@@ -10,8 +10,9 @@
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout"
-        app:srcCompat="@drawable/stade" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/stade"
+        tools:ignore="MissingConstraints" />
 
 
 
