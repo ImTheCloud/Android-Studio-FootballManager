@@ -41,6 +41,20 @@
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/TXT_NewGame" />
 
+    <EditText
+        android:id="@+id/PT_stopwatch"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Stopwatch"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ID_Player"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/startButton"
 
