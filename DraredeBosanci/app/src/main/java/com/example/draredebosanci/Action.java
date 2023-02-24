@@ -15,5 +15,9 @@ public class Action extends AppCompatActivity {
 
     }
 
+    public void goToAction(View v){
+        startActivity(new Intent(Action.this, Live.class));
+    }
+
 
 }
