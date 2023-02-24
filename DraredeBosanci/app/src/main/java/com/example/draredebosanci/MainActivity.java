@@ -25,4 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public void goToOldGame(View v){
         startActivity(new Intent(MainActivity.this, OldGame.class));
     }
+
+
+
+
 }

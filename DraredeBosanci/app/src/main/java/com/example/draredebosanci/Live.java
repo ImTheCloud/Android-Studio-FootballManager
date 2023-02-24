@@ -1,4 +1,5 @@
 package com.example.draredebosanci;
+import android.content.Intent;
 import android.os.Bundle;
         import android.os.CountDownTimer;
         import android.text.TextUtils;
@@ -70,6 +71,10 @@ public class Live extends AppCompatActivity {
         });
     }
 
+    public void goToAction(View v){
+        startActivity(new Intent(Live.this, Action.class));
+    }
+
 
     private void setPlayerOnTeam() {
 
@@ -93,4 +98,6 @@ public class Live extends AppCompatActivity {
         sb.append(TextUtils.join("\n", players));
         textView.setText(sb.toString());
     }
+
+
 }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class NewGame extends AppCompatActivity {
 
-    EditText ETPlayers, ETStopWatch;
+    EditText ETPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

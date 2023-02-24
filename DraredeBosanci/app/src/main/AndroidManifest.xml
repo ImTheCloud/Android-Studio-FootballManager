@@ -12,13 +12,17 @@
         android:theme="@style/Theme.DrareDeBosanci"
         tools:targetApi="31">
         <activity
-            android:name=".Live"
+            android:name=".Action"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
+            android:name=".Live"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".OldGame"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".NewGame"
             android:exported="false"
