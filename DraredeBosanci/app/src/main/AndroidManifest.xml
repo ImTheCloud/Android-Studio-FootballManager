@@ -14,7 +14,7 @@
         <activity
             android:name=".ClaudiuForm"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Ranking"
             android:exported="false"
