@@ -12,9 +12,17 @@
         android:theme="@style/Theme.DrareDeBosanci"
         tools:targetApi="31">
         <activity
-            android:name=".Action"
+            android:name=".ClaudiuForm"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".Ranking"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Action"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Live"
             android:exported="false"

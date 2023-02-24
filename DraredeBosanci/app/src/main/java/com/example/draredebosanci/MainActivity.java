@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, OldGame.class));
     }
 
+    public void goToRanking(View v){
+        startActivity(new Intent(MainActivity.this, Ranking.class));
+    }
+
 
 
 
