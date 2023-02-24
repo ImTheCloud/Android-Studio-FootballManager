@@ -48,8 +48,8 @@
 
     <EditText
         android:id="@+id/ETFame"
-        android:layout_width="310dp"
-        android:layout_height="47dp"
+        android:layout_width="274dp"
+        android:layout_height="46dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -76,11 +76,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.22" />
 
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
     <EditText
         android:id="@+id/ETGame"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="216dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -88,9 +90,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206" />
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+        app:layout_constraintVertical_bias="0.205" />
 
     <TextView
         android:id="@+id/TVWin"
@@ -107,11 +107,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.286" />
 
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
     <EditText
         android:id="@+id/ETWin"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="216dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -120,8 +122,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.273" />
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
     <TextView
         android:id="@+id/TVLose"
@@ -138,11 +138,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.362" />
 
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
     <EditText
         android:id="@+id/ETLose"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="216dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -151,8 +153,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35" />
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
     <TextView
         android:id="@+id/TVTie"
@@ -169,11 +169,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.43" />
 
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
     <EditText
         android:id="@+id/ETTie"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="216dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -182,8 +184,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.419" />
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
     <TextView
         android:id="@+id/TVBonus5Goal"
@@ -199,11 +199,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
     <EditText
         android:id="@+id/ET5Goal"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="184dp"
+        android:layout_marginEnd="152dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"
@@ -212,10 +216,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
-
-    <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
     <TextView
         android:id="@+id/TVYellowCard"
@@ -236,7 +236,7 @@
         android:id="@+id/ETYellowCard"
         android:layout_width="62dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="184dp"
+        android:layout_marginEnd="152dp"
         android:ems="4"
         android:hint=""
         android:textColor="#FFFFFF"

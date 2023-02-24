@@ -7,14 +7,13 @@
     tools:context=".Ranking">
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/stade2"
+        android:id="@+id/imageView7"
+        android:layout_width="417dp"
+        android:layout_height="744dp"
+        app:srcCompat="@drawable/simple"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="-7dp" />
 
     <TextView
         android:id="@+id/TXT_Players"
@@ -24,30 +23,52 @@
         android:textColor="#ffffff"
         android:textSize="32sp"
         android:textStyle="bold"
-
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/BT_Claudiu"
+        android:id="@+id/button_create_new_Player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:elevation="4dp"
-        android:onClick="goToClaudiuForm"
-        android:padding="16dp"
-        android:text="Claudiu"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:translationZ="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        android:background="#00000000"
+        android:onClick="createNewButton"
+        android:text="Add new Player"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.976"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
+        app:layout_constraintVertical_bias="0.992" />
+
+    <LinearLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.219">
+
+        <Button
+            android:id="@+id/BT_Claudiu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#071227"
+            android:elevation="4dp"
+            android:onClick="goToClaudiuForm"
+            android:padding="10dp"
+            android:text="Claudiu"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:translationZ="4dp" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
