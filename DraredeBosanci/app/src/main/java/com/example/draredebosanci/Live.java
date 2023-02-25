@@ -27,10 +27,14 @@ public class Live extends AppCompatActivity {
     private Button mButton2;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
+
 
 
         // Récupération des vues
@@ -120,24 +124,39 @@ public class Live extends AppCompatActivity {
                 }.start();
             }
         });
+
+
+
     }
 
 
 
-    private void setPlayerOnTeam() {
+    private List<String> team1;
+    private List<String> team2;
 
+    private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();
         String players = extras.getString("Players");
         List<String> playerList = Arrays.asList(players.split(","));
         Collections.shuffle(playerList);
-        List<String> team1 = playerList.subList(0, playerList.size() / 2);
-        List<String> team2 = playerList.subList(playerList.size() / 2, playerList.size());
+        team1 = playerList.subList(0, playerList.size() / 2);
+        team2 = playerList.subList(playerList.size() / 2, playerList.size());
+
 
         // Set team names and players
         setTeamText(TVPlayers, "Team 1 : ", team1);
         setTeamText(TVPlayers2, "  Team 2 : ", team2);
     }
+
+    public List<String> getTeam1() {
+        return team1;
+    }
+
+    public List<String> getTeam2() {
+        return team2;
+    }
+
 
 
     private void setTeamText(TextView textView, String teamName, List<String> players) {
@@ -156,4 +175,7 @@ public class Live extends AppCompatActivity {
     }
 
 
+
+
 }
+
