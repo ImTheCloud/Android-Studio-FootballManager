@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ranking">
+    tools:context=".ChoiceGoal">
 
     <ImageView
         android:id="@+id/imageView7"
@@ -14,33 +14,6 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-3dp"
         tools:layout_editor_absoluteY="-7dp" />
-
-    <TextView
-        android:id="@+id/TXT_Players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Players"
-        android:textColor="#ffffff"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_create_new_Player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_selector"
-        android:onClick="createNewButton"
-        android:text="Add new Player"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992" />
-
 
     <LinearLayout
         android:id="@+id/parent_layout"
@@ -53,10 +26,10 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView7"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.079">
+        app:layout_constraintVertical_bias="0.026">
 
         <Button
             android:id="@+id/BT_Claudiu"
@@ -65,7 +38,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="#071227"
             android:elevation="4dp"
-            android:onClick="goToClaudiuForm"
+            android:onClick="goToLive"
             android:padding="10dp"
             android:text="Claudiu"
             android:textColor="#FFFFFF"

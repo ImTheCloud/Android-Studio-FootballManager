@@ -3,7 +3,8 @@ import android.content.Intent;
 import android.os.Bundle;
         import android.os.CountDownTimer;
         import android.text.TextUtils;
-        import android.view.View;
+import android.util.Log;
+import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
@@ -18,12 +19,62 @@ public class Live extends AppCompatActivity {
     private TextView TVPlayers, TVPlayers2, TVStopWatch;
     private CountDownTimer timer;
     private int totalTime = 45 * 60;
+    private int mCount = 0;
+    private int mCount2 = 0;
+    private TextView mTextView;
+    private TextView mTextView2;
+    private Button mButton;
+    private Button mButton2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
 
+
+        // Récupération des vues
+        mTextView = findViewById(R.id.TXT_ScoreTeam1);
+        mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
+        mButton = findViewById(R.id.bt_Goal1);
+        mButton2 = findViewById(R.id.bt_Goal2);
+
+// Définition de l'écouteur de clic pour le bouton "bt_Goal1"
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount++;
+
+                // Mise à jour du TextView
+                mTextView.setText(Integer.toString(mCount));
+
+                // Redirection vers l'activité ChoiceGoal
+                Intent intent = new Intent(Live.this, ChoiceGoal.class);
+                startActivity(intent);
+            }
+        });
+
+// Définition de l'écouteur de clic pour le bouton "bt_Goal2"
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount2++;
+
+                // Mise à jour du TextView
+                mTextView2.setText(Integer.toString(mCount2));
+
+                // Redirection vers l'activité ChoiceGoal
+                Intent intent = new Intent(Live.this, ChoiceGoal.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////
         // Initialize UI elements
         TVPlayers = findViewById(R.id.TVPlayers);
         TVPlayers2 = findViewById(R.id.TVPlayers2);
@@ -71,9 +122,6 @@ public class Live extends AppCompatActivity {
         });
     }
 
-    public void goToAction(View v){
-        startActivity(new Intent(Live.this, Action.class));
-    }
 
 
     private void setPlayerOnTeam() {
@@ -87,16 +135,24 @@ public class Live extends AppCompatActivity {
         List<String> team2 = playerList.subList(playerList.size() / 2, playerList.size());
 
         // Set team names and players
-        setTeamText(TVPlayers, "Team 1:", team1);
-        setTeamText(TVPlayers2, "Team 2:", team2);
+        setTeamText(TVPlayers, "Team 1 : ", team1);
+        setTeamText(TVPlayers2, "  Team 2 : ", team2);
     }
 
 
     private void setTeamText(TextView textView, String teamName, List<String> players) {
         StringBuilder sb = new StringBuilder(teamName);
-        sb.append("\n");
+        sb.append("\n\n");
         sb.append(TextUtils.join("\n", players));
         textView.setText(sb.toString());
+    }
+
+    public void goToYellowCardChoice(View v){
+        startActivity(new Intent(Live.this, ChoiceYellowCard.class));
+    }
+
+    public void goToHouse(View v){
+        startActivity(new Intent(Live.this, MainActivity.class));
     }
 
 
