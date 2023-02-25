@@ -21,7 +21,8 @@
         android:id="@+id/house"
         android:layout_width="59dp"
         android:layout_height="45dp"
-        android:background="@android:color/transparent"
+
+        android:background="@drawable/button_selector"
         android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
         android:drawableStart="@drawable/house"
         android:textSize="12sp"
@@ -33,20 +34,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/TXT_Score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Score :        -  "
-        android:textColor="#ffffff"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/TXT_ScoreTeam1"
@@ -58,10 +45,24 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.587"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.085" />
+
+    <TextView
+        android:id="@+id/TXT_barr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
 
     <TextView
         android:id="@+id/TXT_ScoreTeam2"
@@ -73,10 +74,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.085" />
 
     <LinearLayout
         android:id="@+id/layout_players"
@@ -92,12 +93,13 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:layout_constraintVertical_bias="1.0">
 
+
         <EditText
             android:id="@+id/ID_Timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="4"
-            android:hint="Timer"
+            android:hint="   Timer"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,26 +112,29 @@
             android:id="@+id/add_timer_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#0D2753"
+            android:background="@drawable/button_selector3"
+            android:drawablePadding="10dp"
             android:elevation="2dp"
             android:fontFamily="sans-serif-medium"
-            android:padding="16dp"
-            android:text="Timer"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:textColor="#000000"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/TV_StopWatch"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ID_Timer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.299"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintVertical_bias="0.085" />
 
         <TextView
             android:id="@+id/TV_StopWatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00"
+            android:drawableRight="@drawable/sable"
+            android:text="00:00 "
             android:textColor="#ffffff"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -154,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.148">
+        app:layout_constraintVertical_bias="0.168">
 
         <TextView
             android:id="@+id/TVPlayers"
@@ -192,8 +197,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.791">
 
+
         <Button
-            android:id="@+id/bt_Goal1"
+            android:id="@+id/bt_GoalChoice"
             android:layout_width="150dp"
             android:layout_height="55dp"
             android:backgroundTint="#FFFFFF"
@@ -201,22 +207,7 @@
             android:fontFamily="sans-serif-medium"
             android:onClick="goToChoiceGoal"
             android:padding="10dp"
-            android:text="Team 1"
-            android:textColor="#000000"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/foot" />
-
-
-        <Button
-            android:id="@+id/bt_Goal2"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:backgroundTint="#FFFFFF"
-            android:elevation="2dp"
-            android:fontFamily="sans-serif-medium"
-            android:onClick="goToChoiceGoal"
-            android:padding="10dp"
-            android:text="Team 2"
+            android:text="Goal scored by"
             android:textColor="#000000"
             android:textSize="14sp"
             android:drawableLeft="@drawable/foot"/>
@@ -244,6 +235,71 @@
             android:drawableLeft="@drawable/yellow"/>
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bt_Goal1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector2"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.299"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <Button
+        android:id="@+id/bt_Goal2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector2"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector4"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:onClick="goToOld"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

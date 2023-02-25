@@ -1,20 +1,24 @@
 package com.example.draredebosanci;
 import android.content.Intent;
 import android.os.Bundle;
-        import android.os.CountDownTimer;
-        import android.text.TextUtils;
+import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.Collections;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 public class Live extends AppCompatActivity {
     private TextView TVPlayers, TVPlayers2, TVStopWatch;
     private CountDownTimer timer;
@@ -25,15 +29,16 @@ public class Live extends AppCompatActivity {
     private TextView mTextView2;
     private Button mButton;
     private Button mButton2;
-
-
-
-
+    private List<String> team1;
+    private List<String> team2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
+
+
+
 
 
 
@@ -53,9 +58,6 @@ public class Live extends AppCompatActivity {
                 // Mise à jour du TextView
                 mTextView.setText(Integer.toString(mCount));
 
-                // Redirection vers l'activité ChoiceGoal
-                Intent intent = new Intent(Live.this, ChoiceGoal.class);
-                startActivity(intent);
             }
         });
 
@@ -69,14 +71,8 @@ public class Live extends AppCompatActivity {
                 // Mise à jour du TextView
                 mTextView2.setText(Integer.toString(mCount2));
 
-                // Redirection vers l'activité ChoiceGoal
-                Intent intent = new Intent(Live.this, ChoiceGoal.class);
-                startActivity(intent);
             }
         });
-
-
-
 
         //////////////////////////////////////////////////////////////////////////////
         // Initialize UI elements
@@ -124,16 +120,7 @@ public class Live extends AppCompatActivity {
                 }.start();
             }
         });
-
-
-
     }
-
-
-
-    private List<String> team1;
-    private List<String> team2;
-
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();
@@ -142,12 +129,13 @@ public class Live extends AppCompatActivity {
         Collections.shuffle(playerList);
         team1 = playerList.subList(0, playerList.size() / 2);
         team2 = playerList.subList(playerList.size() / 2, playerList.size());
-
-
         // Set team names and players
         setTeamText(TVPlayers, "Team 1 : ", team1);
         setTeamText(TVPlayers2, "  Team 2 : ", team2);
+
     }
+
+
 
     public List<String> getTeam1() {
         return team1;
@@ -166,12 +154,20 @@ public class Live extends AppCompatActivity {
         textView.setText(sb.toString());
     }
 
+    public void goToChoiceGoal(View v){
+        startActivity(new Intent(Live.this, ChoiceGoal.class));
+    }
+
     public void goToYellowCardChoice(View v){
         startActivity(new Intent(Live.this, ChoiceYellowCard.class));
     }
 
     public void goToHouse(View v){
         startActivity(new Intent(Live.this, MainActivity.class));
+    }
+
+    public void goToOld(View v){
+        startActivity(new Intent(Live.this, OldGame.class));
     }
 
 
