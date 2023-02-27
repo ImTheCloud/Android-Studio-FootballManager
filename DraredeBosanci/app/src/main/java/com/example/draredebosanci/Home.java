@@ -6,28 +6,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
     }
 
     public void goToContact(View v){
-        startActivity(new Intent(MainActivity.this, Contact.class));
+        startActivity(new Intent(Home.this, Contact.class));
     }
 
     public void goToNewGame(View v){
-        startActivity(new Intent(MainActivity.this, NewGame.class));
+        startActivity(new Intent(Home.this, NewGame.class));
     }
 
     public void goToOldGame(View v){
-        startActivity(new Intent(MainActivity.this, OldGame.class));
+        startActivity(new Intent(Home.this, OldGame.class));
     }
 
     public void goToRanking(View v){
-        startActivity(new Intent(MainActivity.this, Ranking.class));
+        startActivity(new Intent(Home.this, Form.class));
     }
 
 

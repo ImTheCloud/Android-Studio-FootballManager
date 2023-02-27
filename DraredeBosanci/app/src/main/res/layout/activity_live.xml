@@ -133,7 +133,6 @@
             android:id="@+id/TV_StopWatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/sable"
             android:text="00:00 "
             android:textColor="#ffffff"
             android:textSize="20sp"
@@ -159,7 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.168">
+        app:layout_constraintVertical_bias="0.212">
 
         <TextView
             android:id="@+id/TVPlayers"
@@ -281,19 +280,19 @@
 
     <Button
         android:id="@+id/bt_Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="43dp"
         android:background="@drawable/button_selector4"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="sans-serif-medium"
         android:minWidth="0dp"
         android:minHeight="0dp"
+        android:onClick="goToOld"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:textColor="#000000"
         android:textSize="14sp"
-        android:onClick="goToOld"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"

@@ -8,8 +8,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Locale;
-public class ClaudiuForm extends AppCompatActivity {
+public class FormClaudiu extends AppCompatActivity {
 
     private EditText etWin;
     private EditText etTie;
@@ -23,17 +22,17 @@ public class ClaudiuForm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_claudiu_form);
+        setContentView(R.layout.activity_form_claudiu);
 
         // Récupérer les trois EditText et les trois TextViews
-        etWin = findViewById(R.id.ETWin);
-        etTie = findViewById(R.id.ETTie);
-        etLose = findViewById(R.id.ETLose);
-        etYellowCard = findViewById(R.id.ETYellowCard);
-        et5Goal = findViewById(R.id.ET5Goal);
-        tvPointsWrite = findViewById(R.id.TVPointsWrite);
-        tvGameWrite = findViewById(R.id.TVGameWrite);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
+        etWin = findViewById(R.id.ETWinClaudiu);
+        etTie = findViewById(R.id.ETTieClaudiu);
+        etLose = findViewById(R.id.ETLoseClaudiu);
+        etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
+        et5Goal = findViewById(R.id.ET5GoalClaudiu);
+        tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
+        tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
 
         // Ajouter les écouteurs d'événements de modification de texte pour chaque EditText
         etWin.addTextChangedListener(textWatcher);

@@ -1,24 +1,18 @@
 package com.example.draredebosanci;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.text.TextUtils;
-import android.util.Log;
+        import android.os.CountDownTimer;
+        import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+        import android.widget.EditText;
+        import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+        import java.util.Collections;
+        import java.util.List;
 public class Live extends AppCompatActivity {
     private TextView TVPlayers, TVPlayers2, TVStopWatch;
     private CountDownTimer timer;
@@ -163,7 +157,7 @@ public class Live extends AppCompatActivity {
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(Live.this, MainActivity.class));
+        startActivity(new Intent(Live.this, Home.class));
     }
 
     public void goToOld(View v){
