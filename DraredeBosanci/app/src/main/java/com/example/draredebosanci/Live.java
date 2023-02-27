@@ -148,6 +148,7 @@ public class Live extends AppCompatActivity {
         textView.setText(sb.toString());
     }
 
+
     public void goToChoiceGoal(View v){
         startActivity(new Intent(Live.this, ChoiceGoal.class));
     }

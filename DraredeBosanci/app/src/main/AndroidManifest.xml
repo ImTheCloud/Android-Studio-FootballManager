@@ -12,6 +12,18 @@
         android:theme="@style/Theme.DrareDeBosanci"
         tools:targetApi="31">
         <activity
+            android:name=".CompoChoice"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".Compo433"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Compo442"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".FormIosif"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -31,7 +43,7 @@
             android:name=".FormDany"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        µ$<activity
+        <activity
             android:name=".FormYaniv"
             android:exported="false"
             android:label="@string/title_activity_form_yaniv"

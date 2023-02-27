@@ -159,19 +159,12 @@ public class NewGame extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
     }
+
 
     private String getTodaysDate()
     {
@@ -207,6 +200,7 @@ public class NewGame extends AppCompatActivity {
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
     }
+
 
     private String makeDateString(int day, int month, int year)
     {

@@ -19,11 +19,27 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
+    <TextView
+        android:id="@+id/TXT_DrareDeBosanci"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drare De Bosanci"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/BT_New_Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.424" />
+
+
     <Button
         android:id="@+id/BT_New_Game"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#004CAF50"
         android:elevation="4dp"
         android:onClick="goToNewGame"
         android:padding="16dp"
@@ -34,15 +50,16 @@
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.443" />
 
     <Button
         android:id="@+id/BT_Old_Game"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#004CAF50"
         android:elevation="4dp"
         android:onClick="goToOldGame"
         android:padding="16dp"
@@ -56,13 +73,33 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintVertical_bias="0.619" />
+
+    <Button
+        android:id="@+id/BT_Live_Game"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#004CAF50"
+        android:elevation="4dp"
+        android:onClick="goToLive"
+        android:padding="16dp"
+        android:text="Live Game"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:translationZ="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
 
     <Button
         android:id="@+id/BT_Ranking"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#004CAF50"
         android:elevation="4dp"
         android:onClick="goToRanking"
         android:padding="16dp"
@@ -76,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.701" />
 
     <Button
         android:id="@+id/BT_Contact"
@@ -90,19 +127,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/TXT_DrareDeBosanci"
+    <Button
+        android:id="@+id/BT_Compo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Drare De Bosanci"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:layout_marginEnd="280dp"
+        android:background="@drawable/button_selector"
+        android:onClick="goToCompo"
+        android:padding="8dp"
+        android:text="Compo"
         android:textColor="#ffffff"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/BT_New_Game"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
