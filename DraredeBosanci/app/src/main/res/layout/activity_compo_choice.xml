@@ -45,7 +45,7 @@
         android:elevation="4dp"
         android:onClick="goTo442"
         android:padding="16dp"
-        android:text="4-2-2"
+        android:text="4-4-2"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"

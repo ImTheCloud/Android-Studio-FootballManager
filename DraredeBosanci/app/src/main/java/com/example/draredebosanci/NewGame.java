@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerIosif.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +63,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerYaniv.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerEdi.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +83,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerFlavyus.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +93,8 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
+
             }
         });
         btnPlayerDavid.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +104,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
 
@@ -107,6 +115,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
 
@@ -117,6 +126,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerRoberto.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +136,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? player : currentText + ", " + player;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
         btnPlayerClaudiu.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +146,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? playerClaudiu : currentText + ", " + playerClaudiu;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
 
@@ -145,6 +157,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? playerDany : currentText + ", " + playerDany;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
 
@@ -155,6 +168,7 @@ public class NewGame extends AppCompatActivity {
                 String currentText = etPlayers.getText().toString();
                 String newText = currentText.isEmpty() ? playerRuben : currentText + ", " + playerRuben;
                 etPlayers.setText(newText);
+                disableButton(view);
             }
         });
 
@@ -238,6 +252,13 @@ public class NewGame extends AppCompatActivity {
         return "JAN";
     }
 
+    public void disableButton(View view) {
+        Button button = (Button) view;
+        button.setEnabled(false);
+        button.setAlpha(0.5f);
+    }
+
+
     public void openDatePicker(View view)
     {
         datePickerDialog.show();
@@ -246,6 +267,14 @@ public class NewGame extends AppCompatActivity {
     public void goToLive(View v){
         Intent i = new Intent(NewGame.this, Live.class);
         i.putExtra("Players", ETPlayers.getText().toString());
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
+        mediaPlayer.start();
+
         startActivity(i);
     }
+
+
+
+
 }

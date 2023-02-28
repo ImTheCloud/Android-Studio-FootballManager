@@ -1,5 +1,6 @@
 package com.example.draredebosanci;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
         import android.os.CountDownTimer;
         import android.text.TextUtils;
@@ -31,10 +32,7 @@ public class Live extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
 
-
-
-
-
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Récupération des vues
         mTextView = findViewById(R.id.TXT_ScoreTeam1);
@@ -83,6 +81,10 @@ public class Live extends AppCompatActivity {
         addTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.clock);
+                mediaPlayer.start();
+
                 String timerString = timerEditText.getText().toString();
                 if (!TextUtils.isEmpty(timerString)) {
                     try {
@@ -151,10 +153,14 @@ public class Live extends AppCompatActivity {
 
     public void goToChoiceGoal(View v){
         startActivity(new Intent(Live.this, ChoiceGoal.class));
+        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
+        mediaPlayer.start();
     }
 
     public void goToYellowCardChoice(View v){
         startActivity(new Intent(Live.this, ChoiceYellowCard.class));
+        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
+        mediaPlayer.start();
     }
 
     public void goToHouse(View v){
@@ -164,6 +170,8 @@ public class Live extends AppCompatActivity {
     public void goToOld(View v){
         startActivity(new Intent(Live.this, OldGame.class));
     }
+
+
 
 
 
