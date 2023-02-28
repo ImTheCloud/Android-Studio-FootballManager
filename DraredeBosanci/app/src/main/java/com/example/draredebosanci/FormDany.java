@@ -2,6 +2,7 @@ package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +25,6 @@ public class FormDany extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_dany);
 
-        // Récupérer les trois EditText et les trois TextViews
         etWin = findViewById(R.id.ETWinDany);
         etTie = findViewById(R.id.ETTieDany);
         etLose = findViewById(R.id.ETLoseDany);
@@ -34,12 +34,17 @@ public class FormDany extends AppCompatActivity {
         tvGameWrite = findViewById(R.id.TVGameWriteDany);
         tvWinRateWrite = findViewById(R.id.TVWinRateWriteDany);
 
-        // Ajouter les écouteurs d'événements de modification de texte pour chaque EditText
         etWin.addTextChangedListener(textWatcher);
         etTie.addTextChangedListener(textWatcher);
         etLose.addTextChangedListener(textWatcher);
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        int counter = prefs.getInt("counterDany", 0);
+        EditText etGoal = findViewById(R.id.ETGoalDany);
+        etGoal.setText(String.valueOf(counter));
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {

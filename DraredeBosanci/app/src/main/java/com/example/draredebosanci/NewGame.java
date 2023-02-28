@@ -177,6 +177,7 @@ public class NewGame extends AppCompatActivity {
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
+
     }
 
 
@@ -268,8 +269,8 @@ public class NewGame extends AppCompatActivity {
         Intent i = new Intent(NewGame.this, Live.class);
         i.putExtra("Players", ETPlayers.getText().toString());
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
-        mediaPlayer.start();
+//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
+//        mediaPlayer.start();
 
         startActivity(i);
     }

@@ -12,6 +12,7 @@ public class Compo433 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compo433);
+
     }
 
     public void goTo442(View v){

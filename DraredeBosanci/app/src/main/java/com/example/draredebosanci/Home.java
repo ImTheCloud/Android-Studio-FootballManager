@@ -18,10 +18,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Démarrer le service de musique
-        Intent intent = new Intent(this, MyMusicService.class);
-        startService(intent);
-
         final Button soundButton = findViewById(R.id.soundOff);
         final Drawable soundOnImage = getResources().getDrawable(R.drawable.sound_off);
         final Drawable soundOffImage = getResources().getDrawable(R.drawable.sound_on);
@@ -32,28 +28,24 @@ public class Home extends AppCompatActivity {
                     // Désactiver le son
                     isSoundEnabled = false;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
-                    stopService(intent);
-                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOnImage, null, null, null);
+                    startService(intent);
+                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOffImage, null, null, null);
                 } else {
                     // Réactiver le son
                     isSoundEnabled = true;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
-                    startService(intent);
-                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOffImage, null, null, null);
+                    stopService(intent);
+                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOnImage, null, null, null);
                 }
             }
         });
 
+
     }
 
 
-
-
-
-
     public void goToLive(View v){
-        Intent i = new Intent(Home.this, OldGame.class);
-        startActivity(i);
+        startActivity(new Intent(Home.this, OldGame.class));
     }
     public void goToCompo(View v){
         startActivity(new Intent(Home.this, CompoChoice.class));

@@ -12,6 +12,7 @@ public class CompoChoice extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compo_choice);
+
     }
 
     public void goTo442(View v){

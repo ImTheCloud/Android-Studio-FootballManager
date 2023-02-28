@@ -2,6 +2,7 @@ package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +41,13 @@ public class FormClaudiu extends AppCompatActivity {
         etLose.addTextChangedListener(textWatcher);
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        int counter = prefs.getInt("counterClaudiu", 0);
+        EditText etGoal = findViewById(R.id.ETGoalClaudiu);
+        etGoal.setText(String.valueOf(counter));
+
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {

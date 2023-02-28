@@ -82,8 +82,8 @@ public class Live extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.clock);
-                mediaPlayer.start();
+//                MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.clock);
+//                mediaPlayer.start();
 
                 String timerString = timerEditText.getText().toString();
                 if (!TextUtils.isEmpty(timerString)) {
@@ -116,6 +116,7 @@ public class Live extends AppCompatActivity {
                 }.start();
             }
         });
+
     }
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
@@ -153,14 +154,14 @@ public class Live extends AppCompatActivity {
 
     public void goToChoiceGoal(View v){
         startActivity(new Intent(Live.this, ChoiceGoal.class));
-        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
-        mediaPlayer.start();
+//        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
+//        mediaPlayer.start();
     }
 
     public void goToYellowCardChoice(View v){
         startActivity(new Intent(Live.this, ChoiceYellowCard.class));
-        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
-        mediaPlayer.start();
+//        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
+//        mediaPlayer.start();
     }
 
     public void goToHouse(View v){

@@ -11,6 +11,7 @@ public class ChoiceYellowCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice_yellow_card);
+
     }
 
     public void goToLive(View v){
