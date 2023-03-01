@@ -158,12 +158,6 @@ public class Live extends AppCompatActivity {
 //        mediaPlayer.start();
     }
 
-    public void goToYellowCardChoice(View v){
-        startActivity(new Intent(Live.this, ChoiceYellowCard.class));
-//        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
-//        mediaPlayer.start();
-    }
-
     public void goToHouse(View v){
         startActivity(new Intent(Live.this, Home.class));
     }

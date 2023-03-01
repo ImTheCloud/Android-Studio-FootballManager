@@ -11,42 +11,38 @@ import android.widget.TextView;
 
 public class FormClaudiu extends AppCompatActivity {
 
-    private EditText etWin;
-    private EditText etTie;
-    private EditText etLose;
-    private EditText etYellowCard;
-    private EditText et5Goal;
-    private TextView tvPointsWrite;
-    private TextView tvGameWrite;
-    private TextView tvWinRateWrite;
+    private EditText etWin,etTie,etLose,etYellowCard,et5Goal;
+    private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_claudiu);
 
-        // Récupérer les trois EditText et les trois TextViews
         etWin = findViewById(R.id.ETWinClaudiu);
         etTie = findViewById(R.id.ETTieClaudiu);
         etLose = findViewById(R.id.ETLoseClaudiu);
         etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
         et5Goal = findViewById(R.id.ET5GoalClaudiu);
+
+
         tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
         tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
         tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
-
-        // Ajouter les écouteurs d'événements de modification de texte pour chaque EditText
-        etWin.addTextChangedListener(textWatcher);
-        etTie.addTextChangedListener(textWatcher);
-        etLose.addTextChangedListener(textWatcher);
-        etYellowCard.addTextChangedListener(textWatcher);
-        et5Goal.addTextChangedListener(textWatcher);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         int counter = prefs.getInt("counterClaudiu", 0);
         EditText etGoal = findViewById(R.id.ETGoalClaudiu);
         etGoal.setText(String.valueOf(counter));
+
+
+        etWin.setText(prefs.getString("etWin", ""));
+        etTie.setText(prefs.getString("etTie", ""));
+        etLose.setText(prefs.getString("etLose", ""));
+        etYellowCard.setText(prefs.getString("etYellowCard", ""));
+        et5Goal.setText(prefs.getString("et5Goal", ""));
+
 
     }
 
@@ -70,6 +66,7 @@ public class FormClaudiu extends AppCompatActivity {
             tvPointsWrite.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
+
         }
 
         @Override

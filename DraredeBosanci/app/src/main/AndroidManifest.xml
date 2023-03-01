@@ -72,10 +72,6 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".ChoiceYellowCard"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
             android:name=".ChoiceGoal"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
