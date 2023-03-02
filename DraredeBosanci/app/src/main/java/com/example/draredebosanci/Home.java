@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Map;
+
 public class Home extends AppCompatActivity {
     private boolean isSoundEnabled = true;
 
@@ -66,10 +68,10 @@ public class Home extends AppCompatActivity {
     public void goToRanking(View v){
         startActivity(new Intent(Home.this, Form.class));
     }
-    public void goToMap(View v){
-        startActivity(new Intent(Home.this, MapsActivity.class));
-    }
 
+//    public void goToMap(View v){
+//        startActivity(new Intent(Home.this, MapsActivity.class));
+//    }
 
 
 
