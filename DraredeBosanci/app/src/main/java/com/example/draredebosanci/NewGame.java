@@ -1,20 +1,16 @@
 package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import java.util.Calendar;
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
+import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -26,256 +22,100 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
-
-    EditText ETPlayers;
-    private DatePickerDialog datePickerDialog;
-    private Button dateButton;
-
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
+    private   EditText etPlayers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        // Initialize the FusedLocationProviderClient.
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Var player
-        ETPlayers = findViewById(R.id.ID_Player);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        Button btnPlayerClaudiu = findViewById(R.id.playerClaudiu);
-        Button btnPlayerRuben = findViewById(R.id.playerRuben);
-        Button btnPlayerDany = findViewById(R.id.playerDany );
-        Button btnPlayerRoberto = findViewById(R.id.playerRoberto );
-        Button btnPlayerDenis = findViewById(R.id.playerDenis );
-        Button btnPlayerLucian = findViewById(R.id.playerLucian );
-        Button btnPlayerDavid = findViewById(R.id.playerDavid );
-        Button btnPlayerFlavyus = findViewById(R.id.playerFlavyus );
-        Button btnPlayerEdi = findViewById(R.id.playerEdaurd );
-        Button btnPlayerYaniv = findViewById(R.id.playerYaniv );
-        Button btnPlayerIosif = findViewById(R.id.playerIosif );
-        Button btnPlayerSimon = findViewById(R.id.playerSimon );
-
-        EditText etPlayers = findViewById(R.id.ID_Player);
-
-        btnPlayerSimon.setOnClickListener(new View.OnClickListener() {
+        LinearLayout linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
+        LinearLayout linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
+        LinearLayout linearLayoutHelb1 = findViewById(R.id.linearLayoutHelb1);
+        LinearLayout linearLayoutHelb2 = findViewById(R.id.linearLayoutHelb2);
+        Button  playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
+        Button  playerHelb = findViewById(R.id.bt_Helb);
+        playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String player = btnPlayerSimon.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerIosif.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerIosif.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerYaniv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerYaniv.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerEdi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerEdi.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerFlavyus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerFlavyus.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-
-            }
-        });
-        btnPlayerDavid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerDavid.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
+                if (linearLayoutBosanci1.getVisibility() == View.VISIBLE && linearLayoutBosanci2.getVisibility() == View.VISIBLE) {
+                    linearLayoutBosanci1.setVisibility(View.INVISIBLE);
+                    linearLayoutBosanci2.setVisibility(View.INVISIBLE);
+                } else {
+                    linearLayoutBosanci1.setVisibility(View.VISIBLE);
+                    linearLayoutBosanci2.setVisibility(View.VISIBLE);
+                }
             }
         });
 
-        btnPlayerLucian.setOnClickListener(new View.OnClickListener() {
+        playerHelb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String player = btnPlayerLucian.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
+                if (linearLayoutHelb1.getVisibility() == View.VISIBLE && linearLayoutHelb2.getVisibility() == View.VISIBLE) {
+                    linearLayoutHelb1.setVisibility(View.INVISIBLE);
+                    linearLayoutHelb2.setVisibility(View.INVISIBLE);
+                } else {
+                    linearLayoutHelb1.setVisibility(View.VISIBLE);
+                    linearLayoutHelb2.setVisibility(View.VISIBLE);
+                }
             }
         });
-
-        btnPlayerDenis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerDenis.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerRoberto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String player = btnPlayerRoberto.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-        btnPlayerClaudiu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String playerClaudiu = btnPlayerClaudiu.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? playerClaudiu : currentText + ", " + playerClaudiu;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-
-        btnPlayerDany.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String playerDany = btnPlayerDany.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? playerDany : currentText + ", " + playerDany;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-
-        btnPlayerRuben.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String playerRuben = btnPlayerRuben.getText().toString();
-                String currentText = etPlayers.getText().toString();
-                String newText = currentText.isEmpty() ? playerRuben : currentText + ", " + playerRuben;
-                etPlayers.setText(newText);
-                disableButton(view);
-            }
-        });
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        initDatePicker();
-        dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
+        Button[] buttons = new Button[] {
+                findViewById(R.id.playerClaudiu),
+                findViewById(R.id.playerRuben),
+                findViewById(R.id.playerDany),
+                findViewById(R.id.playerRoberto),
+                findViewById(R.id.playerDenis),
+                findViewById(R.id.playerLucian),
+                findViewById(R.id.playerDavid),
+                findViewById(R.id.playerFlavyus),
+                findViewById(R.id.playerEdaurd),
+                findViewById(R.id.playerYaniv),
+                findViewById(R.id.playerIosif),
+                findViewById(R.id.playerBartek),
+                findViewById(R.id.playerMichel),
+                findViewById(R.id.playerBasile),
+                findViewById(R.id.playerClaudiu2),
+                findViewById(R.id.playerMohamed),
+                findViewById(R.id.playerRedouan),
+                findViewById(R.id.playerYassin),
+                findViewById(R.id.playerArthur),
+                findViewById(R.id.playerDamien),
+                findViewById(R.id.playerAnthony),
+                findViewById(R.id.playerLeo),
 
-    }
-
-
-    private String getTodaysDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
-    }
-
-    private void initDatePicker()
-    {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
-        {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day)
-            {
-                month = month + 1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText(date);
-            }
         };
 
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        etPlayers = findViewById(R.id.ID_Player);
 
-        int style = AlertDialog.THEME_HOLO_LIGHT;
+        for (Button button : buttons) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String player = button.getText().toString();
+                    String currentText = etPlayers.getText().toString();
+                    String newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                    etPlayers.setText(newText);
+                    disableButton(view);
+                }
+            });
+        }
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.mapGameLocation);
+//        mapFragment.getMapAsync(this);
+//
+//        // Initialize the FusedLocationProviderClient.
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-
-    }
-
-
-    private String makeDateString(int day, int month, int year)
-    {
-        return day + " " + getMonthFormat(month) + " " + year;
-    }
-
-    private String getMonthFormat(int month)
-    {
-        if(month == 1)
-            return "JANUARY";
-        if(month == 2)
-            return "FEBRUARY";
-        if(month == 3)
-            return "MARCH";
-        if(month == 4)
-            return "APRIL";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUNE";
-        if(month == 7)
-            return "JULY";
-        if(month == 8)
-            return "AUGUST";
-        if(month == 9)
-            return "SEPTEMBER";
-        if(month == 10)
-            return "OCTOBER";
-        if(month == 11)
-            return "NOVEMBER";
-        if(month == 12)
-            return "DECEMBER";
-
-        //default should never happen
-        return "JAN";
     }
 
     public void disableButton(View view) {
@@ -283,24 +123,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
         button.setEnabled(false);
         button.setAlpha(0.5f);
     }
-
-
-    public void openDatePicker(View view)
-    {
-        datePickerDialog.show();
-    }
-
-    public void goToLive(View v){
-        Intent i = new Intent(NewGame.this, Live.class);
-        i.putExtra("Players", ETPlayers.getText().toString());
-
-//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
-//        mediaPlayer.start();
-
-        startActivity(i);
-    }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -347,7 +169,12 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
             }
         }
     }
-
-
+    public void goToLive(View v){
+        Intent i = new Intent(NewGame.this, Live.class);
+        i.putExtra("Players", etPlayers.getText().toString());
+//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
+//        mediaPlayer.start();
+        startActivity(i);
+    }
 
 }
