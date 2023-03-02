@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class FormClaudiu extends AppCompatActivity {
 
-    private EditText etWin,etTie,etLose,etYellowCard,et5Goal;
+    private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etGoal;
     private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite;
 
     @Override
@@ -19,16 +19,27 @@ public class FormClaudiu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_claudiu);
 
+
+
+        // Récupérer les trois EditText et les trois TextViews
         etWin = findViewById(R.id.ETWinClaudiu);
         etTie = findViewById(R.id.ETTieClaudiu);
         etLose = findViewById(R.id.ETLoseClaudiu);
         etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
         et5Goal = findViewById(R.id.ET5GoalClaudiu);
+        etRank = findViewById(R.id.ETRankClaudiu);
 
 
         tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
         tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
         tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
+
+        // Ajouter les écouteurs d'événements de modification de texte pour chaque EditText
+        etWin.addTextChangedListener(textWatcher);
+        etTie.addTextChangedListener(textWatcher);
+        etLose.addTextChangedListener(textWatcher);
+        etYellowCard.addTextChangedListener(textWatcher);
+        et5Goal.addTextChangedListener(textWatcher);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -36,8 +47,7 @@ public class FormClaudiu extends AppCompatActivity {
         EditText etGoal = findViewById(R.id.ETGoalClaudiu);
         etGoal.setText(String.valueOf(counter));
 
-
-        etWin.setText(prefs.getString("etWin", ""));
+        etWin.setText(prefs.getString("etWin", "0"));
         etTie.setText(prefs.getString("etTie", ""));
         etLose.setText(prefs.getString("etLose", ""));
         etYellowCard.setText(prefs.getString("etYellowCard", ""));
@@ -45,6 +55,8 @@ public class FormClaudiu extends AppCompatActivity {
 
 
     }
+
+
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override

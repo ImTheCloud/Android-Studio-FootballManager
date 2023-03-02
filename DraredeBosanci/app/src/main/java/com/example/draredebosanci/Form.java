@@ -60,48 +60,48 @@ public class Form extends AppCompatActivity {
         startActivity(new Intent(Form.this, FormEduard.class));
     }
 
-   /* public void createNewButton(View view) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Name of the new player :");
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String buttonText = input.getText().toString();
-
-                // Create a new button and set its text and background color
-                Button newButton = new Button(Form.this);
-                newButton.setText(buttonText);
-                newButton.setBackgroundColor(Color.parseColor("#071227"));
-                // Add the button to the parent layout
-                LinearLayout parentLayout = findViewById(R.id.parent_layout);
-                parentLayout.addView(newButton);
-
-                // Set layout parameters for the button
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                );
-                int marginInDp = (int) TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
-                layoutParams.setMargins(0, marginInDp, 0, marginInDp);
-                newButton.setLayoutParams(layoutParams);
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }*/
+//   public void createNewButton(View view) {
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Name of the new player :");
+//        final EditText input = new EditText(this);
+//        input.setInputType(InputType.TYPE_CLASS_TEXT);
+//        builder.setView(input);
+//
+//        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String buttonText = input.getText().toString();
+//
+//                // Create a new button and set its text and background color
+//                Button newButton = new Button(Form.this);
+//                newButton.setText(buttonText);
+//                newButton.setBackgroundColor(Color.parseColor("#071227"));
+//                // Add the button to the parent layout
+//                LinearLayout parentLayout = findViewById(R.id.parent_layout);
+//                parentLayout.addView(newButton);
+//
+//                // Set layout parameters for the button
+//                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//                        LinearLayout.LayoutParams.WRAP_CONTENT,
+//                        LinearLayout.LayoutParams.WRAP_CONTENT
+//                );
+//                int marginInDp = (int) TypedValue.applyDimension(
+//                        TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
+//                layoutParams.setMargins(0, marginInDp, 0, marginInDp);
+//                newButton.setLayoutParams(layoutParams);
+//            }
+//        });
+//
+//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//
+//        builder.show();
+//    }
 
 
 

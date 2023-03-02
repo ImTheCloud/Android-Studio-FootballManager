@@ -17,7 +17,6 @@
         tools:layout_editor_absoluteY="0dp" />
 
 
-
     <Button
         android:id="@+id/btn_reset"
         android:layout_width="154dp"
@@ -28,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898" />
+        app:layout_constraintVertical_bias="0.195" />
 
     <TextView
         android:id="@+id/TXT_Players"
@@ -43,6 +42,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
     <LinearLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
@@ -54,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -147,6 +149,20 @@
 
                 android:padding="10dp"
                 android:text="Roberto"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:translationZ="4dp" />
+
+            <Button
+                android:id="@+id/BT_Other1"
+                android:layout_width="150dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#00071227"
+                android:drawableLeft="@drawable/person"
+                android:elevation="4dp"
+                android:padding="10dp"
+                android:text="Other 1"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:translationZ="4dp" />
@@ -249,12 +265,24 @@
                 android:textSize="18sp"
                 android:translationZ="4dp" />
 
+            <Button
+                android:id="@+id/BT_Other2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#00071227"
+                android:drawableLeft="@drawable/person"
+                android:elevation="4dp"
+                android:padding="10dp"
+                android:text="Other 2"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:translationZ="4dp" />
+
 
         </LinearLayout>
 
     </LinearLayout>
-    <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
 
     <TextView
         android:id="@+id/TV_DANY"
@@ -331,6 +359,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.842" />
+
+    <TextView
+        android:id="@+id/TV_OTHER1"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:text="0"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965" />
 
     <TextView
         android:id="@+id/TV_DENIS"
@@ -436,6 +479,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.842" />
+
+    <TextView
+        android:id="@+id/TV_OTHER2"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:text="0"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.965" />
+
+
+    <!--    <Button-->
+<!--        android:id="@+id/button_create_new_Player"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/button_selector"-->
+<!--        android:onClick="createNewButton"-->
+<!--        android:text="Add Player"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.036"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.102" />-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/layoutNew"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="16dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.175">-->
+
+<!--    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
