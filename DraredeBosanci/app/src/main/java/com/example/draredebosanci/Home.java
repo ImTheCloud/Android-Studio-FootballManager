@@ -66,6 +66,11 @@ public class Home extends AppCompatActivity {
     public void goToRanking(View v){
         startActivity(new Intent(Home.this, Form.class));
     }
+    public void goToMap(View v){
+        startActivity(new Intent(Home.this, MapsActivity.class));
+    }
+
+
 
 
 
