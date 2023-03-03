@@ -1,4 +1,5 @@
 package com.example.draredebosanci;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Button;
         import android.widget.TextView;
 
         import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Arrays;
         import java.util.Collections;
@@ -26,11 +28,14 @@ public class Live extends AppCompatActivity {
     private Button mButton2;
     private List<String> team1;
     private List<String> team2;
+    private NotificationHelper notificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
+
+        notificationHelper = new NotificationHelper(this);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -76,15 +81,9 @@ public class Live extends AppCompatActivity {
 
         setPlayerOnTeam();
 
-
-        // Set up timer button click listener
         addTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.clock);
-//                mediaPlayer.start();
-
                 String timerString = timerEditText.getText().toString();
                 if (!TextUtils.isEmpty(timerString)) {
                     try {
@@ -112,12 +111,57 @@ public class Live extends AppCompatActivity {
 
                     public void onFinish() {
                         TVStopWatch.setText("00:00");
+
+                        // Display notification when timer finishes
+                        String title = "Stopwatch";
+                        String message = "The time is up";
+
+                        NotificationCompat.Builder builder = notificationHelper.createNotification(title, message);
+
+                        builder.setSmallIcon(R.drawable.timer);
+
+                        NotificationManager manager = notificationHelper.getManager();
+                        manager.notify(1, builder.build());
+
+                        // Reset the timer
+                        timer = null;
                     }
                 }.start();
             }
         });
 
+        // Initialize the timer to null to prevent it from triggering a notification on startup
+        timer = null;
     }
+
+
+
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timer == null) {
+            return;
+        }
+
+        String title = "Stopwatch";
+        String message = "The time is up";
+
+        NotificationCompat.Builder builder = notificationHelper.createNotification(title, message);
+
+        builder.setSmallIcon(R.drawable.timer);
+
+        NotificationManager manager = notificationHelper.getManager();
+        manager.notify(1, builder.build());
+    }
+
+
+
+
+
+
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();

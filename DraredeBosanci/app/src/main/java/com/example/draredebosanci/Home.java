@@ -69,9 +69,6 @@ public class Home extends AppCompatActivity {
         startActivity(new Intent(Home.this, Form.class));
     }
 
-//    public void goToMap(View v){
-//        startActivity(new Intent(Home.this, MapsActivity.class));
-//    }
 
 
 

@@ -2,6 +2,7 @@ package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,11 +30,14 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
     private final int REQUEST_LOCATION_PERMISSION = 1;
     private   EditText etPlayers;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         LinearLayout linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
@@ -108,15 +114,18 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
             });
         }
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.mapGameLocation);
-//        mapFragment.getMapAsync(this);
-//
-//        // Initialize the FusedLocationProviderClient.
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        // Initialize the FusedLocationProviderClient.
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
     }
+
+
+
 
     public void disableButton(View view) {
         Button button = (Button) view;
