@@ -40,7 +40,17 @@ public class FormEduard extends AppCompatActivity {
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        int counter = prefs.getInt("counterEduard", 10);
+        EditText etGoal = findViewById(R.id.ETGoalEduard);
+        etGoal.setText(String.valueOf(counter));
+
+
     }
+// on create end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -63,11 +73,6 @@ public class FormEduard extends AppCompatActivity {
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
 
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-            int counter = prefs.getInt("counterEduard", 10);
-            EditText etGoal = findViewById(R.id.ETGoalEduard);
-            etGoal.setText(String.valueOf(counter));
 
         }
 

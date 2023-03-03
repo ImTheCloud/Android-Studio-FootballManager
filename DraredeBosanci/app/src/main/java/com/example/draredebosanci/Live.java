@@ -1,7 +1,6 @@
 package com.example.draredebosanci;
 import android.app.NotificationManager;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
         import android.os.CountDownTimer;
         import android.text.TextUtils;
@@ -113,10 +112,9 @@ public class Live extends AppCompatActivity {
                         TVStopWatch.setText("00:00");
 
                         // Display notification when timer finishes
-                        String title = "Stopwatch";
-                        String message = "The time is up";
+                        String title = "Time up";
 
-                        NotificationCompat.Builder builder = notificationHelper.createNotification(title, message);
+                        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
                         builder.setSmallIcon(R.drawable.timer);
 
@@ -133,12 +131,8 @@ public class Live extends AppCompatActivity {
         // Initialize the timer to null to prevent it from triggering a notification on startup
         timer = null;
     }
-
-
-
-
-
-
+// on create end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onResume() {
         super.onResume();
@@ -146,22 +140,16 @@ public class Live extends AppCompatActivity {
             return;
         }
 
-        String title = "Stopwatch";
-        String message = "The time is up";
+        String title = "Time up";
 
-        NotificationCompat.Builder builder = notificationHelper.createNotification(title, message);
+
+        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
         builder.setSmallIcon(R.drawable.timer);
 
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
     }
-
-
-
-
-
-
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();
@@ -175,27 +163,12 @@ public class Live extends AppCompatActivity {
         setTeamText(TVPlayers2, "  Team 2 : ", team2);
 
     }
-
-
-
-    public List<String> getTeam1() {
-        return team1;
-    }
-
-    public List<String> getTeam2() {
-        return team2;
-    }
-
-
-
     private void setTeamText(TextView textView, String teamName, List<String> players) {
         StringBuilder sb = new StringBuilder(teamName);
         sb.append("\n\n");
         sb.append(TextUtils.join("\n", players));
         textView.setText(sb.toString());
     }
-
-
     public void goToChoiceGoal(View v){
         startActivity(new Intent(Live.this, ChoiceGoal.class));
 //        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);

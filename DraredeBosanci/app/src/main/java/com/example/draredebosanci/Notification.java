@@ -24,10 +24,10 @@ public class Notification extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        String title = "stopwatch";
-        String message = "The time is up";
+        String title = "Stopwatch";
+        String message = "Time up";
 
-        NotificationCompat.Builder builder = notificationHelper.createNotification(title, message);
+        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
         builder.setSmallIcon(R.drawable.timer);
 
