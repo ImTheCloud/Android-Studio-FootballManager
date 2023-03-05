@@ -8,28 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 public class LiveSelected extends AppCompatActivity {
-    private TextView TVPlayers, TVPlayers2, TVStopWatch;
+    private TextView TVPlayers, TVPlayers2, TVStopWatch,mTextView,mTextView2;
+    private  EditText timerEditText;
     private CountDownTimer timer;
-    private int totalTime = 45 * 60;
-    private int mCount = 0;
-    private int mCount2 = 0;
-    private TextView mTextView;
-    private TextView mTextView2;
-    private Button mButton;
-    private Button mButton2;
-    boolean notificationSent = false;
-
-
-
+    private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
+    private Button mButton,mButton2,addTimerButton;
     private NotificationHelper notificationHelper;
+    boolean notificationSent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +26,19 @@ public class LiveSelected extends AppCompatActivity {
         setContentView(R.layout.activity_live_selected);
 
         notificationHelper = new NotificationHelper(this);
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // Récupération des vues
         mTextView = findViewById(R.id.TXT_ScoreTeam1);
         mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
         mButton = findViewById(R.id.bt_Goal1);
         mButton2 = findViewById(R.id.bt_Goal2);
-
-// Définition de l'écouteur de clic pour le bouton "bt_Goal1"
+        TVPlayers = findViewById(R.id.TVPlayers);
+        TVPlayers2 = findViewById(R.id.TVPlayers2);
+        TVStopWatch = findViewById(R.id.TV_StopWatch);
+        TVPlayers = findViewById(R.id.TVPlayers);
+        TVPlayers2 = findViewById(R.id.TVPlayers2);
+        TVStopWatch = findViewById(R.id.TV_StopWatch);
+        addTimerButton = findViewById(R.id.add_timer_button);
+        timerEditText = findViewById(R.id.ID_Timer);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,8 +50,6 @@ public class LiveSelected extends AppCompatActivity {
 
             }
         });
-
-// Définition de l'écouteur de clic pour le bouton "bt_Goal2"
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,34 +61,17 @@ public class LiveSelected extends AppCompatActivity {
 
             }
         });
-
-        //////////////////////////////////////////////////////////////////////////////
-        // Initialize UI elements
-        TVPlayers = findViewById(R.id.TVPlayers);
-        TVPlayers2 = findViewById(R.id.TVPlayers2);
-
-        // Récupérer les données supplémentaires de l'intention
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String players1 = extras.getString("players_data");
-            players1 = players1.replace(",", "\n"); // Remplacer les virgules par des sauts de ligne
-            TVPlayers.setText(players1);
+            players1 = players1.replace(",", "\n");
 
             String players2 = extras.getString("players_data2");
-            players2 = players2.replace(",", "\n"); // Remplacer les virgules par des sauts de ligne
+            players2 = players2.replace(",", "\n");
             TVPlayers2.setText(players2);
         }
-
-
-
-
-
-        TVStopWatch = findViewById(R.id.TV_StopWatch);
-        Button addTimerButton = findViewById(R.id.add_timer_button);
-        EditText timerEditText = findViewById(R.id.ID_Timer);
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         addTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,8 +135,6 @@ public class LiveSelected extends AppCompatActivity {
                 }.start();
             }
         });
-
-        // Initialize the timer to null to prevent it from triggering a notification on startup
         timer = null;
     }
     // on create end
@@ -190,8 +161,6 @@ public class LiveSelected extends AppCompatActivity {
             notificationSent = true;
         }
     }
-
-
     public void goToHouse(View v){
         startActivity(new Intent(LiveSelected.this, Home.class));
     }

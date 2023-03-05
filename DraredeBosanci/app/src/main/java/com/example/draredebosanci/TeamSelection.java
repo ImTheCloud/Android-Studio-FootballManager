@@ -14,12 +14,9 @@ public class TeamSelection extends AppCompatActivity {
         setContentView(R.layout.activity_team_selection);
     }
 
-
-
     public void goToRandomTeam(View v){
         startActivity(new Intent(TeamSelection.this, RandomTeam.class));
     }
-
     public void goToSelectedTeam(View v){
         startActivity(new Intent(TeamSelection.this, SelectedTeam.class));
     }

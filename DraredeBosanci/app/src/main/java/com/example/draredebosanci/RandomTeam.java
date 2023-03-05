@@ -1,7 +1,6 @@
 package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,52 +24,24 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
-    private   EditText etPlayers;
+    private EditText etPlayers;
+    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2,linearLayoutHelb1,linearLayoutHelb2;
+    private Button playerDareDeBosanci,playerHelb;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_random_team);
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        LinearLayout linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
-        LinearLayout linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
-        LinearLayout linearLayoutHelb1 = findViewById(R.id.linearLayoutHelb1);
-        LinearLayout linearLayoutHelb2 = findViewById(R.id.linearLayoutHelb2);
-        Button  playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
-        Button  playerHelb = findViewById(R.id.bt_Helb);
-        playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearLayoutBosanci1.getVisibility() == View.VISIBLE && linearLayoutBosanci2.getVisibility() == View.VISIBLE) {
-                    linearLayoutBosanci1.setVisibility(View.INVISIBLE);
-                    linearLayoutBosanci2.setVisibility(View.INVISIBLE);
-                } else {
-                    linearLayoutBosanci1.setVisibility(View.VISIBLE);
-                    linearLayoutBosanci2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        playerHelb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearLayoutHelb1.getVisibility() == View.VISIBLE && linearLayoutHelb2.getVisibility() == View.VISIBLE) {
-                    linearLayoutHelb1.setVisibility(View.INVISIBLE);
-                    linearLayoutHelb2.setVisibility(View.INVISIBLE);
-                } else {
-                    linearLayoutHelb1.setVisibility(View.VISIBLE);
-                    linearLayoutHelb2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Button[] buttons = new Button[] {
+         linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
+         linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
+         linearLayoutHelb1 = findViewById(R.id.linearLayoutHelb1);
+         linearLayoutHelb2 = findViewById(R.id.linearLayoutHelb2);
+         playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
+         playerHelb = findViewById(R.id.bt_Helb);
+         etPlayers = findViewById(R.id.ID_Player);
+         Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
                 findViewById(R.id.playerRuben),
                 findViewById(R.id.playerDany),
@@ -95,11 +65,34 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
                 findViewById(R.id.playerDamien),
                 findViewById(R.id.playerAnthony),
                 findViewById(R.id.playerLeo),
-
         };
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (linearLayoutBosanci1.getVisibility() == View.VISIBLE && linearLayoutBosanci2.getVisibility() == View.VISIBLE) {
+                    linearLayoutBosanci1.setVisibility(View.INVISIBLE);
+                    linearLayoutBosanci2.setVisibility(View.INVISIBLE);
+                } else {
+                    linearLayoutBosanci1.setVisibility(View.VISIBLE);
+                    linearLayoutBosanci2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        playerHelb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (linearLayoutHelb1.getVisibility() == View.VISIBLE && linearLayoutHelb2.getVisibility() == View.VISIBLE) {
+                    linearLayoutHelb1.setVisibility(View.INVISIBLE);
+                    linearLayoutHelb2.setVisibility(View.INVISIBLE);
+                } else {
+                    linearLayoutHelb1.setVisibility(View.VISIBLE);
+                    linearLayoutHelb2.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
-        etPlayers = findViewById(R.id.ID_Player);
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (Button button : buttons) {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,25 +106,19 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
             });
         }
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        // Initialize the FusedLocationProviderClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
     public void disableButton(View view) {
         Button button = (Button) view;
         button.setEnabled(false);
         button.setAlpha(0.5f);
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -153,8 +140,6 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
             });
         }
     }
-
-    // Called when the user responds to the permission request dialog.
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -184,5 +169,4 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
 //        mediaPlayer.start();
         startActivity(i);
     }
-
 }

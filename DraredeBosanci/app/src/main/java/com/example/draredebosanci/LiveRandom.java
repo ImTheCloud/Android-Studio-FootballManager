@@ -12,23 +12,20 @@ import android.widget.Button;
         import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import java.util.Arrays;
+        import java.util.Arrays;
         import java.util.Collections;
         import java.util.List;
 public class LiveRandom extends AppCompatActivity {
-    private TextView TVPlayers, TVPlayers2, TVStopWatch;
+    private TextView TVPlayers, TVPlayers2, TVStopWatch,mTextView,mTextView2;
+    private EditText timerEditText;
     private CountDownTimer timer;
-    private int totalTime = 45 * 60;
-    private int mCount = 0;
-    private int mCount2 = 0;
-    private TextView mTextView;
-    private TextView mTextView2;
-    private Button mButton;
-    private Button mButton2;
-    private List<String> team1;
-    private List<String> team2;
+    private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
+    private Button mButton,mButton2,addTimerButton;
+    private List<String> team1,team2;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +33,18 @@ public class LiveRandom extends AppCompatActivity {
         setContentView(R.layout.activity_live_random);
 
         notificationHelper = new NotificationHelper(this);
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // Récupération des vues
         mTextView = findViewById(R.id.TXT_ScoreTeam1);
         mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
         mButton = findViewById(R.id.bt_Goal1);
         mButton2 = findViewById(R.id.bt_Goal2);
+        TVPlayers = findViewById(R.id.TVPlayers);
+        TVPlayers2 = findViewById(R.id.TVPlayers2);
+        TVStopWatch = findViewById(R.id.TV_StopWatch);
+        addTimerButton = findViewById(R.id.add_timer_button);
+        timerEditText = findViewById(R.id.ID_Timer);
 
-// Définition de l'écouteur de clic pour le bouton "bt_Goal1"
+        setPlayerOnTeam();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +56,6 @@ public class LiveRandom extends AppCompatActivity {
 
             }
         });
-
-// Définition de l'écouteur de clic pour le bouton "bt_Goal2"
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,17 +67,7 @@ public class LiveRandom extends AppCompatActivity {
 
             }
         });
-
-        //////////////////////////////////////////////////////////////////////////////
-        // Initialize UI elements
-        TVPlayers = findViewById(R.id.TVPlayers);
-        TVPlayers2 = findViewById(R.id.TVPlayers2);
-        TVStopWatch = findViewById(R.id.TV_StopWatch);
-        Button addTimerButton = findViewById(R.id.add_timer_button);
-        EditText timerEditText = findViewById(R.id.ID_Timer);
-
-        setPlayerOnTeam();
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         addTimerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,35 +131,28 @@ public class LiveRandom extends AppCompatActivity {
                 }.start();
             }
         });
-
-        // Initialize the timer to null to prevent it from triggering a notification on startup
         timer = null;
     }
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@Override
-protected void onResume() {
+
+    @Override
+    protected void onResume() {
     super.onResume();
     if (timer == null) {
         return;
     }
 
-    // Send notification only if it hasn't been sent before
     if (!notificationSent) {
         String title = "Time up";
-
         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-
         builder.setSmallIcon(R.drawable.timer);
-
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
-
         // Update notificationSent flag to true
         notificationSent = true;
     }
 }
-
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();
@@ -192,18 +172,14 @@ protected void onResume() {
         textView.setText(sb.toString());
     }
 
-
-
     public void goToChoiceGoal(View v){
         startActivity(new Intent(LiveRandom.this, ChoiceGoal.class));
 //        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
 //        mediaPlayer.start();
     }
-
     public void goToHouse(View v){
         startActivity(new Intent(LiveRandom.this, Home.class));
     }
-
     public void goToOld(View v){
         startActivity(new Intent(LiveRandom.this, OldGame.class));
     }
