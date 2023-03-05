@@ -20,10 +20,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private final int REQUEST_LOCATION_PERMISSION = 1;
+public class RandomTeam extends AppCompatActivity {
+
     private EditText etPlayers;
     private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2,linearLayoutHelb1,linearLayoutHelb2;
     private Button playerDareDeBosanci,playerHelb;
@@ -105,11 +103,7 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
                 }
             });
         }
- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
 // on create end
@@ -119,49 +113,7 @@ public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
         button.setEnabled(false);
         button.setAlpha(0.5f);
     }
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Check if we have permission to access the user's location.
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission from the user to access their location.
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-        } else {
-            // If we have permission, get the user's last known location and move the camera there.
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-                if (location != null) {
-                    LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions()
-                            .position(userLocation)
-                            .title("Marker at User Location"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
-                }
-            });
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == REQUEST_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // If the user grants permission, get the user's last known location and move the camera there.
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-                    if (location != null) {
-                        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                        mMap.addMarker(new MarkerOptions()
-                                .position(userLocation)
-                                .title("Marker at User Location"));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
-                    }
-                });
-            }
-        }
-    }
     public void goToLive(View v){
         Intent i = new Intent(RandomTeam.this, LiveRandom.class);
         i.putExtra("Players", etPlayers.getText().toString());
