@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 import java.util.Arrays;
         import java.util.Collections;
         import java.util.List;
-public class Live extends AppCompatActivity {
+public class LiveRandom extends AppCompatActivity {
     private TextView TVPlayers, TVPlayers2, TVStopWatch;
     private CountDownTimer timer;
     private int totalTime = 45 * 60;
@@ -32,7 +32,7 @@ public class Live extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live);
+        setContentView(R.layout.activity_live_random);
 
         notificationHelper = new NotificationHelper(this);
 
@@ -159,28 +159,30 @@ public class Live extends AppCompatActivity {
         team1 = playerList.subList(0, playerList.size() / 2);
         team2 = playerList.subList(playerList.size() / 2, playerList.size());
         // Set team names and players
-        setTeamText(TVPlayers, "Team 1 : ", team1);
-        setTeamText(TVPlayers2, "  Team 2 : ", team2);
-
+        setTeamText(TVPlayers, team1);
+        setTeamText(TVPlayers2, team2);
     }
-    private void setTeamText(TextView textView, String teamName, List<String> players) {
-        StringBuilder sb = new StringBuilder(teamName);
-        sb.append("\n\n");
+
+    private void setTeamText(TextView textView, List<String> players) {
+        StringBuilder sb = new StringBuilder();
         sb.append(TextUtils.join("\n", players));
         textView.setText(sb.toString());
     }
+
+
+
     public void goToChoiceGoal(View v){
-        startActivity(new Intent(Live.this, ChoiceGoal.class));
+        startActivity(new Intent(LiveRandom.this, ChoiceGoal.class));
 //        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
 //        mediaPlayer.start();
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(Live.this, Home.class));
+        startActivity(new Intent(LiveRandom.this, Home.class));
     }
 
     public void goToOld(View v){
-        startActivity(new Intent(Live.this, OldGame.class));
+        startActivity(new Intent(LiveRandom.this, OldGame.class));
     }
 
 

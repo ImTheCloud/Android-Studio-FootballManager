@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
-import java.util.Map;
 
 public class Home extends AppCompatActivity {
     private boolean isSoundEnabled = true;
@@ -59,8 +55,8 @@ public class Home extends AppCompatActivity {
         startActivity(new Intent(Home.this, Contact.class));
     }
 
-    public void goToNewGame(View v){
-        startActivity(new Intent(Home.this, NewGame.class));
+    public void goToTeamSelection(View v){
+        startActivity(new Intent(Home.this, TeamSelection.class));
     }
 
     public void goToOldGame(View v){

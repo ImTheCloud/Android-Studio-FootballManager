@@ -15,9 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DrareDeBosanci"
         tools:targetApi="31">
-        <activity
-            android:name=".Notification"
-            android:exported="false" />
+
 
         <service android:name=".MyMusicService" />
 
@@ -25,6 +23,21 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
+        <activity
+            android:name=".LiveSelected"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".SelectedTeam"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".TeamSelection"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Notification"
+            android:exported="false" />
         <activity
             android:name=".CompoChoice"
             android:exported="false"
@@ -95,7 +108,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".Live"
+            android:name=".LiveRandom"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
@@ -103,7 +116,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".NewGame"
+            android:name=".RandomTeam"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

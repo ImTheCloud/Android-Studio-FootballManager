@@ -56,7 +56,7 @@
         android:layout_height="55dp"
         android:backgroundTint="#004CAF50"
         android:elevation="4dp"
-        android:onClick="goToNewGame"
+        android:onClick="goToTeamSelection"
         android:padding="16dp"
         android:text="New Game"
         android:textColor="#FFFFFF"

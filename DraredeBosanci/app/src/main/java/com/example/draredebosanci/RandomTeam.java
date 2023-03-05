@@ -1,8 +1,7 @@
 package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.DatePickerDialog;
-import android.app.NotificationManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.content.pm.PackageManager;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,7 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
+public class RandomTeam extends AppCompatActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
@@ -35,7 +33,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_game);
+        setContentView(R.layout.activity_random_team);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -82,6 +80,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
                 findViewById(R.id.playerLucian),
                 findViewById(R.id.playerDavid),
                 findViewById(R.id.playerFlavyus),
+                findViewById(R.id.playerSimon),
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
@@ -118,10 +117,8 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         // Initialize the FusedLocationProviderClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
     }
 
 // on create end
@@ -181,7 +178,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback{
         }
     }
     public void goToLive(View v){
-        Intent i = new Intent(NewGame.this, Live.class);
+        Intent i = new Intent(RandomTeam.this, LiveRandom.class);
         i.putExtra("Players", etPlayers.getText().toString());
 //        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
 //        mediaPlayer.start();
