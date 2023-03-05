@@ -28,6 +28,7 @@ public class LiveRandom extends AppCompatActivity {
     private List<String> team1;
     private List<String> team2;
     private NotificationHelper notificationHelper;
+    boolean notificationSent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,13 +102,27 @@ public class LiveRandom extends AppCompatActivity {
 
                 // Start a new timer
                 timer = new CountDownTimer(totalTime * 1000, 1000) {
+                    boolean notificationSent = false; // Initialize notificationSent to false
+                    @Override
                     public void onTick(long millisUntilFinished) {
                         int minutes = (int) millisUntilFinished / 60000;
                         int seconds = (int) (millisUntilFinished % 60000) / 1000;
                         String timeLeft = String.format("%02d:%02d", minutes, seconds);
                         TVStopWatch.setText(timeLeft);
+
+                        // Display time left in notification
+                        String title = "Time left: " + timeLeft;
+
+                        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                        builder.setSmallIcon(R.drawable.timer);
+                        builder.setOnlyAlertOnce(true);
+
+                        NotificationManager manager = notificationHelper.getManager();
+                        manager.notify(1, builder.build());
                     }
 
+
+                    @Override
                     public void onFinish() {
                         TVStopWatch.setText("00:00");
 
@@ -117,6 +132,7 @@ public class LiveRandom extends AppCompatActivity {
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
                         builder.setSmallIcon(R.drawable.timer);
+                        builder.setOnlyAlertOnce(true);
 
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
@@ -124,6 +140,7 @@ public class LiveRandom extends AppCompatActivity {
                         // Reset the timer
                         timer = null;
                     }
+
                 }.start();
             }
         });
@@ -133,15 +150,16 @@ public class LiveRandom extends AppCompatActivity {
     }
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (timer == null) {
-            return;
-        }
+@Override
+protected void onResume() {
+    super.onResume();
+    if (timer == null) {
+        return;
+    }
 
+    // Send notification only if it hasn't been sent before
+    if (!notificationSent) {
         String title = "Time up";
-
 
         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
@@ -149,7 +167,12 @@ public class LiveRandom extends AppCompatActivity {
 
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
+
+        // Update notificationSent flag to true
+        notificationSent = true;
     }
+}
+
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();

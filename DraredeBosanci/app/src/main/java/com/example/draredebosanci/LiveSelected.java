@@ -25,6 +25,8 @@ public class LiveSelected extends AppCompatActivity {
     private TextView mTextView2;
     private Button mButton;
     private Button mButton2;
+    boolean notificationSent = false;
+
 
 
     private NotificationHelper notificationHelper;
@@ -118,13 +120,27 @@ public class LiveSelected extends AppCompatActivity {
 
                 // Start a new timer
                 timer = new CountDownTimer(totalTime * 1000, 1000) {
+                    boolean notificationSent = false; // Initialize notificationSent to false
+                    @Override
                     public void onTick(long millisUntilFinished) {
                         int minutes = (int) millisUntilFinished / 60000;
                         int seconds = (int) (millisUntilFinished % 60000) / 1000;
                         String timeLeft = String.format("%02d:%02d", minutes, seconds);
                         TVStopWatch.setText(timeLeft);
+
+                        // Display time left in notification
+                        String title = "Time left: " + timeLeft;
+
+                        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                        builder.setSmallIcon(R.drawable.timer);
+                        builder.setOnlyAlertOnce(true);
+
+                        NotificationManager manager = notificationHelper.getManager();
+                        manager.notify(1, builder.build());
                     }
 
+
+                    @Override
                     public void onFinish() {
                         TVStopWatch.setText("00:00");
 
@@ -134,6 +150,7 @@ public class LiveSelected extends AppCompatActivity {
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
                         builder.setSmallIcon(R.drawable.timer);
+                        builder.setOnlyAlertOnce(true);
 
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
@@ -141,6 +158,7 @@ public class LiveSelected extends AppCompatActivity {
                         // Reset the timer
                         timer = null;
                     }
+
                 }.start();
             }
         });
@@ -150,8 +168,6 @@ public class LiveSelected extends AppCompatActivity {
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -159,15 +175,20 @@ public class LiveSelected extends AppCompatActivity {
             return;
         }
 
-        String title = "Time up";
+        // Send notification only if it hasn't been sent before
+        if (!notificationSent) {
+            String title = "Time up";
 
+            NotificationCompat.Builder builder = notificationHelper.createNotification(title);
 
-        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+            builder.setSmallIcon(R.drawable.timer);
 
-        builder.setSmallIcon(R.drawable.timer);
+            NotificationManager manager = notificationHelper.getManager();
+            manager.notify(1, builder.build());
 
-        NotificationManager manager = notificationHelper.getManager();
-        manager.notify(1, builder.build());
+            // Update notificationSent flag to true
+            notificationSent = true;
+        }
     }
 
 
