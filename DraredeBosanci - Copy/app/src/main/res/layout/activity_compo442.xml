@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Compo442">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/fieldcompo"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <TextView
+        android:id="@+id/TXT_442"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4-4-2"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/player17"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="284dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/player18"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/player15"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="228dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <EditText
+        android:id="@+id/player19"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="228dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.334" />
+
+    <EditText
+        android:id="@+id/player20"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <EditText
+        android:id="@+id/player16"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.584" />
+
+    <EditText
+        android:id="@+id/Player1"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="144dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/Player2"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="228dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.814" />
+
+    <EditText
+        android:id="@+id/player14"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="284dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748" />
+
+    <EditText
+        android:id="@+id/player11"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.822" />
+
+    <EditText
+        android:id="@+id/player12"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:drawableBottom="@drawable/t_shirt"
+        android:ems="4"
+        android:hint="PLAYER"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748" />
+
+
+
+
+<!--    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
