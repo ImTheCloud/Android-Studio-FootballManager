@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
+    private int numTries = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 // Créer une boîte de dialogue pour demander le code
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setTitle("Enter code");
+                builder.setTitle("Enter the code");
 
                 final EditText input = new EditText(Home.this);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -40,7 +44,23 @@ public class Home extends AppCompatActivity {
                             Intent intent = new Intent(Home.this, Season3.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(Home.this, "Wrong code, try again", Toast.LENGTH_SHORT).show();
+                            if (numTries < 1) {
+                                // Afficher le nombre d'essais restants
+                                int remainingTries = 1 - numTries;
+                                Toast.makeText(Home.this, "Try again, remaining tries: " + remainingTries, Toast.LENGTH_SHORT).show();
+                                numTries++;
+                            } else {
+                                // Bloquer le bouton et attendre 10 secondes avant de réinitialiser le nombre d'essais
+                                btSeason3DrareDeBosanci.setEnabled(false);
+                                Toast.makeText(Home.this, "The access is blocked please wait 10 seconds " , Toast.LENGTH_SHORT).show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        btSeason3DrareDeBosanci.setEnabled(true);
+                                        numTries = 0;
+                                    }
+                                }, 10000); // 10 secondes d'attente
+                            }
                         }
                     }
                 });
@@ -52,6 +72,7 @@ public class Home extends AppCompatActivity {
                 });
 
                 builder.show();
+
             }
         });
 
