@@ -7,6 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Home extends AppCompatActivity {
     private boolean isSoundEnabled = true;
@@ -15,6 +19,23 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userEmail = null;
+        if (user != null) {
+            userEmail = user.getEmail();
+        }
+        Button newGameButton = findViewById(R.id.BT_New_Game);
+        if (!userEmail.equals("claudiuppdc7@yahoo.com")) {
+            newGameButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), "Only the admin can create a new soccer game", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
         final Button soundButton = findViewById(R.id.soundOff);
         final Drawable soundOnImage = getResources().getDrawable(R.drawable.sound_off);
