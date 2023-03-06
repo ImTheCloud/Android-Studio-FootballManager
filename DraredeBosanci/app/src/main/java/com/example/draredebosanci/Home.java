@@ -1,96 +1,60 @@
 package com.example.draredebosanci;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 public class Home extends AppCompatActivity {
-    private boolean isSoundEnabled = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        String userEmail = null;
-        if (user != null) {
-            userEmail = user.getEmail();
-        }
-        Button newGameButton = findViewById(R.id.BT_New_Game);
-        if (!userEmail.equals("claudiuppdc7@yahoo.com")) {
-            newGameButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), "Only the admin can create a new soccer game", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-
-        final Button soundButton = findViewById(R.id.soundOff);
-        final Drawable soundOnImage = getResources().getDrawable(R.drawable.sound_off);
-        final Drawable soundOffImage = getResources().getDrawable(R.drawable.sound_on);
-        soundButton.setOnClickListener(new View.OnClickListener() {
+        Button btSeason3DrareDeBosanci = findViewById(R.id.BT_Season3_DrareDeBosanci);
+        btSeason3DrareDeBosanci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isSoundEnabled) {
-                    // Désactiver le son
-                    isSoundEnabled = false;
-                    Intent intent = new Intent(Home.this, MyMusicService.class);
-                    startService(intent);
-                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOffImage, null, null, null);
-                } else {
-                    // Réactiver le son
-                    isSoundEnabled = true;
-                    Intent intent = new Intent(Home.this, MyMusicService.class);
-                    stopService(intent);
-                    soundButton.setCompoundDrawablesWithIntrinsicBounds(soundOnImage, null, null, null);
-                }
+                // Créer une boîte de dialogue pour demander le code
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                builder.setTitle("Enter code");
+
+                final EditText input = new EditText(Home.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setView(input);
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String code = input.getText().toString();
+                        if (code.equals("1070")) {
+                            // Lancer l'activité si le code est correct
+                            Intent intent = new Intent(Home.this, Season3.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(Home.this, "Wrong code, try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
             }
         });
 
-
     }
-// on create end
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    public void goToLive(View v){
-        startActivity(new Intent(Home.this, OldGame.class));
-    }
-    public void goToCompo(View v){
-        startActivity(new Intent(Home.this, CompoChoice.class));
-    }
-
-    public void goToContact(View v){
-        startActivity(new Intent(Home.this, Contact.class));
-    }
-
-    public void goToTeamSelection(View v){
-        startActivity(new Intent(Home.this, TeamSelection.class));
-    }
-
-    public void goToOldGame(View v){
-        startActivity(new Intent(Home.this, OldGame.class));
-    }
-
-    public void goToRanking(View v){
-        startActivity(new Intent(Home.this, Form.class));
-    }
-
-
-
-
-
 
 }

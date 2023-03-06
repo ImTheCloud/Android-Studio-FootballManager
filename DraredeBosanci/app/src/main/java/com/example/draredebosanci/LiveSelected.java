@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 public class LiveSelected extends AppCompatActivity {
-    private TextView TVPlayers, TVPlayers2, TVStopWatch,mTextView,mTextView2;
+    private TextView TVPlayers1, TVPlayers2, TVStopWatch,mTextView,mTextView2;
     private  EditText timerEditText;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
@@ -30,10 +30,9 @@ public class LiveSelected extends AppCompatActivity {
         mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
         mButton = findViewById(R.id.bt_Goal1);
         mButton2 = findViewById(R.id.bt_Goal2);
-        TVPlayers = findViewById(R.id.TVPlayers);
+        TVPlayers1 = findViewById(R.id.TVPlayers);
         TVPlayers2 = findViewById(R.id.TVPlayers2);
         TVStopWatch = findViewById(R.id.TV_StopWatch);
-        TVPlayers = findViewById(R.id.TVPlayers);
         TVPlayers2 = findViewById(R.id.TVPlayers2);
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         addTimerButton = findViewById(R.id.add_timer_button);
@@ -66,6 +65,7 @@ public class LiveSelected extends AppCompatActivity {
         if (extras != null) {
             String players1 = extras.getString("players_data");
             players1 = players1.replace(",", "\n");
+            TVPlayers1.setText(players1);
 
             String players2 = extras.getString("players_data2");
             players2 = players2.replace(",", "\n");
