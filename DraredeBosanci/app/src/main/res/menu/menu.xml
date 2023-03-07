@@ -26,6 +26,11 @@
             android:id="@+id/volume"
             android:icon="@drawable/volume_up"
             android:title="Volume up"/>
+
+<!--        <item-->
+<!--            android:id="@+id/search"-->
+<!--            android:icon="@drawable/baseline_search_24"-->
+<!--            android:title="Search"/>-->
     </group>
     <item
         android:title="">

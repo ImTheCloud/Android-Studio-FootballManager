@@ -26,10 +26,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".Season3"
             android:exported="true"
@@ -152,7 +149,6 @@
             android:name=".Contact"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
     </application>
 
 </manifest>
