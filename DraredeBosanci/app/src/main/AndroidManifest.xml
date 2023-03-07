@@ -25,6 +25,13 @@
 
         <activity
             android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".Season3"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -32,20 +39,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <activity
-            android:name=".Season3"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Home"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".LiveSelected"
             android:exported="false"
