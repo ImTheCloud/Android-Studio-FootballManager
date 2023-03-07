@@ -22,7 +22,6 @@
         android:id="@+id/house"
         android:layout_width="59dp"
         android:layout_height="45dp"
-
         android:background="@drawable/button_selector"
         android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
         android:drawableStart="@drawable/house"

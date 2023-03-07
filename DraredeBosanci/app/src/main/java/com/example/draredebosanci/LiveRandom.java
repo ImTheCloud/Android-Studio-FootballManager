@@ -178,7 +178,7 @@ public class LiveRandom extends AppCompatActivity {
 //        mediaPlayer.start();
     }
     public void goToHouse(View v){
-        startActivity(new Intent(LiveRandom.this, Home.class));
+        startActivity(new Intent(LiveRandom.this, Season3.class));
     }
     public void goToOld(View v){
         startActivity(new Intent(LiveRandom.this, OldGame.class));

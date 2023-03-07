@@ -16,6 +16,22 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <Button
+        android:id="@+id/house"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableStart="@drawable/house"
+        android:onClick="goToHouse"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
@@ -28,6 +44,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+
     <Button
         android:id="@+id/bt_drareDeBosanci"
         android:layout_width="119dp"
@@ -39,30 +56,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <Button
-        android:id="@+id/bt_Helb"
-        android:layout_width="119dp"
-        android:layout_height="46dp"
-        android:backgroundTint="#000D2753"
-        android:text="Group Prigogine"
-        android:textColor="@android:color/white"
-        android:textSize="10dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-
+        app:layout_constraintVertical_bias="0.036" />
 
     <LinearLayout
         android:id="@+id/linearLayoutBosanci1"
@@ -223,164 +220,6 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayoutHelb1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="#AA1C4285"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098">
-
-        <Button
-            android:id="@+id/playerClaudiu2"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Claudiu"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerBartek"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Bartek"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerBasile"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Basile"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerMichel"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Michel"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerRedouan"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Rdn"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerIlias"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Ilias"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutHelb2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="#AA1C4285"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174">
-
-        <Button
-            android:id="@+id/playerYassin"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Yassin"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerMohamed"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Moha"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerArthur"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Arthur"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-
-        <Button
-            android:id="@+id/playerDamien"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Damien"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerLeo"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Leo"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-        <Button
-            android:id="@+id/playerAnthony"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#0D2753"
-            android:text="Antoni"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
 
 
 

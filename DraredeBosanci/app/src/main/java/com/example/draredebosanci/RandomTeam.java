@@ -34,10 +34,7 @@ public class RandomTeam extends AppCompatActivity {
 
          linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
          linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
-         linearLayoutHelb1 = findViewById(R.id.linearLayoutHelb1);
-         linearLayoutHelb2 = findViewById(R.id.linearLayoutHelb2);
          playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
-         playerHelb = findViewById(R.id.bt_Helb);
          etPlayers = findViewById(R.id.ID_Player);
          Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
@@ -52,17 +49,7 @@ public class RandomTeam extends AppCompatActivity {
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
-                findViewById(R.id.playerBartek),
-                findViewById(R.id.playerMichel),
-                findViewById(R.id.playerBasile),
-                findViewById(R.id.playerClaudiu2),
-                findViewById(R.id.playerMohamed),
-                findViewById(R.id.playerRedouan),
-                findViewById(R.id.playerYassin),
-                findViewById(R.id.playerArthur),
-                findViewById(R.id.playerDamien),
-                findViewById(R.id.playerAnthony),
-                findViewById(R.id.playerLeo),
+
         };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
@@ -77,18 +64,7 @@ public class RandomTeam extends AppCompatActivity {
                 }
             }
         });
-        playerHelb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearLayoutHelb1.getVisibility() == View.VISIBLE && linearLayoutHelb2.getVisibility() == View.VISIBLE) {
-                    linearLayoutHelb1.setVisibility(View.INVISIBLE);
-                    linearLayoutHelb2.setVisibility(View.INVISIBLE);
-                } else {
-                    linearLayoutHelb1.setVisibility(View.VISIBLE);
-                    linearLayoutHelb2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (Button button : buttons) {
@@ -112,6 +88,10 @@ public class RandomTeam extends AppCompatActivity {
         Button button = (Button) view;
         button.setEnabled(false);
         button.setAlpha(0.5f);
+    }
+
+    public void goToHouse(View v){
+        startActivity(new Intent(RandomTeam.this, Season3.class));
     }
 
     public void goToLive(View v){

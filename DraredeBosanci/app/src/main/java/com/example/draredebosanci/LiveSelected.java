@@ -162,7 +162,7 @@ public class LiveSelected extends AppCompatActivity {
         }
     }
     public void goToHouse(View v){
-        startActivity(new Intent(LiveSelected.this, Home.class));
+        startActivity(new Intent(LiveSelected.this, Season3.class));
     }
 
     public void goToOld(View v){

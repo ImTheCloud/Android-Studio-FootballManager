@@ -23,8 +23,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 public class SelectedTeam extends AppCompatActivity{
     private EditText etPlayers1,etPlayers2;
-    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2,linearLayoutHelb1,linearLayoutHelb2;
-    private Button playerDareDeBosanci,playerHelb;
+    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2;
+    private Button playerDareDeBosanci;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,7 @@ public class SelectedTeam extends AppCompatActivity{
 
         linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
         linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
-        linearLayoutHelb1 = findViewById(R.id.linearLayoutHelb1);
-        linearLayoutHelb2 = findViewById(R.id.linearLayoutHelb2);
         playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
-        playerHelb = findViewById(R.id.bt_Helb);
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
         Button[] buttons = new Button[] {
@@ -52,17 +49,7 @@ public class SelectedTeam extends AppCompatActivity{
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
-                findViewById(R.id.playerBartek),
-                findViewById(R.id.playerMichel),
-                findViewById(R.id.playerBasile),
-                findViewById(R.id.playerClaudiu2),
-                findViewById(R.id.playerMohamed),
-                findViewById(R.id.playerRedouan),
-                findViewById(R.id.playerYassin),
-                findViewById(R.id.playerArthur),
-                findViewById(R.id.playerDamien),
-                findViewById(R.id.playerAnthony),
-                findViewById(R.id.playerLeo),
+
         };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,18 +65,7 @@ public class SelectedTeam extends AppCompatActivity{
                 }
             }
         });
-        playerHelb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearLayoutHelb1.getVisibility() == View.VISIBLE && linearLayoutHelb2.getVisibility() == View.VISIBLE) {
-                    linearLayoutHelb1.setVisibility(View.INVISIBLE);
-                    linearLayoutHelb2.setVisibility(View.INVISIBLE);
-                } else {
-                    linearLayoutHelb1.setVisibility(View.VISIBLE);
-                    linearLayoutHelb2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         for (Button button : buttons) {
@@ -121,6 +97,10 @@ public class SelectedTeam extends AppCompatActivity{
         Button button = (Button) view;
         button.setEnabled(false);
         button.setAlpha(0.5f);
+    }
+
+    public void goToHouse(View v){
+        startActivity(new Intent(SelectedTeam.this, Season3.class));
     }
     public void goToLiveSelected(View v){
         Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
