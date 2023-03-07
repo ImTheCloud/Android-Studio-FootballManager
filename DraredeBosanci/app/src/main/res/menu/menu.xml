@@ -7,22 +7,25 @@
     <group
         android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/house"
-            android:title="Home"/>
+<!--        <item-->
+<!--            android:id="@+id/nav_home"-->
+<!--            android:icon="@drawable/house"-->
+<!--            android:title="Home"/>-->
 
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/settings"
-            android:title="Settings"/>
-
-
+<!--        <item-->
+<!--            android:id="@+id/nav_settings"-->
+<!--            android:icon="@drawable/settings"-->
+<!--            android:title="Settings"/>-->
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
-            android:title="About Us"/>
+            android:title="About Me"/>
+
+        <item
+            android:id="@+id/volume"
+            android:icon="@drawable/volume_up"
+            android:title="Volume up"/>
     </group>
     <item
         android:title="">
