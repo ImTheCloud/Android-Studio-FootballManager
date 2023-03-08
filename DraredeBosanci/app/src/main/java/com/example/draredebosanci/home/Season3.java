@@ -6,18 +6,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.draredebosanci.MyMusicService;
+import com.example.draredebosanci.Profile.DBHelper;
 import com.example.draredebosanci.R;
+import com.example.draredebosanci.Profile.UploadActivity;
 import com.example.draredebosanci.compo.CompoChoice;
 import com.example.draredebosanci.firebase.LoginActivity;
 import com.example.draredebosanci.form.Form;
 import com.example.draredebosanci.team.TeamSelection;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +35,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 public class Season3 extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private boolean isSoundEnabled = true;
     private DrawerLayout drawerLayout;
-    private Button newGameButton,oldGame,liveGame,ranking,compo;
+    FloatingActionButton compo;
+    private Button newGameButton,oldGame,liveGame,ranking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +47,51 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
         oldGame = findViewById(R.id.BT_Old_Game);
         liveGame = findViewById(R.id.BT_Live_Game);
         ranking = findViewById(R.id.BT_Ranking);
-        compo = findViewById(R.id.BT_Compo);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
+
         drawerLayout = findViewById(R.id.drawer_layout);
+        compo = findViewById(R.id.BT_Compo);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
-                R.string.close_nav);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        View header = navigationView.getHeaderView(0);
+        ImageView navImage = (ImageView) header.findViewById(R.id.navImage);
+        TextView navName = (TextView) header.findViewById(R.id.navName);
+        TextView navEmail = (TextView) header.findViewById(R.id.navEmail);
+
+        DBHelper dbHelper = new DBHelper(this);
+        Cursor cursor = dbHelper.getUser();
+
+        if (cursor.getCount() == 0){
+            Toast.makeText(this, "No Profile Details", Toast.LENGTH_SHORT).show();
+        } else {
+            while (cursor.moveToNext()){
+                navName.setText(""+cursor.getString(0));
+                navEmail.setText(""+cursor.getString(1));
+                byte[] imageByte = cursor.getBlob(2);
+
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageByte,0,imageByte.length);
+                navImage.setImageBitmap(bitmap);
+            }
+        }
+
+        compo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Season3.this, CompoChoice.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -143,6 +186,10 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
                     finishAffinity(); // Empêcher l'utilisateur de revenir en arrière
                     break;
 
+                case R.id.profile:
+                    startActivity(new Intent(Season3.this, UploadActivity.class));
+                    break;
+
             }
             newGameButton.setEnabled(false);
             return true;
@@ -151,12 +198,7 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
     public void goToLive(View v){
         startActivity(new Intent(Season3.this, OldGame.class));
     }
-    public void goToCompo(View v){
-        startActivity(new Intent(Season3.this, CompoChoice.class));
-    }
-    public void goToContact(View v){
-        startActivity(new Intent(Season3.this, Contact.class));
-    }
+
     public void goToTeamSelection(View v){
         startActivity(new Intent(Season3.this, TeamSelection.class));
     }
