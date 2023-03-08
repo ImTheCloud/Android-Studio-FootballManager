@@ -5,3 +5,8 @@ L’application devra supporter le format téléphone et tablette et réagir
 adéquatement au changement d’orientation de l’appareil
 ex chez moi
 
+api super compliquer
+
+donne comment faire
+
+
