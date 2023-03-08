@@ -1,4 +1,4 @@
-package com.example.draredebosanci.Profile;
+package com.example.draredebosanci.profile;
 
 import android.graphics.Bitmap;
 

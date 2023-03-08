@@ -18,9 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.draredebosanci.MyMusicService;
-import com.example.draredebosanci.Profile.DBHelper;
+import com.example.draredebosanci.profile.DBHelper;
 import com.example.draredebosanci.R;
-import com.example.draredebosanci.Profile.UploadActivity;
+import com.example.draredebosanci.profile.UploadActivity;
 import com.example.draredebosanci.compo.CompoChoice;
 import com.example.draredebosanci.firebase.LoginActivity;
 import com.example.draredebosanci.form.Form;

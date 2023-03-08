@@ -48,7 +48,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".Profile.UploadActivity"
+            android:name=".profile.UploadActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
@@ -58,7 +58,7 @@
         <activity
             android:name=".firebase.SignUpActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".live.LiveSelected"
             android:exported="false"
