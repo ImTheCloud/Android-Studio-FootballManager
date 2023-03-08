@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn = "navigation_view">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
 
     <group
         android:checkableBehavior="single">
@@ -27,7 +27,7 @@
             android:icon="@drawable/volume_up"
             android:title="Volume up"/>
 
-<!--        <item-->
+        <!--        <item-->
 <!--            android:id="@+id/search"-->
 <!--            android:icon="@drawable/baseline_search_24"-->
 <!--            android:title="Search"/>-->
