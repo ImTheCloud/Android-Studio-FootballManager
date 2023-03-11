@@ -401,6 +401,54 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.878" />
 
+
+    <TextView
+        android:id="@+id/playerPositondef"
+        android:layout_width="157dp"
+        android:layout_height="48dp"
+        android:drawableLeft="@drawable/position_player"
+        android:text="   Position  :  "
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974" />
+
+
+    <Spinner
+        android:id="@+id/playerPositionSpinner"
+        android:layout_width="105dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="92dp"
+        android:background="@android:color/transparent"
+        android:entries="@array/positions"
+        android:spinnerMode="dropdown"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
+
+    <TextView
+        android:id="@+id/apiResult"
+        android:layout_width="111dp"
+        android:layout_height="25dp"
+        android:text="*"
+        android:textColor="#ffffff"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998" />
+
     <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
 
 

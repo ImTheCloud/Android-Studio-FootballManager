@@ -24,7 +24,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".MainActivity2"
+            android:name=".home.Season3"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -47,10 +47,6 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".home.Home"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".home.Season3"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

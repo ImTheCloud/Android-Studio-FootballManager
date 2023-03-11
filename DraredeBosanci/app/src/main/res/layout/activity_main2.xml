@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/apiResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="hello"
@@ -21,20 +21,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <TextView
-        android:id="@+id/positon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Striker"
-        android:textColor="#ffffff"
-        android:textSize="32sp"
-        android:textStyle="bold"
+    <Spinner
+        android:id="@+id/playerPositionSpinner"
+        android:layout_width="85dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="168dp"
+        android:background="@android:color/transparent"
+        android:entries="@array/positions"
+        android:spinnerMode="dropdown"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BDBDBD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.797" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
