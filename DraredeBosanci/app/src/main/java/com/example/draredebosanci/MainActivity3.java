@@ -1,20 +1,13 @@
 package com.example.draredebosanci;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-
-import com.example.draredebosanci.databinding.ActivityMainBinding;
-
-public class MainActivity extends AppCompatActivity {
-
-    ActivityMainBinding binding;
+public class MainActivity3 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        setContentView(R.layout.activity_main3);
     }
 }
