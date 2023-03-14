@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".firebase.SignUpActivity">
+    tools:context="Firebase.SignUpActivity">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".firebase.SignUpActivity">
+        tools:context="Firebase.SignUpActivity">
         <TextView
             android:id="@+id/TXT_DrareDeBosanci"
             android:layout_width="wrap_content"
