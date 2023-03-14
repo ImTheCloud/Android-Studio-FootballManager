@@ -1,10 +1,12 @@
-package com.example.draredebosanci;
+package com.example.draredebosanci.Notif;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationManager;
 import android.os.Bundle;
+
+import com.example.draredebosanci.R;
 
 
 public class Notification extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.draredebosanci;
+package com.example.draredebosanci.Notif;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

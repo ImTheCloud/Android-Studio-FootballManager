@@ -12,7 +12,7 @@ import android.widget.Button;
         import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import com.example.draredebosanci.NotificationHelper;
+import com.example.draredebosanci.Notif.NotificationHelper;
 import com.example.draredebosanci.home.OldGame;
 import com.example.draredebosanci.R;
 import com.example.draredebosanci.home.Season3;
