@@ -182,8 +182,10 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
                     break;
 
                 case R.id.nav_logout:
-                    startActivity(new Intent(Season3.this, LoginActivity.class));
-                    Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    mAuth.signOut();
+                    startActivity(new Intent(Season3.this, Home.class));
+                    finish();
                     finishAffinity(); // Empêcher l'utilisateur de revenir en arrière
                     break;
 

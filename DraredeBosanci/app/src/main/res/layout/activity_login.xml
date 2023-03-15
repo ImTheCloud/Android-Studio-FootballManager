@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Login"
                     android:textAlignment="center"
-                    android:textColor="@color/teal_700"
+                    android:textColor="@color/Green"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="@color/Green"
                     android:text="Login"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
@@ -120,7 +120,7 @@
                     android:padding="8dp"
                     android:text="Not yet registered? Sign Up"
                     android:textAlignment="center"
-                    android:textColor="@color/teal_700"
+                    android:textColor="@color/Green"
                     android:textSize="18sp" />
 
             </LinearLayout>

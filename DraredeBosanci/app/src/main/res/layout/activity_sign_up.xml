@@ -17,9 +17,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -43,21 +40,24 @@
             android:layout_margin="30dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="20dp">
+
             <LinearLayout
-                android:layout_width="311dp"
+                android:layout_width="351dp"
                 android:layout_height="473dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/custom_edittext"
                 android:orientation="vertical"
                 android:padding="24dp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sign Up"
                     android:textAlignment="center"
-                    android:textColor="@color/teal_700"
+                    android:textColor="@color/Green"
                     android:textSize="36sp"
                     android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/signup_email"
                     android:layout_width="match_parent"
@@ -69,6 +69,7 @@
                     android:hint="Email"
                     android:padding="8dp"
                     android:textColor="@color/black" />
+
                 <EditText
                     android:id="@+id/signup_password"
                     android:layout_width="match_parent"
@@ -80,15 +81,17 @@
                     android:hint="Password"
                     android:padding="8dp"
                     android:textColor="@color/black" />
+
                 <Button
                     android:id="@+id/signup_button"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="@color/Green"
                     android:text="Sign Up"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
+
                 <TextView
                     android:id="@+id/loginRedirectText"
                     android:layout_width="wrap_content"
@@ -97,7 +100,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="8dp"
                     android:text="Already an user? Login"
-                    android:textColor="@color/teal_700"
+                    android:textColor="@color/Green"
                     android:textSize="18sp" />
 
             </LinearLayout>
