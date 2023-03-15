@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.draredebosanci.R;
@@ -26,6 +27,7 @@ import Form.Form;
 public class Home extends AppCompatActivity {
     private int numTries = 0;
     private FirebaseAuth mAuth;
+    private TextView userTextView;
 
 
     @Override
@@ -34,10 +36,23 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
 
+        userTextView = findViewById(R.id.userTextView); // Récupérer la référence du TextView dans le layout
+
+        // Vérifier si l'utilisateur est connecté
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) {
+            // Si l'utilisateur n'est pas connecté, afficher une alerte
+            Toast.makeText(getApplicationContext(), "You are not logged in", Toast.LENGTH_SHORT).show();
+            userTextView.setText("No one is connected"); // Afficher "Personne n'est connecté" dans le TextView
+        } else {
+            // Si l'utilisateur est connecté, afficher son nom dans le TextView
+            userTextView.setText("Connected as " + currentUser.getEmail());
+
+        }
 
         Button btNewSeason = findViewById(R.id.BT_New_Season);
         // Vérifier si l'utilisateur est connecté
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser == null) {
             // Si l'utilisateur n'est pas connecté, afficher une alerte et ne pas passer à la méthode onClick
@@ -126,9 +141,9 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("Season 3")) {
+                if (s.toString().equals("3")) {
                     Season3.setVisibility(View.VISIBLE);
-                } else if (s.toString().equals("Season 2")) {
+                } else if (s.toString().equals("2")) {
                     Season3.setVisibility(View.INVISIBLE);
                     Season2.setVisibility(View.VISIBLE);
                 } else {
@@ -146,9 +161,15 @@ public class Home extends AppCompatActivity {
     }
 
     public void goToLogin(View v){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+        finish();
         startActivity(new Intent(Home.this, LoginActivity.class));
     }
 
+
+
+// log out when appli end
     protected void onStop() {
         super.onStop();
         mAuth.signOut();

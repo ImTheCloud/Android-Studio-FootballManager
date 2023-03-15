@@ -100,16 +100,6 @@
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
 
-                <!--            <TextView-->
-                <!--                android:id="@+id/forgot_password"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:layout_gravity="center"-->
-                <!--                android:layout_marginTop="5dp"-->
-                <!--                android:padding="8dp"-->
-                <!--                android:text="Forgot Password?"-->
-                <!--                android:textColor="@color/teal_700"-->
-                <!--                android:textSize="16sp" />-->
 
                 <TextView
                     android:id="@+id/signUpRedirectText"
@@ -119,9 +109,21 @@
                     android:layout_marginTop="20dp"
                     android:padding="8dp"
                     android:text="Not yet registered? Sign Up"
+                    android:onClick="goToSignUp"
                     android:textAlignment="center"
                     android:textColor="@color/Green"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:padding="8dp"
+                    android:text="Forgot Password?"
+                    android:textColor="@color/lavender"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

@@ -16,12 +16,14 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         tools:context="Firebase.SignUpActivity">
+
         <TextView
             android:id="@+id/TXT_DrareDeBosanci"
             android:layout_width="wrap_content"
@@ -34,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +45,7 @@
             app:cardElevation="20dp">
 
             <LinearLayout
-                android:layout_width="351dp"
+                android:layout_width="311dp"
                 android:layout_height="473dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/custom_edittext"
@@ -99,6 +102,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:padding="8dp"
+                    android:onClick="goToLogin"
                     android:text="Already an user? Login"
                     android:textColor="@color/Green"
                     android:textSize="18sp" />

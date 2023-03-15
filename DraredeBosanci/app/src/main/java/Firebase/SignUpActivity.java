@@ -21,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText signupEmail, signupPassword;
     private Button signupButton;
     private TextView loginRedirectText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +47,22 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this, "SignUp Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this, Home.class));
+
+                                auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful() ){
+                                            Toast.makeText(SignUpActivity.this,"User registered successfully, please verify your email",Toast.LENGTH_SHORT).show();
+                                            signupEmail.setText("");
+                                            signupPassword.setText("");
+                                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                        }else
+                                        {
+                                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
                             } else {
                                 Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -56,11 +71,9 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-        loginRedirectText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-            }
-        });
+    }
+
+    public void goToLogin(View view) {
+        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
     }
 }
