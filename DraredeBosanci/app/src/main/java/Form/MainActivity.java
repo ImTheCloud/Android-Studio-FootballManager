@@ -3,6 +3,12 @@ package Form;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -20,43 +26,80 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Spinner playerPositionSpinner;
     private TextView apiResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Find the TextView in the layout
+        // Initialize views
+        playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         apiResult = findViewById(R.id.apiResult);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://api-football-v1.p.rapidapi.com/v3/players/squads?team=541";
+        // Set up spinner adapter
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.positions, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPositionSpinner.setAdapter(adapter);
 
+        // Set up Volley RequestQueue
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        // Set up API URL
+        String teamId = "541";
+        String apiUrl = String.format("https://api-football-v1.p.rapidapi.com/v3/players/squads?team=%s", teamId);
+
+        // Set up listener for spinner item selection
+        playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                makeApiRequest(queue, apiUrl);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    }
+
+    private void makeApiRequest(RequestQueue queue, String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Parse the JSON response
                         try {
+                            // Parse the JSON response
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("response").getJSONObject(0).getJSONArray("players");
 
-                            // Extract player names
-                            ArrayList<String> playerNames = new ArrayList<>();
+                            // Filter players by selected position
+                            List<String> playerNames = new ArrayList<>();
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject playerObject = jsonArray.getJSONObject(i);
-                                String playerName = playerObject.getString("name");
-                                playerNames.add(playerName);
+                                String playerPosition = playerObject.getString("position");
+                                if (playerPosition.equalsIgnoreCase(playerPositionSpinner.getSelectedItem().toString())) {
+                                    String playerName = playerObject.getString("name");
+                                    playerNames.add(playerName);
+                                }
                             }
 
-                            // Display player names in the activity
-                            apiResult.setText(String.join("\n", playerNames));
+                            // Display result
+                            if (playerNames.size() > 0) {
+                                String randomPlayerName = getRandomPlayer(playerNames);
+                                apiResult.setText(String.format("Like : %s", randomPlayerName));
+                            } else {
+                                apiResult.setText(String.format("No players found with position: %s", playerPositionSpinner.getSelectedItem().toString()));
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -77,7 +120,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        // Add the request to the RequestQueue.
+        // Add request to queue
         queue.add(stringRequest);
     }
+
+    private String getRandomPlayer(List<String> players) {
+        int randomIndex = new Random().nextInt(players.size());
+        return players.get(randomIndex);
+    }
 }
+

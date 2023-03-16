@@ -16,9 +16,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string-array name="positions">
-        <item>Striker</item>
-        <item>Defender</item>
         <item>Goalkeeper</item>
+        <item>Defender</item>
         <item>Midfielder</item>
         <item>Attacker</item>
     </string-array>

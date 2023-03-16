@@ -27,7 +27,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name="Form.MainActivity"
+            android:name="Home.Season3"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
