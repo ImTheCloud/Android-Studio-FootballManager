@@ -22,7 +22,6 @@ import Profile.DBHelper;
 import com.example.draredebosanci.R;
 import Profile.UploadActivity;
 import Compo.CompoChoice;
-import Firebase.LoginActivity;
 import Form.Form;
 import Team.TeamSelection;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import Home.Home;
+
 import com.example.draredebosanci.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignUpActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword;
     private Button signupButton;
@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_register);
         auth = FirebaseAuth.getInstance();
         signupEmail = findViewById(R.id.signup_email);
         signupPassword = findViewById(R.id.signup_password);
@@ -52,19 +52,19 @@ public class SignUpActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful() ){
-                                            Toast.makeText(SignUpActivity.this,"User registered successfully, please verify your email",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Register.this,"User registered successfully, please verify your email",Toast.LENGTH_SHORT).show();
                                             signupEmail.setText("");
                                             signupPassword.setText("");
-                                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                            startActivity(new Intent(Register.this, Login.class));
                                         }else
                                         {
-                                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
 
                             } else {
-                                Toast.makeText(SignUpActivity.this, "SignUp Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, "Register Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -74,6 +74,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void goToLogin(View view) {
-        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+        startActivity(new Intent(Register.this, Login.class));
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Firebase.SignUpActivity">
+    tools:context="Firebase.Register">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context="Firebase.SignUpActivity">
+        tools:context="Firebase.Register">
 
         <TextView
             android:id="@+id/TXT_DrareDeBosanci"
@@ -55,9 +55,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sign Up"
+                    android:text="Register"
                     android:textAlignment="center"
-                    android:textColor="@color/Green"
+                    android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
                     android:padding="8dp"
                     android:onClick="goToLogin"
                     android:text="Already an user? Login"
-                    android:textColor="@color/Green"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
             </LinearLayout>

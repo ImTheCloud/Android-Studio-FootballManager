@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +20,7 @@ import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import Firebase.LoginActivity;
-import Form.Form;
+import Firebase.Login;
 
 public class Home extends AppCompatActivity {
     private int numTries = 0;
@@ -164,7 +162,7 @@ public class Home extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
         finish();
-        startActivity(new Intent(Home.this, LoginActivity.class));
+        startActivity(new Intent(Home.this, Login.class));
     }
 
 

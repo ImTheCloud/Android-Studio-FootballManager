@@ -10,10 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.draredebosanci.R;
@@ -21,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -79,6 +84,65 @@ public class FormClaudiu extends AppCompatActivity {
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    private void searchPlayersByPosition(String position) {
+        String url = "https://api-football-v1.p.rapidapi.com/v3/players/squads?team=541";
+        String apiKey = "2e8e0f243bmshb40a5716fd99fb3p16e3e1jsn6b6864f3d84e";
+        String apiHost = "api-football-v1.p.rapidapi.com";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray playersArray = response.getJSONObject("response").getJSONArray("players");
+                            ArrayList<JSONObject> matchingPlayers = new ArrayList<>();
+                            for (int i = 0; i < playersArray.length(); i++) {
+                                JSONObject player = playersArray.getJSONObject(i);
+                                if (player.getString("position").equals(position)) {
+                                    matchingPlayers.add(player);
+                                }
+                            }
+                            if (matchingPlayers.size() > 0) {
+                                // Choose a random player from the list of matching players
+                                Random random = new Random();
+                                int randomIndex = random.nextInt(matchingPlayers.size());
+                                JSONObject randomPlayer = matchingPlayers.get(randomIndex);
+                                String firstName = randomPlayer.getString("firstname");
+                                String lastName = randomPlayer.getString("lastname");
+                                String playerInfo = "Like: " + firstName + " " + lastName;
+                                apiResult.setText(playerInfo);
+                            } else {
+                                apiResult.setText("No players");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            apiResult.setText("Error parsing JSON response");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                apiResult.setText("That didn't work!");
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("X-RapidAPI-Key", apiKey);
+                headers.put("X-RapidAPI-Host", apiHost);
+                return headers;
+            }
+        };
+
+        queue.add(jsonObjectRequest);
+    }
+
+
+
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -120,52 +184,6 @@ public class FormClaudiu extends AppCompatActivity {
         }
     }
 
-    private void searchPlayersByPosition(String position) {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://gist.githubusercontent.com/jamesmwali/11b34a6d4c87644915573e54fbd34ac5/raw/93124e101231f8cbf14ff48ca191156059d6c41f/playerlist.json";
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            ArrayList<JSONObject> matchingPlayers = new ArrayList<>();
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject player = jsonArray.getJSONObject(i);
-                                if (player.getString("position").equals(position)) {
-                                    matchingPlayers.add(player);
-                                }
-                            }
-                            if (matchingPlayers.size() > 0) {
-                                // Choose a random player from the list of matching players
-                                Random random = new Random();
-                                int randomIndex = random.nextInt(matchingPlayers.size());
-                                JSONObject randomPlayer = matchingPlayers.get(randomIndex);
-                                String firstName = randomPlayer.getString("first_name");
-                                String lastName = randomPlayer.getString("last_name");
-                                String playerInfo = "Like: " + firstName + " " + lastName;
-                                apiResult.setText(playerInfo);
-                            } else {
-                                apiResult.setText("No players");
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            apiResult.setText("Error parsing JSON response");
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                apiResult.setText("That didn't work!");
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-    }
 
 }

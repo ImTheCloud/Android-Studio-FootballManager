@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-public class LoginActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private EditText loginEmail, loginPassword;
     private TextView signupRedirectText,forgotPassword;
     private Button loginButton;
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot, null);
                 EditText emailBox = dialogView.findViewById(R.id.emailBox);
                 builder.setView(dialogView);
@@ -53,17 +53,17 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String userEmail = emailBox.getText().toString();
                         if (TextUtils.isEmpty(userEmail) && !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
-                            Toast.makeText(LoginActivity.this, "Enter your registered email id", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Enter your registered email", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         auth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Check your email", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -97,18 +97,18 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
                                         if (auth.getCurrentUser() != null && !auth.getCurrentUser().isEmailVerified()) {
-                                            Toast.makeText(LoginActivity.this, "Please verify your email address before logging in", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Login.this, "Please verify your email address before logging in", Toast.LENGTH_SHORT).show();
                                             return;
                                         }else{
-                                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(LoginActivity.this, Home.class));
+                                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(Login.this, Home.class));
                                             finish();
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     } else {
@@ -128,6 +128,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goToSignUp(View v) {
-        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        startActivity(new Intent(Login.this, Register.class));
     }
 }

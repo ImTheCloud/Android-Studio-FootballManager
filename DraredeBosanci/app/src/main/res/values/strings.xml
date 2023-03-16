@@ -19,8 +19,8 @@
         <item>Striker</item>
         <item>Defender</item>
         <item>Goalkeeper</item>
-        <item>Midfielder 1</item>
-        <item>Midfielder 2</item>
+        <item>Midfielder</item>
+        <item>Attacker</item>
     </string-array>
 
 </resources>

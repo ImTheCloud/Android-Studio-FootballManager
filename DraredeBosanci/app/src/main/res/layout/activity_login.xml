@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Firebase.LoginActivity">
+    tools:context="Firebase.Login">
 
     <ImageView
         android:id="@+id/imageView"
@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context="Firebase.LoginActivity">
+        tools:context="Firebase.Login">
 
 
         <TextView
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Login"
                     android:textAlignment="center"
-                    android:textColor="@color/Green"
+                    android:textColor="@color/white"
                     android:textSize="36sp"
                     android:textStyle="bold" />
 
@@ -108,10 +108,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:padding="8dp"
-                    android:text="Not yet registered? Sign Up"
+                    android:text="Not yet registered?"
                     android:onClick="goToSignUp"
                     android:textAlignment="center"
-                    android:textColor="@color/Green"
+                    android:textColor="@color/white"
                     android:textSize="18sp" />
 
                 <TextView
@@ -122,7 +122,7 @@
                     android:layout_marginTop="5dp"
                     android:padding="8dp"
                     android:text="Forgot Password?"
-                    android:textColor="@color/lavender"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
             </LinearLayout>
