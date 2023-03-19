@@ -9,6 +9,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.draredebosanci.MainActivity;
 import com.example.draredebosanci.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -20,8 +30,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TeamSelection extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
+    private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
 
@@ -30,12 +44,58 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_selection);
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        temperatureTextView = findViewById(R.id.temperature_textview);
+        fetchTemperature();
     }
+
+    private void fetchTemperature() {
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + getLocation() + "&appid=fb665f2037e41531ac80292d5a31dc2c";
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject main = response.getJSONObject("main");
+                            int temperature = (int) (main.getDouble("temp") - 273.15);
+                            temperatureTextView.setText(String.format("Temperature Anderlecht : "+String.valueOf(temperature))+ "°C");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(TeamSelection.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(TeamSelection.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+    }
+
+    private String getLocation() {
+        // Here you can add code to retrieve the user's location
+        // For the purpose of this example, we will return a hardcoded location
+        return "Anderlecht";
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

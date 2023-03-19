@@ -1,8 +1,6 @@
 package com.example.draredebosanci;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +18,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText locationEditText;
-    private Button fetchButton;
+    private TextView locationTextView;
     private TextView temperatureTextView;
 
     @Override
@@ -29,22 +26,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        locationEditText = findViewById(R.id.location_edittext);
-        fetchButton = findViewById(R.id.fetch_button);
+        locationTextView = findViewById(R.id.location_textview);
         temperatureTextView = findViewById(R.id.temperature_textview);
 
-        fetchButton.setOnClickListener(v -> {
-            String location = locationEditText.getText().toString();
-            if (!location.isEmpty()) {
-                fetchTemperature(location);
-            } else {
-                Toast.makeText(MainActivity.this, "Veuillez entrer un lieu", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        fetchTemperature();
     }
 
-    private void fetchTemperature(String location) {
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=fb665f2037e41531ac80292d5a31dc2c";
+    private void fetchTemperature() {
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + getLocation() + "&appid=fb665f2037e41531ac80292d5a31dc2c";
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -55,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject main = response.getJSONObject("main");
-                            double temperature = main.getDouble("temp") - 273.15;
-                            temperatureTextView.setText(String.format("%.1f°C", temperature));
+                            int temperature = (int) (main.getDouble("temp") - 273.15);
+                            temperatureTextView.setText(String.format("Temperature Anderlecht : "+String.valueOf(temperature))+ "°C");
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity.this, "Erreur lors de la récupération de la température", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -67,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Erreur lors de la récupération de la température", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -75,5 +67,10 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
-}
 
+    private String getLocation() {
+        // Here you can add code to retrieve the user's location
+        // For the purpose of this example, we will return a hardcoded location
+        return "Anderlecht";
+    }
+}
