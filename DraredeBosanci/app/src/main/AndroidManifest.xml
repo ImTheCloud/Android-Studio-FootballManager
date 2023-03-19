@@ -3,11 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="CoarseFineLocation">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -16,9 +20,8 @@
         android:icon="@drawable/foot"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DrareDeBosanci"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
-
 
         <service android:name="Music.MyMusicService" />
 
@@ -27,9 +30,8 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name="Home.Season3"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,125 +42,94 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
         <activity
             android:name="Firebase.Register"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Firebase.Login"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Profile.UploadActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Home.Home"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Live.LiveSelected"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Team.SelectedTeam"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Team.TeamSelection"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Notif.Notification"
             android:exported="false" />
         <activity
             android:name="Compo.CompoChoice"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Compo.Compo433"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Compo.Compo442"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormClaudiu"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormIosif"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormSimon"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormDavid"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormLucian"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormDany"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormYaniv"
             android:exported="false"
-            android:label="@string/title_activity_form_yaniv"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:label="@string/title_activity_form_yaniv" />
         <activity
             android:name="Form.FormEduard"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormRoberto"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormDenis"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormFlavyus"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Form.FormRuben"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Live.ChoiceGoal"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-
+            android:exported="false" />
         <activity
             android:name="Form.Form"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Live.LiveRandom"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Home.OldGame"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false"/>
         <activity
             android:name="Team.RandomTeam"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name="Home.Contact"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
     </application>
 
 </manifest>
