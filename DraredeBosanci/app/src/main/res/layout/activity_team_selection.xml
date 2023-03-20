@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="Team.TeamSelection">
 
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
@@ -15,7 +16,6 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-
 
     <EditText
         android:id="@+id/city"
@@ -27,30 +27,30 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintVertical_bias="0.008" />
 
     <Button
         android:id="@+id/BT_meteo"
-        android:layout_width="93dp"
-        android:layout_height="56dp"
-        android:backgroundTint="#004CAF50"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#000B5C0E"
         android:elevation="4dp"
+
         android:onClick="goToSelectedTeam"
         android:padding="16dp"
         android:text="Get Meteo"
         android:textColor="#FFFFFF"
-        android:textSize="11sp"
         android:textStyle="bold"
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.654"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.008" />
 
     <TextView
         android:id="@+id/temperature_textview"
@@ -63,57 +63,56 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.981" />
+        app:layout_constraintVertical_bias="0.018" />
 
     <Button
         android:id="@+id/BT_Random_Team"
-        android:layout_width="191dp"
-        android:layout_height="68dp"
-        android:backgroundTint="#004CAF50"
+        android:layout_width="156dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#000B5C0E"
         android:elevation="4dp"
         android:onClick="goToRandomTeam"
         android:padding="16dp"
         android:text="Random Team"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.949" />
 
     <Button
         android:id="@+id/BT_Selected_Team"
-        android:layout_width="191dp"
-        android:layout_height="68dp"
-        android:backgroundTint="#004CAF50"
+        android:layout_width="156dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#000B5C0E"
         android:elevation="4dp"
         android:onClick="goToSelectedTeam"
         android:padding="16dp"
         android:text="Selected Team"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textColor="#000000"
         android:textStyle="bold"
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintVertical_bias="0.948" />
 
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="320dp"
-        android:layout_height="350dp"
+        android:layout_width="match_parent"
+        android:layout_height="640dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -123,3 +122,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

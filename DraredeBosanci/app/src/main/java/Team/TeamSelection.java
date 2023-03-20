@@ -87,8 +87,8 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject main = response.getJSONObject("main");
-                            double temperature = main.getDouble("temp") - 273.15;
-                            temperatureTextView.setText(String.format("%.1f°C", temperature));
+                            int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
+                            temperatureTextView.setText(temperature + "°C");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
