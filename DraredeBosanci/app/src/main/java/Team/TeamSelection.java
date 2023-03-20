@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ import org.json.JSONObject;
 
 public class TeamSelection extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
+    private EditText locationEditText;
+    private Button fetchButton;
     private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
@@ -43,6 +47,10 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_selection);
+        locationEditText = findViewById(R.id.city);
+        fetchButton = findViewById(R.id.BT_meteo);
+        temperatureTextView = findViewById(R.id.temperature_textview);
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,12 +59,24 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        temperatureTextView = findViewById(R.id.temperature_textview);
-        fetchTemperature();
+
+        fetchTemperature("Anderlecht");
+
+        fetchButton.setOnClickListener(v -> {
+            String location = locationEditText.getText().toString();
+            if (!location.isEmpty()) {
+                fetchTemperature(location);
+            } else {
+                Toast.makeText(TeamSelection.this, "Enter a place", Toast.LENGTH_SHORT).show();
+                fetchTemperature(location);
+            }
+        });
+
+
     }
 
-    private void fetchTemperature() {
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + getLocation() + "&appid=fb665f2037e41531ac80292d5a31dc2c";
+    private void fetchTemperature(String location) {
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=fb665f2037e41531ac80292d5a31dc2c";
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -67,13 +87,10 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject main = response.getJSONObject("main");
-                            int temperature = (int) (main.getDouble("temp") - 273.15);
-                            temperatureTextView.setText(String.format("Temperature Anderlecht : "+String.valueOf(temperature))+ "°C");
-
-
+                            double temperature = main.getDouble("temp") - 273.15;
+                            temperatureTextView.setText(String.format("%.1f°C", temperature));
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(TeamSelection.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -81,7 +98,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Toast.makeText(TeamSelection.this, "Error while fetching temperature", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TeamSelection.this, "Erreur lors de la récupération de la température", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -90,11 +107,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         queue.add(request);
     }
 
-    private String getLocation() {
-        // Here you can add code to retrieve the user's location
-        // For the purpose of this example, we will return a hardcoded location
-        return "Anderlecht";
-    }
+
 
 
     @Override
