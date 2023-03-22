@@ -98,7 +98,6 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Toast.makeText(TeamSelection.this, "Erreur lors de la récupération de la température", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
