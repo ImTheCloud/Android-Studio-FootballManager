@@ -113,14 +113,14 @@
         app:layout_constraintVertical_bias="0.322" />
 
     <Button
-        android:id="@+id/BT_Old_Game"
+        android:id="@+id/BT_History"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:backgroundTint="#004CAF50"
         android:elevation="4dp"
-        android:onClick="goToOldGame"
+        android:onClick="goToHistory"
         android:padding="16dp"
-        android:text="Old Game"
+        android:text="History"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"

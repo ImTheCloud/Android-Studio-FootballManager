@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import Notif.NotificationHelper;
-import Home.OldGame;
+import Home.History;
 import com.example.draredebosanci.R;
 import Home.Season3;
 
@@ -170,8 +172,9 @@ public class LiveSelected extends AppCompatActivity {
         startActivity(new Intent(LiveSelected.this, Season3.class));
     }
 
-    public void goToOld(View v){
-        startActivity(new Intent(LiveSelected.this, OldGame.class));
+    public void goToHistory(View v){
+        Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(LiveSelected.this, History.class));
     }
 
 

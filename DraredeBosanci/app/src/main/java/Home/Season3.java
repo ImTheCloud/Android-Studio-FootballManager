@@ -43,7 +43,7 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_season3);
 
 
-        oldGame = findViewById(R.id.BT_Old_Game);
+        oldGame = findViewById(R.id.BT_History);
         liveGame = findViewById(R.id.BT_Live_Game);
         ranking = findViewById(R.id.BT_Ranking);
 
@@ -198,14 +198,14 @@ public class Season3 extends AppCompatActivity implements NavigationView.OnNavig
         }
 
     public void goToLive(View v){
-        startActivity(new Intent(Season3.this, OldGame.class));
+        startActivity(new Intent(Season3.this, History.class));
     }
 
     public void goToTeamSelection(View v){
         startActivity(new Intent(Season3.this, TeamSelection.class));
     }
-    public void goToOldGame(View v){
-        startActivity(new Intent(Season3.this, OldGame.class));
+    public void goToHistory(View v){
+        startActivity(new Intent(Season3.this, History.class));
     }
     public void goToRanking(View v){
         startActivity(new Intent(Season3.this, Form.class));

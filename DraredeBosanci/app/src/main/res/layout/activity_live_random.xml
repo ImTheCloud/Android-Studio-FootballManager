@@ -17,7 +17,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-
     <Button
         android:id="@+id/house"
         android:layout_width="59dp"
@@ -199,10 +198,10 @@
         android:background="@drawable/button_selector4"
         android:drawablePadding="10dp"
         android:elevation="2dp"
+        android:onClick="goToHistory"
         android:fontFamily="sans-serif-medium"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        android:onClick="goToOld"
         android:padding="10dp"
         android:scaleType="fitCenter"
         android:textColor="#000000"

@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,7 +19,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-
         tools:targetApi="31">
 
         <service android:name="Music.MyMusicService" />
@@ -119,11 +117,11 @@
             android:name="Form.Form"
             android:exported="false" />
         <activity
-            android:name="Live.LiveRandom"
-            android:exported="false" />
+         android:name="Live.LiveRandom"
+         android:exported="false" />
         <activity
-            android:name="Home.OldGame"
-            android:exported="false"/>
+            android:name="Home.History"
+            android:exported="false" />
         <activity
             android:name="Team.RandomTeam"
             android:exported="false" />

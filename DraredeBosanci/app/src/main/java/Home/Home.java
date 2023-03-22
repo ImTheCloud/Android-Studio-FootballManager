@@ -65,7 +65,7 @@ public class Home extends AppCompatActivity {
             btNewSeason.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Home.this, OldGame.class));
+                    startActivity(new Intent(Home.this, History.class));
 
                 }
             });
