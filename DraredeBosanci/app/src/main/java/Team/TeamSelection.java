@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,9 +32,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import Firebase.Game;
 
 public class TeamSelection extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -42,6 +47,8 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
+    LatLng userLocation;
+    DatabaseReference UserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,10 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
+
+
+
+
 
 
 
@@ -131,7 +142,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
             // If we have permission, get the user's last known location and move the camera there.
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
-                    LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions()
                             .position(userLocation)
                             .title("Marker at User Location"));
@@ -165,12 +176,16 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
 
 
     public void goToRandomTeam(View v){
+        Game map = new Game(userLocation);
+        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+        UserRef.push().setValue(map);
         startActivity(new Intent(TeamSelection.this, RandomTeam.class));
     }
     public void goToSelectedTeam(View v){
+        Game map = new Game(userLocation);
+        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+        UserRef.push().setValue(map);
         startActivity(new Intent(TeamSelection.this, SelectedTeam.class));
     }
-
-
 
 }

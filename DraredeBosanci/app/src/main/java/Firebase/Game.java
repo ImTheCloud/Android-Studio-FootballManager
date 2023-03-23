@@ -1,8 +1,14 @@
 package Firebase;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 public class Game {
+
+
+
+    LatLng userLocation;
     String goalTeam1,goalTeam2;
     String timeFirstHalf,timeSecondHalf,half;
     List<String> team2,team1;
@@ -12,10 +18,6 @@ public class Game {
         this.goalTeam2 = goalTeam2;
     }
 
-//    public Game(String playerTeam1,String playerTeam2) {
-//        this.playerTeam1 = playerTeam1;
-//        this.playerTeam2 = playerTeam2;
-//    }
 
     public Game(String timerHF, String timerF, String timerS) {
         this.half = timerF;
@@ -26,6 +28,10 @@ public class Game {
     public Game(List<String> team1, List<String> team2) {
         this.team1=team1;
         this.team2=team2;
+    }
+
+    public Game(LatLng userLocation) {
+        this.userLocation=userLocation;
     }
 
     public String getGoalTeam1() {
@@ -79,4 +85,13 @@ public class Game {
     public void setTeam1(List<String> team1) {
         this.team1 = team1;
     }
+
+    public LatLng getUserLocation() {
+        return userLocation;
+    }
+    public void setUserLocation(LatLng userLocation) {
+        this.userLocation = userLocation;
+    }
+
+
 }
