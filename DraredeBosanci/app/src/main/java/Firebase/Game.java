@@ -1,12 +1,12 @@
 package Firebase;
 
+import android.widget.TextView;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
 public class Game {
-
-
 
     LatLng userLocation;
     String goalTeam1,goalTeam2;
@@ -33,6 +33,8 @@ public class Game {
     public Game(LatLng userLocation) {
         this.userLocation=userLocation;
     }
+
+
 
     public String getGoalTeam1() {
         return goalTeam1;
@@ -92,6 +94,5 @@ public class Game {
     public void setUserLocation(LatLng userLocation) {
         this.userLocation = userLocation;
     }
-
 
 }

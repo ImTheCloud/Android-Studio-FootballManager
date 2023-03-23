@@ -1,5 +1,7 @@
 package Live;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -30,13 +32,14 @@ public class LiveRandom extends AppCompatActivity {
     private List<String> team1,team2;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
+    private Context context;
 
     DatabaseReference UserRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_random);
-
+        context = this;
         notificationHelper = new NotificationHelper(this);
         goalT1 = findViewById(R.id.TXT_ScoreTeam1);
         goalT2 = findViewById(R.id.TXT_ScoreTeam2);
@@ -124,26 +127,38 @@ public class LiveRandom extends AppCompatActivity {
                     boolean notificationSent = false; // Initialize notificationSent to false
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        int minutes = (int) millisUntilFinished / 60000;
-                        int seconds = (int) (millisUntilFinished % 60000) / 1000;
-                        String timeLeft = String.format("%02d:%02d", minutes, seconds);
+                        int hours = (int) (millisUntilFinished / 3600000);
+                        int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                        int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                        String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                         TVStopWatch.setText(timeLeft);
-                        // Display time left in notification
-                        String title = "Time left: " + timeLeft;
+
+
+
+                        // Afficher le temps restant dans la notification
+                        String title = "Temps restant : " + timeLeft;
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                         builder.setSmallIcon(R.drawable.timer);
                         builder.setOnlyAlertOnce(true);
+
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
                     }
+
+
+
                     @Override
                     public void onFinish() {
-                        TVStopWatch.setText("00:00");
+                        TVStopWatch.setText("00:00:00");
+
+                        Intent intent = new Intent(context, History.class);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                         // Display notification when timer finishes
                         String title = "Time up";
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                         builder.setSmallIcon(R.drawable.timer);
                         builder.setOnlyAlertOnce(true);
+                        builder.setContentIntent(pendingIntent); // Ajouter l'intention de l'activité LiveRandom à la notification
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
                         // Reset the timer

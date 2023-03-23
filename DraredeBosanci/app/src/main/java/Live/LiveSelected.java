@@ -1,5 +1,7 @@
 package Live;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,28 +15,37 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import Firebase.Game;
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Arrays;
+import java.util.List;
+
 import Home.Season3;
 
 public class LiveSelected extends AppCompatActivity {
-    private TextView TVPlayers1, TVPlayers2, TVStopWatch,mTextView,mTextView2;
-    private  EditText timerEditText;
+    private TextView TVPlayers1, TVPlayers2, TVStopWatch,goalT1,goalT2;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
-    private Button mButton,mButton2,addTimerButton;
+    private Button mButton,mButton2,bt_Save;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
+    private Context context;
+    DatabaseReference UserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_selected);
+        context = this;
 
         notificationHelper = new NotificationHelper(this);
-        mTextView = findViewById(R.id.TXT_ScoreTeam1);
-        mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
+        goalT1 = findViewById(R.id.TXT_ScoreTeam1);
+        goalT2 = findViewById(R.id.TXT_ScoreTeam2);
         mButton = findViewById(R.id.bt_Goal1);
         mButton2 = findViewById(R.id.bt_Goal2);
         TVPlayers1 = findViewById(R.id.TVPlayers);
@@ -42,8 +53,25 @@ public class LiveSelected extends AppCompatActivity {
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         TVPlayers2 = findViewById(R.id.TVPlayers2);
         TVStopWatch = findViewById(R.id.TV_StopWatch);
-        addTimerButton = findViewById(R.id.add_timer_button);
-        timerEditText = findViewById(R.id.ID_Timer);
+        bt_Save = findViewById(R.id.bt_Save);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bt_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String goalTeam1 = goalT1.getText().toString();
+                String goalTeam2 = goalT2.getText().toString();
+                Game goals = new Game(goalTeam1, goalTeam2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                UserRef.push().setValue(goals);
+
+                Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LiveSelected.this, History.class));
+            }
+        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +80,7 @@ public class LiveSelected extends AppCompatActivity {
                 mCount++;
 
                 // Mise à jour du TextView
-                mTextView.setText(Integer.toString(mCount));
+                goalT1.setText(Integer.toString(mCount));
 
             }
         });
@@ -63,7 +91,7 @@ public class LiveSelected extends AppCompatActivity {
                 mCount2++;
 
                 // Mise à jour du TextView
-                mTextView2.setText(Integer.toString(mCount2));
+                goalT2.setText(Integer.toString(mCount2));
 
             }
         });
@@ -71,77 +99,97 @@ public class LiveSelected extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String players1 = extras.getString("players_data");
-            players1 = players1.replace(",", "\n");
-            TVPlayers1.setText(players1);
+            List<String> listPlayers1 = Arrays.asList(players1.split(","));
+            String formattedPlayers1 = "";
+            for (String player : listPlayers1) {
+                formattedPlayers1 += "\u2022 " + player.trim() + "\n";
+            }
+            TVPlayers1.setText(formattedPlayers1);
 
             String players2 = extras.getString("players_data2");
-            players2 = players2.replace(",", "\n");
-            TVPlayers2.setText(players2);
+            List<String> listPlayers2 = Arrays.asList(players2.split(","));
+            String formattedPlayers2 = "";
+            for (String player : listPlayers2) {
+                formattedPlayers2 += "\u2022 " + player.trim() + "\n";
+            }
+            TVPlayers2.setText(formattedPlayers2);
+
+
+            Game teams = new Game(listPlayers1,listPlayers2);
+            UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+            UserRef.push().setValue(teams);
+
         }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        addTimerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String timerString = timerEditText.getText().toString();
-                if (!TextUtils.isEmpty(timerString)) {
-                    try {
-                        int minutes = Integer.parseInt(timerString);
-                        totalTime = minutes * 60;
-                    } catch (NumberFormatException e) {
-                        // Invalid input, use default value
-                        totalTime = 45 * 60;
-                    }
-                }
+        Bundle extrass = getIntent().getExtras();
+        if (extrass != null) {
+            String timerHalf = extrass.getString("timerHalf");
+            int ttimerHalf = (timerHalf != null && !timerHalf.isEmpty()) ? (int) Double.parseDouble(timerHalf) : 0;
+            String timerFirst = extrass.getString("timerFirst");
+            int ttimerFirst = (timerFirst != null && !timerFirst.isEmpty()) ? (int) Double.parseDouble(timerFirst) : 0;
+            String timerSecond = extrass.getString("timerSecond");
+            int ttimerSecond = (timerSecond != null && !timerSecond.isEmpty()) ? (int) Double.parseDouble(timerSecond) : 0;
+            int totalTime = ttimerHalf+ ttimerFirst+ttimerSecond;
+            TVStopWatch.setText(String.valueOf(totalTime));
+        }
 
-                // Cancel previous timer if there is one
-                if (timer != null) {
-                    timer.cancel();
-                }
-
-                // Start a new timer
-                timer = new CountDownTimer(totalTime * 1000, 1000) {
-                    boolean notificationSent = false; // Initialize notificationSent to false
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        int minutes = (int) millisUntilFinished / 60000;
-                        int seconds = (int) (millisUntilFinished % 60000) / 1000;
-                        String timeLeft = String.format("%02d:%02d", minutes, seconds);
-                        TVStopWatch.setText(timeLeft);
-
-                        // Display time left in notification
-                        String title = "Time left: " + timeLeft;
-
-                        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-                        builder.setSmallIcon(R.drawable.timer);
-                        builder.setOnlyAlertOnce(true);
-
-                        NotificationManager manager = notificationHelper.getManager();
-                        manager.notify(1, builder.build());
-                    }
-
-
-                    @Override
-                    public void onFinish() {
-                        TVStopWatch.setText("00:00");
-
-                        // Display notification when timer finishes
-                        String title = "Time up";
-
-                        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-
-                        builder.setSmallIcon(R.drawable.timer);
-                        builder.setOnlyAlertOnce(true);
-
-                        NotificationManager manager = notificationHelper.getManager();
-                        manager.notify(1, builder.build());
-
-                        // Reset the timer
-                        timer = null;
-                    }
-
-                }.start();
+        String timerString = TVStopWatch.getText().toString();
+        if (!TextUtils.isEmpty(timerString)) {
+            try {
+                int minutes = Integer.parseInt(timerString);
+                totalTime = minutes * 60;
+            } catch (NumberFormatException e) {
+                // Invalid input, use default value
+                totalTime = 45 * 60;
             }
-        });
+        }
+        // Cancel previous timer if there is one
+        if (timer != null) {
+            timer.cancel();
+        }
+        // Start a new timer
+        timer = new CountDownTimer(totalTime * 1000, 1000) {
+            boolean notificationSent = false; // Initialize notificationSent to false
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int hours = (int) (millisUntilFinished / 3600000);
+                int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                TVStopWatch.setText(timeLeft);
+
+
+
+                // Afficher le temps restant dans la notification
+                String title = "Temps restant : " + timeLeft;
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
+            }
+
+
+
+            @Override
+            public void onFinish() {
+                TVStopWatch.setText("00:00:00");
+
+                Intent intent = new Intent(context, History.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                // Display notification when timer finishes
+                String title = "Time up";
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);   builder.setContentIntent(pendingIntent); // Ajouter l'intention de l'activité LiveRandom à la notification
+                builder.setContentIntent(pendingIntent); // Ajouter l'intention de l'activité LiveRandom à la notification
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
+                // Reset the timer
+                timer = null;
+            }
+        }.start();
         timer = null;
     }
     // on create end

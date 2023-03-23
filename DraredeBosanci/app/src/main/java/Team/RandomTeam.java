@@ -106,14 +106,13 @@ public class RandomTeam extends AppCompatActivity {
 
     public void goToLive(View v){
 
-
         String timerF = timerFirst.getText().toString();
         String timerHF = timerHalfTime.getText().toString();
         String timerS = timerSecond.getText().toString();
-        Game team1 = new Game(timerF,timerHF,timerS);
+        Game timeTotal = new Game(timerF,timerHF,timerS);
 
         UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-        UserRef.push().setValue(team1);
+        UserRef.push().setValue(timeTotal);
 
 
         Intent i = new Intent(RandomTeam.this, LiveRandom.class);

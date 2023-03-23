@@ -10,13 +10,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import Firebase.Game;
 import Home.Season3;
 import Live.LiveSelected;
 
 public class SelectedTeam extends AppCompatActivity{
-    private EditText etPlayers1,etPlayers2;
+    private EditText etPlayers1,etPlayers2,timerHalfTime,timerFirst,timerSecond;
     private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2;
     private Button playerDareDeBosanci;
+    DatabaseReference UserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class SelectedTeam extends AppCompatActivity{
         playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
+
+        timerHalfTime = findViewById(R.id.ID_Timer_halftime);
+        timerFirst = findViewById(R.id.ID_Timer_first);
+        timerSecond = findViewById(R.id.ID_Timer_second);
+
         Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
                 findViewById(R.id.playerRuben),
@@ -95,11 +105,24 @@ public class SelectedTeam extends AppCompatActivity{
         startActivity(new Intent(SelectedTeam.this, Season3.class));
     }
     public void goToLiveSelected(View v){
+        String timerF = timerFirst.getText().toString();
+        String timerHF = timerHalfTime.getText().toString();
+        String timerS = timerSecond.getText().toString();
+        Game timeTotal = new Game(timerF,timerHF,timerS);
+
+        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+        UserRef.push().setValue(timeTotal);
+
         Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
         String players = etPlayers1.getText().toString();
         i.putExtra("players_data", players);
         String players2 = etPlayers2.getText().toString();
         i.putExtra("players_data2", players2);
+
+        i.putExtra("timerFirst", timerFirst.getText().toString());
+        i.putExtra("timerHalf", timerHalfTime.getText().toString());
+        i.putExtra("timerSecond", timerSecond.getText().toString());
+
         startActivity(i);
     }
 }
