@@ -14,9 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import Firebase.Login;
+import Firebase.User;
 import Home.History;
 import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import Home.Season3;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,10 +30,12 @@ public class LiveRandom extends AppCompatActivity {
     private EditText timerEditText;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
-    private Button mButton,mButton2,addTimerButton;
+    private Button mButton,mButton2,addTimerButton,bt_Save;
     private List<String> team1,team2;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
+
+    DatabaseReference UserRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +50,22 @@ public class LiveRandom extends AppCompatActivity {
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         addTimerButton = findViewById(R.id.add_timer_button);
         timerEditText = findViewById(R.id.ID_Timer);
+        bt_Save = findViewById(R.id.bt_Save);
+
         setPlayerOnTeam();
+
+
+        bt_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            String name = mTextView.getText().toString();
+            User user1 = new User(name);
+            UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("User");
+            UserRef.push().setValue(user1);
+            Toast.makeText(LiveRandom.this, "Data Insert", Toast.LENGTH_SHORT).show();
+        }
+    });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,4 +186,7 @@ public class LiveRandom extends AppCompatActivity {
         Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
 
     }
+
+
+
 }
