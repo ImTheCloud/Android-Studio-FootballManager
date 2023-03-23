@@ -7,16 +7,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import Firebase.Game;
 import Home.Season3;
 import Live.LiveRandom;
 
 public class RandomTeam extends AppCompatActivity {
 
-    private EditText etPlayers;
+    private EditText etPlayers, timerFirst,timerHalfTime,timerSecond;
     private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2,linearLayoutHelb1,linearLayoutHelb2;
     private Button playerDareDeBosanci,playerHelb;
+
+    DatabaseReference UserRef;
 
 
     @Override
@@ -27,6 +35,10 @@ public class RandomTeam extends AppCompatActivity {
          linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
          linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
          playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
+        timerHalfTime = findViewById(R.id.ID_Timer_halftime);
+        timerFirst = findViewById(R.id.ID_Timer_first);
+        timerSecond = findViewById(R.id.ID_Timer_second);
+
          etPlayers = findViewById(R.id.ID_Player);
          Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
@@ -43,6 +55,12 @@ public class RandomTeam extends AppCompatActivity {
                 findViewById(R.id.playerIosif),
 
         };
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +105,27 @@ public class RandomTeam extends AppCompatActivity {
     }
 
     public void goToLive(View v){
+
+
+        String timerF = timerFirst.getText().toString();
+        String timerHF = timerHalfTime.getText().toString();
+        String timerS = timerSecond.getText().toString();
+        Game team1 = new Game(timerF,timerHF,timerS);
+
+        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+        UserRef.push().setValue(team1);
+
+
         Intent i = new Intent(RandomTeam.this, LiveRandom.class);
         i.putExtra("Players", etPlayers.getText().toString());
+
 //        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
 //        mediaPlayer.start();
+
+        i.putExtra("timerFirst", timerFirst.getText().toString());
+        i.putExtra("timerHalf", timerHalfTime.getText().toString());
+        i.putExtra("timerSecond", timerSecond.getText().toString());
+
         startActivity(i);
     }
 }

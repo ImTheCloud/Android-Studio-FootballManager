@@ -6,31 +6,27 @@ import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import Firebase.Login;
-import Firebase.User;
+import Firebase.Game;
 import Home.History;
 import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import Home.Season3;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 public class LiveRandom extends AppCompatActivity {
-    private TextView TVPlayers, TVPlayers2, TVStopWatch,mTextView,mTextView2;
-    private EditText timerEditText;
+    private TextView TVPlayers, TVPlayers2, TVStopWatch,goalT1,goalT2;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
-    private Button mButton,mButton2,addTimerButton,bt_Save;
+    private Button mButton,mButton2,bt_Save;
     private List<String> team1,team2;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
@@ -41,15 +37,13 @@ public class LiveRandom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_random);
         notificationHelper = new NotificationHelper(this);
-        mTextView = findViewById(R.id.TXT_ScoreTeam1);
-        mTextView2 = findViewById(R.id.TXT_ScoreTeam2);
+        goalT1 = findViewById(R.id.TXT_ScoreTeam1);
+        goalT2 = findViewById(R.id.TXT_ScoreTeam2);
         mButton = findViewById(R.id.bt_Goal1);
         mButton2 = findViewById(R.id.bt_Goal2);
         TVPlayers = findViewById(R.id.TVPlayers);
         TVPlayers2 = findViewById(R.id.TVPlayers2);
         TVStopWatch = findViewById(R.id.TV_StopWatch);
-        addTimerButton = findViewById(R.id.add_timer_button);
-        timerEditText = findViewById(R.id.ID_Timer);
         bt_Save = findViewById(R.id.bt_Save);
 
         setPlayerOnTeam();
@@ -58,22 +52,33 @@ public class LiveRandom extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String name = mTextView.getText().toString();
-            User user1 = new User(name);
-            UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("User");
-            UserRef.push().setValue(user1);
-            Toast.makeText(LiveRandom.this, "Data Insert", Toast.LENGTH_SHORT).show();
-        }
-    });
+
+                Game teams = new Game(team1,team2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                UserRef.push().setValue(teams);
+
+                String goalTeam1 = goalT1.getText().toString();
+                String goalTeam2 = goalT2.getText().toString();
+                Game goals = new Game(goalTeam1, goalTeam2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                UserRef.push().setValue(goals);
+
+                Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LiveRandom.this, History.class));
+            }
+        });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Incrémentation de l'entier
                 mCount++;
                 // Mise à jour du TextView
-                mTextView.setText(Integer.toString(mCount));
+                goalT1.setText(Integer.toString(mCount));
             }
         });
         mButton2.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +87,24 @@ public class LiveRandom extends AppCompatActivity {
                 // Incrémentation de l'entier
                 mCount2++;
                 // Mise à jour du TextView
-                mTextView2.setText(Integer.toString(mCount2));
+                goalT2.setText(Integer.toString(mCount2));
             }
         });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        addTimerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String timerString = timerEditText.getText().toString();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String timerHalf = extras.getString("timerHalf");
+            int ttimerHalf = (timerHalf != null && !timerHalf.isEmpty()) ? (int) Double.parseDouble(timerHalf) : 0;
+            String timerFirst = extras.getString("timerFirst");
+            int ttimerFirst = (timerFirst != null && !timerFirst.isEmpty()) ? (int) Double.parseDouble(timerFirst) : 0;
+            String timerSecond = extras.getString("timerSecond");
+            int ttimerSecond = (timerSecond != null && !timerSecond.isEmpty()) ? (int) Double.parseDouble(timerSecond) : 0;
+            int totalTime = ttimerHalf+ ttimerFirst+ttimerSecond;
+            TVStopWatch.setText(String.valueOf(totalTime));
+        }
+
+                String timerString = TVStopWatch.getText().toString();
                 if (!TextUtils.isEmpty(timerString)) {
                     try {
                         int minutes = Integer.parseInt(timerString);
@@ -134,8 +149,6 @@ public class LiveRandom extends AppCompatActivity {
                         timer = null;
                     }
                 }.start();
-            }
-        });
         timer = null;
     }
     // on create end
@@ -181,12 +194,5 @@ public class LiveRandom extends AppCompatActivity {
     public void goToHouse(View v){
         startActivity(new Intent(LiveRandom.this, Season3.class));
     }
-    public void goToHistory(View v){
-        startActivity(new Intent(LiveRandom.this, History.class));
-        Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
-
-    }
-
-
 
 }
