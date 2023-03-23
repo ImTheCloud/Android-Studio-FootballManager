@@ -151,14 +151,18 @@ public class LiveRandom extends AppCompatActivity {
                     public void onFinish() {
                         TVStopWatch.setText("00:00:00");
 
-                        Intent intent = new Intent(context, History.class);
-                        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
                         // Display notification when timer finishes
                         String title = "Time up";
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                         builder.setSmallIcon(R.drawable.timer);
                         builder.setOnlyAlertOnce(true);
-                        builder.setContentIntent(pendingIntent); // Ajouter l'intention de l'activité LiveRandom à la notification
+
+                        // Ajouter l'Intent pour ouvrir l'activité "History"
+                        Intent intent = new Intent(LiveRandom.this, History.class);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(LiveRandom.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                        builder.setContentIntent(pendingIntent);
+
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
                         // Reset the timer
