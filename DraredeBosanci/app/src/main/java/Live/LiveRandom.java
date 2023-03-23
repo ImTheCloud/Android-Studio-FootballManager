@@ -132,37 +132,27 @@ public class LiveRandom extends AppCompatActivity {
                         int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
                         String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                         TVStopWatch.setText(timeLeft);
-
-
-
                         // Afficher le temps restant dans la notification
                         String title = "Temps restant : " + timeLeft;
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                         builder.setSmallIcon(R.drawable.timer);
                         builder.setOnlyAlertOnce(true);
-
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
                     }
 
-
-
                     @Override
                     public void onFinish() {
                         TVStopWatch.setText("00:00:00");
-
-
                         // Display notification when timer finishes
                         String title = "Time up";
                         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                         builder.setSmallIcon(R.drawable.timer);
                         builder.setOnlyAlertOnce(true);
-
                         // Ajouter l'Intent pour ouvrir l'activité "History"
                         Intent intent = new Intent(LiveRandom.this, History.class);
                         PendingIntent pendingIntent = PendingIntent.getActivity(LiveRandom.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                         builder.setContentIntent(pendingIntent);
-
                         NotificationManager manager = notificationHelper.getManager();
                         manager.notify(1, builder.build());
                         // Reset the timer

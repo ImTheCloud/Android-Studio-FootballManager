@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.draredebosanci.R;
 import com.google.firebase.database.DatabaseReference;
@@ -33,11 +36,9 @@ public class SelectedTeam extends AppCompatActivity{
         playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
-
         timerHalfTime = findViewById(R.id.ID_Timer_halftime);
         timerFirst = findViewById(R.id.ID_Timer_first);
         timerSecond = findViewById(R.id.ID_Timer_second);
-
         Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
                 findViewById(R.id.playerRuben),
@@ -53,6 +54,37 @@ public class SelectedTeam extends AppCompatActivity{
                 findViewById(R.id.playerIosif),
 
         };
+
+
+
+
+        // Créer un InputFilter qui n'accepte que les nombres
+        InputFilter numberFilter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!Character.isDigit(source.charAt(i))) {
+                        // Afficher un toast si l'utilisateur entre autre chose qu'un nombre
+                        Toast.makeText(getApplicationContext(), "Only number", Toast.LENGTH_SHORT).show();
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+
+// Attacher le InputFilter aux champs de texte
+        timerHalfTime.setFilters(new InputFilter[] { numberFilter });
+        timerFirst.setFilters(new InputFilter[] { numberFilter });
+        timerSecond.setFilters(new InputFilter[] { numberFilter });
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
