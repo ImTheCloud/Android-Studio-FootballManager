@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/displayHistory"
-        android:layout_width="310dp"
-        android:layout_height="437dp"
+        android:layout_width="343dp"
+        android:layout_height="549dp"
         android:text=""
         android:textColor="#ffffff"
         android:textSize="20sp"
