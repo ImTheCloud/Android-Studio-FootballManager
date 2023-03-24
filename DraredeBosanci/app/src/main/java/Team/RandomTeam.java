@@ -22,12 +22,11 @@ import Live.LiveRandom;
 
 public class RandomTeam extends AppCompatActivity {
 
-    private EditText etPlayers, timerFirst,timerHalfTime,timerSecond;
-    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2,linearLayoutHelb1,linearLayoutHelb2;
-    private Button playerDareDeBosanci,playerHelb;
+    private EditText etPlayers;
 
-    DatabaseReference UserRef;
-
+    public static EditText  timerFirst,timerHalfTime,timerSecond;
+    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2;
+    private Button playerDareDeBosanci;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,14 +124,6 @@ public class RandomTeam extends AppCompatActivity {
     }
 
     public void goToLive(View v){
-
-        String timerF = timerFirst.getText().toString();
-        String timerHF = timerHalfTime.getText().toString();
-        String timerS = timerSecond.getText().toString();
-        Game timeTotal = new Game(timerF,timerHF,timerS);
-
-        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-        UserRef.push().setValue(timeTotal);
 
 
         Intent i = new Intent(RandomTeam.this, LiveRandom.class);

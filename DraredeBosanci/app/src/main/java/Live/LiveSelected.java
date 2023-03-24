@@ -1,4 +1,10 @@
 package Live;
+import static Team.RandomTeam.timerFirst;
+import static Team.RandomTeam.timerHalfTime;
+import static Team.RandomTeam.timerSecond;
+import static Team.SelectedTeam.ttimerFirst;
+import static Team.SelectedTeam.ttimerHalfTime;
+import static Team.SelectedTeam.ttimerSecond;
 import static Team.TeamSelection.userLocation;
 
 import android.app.NotificationManager;
@@ -66,6 +72,13 @@ public class LiveSelected extends AppCompatActivity {
                 Game map = new Game(userLocation);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
                 UserRef.push().setValue(map);
+
+                String timerF = ttimerFirst.getText().toString();
+                String timerHF = ttimerHalfTime.getText().toString();
+                String timerS = ttimerSecond.getText().toString();
+                Game timeTotal = new Game(timerF,timerHF,timerS);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                UserRef.push().setValue(timeTotal);
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();

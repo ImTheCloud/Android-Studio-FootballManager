@@ -21,10 +21,11 @@ import Home.Season3;
 import Live.LiveSelected;
 
 public class SelectedTeam extends AppCompatActivity{
-    private EditText etPlayers1,etPlayers2,timerHalfTime,timerFirst,timerSecond;
+    private EditText etPlayers1,etPlayers2;
+    public static EditText  ttimerFirst,ttimerHalfTime,ttimerSecond;
     private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2;
     private Button playerDareDeBosanci;
-    DatabaseReference UserRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +37,9 @@ public class SelectedTeam extends AppCompatActivity{
         playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
-        timerHalfTime = findViewById(R.id.ID_Timer_halftime);
-        timerFirst = findViewById(R.id.ID_Timer_first);
-        timerSecond = findViewById(R.id.ID_Timer_second);
+        ttimerFirst = findViewById(R.id.ID_Timer_halftime);
+        ttimerHalfTime = findViewById(R.id.ID_Timer_first);
+        ttimerSecond = findViewById(R.id.ID_Timer_second);
         Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
                 findViewById(R.id.playerRuben),
@@ -74,9 +75,9 @@ public class SelectedTeam extends AppCompatActivity{
         };
 
 // Attacher le InputFilter aux champs de texte
-        timerHalfTime.setFilters(new InputFilter[] { numberFilter });
-        timerFirst.setFilters(new InputFilter[] { numberFilter });
-        timerSecond.setFilters(new InputFilter[] { numberFilter });
+        ttimerHalfTime.setFilters(new InputFilter[] { numberFilter });
+        ttimerFirst.setFilters(new InputFilter[] { numberFilter });
+        ttimerSecond.setFilters(new InputFilter[] { numberFilter });
 
 
 
@@ -137,13 +138,7 @@ public class SelectedTeam extends AppCompatActivity{
         startActivity(new Intent(SelectedTeam.this, Season3.class));
     }
     public void goToLiveSelected(View v){
-        String timerF = timerFirst.getText().toString();
-        String timerHF = timerHalfTime.getText().toString();
-        String timerS = timerSecond.getText().toString();
-        Game timeTotal = new Game(timerF,timerHF,timerS);
 
-        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-        UserRef.push().setValue(timeTotal);
 
         Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
         String players = etPlayers1.getText().toString();
@@ -151,9 +146,9 @@ public class SelectedTeam extends AppCompatActivity{
         String players2 = etPlayers2.getText().toString();
         i.putExtra("players_data2", players2);
 
-        i.putExtra("timerFirst", timerFirst.getText().toString());
-        i.putExtra("timerHalf", timerHalfTime.getText().toString());
-        i.putExtra("timerSecond", timerSecond.getText().toString());
+        i.putExtra("timerFirst", ttimerFirst.getText().toString());
+        i.putExtra("timerHalf", ttimerHalfTime.getText().toString());
+        i.putExtra("timerSecond", ttimerSecond.getText().toString());
 
         startActivity(i);
     }

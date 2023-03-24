@@ -1,4 +1,7 @@
 package Live;
+import static Team.RandomTeam.timerFirst;
+import static Team.RandomTeam.timerHalfTime;
+import static Team.RandomTeam.timerSecond;
 import static Team.TeamSelection.userLocation;
 
 import android.app.NotificationManager;
@@ -63,6 +66,12 @@ public class LiveRandom extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
                 UserRef.push().setValue(map);
 
+                String timerF = timerFirst.getText().toString();
+                String timerHF = timerHalfTime.getText().toString();
+                String timerS = timerSecond.getText().toString();
+                Game timeTotal = new Game(timerF,timerHF,timerS);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                UserRef.push().setValue(timeTotal);
 
                 Game teams = new Game(team1,team2);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");

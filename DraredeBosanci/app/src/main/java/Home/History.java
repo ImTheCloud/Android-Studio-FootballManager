@@ -1,22 +1,15 @@
 package Home;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.draredebosanci.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class History extends AppCompatActivity {
@@ -36,6 +29,7 @@ public class History extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Extraire les données de la base de données Firebase pour les noms des joueurs et la localisation
+
                 Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
                 Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
                 Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
@@ -60,7 +54,7 @@ public class History extends AppCompatActivity {
                     Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
                     String latitude = userLocationData.get("latitude").toString();
                     String longitude = userLocationData.get("longitude").toString();
-                    location += "Lat / long : " + latitude +" "+ longitude + "\n";
+                    location += "Lat / long : " + latitude +" / "+ longitude + "\n";
                 }
 
                 // Extraire les données des scores
@@ -86,7 +80,7 @@ public class History extends AppCompatActivity {
 
 
                 // Afficher les données dans le TextView
-                String historyData = "Team 1 : " + team1 + "\n" + "Team 2 : " + team2 +  "\n"+ "\n" + "Location : " + location +  "\n"+"\n" + "Scores : " + scores + "\n" + "Time First Half : " + timeFirstHalf + "\n" + "Half : " + half + "\n" + "Time Second Half : " + timeSecondHalf;
+                String historyData = "Team 1 : " + "\n" + team1 + "\n" + "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n" + "Location : "  + "\n"+ location +  "\n"+"\n" + "Scores : " + "\n" + scores + "\n" + "Time : " + "\n"+"Time First Half : " + "\n" + timeFirstHalf + "\n" + "Half : "  + "\n"+ half + "\n" + "Time Second Half : "  + "\n"+ timeSecondHalf;
                 mTextView.setText(historyData);
             }
 
