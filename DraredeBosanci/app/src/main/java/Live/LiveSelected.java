@@ -43,7 +43,10 @@ public class LiveSelected extends AppCompatActivity {
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
     private Context context;
+    String players1,players2;
+    List<String> listPlayers1,listPlayers2;
     DatabaseReference UserRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,11 @@ public class LiveSelected extends AppCompatActivity {
                 Game timeTotal = new Game(timerF,timerHF,timerS);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
                 UserRef.push().setValue(timeTotal);
+
+                Game teams = new Game(listPlayers1,listPlayers2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                UserRef.push().setValue(teams);
+
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();
@@ -116,16 +124,16 @@ public class LiveSelected extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String players1 = extras.getString("players_data");
-            List<String> listPlayers1 = Arrays.asList(players1.split(","));
+            players1 = extras.getString("players_data");
+            listPlayers1 = Arrays.asList(players1.split(","));
             String formattedPlayers1 = "";
             for (String player : listPlayers1) {
                 formattedPlayers1 += "\u2022 " + player.trim() + "\n";
             }
             TVPlayers1.setText(formattedPlayers1);
 
-            String players2 = extras.getString("players_data2");
-            List<String> listPlayers2 = Arrays.asList(players2.split(","));
+           players2 = extras.getString("players_data2");
+            listPlayers2 = Arrays.asList(players2.split(","));
             String formattedPlayers2 = "";
             for (String player : listPlayers2) {
                 formattedPlayers2 += "\u2022 " + player.trim() + "\n";
@@ -133,9 +141,7 @@ public class LiveSelected extends AppCompatActivity {
             TVPlayers2.setText(formattedPlayers2);
 
 
-            Game teams = new Game(listPlayers1,listPlayers2);
-            UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
-            UserRef.push().setValue(teams);
+
 
         }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -139,8 +139,8 @@ public class SelectedTeam extends AppCompatActivity{
     }
     public void goToLiveSelected(View v){
 
-
         Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
+
         String players = etPlayers1.getText().toString();
         i.putExtra("players_data", players);
         String players2 = etPlayers2.getText().toString();
