@@ -1,4 +1,6 @@
 package Live;
+import static Team.TeamSelection.userLocation;
+
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -61,6 +63,9 @@ public class LiveSelected extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Game map = new Game(userLocation);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+                UserRef.push().setValue(map);
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();

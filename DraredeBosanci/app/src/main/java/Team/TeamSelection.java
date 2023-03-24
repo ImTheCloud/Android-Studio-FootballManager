@@ -47,7 +47,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
-    LatLng userLocation;
+    public static LatLng userLocation;
     DatabaseReference UserRef;
 
     @Override
@@ -176,15 +176,9 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
 
 
     public void goToRandomTeam(View v){
-        Game map = new Game(userLocation);
-        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-        UserRef.push().setValue(map);
         startActivity(new Intent(TeamSelection.this, RandomTeam.class));
     }
     public void goToSelectedTeam(View v){
-        Game map = new Game(userLocation);
-        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-        UserRef.push().setValue(map);
         startActivity(new Intent(TeamSelection.this, SelectedTeam.class));
     }
 

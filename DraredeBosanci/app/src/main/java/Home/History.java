@@ -29,10 +29,9 @@ public class History extends AppCompatActivity {
 
         mTextView = findViewById(R.id.displayHistory);
 
-        // Récupérer une référence à votre base de données Firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
-        // Récupérer une référence à l'emplacement "Game" de votre base de données Firebase
+// Récupérer une référence à l'emplacement "Game" de votre base de données Firebase
         database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -50,8 +49,8 @@ public class History extends AppCompatActivity {
                     Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
                     ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                     ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
-                    team1 = String.join(", ", players1);
-                    team2 = String.join(", ", players2);
+                    team1 += String.join(", ", players1) + "\n";
+                    team2 += String.join(", ", players2) + "\n";
                 }
 
                 // Extraire les données de la localisation
@@ -61,7 +60,7 @@ public class History extends AppCompatActivity {
                     Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
                     String latitude = userLocationData.get("latitude").toString();
                     String longitude = userLocationData.get("longitude").toString();
-                    location = "Latitude : " + latitude + " / Longitude : " + longitude;
+                    location += "Lat / long : " + latitude +" "+ longitude + "\n";
                 }
 
                 // Extraire les données des scores
@@ -73,7 +72,7 @@ public class History extends AppCompatActivity {
                     scores += "Team 1: " + goalTeam1 + " / Team 2: " + goalTeam2 + "\n";
                 }
 
-            // Extraire les données de temps
+                // Extraire les données de temps
                 String half = "";
                 String timeFirstHalf = "";
                 String timeSecondHalf = "";
@@ -84,8 +83,10 @@ public class History extends AppCompatActivity {
                     timeSecondHalf = timePointData.get("timeSecondHalf").toString();
                 }
 
-            // Afficher les données dans le TextView
-                String historyData = "Team 1 : " + team1 + "\n" + "Team 2 : " + team2 + "\n" + "Location : " + location + "\n" + "Scores : " + scores + "\n" + "Half : " + half + "\n" + "Time First Half : " + timeFirstHalf + "\n" + "Time Second Half : " + timeSecondHalf;
+
+
+                // Afficher les données dans le TextView
+                String historyData = "Team 1 : " + team1 + "\n" + "Team 2 : " + team2 +  "\n"+ "\n" + "Location : " + location +  "\n"+"\n" + "Scores : " + scores + "\n" + "Time First Half : " + timeFirstHalf + "\n" + "Half : " + half + "\n" + "Time Second Half : " + timeSecondHalf;
                 mTextView.setText(historyData);
             }
 
