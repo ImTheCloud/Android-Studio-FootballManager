@@ -212,11 +212,6 @@ public class LiveRandom extends AppCompatActivity {
         sb.append(TextUtils.join("\n", players));
         textView.setText(sb.toString());
     }
-    public void goToChoiceGoal(View v){
-        startActivity(new Intent(LiveRandom.this, ChoiceGoal.class));
-//        MediaPlayer mediaPlayer = MediaPlayer.create(Live.this, R.raw.whistle_referee);
-//        mediaPlayer.start();
-    }
     public void goToHouse(View v){
         startActivity(new Intent(LiveRandom.this, Season3.class));
     }

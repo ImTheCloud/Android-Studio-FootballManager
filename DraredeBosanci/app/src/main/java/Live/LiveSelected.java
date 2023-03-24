@@ -246,16 +246,5 @@ public class LiveSelected extends AppCompatActivity {
     public void goToHouse(View v){
         startActivity(new Intent(LiveSelected.this, Season3.class));
     }
-
-    public void goToHistory(View v){
-        Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LiveSelected.this, History.class));
-    }
-
-
-
-
-
-
 }
 
