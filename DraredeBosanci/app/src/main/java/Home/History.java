@@ -73,9 +73,19 @@ public class History extends AppCompatActivity {
                     scores += "Team 1: " + goalTeam1 + " / Team 2: " + goalTeam2 + "\n";
                 }
 
+            // Extraire les données de temps
+                String half = "";
+                String timeFirstHalf = "";
+                String timeSecondHalf = "";
+                for (Map.Entry<String, Object> entry : timeData.entrySet()) {
+                    Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
+                    half = timePointData.get("half").toString();
+                    timeFirstHalf = timePointData.get("timeFirstHalf").toString();
+                    timeSecondHalf = timePointData.get("timeSecondHalf").toString();
+                }
 
-                // Afficher les données dans le TextView
-                String historyData = "Team 1 : " + team1 + "\n" + "Team 2 : " + team2 + "\n" + "Location : " + location+ "\n" + "scores : " + scores;
+            // Afficher les données dans le TextView
+                String historyData = "Team 1 : " + team1 + "\n" + "Team 2 : " + team2 + "\n" + "Location : " + location + "\n" + "Scores : " + scores + "\n" + "Half : " + half + "\n" + "Time First Half : " + timeFirstHalf + "\n" + "Time Second Half : " + timeSecondHalf;
                 mTextView.setText(historyData);
             }
 
