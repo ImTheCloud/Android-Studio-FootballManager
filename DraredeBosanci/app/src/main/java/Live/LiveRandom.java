@@ -2,6 +2,7 @@ package Live;
 import static Team.RandomTeam.timerFirst;
 import static Team.RandomTeam.timerHalfTime;
 import static Team.RandomTeam.timerSecond;
+import static Team.TeamSelection.date;
 import static Team.TeamSelection.userLocation;
 
 import android.app.NotificationManager;
@@ -61,6 +62,10 @@ public class LiveRandom extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Game dateUser = new Game(date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                UserRef.push().setValue(dateUser);
 
                 Game map = new Game(userLocation);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");

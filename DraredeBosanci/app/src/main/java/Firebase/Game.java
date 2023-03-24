@@ -11,6 +11,9 @@ public class Game {
     LatLng userLocation;
     String goalTeam1,goalTeam2;
     String timeFirstHalf,timeSecondHalf,half;
+
+
+    String date;
     List<String> team2,team1;
 
     public Game(String goalTeam1,String goalTeam2) {
@@ -34,6 +37,9 @@ public class Game {
         this.userLocation=userLocation;
     }
 
+    public Game(String date) {
+        this.date=date;
+    }
 
 
     public String getGoalTeam1() {
@@ -95,4 +101,7 @@ public class Game {
         this.userLocation = userLocation;
     }
 
+    public String getData() {
+        return date;
+    }
 }

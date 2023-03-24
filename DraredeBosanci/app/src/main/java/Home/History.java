@@ -10,11 +10,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class History extends AppCompatActivity {
-    private TextView mTextView;
+    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay;
     private String half,timeFirstHalf,timeSecondHalf,time;
 
     @Override
@@ -22,7 +23,10 @@ public class History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        mTextView = findViewById(R.id.displayHistory);
+        teamDisplay = findViewById(R.id.Team);
+        goalDisplay = findViewById(R.id.Goals);
+        timeDisplay = findViewById(R.id.Time);
+        dateDisplay = findViewById(R.id.Date);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
@@ -37,6 +41,7 @@ public class History extends AppCompatActivity {
                 Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
                 Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
                 Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
+                Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
 
                 // Extraire les données des noms des joueurs
                 String team1 = "";
@@ -81,13 +86,29 @@ public class History extends AppCompatActivity {
                 String timeDataString = String.join("\n", times);
 
 
+                String dates = "";
+                for (Map.Entry<String, Object> entry : dateData.entrySet()) {
+                    Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
+                    String date = ddateData.get("data").toString();
+                    dates += date;
+                }
 
 
-                // Afficher les données dans le TextView
-                String historyData = "Team 1 : " + "\n" + team1 + "\n" + "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n" +
-                        "Location : "  + "\n"+ location +  "\n"+"\n" + "Scores : " + "\n" + scores + "\n" + "Time : " + "\n" + timeFirstHalf +  "'' " + half +  "'' " +  timeSecondHalf +  "''";
+                String teamDisplayData =
+                        "Team 1 : " + "\n" + team1 + "\n" +
+                        "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n";
+                       // + "Location : "  + "\n"+ location;
+                String goalDisplayData  = "Scores : " + "\n" + scores;
+                String timeDisplayData  = "Time : " + "\n" + timeDataString;
+                String dateDisplayData  = "Date : " + "\n" + dates;
 
-                mTextView.setText(historyData);
+
+                teamDisplay.setText(teamDisplayData);
+                goalDisplay.setText(goalDisplayData);
+                timeDisplay.setText(timeDisplayData);
+                dateDisplay.setText(dateDisplayData);
+
+
             }
 
             @Override

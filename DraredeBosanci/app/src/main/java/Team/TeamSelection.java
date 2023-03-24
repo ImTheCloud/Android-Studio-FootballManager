@@ -38,6 +38,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import Firebase.Game;
 
 public class TeamSelection extends AppCompatActivity implements OnMapReadyCallback {
@@ -48,7 +51,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     public static LatLng userLocation;
-    DatabaseReference UserRef;
+    public static String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,11 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
 
 
 
-
+        TextView dateTextView = findViewById(R.id.date_textview);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        date = dateFormat.format(calendar.getTime());
+        dateTextView.setText(date);
 
 
 

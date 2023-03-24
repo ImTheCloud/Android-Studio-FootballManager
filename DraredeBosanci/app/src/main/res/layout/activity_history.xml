@@ -13,23 +13,63 @@
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/stade"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
 
-    <TextView
-        android:id="@+id/displayHistory"
-        android:layout_width="343dp"
-        android:layout_height="549dp"
-        android:text=""
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-
+    <LinearLayout
+        android:layout_width="396dp"
+        android:layout_height="257dp"
+        android:background="@drawable/border_rounded"
+        android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.025">
+
+        <TextView
+            android:id="@+id/Team"
+            android:layout_width="1dp"
+            android:layout_height="241dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Équipe"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/Goals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Buts"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Time"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="84dp"
+            android:layout_height="245dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Date"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
