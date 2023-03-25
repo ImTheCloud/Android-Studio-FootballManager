@@ -5,6 +5,7 @@ import static Team.RandomTeam.timerSecond;
 import static Team.SelectedTeam.ttimerFirst;
 import static Team.SelectedTeam.ttimerHalfTime;
 import static Team.SelectedTeam.ttimerSecond;
+import static Team.TeamSelection.date;
 import static Team.TeamSelection.userLocation;
 
 import android.app.NotificationManager;
@@ -71,6 +72,10 @@ public class LiveSelected extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Game dateUser = new Game(date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                UserRef.push().setValue(dateUser);
 
                 Game map = new Game(userLocation);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
