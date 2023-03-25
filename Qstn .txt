@@ -1,1 +1,136 @@
-timer faire en sorte que dabord la mi temps 1 SECOULE puis pause,...
+    bt_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String goalTeam1 = goalT1.getText().toString();
+                String goalTeam2 = goalT2.getText().toString();
+                String timerF = timerFirst.getText().toString();
+                String timerHF = timerHalfTime.getText().toString();
+                String timerS = timerSecond.getText().toString();
+
+                Game goals = new Game(goalTeam1, goalTeam2,timerF,timerHF,timerS,team1,team2,userLocation,date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game").child("Game");
+                UserRef.setValue(goals);
+
+
+                Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LiveRandom.this, History.class));
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package Firebase;
+
+import android.widget.TextView;
+
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
+
+public class Game {
+
+    LatLng userLocation;
+    String goalTeam1,goalTeam2;
+    String timeFirstHalf,timeSecondHalf,half;
+    String date;
+    List<String> team2,team1;
+
+    public Game(String goalTeam1,String goalTeam2,String timerHF, String timerF, String timerS,List<String> team1, List<String> team2,LatLng userLocation,String date) {
+        this.goalTeam1 = goalTeam1;
+        this.goalTeam2 = goalTeam2;
+
+        this.half = timerF;
+        this.timeSecondHalf = timerS;
+        this.timeFirstHalf = timerHF;
+
+        this.team1=team1;
+        this.team2=team2;
+        this.userLocation=userLocation;
+
+        this.date=date;
+
+    }
+
+
+    public String getGoalTeam1() {
+        return goalTeam1;
+    }
+    public String getGoalTeam2() {
+        return goalTeam2;
+    }
+    public void setGoalTeam2(String goalTeam2) {
+        this.goalTeam2 = goalTeam2;
+    }
+    public void setGoalTeam1(String goalTeam1) {
+        this.goalTeam1 = goalTeam1;
+    }
+
+    public String getHalf() {
+        return half;
+    }
+
+    public void setHalf(String half) {
+        this.half = half;
+    }
+
+    public String getTimeSecondHalf() {
+        return timeSecondHalf;
+    }
+
+    public void setTimeSecondHalf(String timeSecondHalf) {
+        this.timeSecondHalf = timeSecondHalf;
+    }
+    public String getTimeFirstHalf() {
+        return timeFirstHalf;
+    }
+
+    public void setTimeFirstHalf(String timeFirstHalf) {
+        this.timeFirstHalf = timeFirstHalf;
+    }
+
+    public List<String> getTeam2() {
+        return team2;
+    }
+
+    public void setTeam2(List<String> team2) {
+        this.team2 = team2;
+    }
+
+    public List<String> getTeam1() {
+        return team1;
+    }
+
+    public void setTeam1(List<String> team1) {
+        this.team1 = team1;
+    }
+
+    public LatLng getUserLocation() {
+        return userLocation;
+    }
+    public void setUserLocation(LatLng userLocation) {
+        this.userLocation = userLocation;
+    }
+
+    public String getData() {
+        return date;
+    }
+}

@@ -35,18 +35,18 @@ public class History extends AppCompatActivity {
         deleteButton = findViewById(R.id.Delete);
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-            database.getReference().setValue(null); // Supprime toutes les données de la base de données Firebase
-            // Mettre à jour l'interface utilisateur pour afficher que toutes les données ont été supprimées
-            teamDisplay.setText("");
-            goalDisplay.setText("");
-            timeDisplay.setText("");
-            dateDisplay.setText("");
-            Toast.makeText(History.this, "Toutes les données ont été supprimées", Toast.LENGTH_SHORT).show();
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                database.getReference().setValue(null); // Supprime toutes les données de la base de données Firebase
+                // Mettre à jour l'interface utilisateur pour afficher que toutes les données ont été supprimées
+                teamDisplay.setText("");
+                goalDisplay.setText("");
+                timeDisplay.setText("");
+                dateDisplay.setText("");
+                Toast.makeText(History.this, "Toutes les données ont été supprimées", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -72,8 +72,8 @@ public class History extends AppCompatActivity {
                     Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
                     ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                     ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
-                    team1 += String.join(", ", players1) + "\n";
                     team2 += String.join(", ", players2) + "\n";
+                    team1 += String.join(", ", players1) + "\n";
                 }
 
                 // Extraire les données de la localisation
@@ -118,8 +118,8 @@ public class History extends AppCompatActivity {
 
                 String teamDisplayData =
                         "Team 1 : " + "\n" + team1 + "\n" +
-                        "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n";
-                       // + "Location : "  + "\n"+ location;
+                                "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n";
+                // + "Location : "  + "\n"+ location;
                 String goalDisplayData  = "Scores : " + "\n" + scores;
                 String timeDisplayData  = "Time : " + "\n" + timeDataString;
                 String dateDisplayData  = "Date : " + "\n" + dates;
@@ -140,4 +140,3 @@ public class History extends AppCompatActivity {
         });
     }
 }
-
