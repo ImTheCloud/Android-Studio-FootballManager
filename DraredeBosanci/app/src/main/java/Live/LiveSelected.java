@@ -24,6 +24,8 @@ import Firebase.Game;
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +45,7 @@ public class LiveSelected extends AppCompatActivity {
     String players1,players2;
     List<String> listPlayers1,listPlayers2;
     DatabaseReference UserRef;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -68,6 +71,12 @@ public class LiveSelected extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                String email = currentUser.getEmail();
+                Game user_mail = new Game(email);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                UserRef.push().setValue(user_mail);
 
                 Game dateUser = new Game(date);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
@@ -214,7 +223,7 @@ public class LiveSelected extends AppCompatActivity {
                 manager.notify(1, builder.build());
                 // Reset the timer
                 timer = null;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 Game dateUser = new Game(date);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
@@ -235,7 +244,14 @@ public class LiveSelected extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
                 UserRef.push().setValue(teams);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                String email = currentUser.getEmail();
+                Game user_mail = new Game(email);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                UserRef.push().setValue(user_mail);
+
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();
                 Game goals = new Game(goalTeam1, goalTeam2);

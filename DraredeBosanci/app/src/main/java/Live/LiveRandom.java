@@ -24,6 +24,8 @@ import Firebase.Game;
 import Home.History;
 import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import Home.Home;
@@ -39,6 +41,7 @@ public class LiveRandom extends AppCompatActivity {
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
     private Context context;
+    private FirebaseAuth mAuth;
 
     DatabaseReference UserRef;
     @Override
@@ -62,6 +65,15 @@ public class LiveRandom extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                    String email = currentUser.getEmail();
+                    Game user_mail = new Game(email);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                    UserRef.push().setValue(user_mail);
+
+
 
                 Game dateUser = new Game(date);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
@@ -179,6 +191,13 @@ public class LiveRandom extends AppCompatActivity {
                         // Reset the timer
                         timer = null;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        String email = currentUser.getEmail();
+                        Game user_mail = new Game(email);
+                        UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                        UserRef.push().setValue(user_mail);
+
                         Game dateUser = new Game(date);
                         UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
                         UserRef.push().setValue(dateUser);

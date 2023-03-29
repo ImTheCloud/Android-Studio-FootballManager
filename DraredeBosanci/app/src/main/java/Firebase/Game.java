@@ -1,8 +1,8 @@
 package Firebase;
 
-import android.widget.TextView;
-
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -13,8 +13,19 @@ public class Game {
     String timeFirstHalf,timeSecondHalf,half;
 
 
+    public FirebaseAuth getMail() {
+        return mail;
+    }
+
+    FirebaseAuth mail;
+
     String date;
     List<String> team2,team1;
+
+    public Game(FirebaseAuth mail) {
+        this.mail=mail;
+    }
+
 
     public Game(String goalTeam1,String goalTeam2) {
         this.goalTeam1 = goalTeam1;
@@ -104,4 +115,6 @@ public class Game {
     public String getData() {
         return date;
     }
+
+
 }

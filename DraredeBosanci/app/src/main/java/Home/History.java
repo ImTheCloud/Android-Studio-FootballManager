@@ -1,5 +1,6 @@
 package Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class History extends AppCompatActivity {
-    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay;
+    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
     private String half,timeFirstHalf,timeSecondHalf,time;
     private Button deleteAll,deleteLast;
 
@@ -32,6 +33,8 @@ public class History extends AppCompatActivity {
         goalDisplay = findViewById(R.id.Goals);
         timeDisplay = findViewById(R.id.Time);
         dateDisplay = findViewById(R.id.Date);
+        mailDisplay = findViewById(R.id.Mail);
+
         deleteAll = findViewById(R.id.DeleteAll);
         deleteLast = findViewById(R.id.deleteLast);
 
@@ -71,6 +74,7 @@ public class History extends AppCompatActivity {
                 Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
                 Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
                 Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
+                Map<String, Object> mailData = (Map<String, Object>) gameData.get("Mail");
 
                 // Extraire les données des noms des joueurs
                 String team1 = "";
@@ -80,7 +84,7 @@ public class History extends AppCompatActivity {
                     ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                     ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
                     team2 += String.join(", ", players2) + "\n";
-                    team1 += String.join(", ", players1) + "\n";
+                     team1 += String.join(", ", players1) + "\n";
                 }
 
                 // Extraire les données de la localisation
@@ -122,6 +126,13 @@ public class History extends AppCompatActivity {
                     dates += date+ "\n";
                 }
 
+                String mails = "";
+                for (Map.Entry<String, Object> entry : mailData.entrySet()) {
+                    Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
+                    String mail = ddateMail.get("data").toString();
+                    mails += mail+ "\n";
+                }
+
 
                 String teamDisplayData =
                         "Team 1 : " + "\n" + team1 + "\n" +
@@ -130,12 +141,14 @@ public class History extends AppCompatActivity {
                 String goalDisplayData  = "Scores : " + "\n" + scores;
                 String timeDisplayData  = "Time : " + "\n" + timeDataString;
                 String dateDisplayData  = "Date : " + "\n" + dates;
+                String mailDisplayData  = "Mails : " + "\n" + mails;
 
 
                 teamDisplay.setText(teamDisplayData);
                 goalDisplay.setText(goalDisplayData);
                 timeDisplay.setText(timeDisplayData);
                 dateDisplay.setText(dateDisplayData);
+                mailDisplay.setText(mailDisplayData);
 
 
             }
@@ -145,6 +158,14 @@ public class History extends AppCompatActivity {
                 // Gérer l'erreur
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
     }
 }
 
