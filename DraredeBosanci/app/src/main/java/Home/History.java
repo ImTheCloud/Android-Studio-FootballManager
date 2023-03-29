@@ -66,10 +66,9 @@ public class History extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Extraire les données de la base de données Firebase pour les noms des joueurs et la localisation
-
+                if(snapshot != null && snapshot.getValue() != null) {
                 Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
                 Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
-                Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
                 Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
                 Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
                 Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
@@ -86,15 +85,7 @@ public class History extends AppCompatActivity {
                     team1 += String.join(", ", players1) + "\n";
                 }
 
-                // Extraire les données de la localisation
-                String location = "";
-                for (Map.Entry<String, Object> entry : mapData.entrySet()) {
-                    Map<String, Object> mapPointData = (Map<String, Object>) entry.getValue();
-                    Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
-                    String latitude = userLocationData.get("latitude").toString();
-                    String longitude = userLocationData.get("longitude").toString();
-                    location += "Lat / long : " + latitude +" / "+ longitude + "\n";
-                }
+
 
                 // Extraire les données des scores
                 String scores = "";
@@ -136,7 +127,6 @@ public class History extends AppCompatActivity {
                 String teamDisplayData =
                         "Team 1 : " + "\n" + team1 + "\n" +
                                 "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n";
-                // + "Location : "  + "\n"+ location;
                 String goalDisplayData  = "Scores : " + "\n" + scores;
                 String timeDisplayData  = "Time : " + "\n" + timeDataString;
                 String dateDisplayData  = "Date : " + "\n" + dates;
@@ -150,7 +140,7 @@ public class History extends AppCompatActivity {
                 mailDisplay.setText(mailDisplayData);
 
 
-            }
+            }   }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

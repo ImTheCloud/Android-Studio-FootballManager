@@ -32,14 +32,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 import Firebase.Game;
 
@@ -69,8 +73,38 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         date = dateFormat.format(calendar.getTime());
         dateTextView.setText(date);
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
+        database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot != null && snapshot.getValue() != null) {
+                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
+                    Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
 
+                    // Ajouter des marqueurs à la carte pour chaque point de localisation dans la base de données
+                    for (Map.Entry<String, Object> entry : mapData.entrySet()) {
+                        Map<String, Object> mapPointData = (Map<String, Object>) entry.getValue();
+                        Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
+                        String latitude = userLocationData.get("latitude").toString();
+                        String longitude = userLocationData.get("longitude").toString();
+
+                        // Ajouter un marqueur à la carte pour cette localisation
+                        LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                        mMap.addMarker(new MarkerOptions()
+                                .position(location)
+                                .title("Custom Marker")
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Gérer l'erreur
+            }
+        });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -89,7 +123,6 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                 fetchTemperature(location);
             }
         });
-
 
     }
 
@@ -130,16 +163,6 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                MarkerOptions markerOptions = new MarkerOptions()
-                        .position(latLng)
-                        .title("Custom Marker")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker));
-                mMap.addMarker(markerOptions);
-            }
-        });
 
         // Check if we have permission to access the user's location.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -152,7 +175,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions()
                             .position(userLocation)
-                            .title("Marker at User Location"));
+                            .title("Game played here"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                 }
             });
@@ -173,7 +196,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                         LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                         mMap.addMarker(new MarkerOptions()
                                 .position(userLocation)
-                                .title("Marker at User Location"));
+                                .title("User location"));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                     }
                 });
