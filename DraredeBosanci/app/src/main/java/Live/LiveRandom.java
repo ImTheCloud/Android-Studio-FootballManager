@@ -63,7 +63,33 @@ public class LiveRandom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Game dateUser = new Game(date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                UserRef.push().setValue(dateUser);
 
+                Game map = new Game(userLocation);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+                UserRef.push().setValue(map);
+
+                String timerF = timerFirst.getText().toString();
+                String timerHF = timerHalfTime.getText().toString();
+                String timerS = timerSecond.getText().toString();
+                Game timeTotal = new Game(timerF,timerHF,timerS);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                UserRef.push().setValue(timeTotal);
+
+                Game teams = new Game(team1,team2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                UserRef.push().setValue(teams);
+
+                String goalTeam1 = goalT1.getText().toString();
+                String goalTeam2 = goalT2.getText().toString();
+                Game goals = new Game(goalTeam1, goalTeam2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                UserRef.push().setValue(goals);
+
+                Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LiveRandom.this, History.class));
             }
         });
 
