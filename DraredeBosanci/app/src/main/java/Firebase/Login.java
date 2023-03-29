@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import Home.Home;
 import com.example.draredebosanci.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -22,6 +21,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import Home.Home;
+
 public class Login extends AppCompatActivity {
     private EditText loginEmail, loginPassword;
     private TextView signupRedirectText,forgotPassword;
@@ -126,7 +128,13 @@ public class Login extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        finish();
+    }
     public void goToSignUp(View v) {
         startActivity(new Intent(Login.this, Register.class));
     }

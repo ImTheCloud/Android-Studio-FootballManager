@@ -13,11 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.draredebosanci.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import Firebase.Game;
-import Home.Season3;
+import Home.Home;
 import Live.LiveSelected;
 
 public class SelectedTeam extends AppCompatActivity{
@@ -135,7 +132,7 @@ public class SelectedTeam extends AppCompatActivity{
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(SelectedTeam.this, Season3.class));
+        startActivity(new Intent(SelectedTeam.this, Home.class));
     }
     public void goToLiveSelected(View v){
 

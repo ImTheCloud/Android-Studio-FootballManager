@@ -9,15 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.draredebosanci.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import Firebase.Game;
-import Home.Season3;
+import Home.Home;
 import Live.LiveRandom;
 
 public class RandomTeam extends AppCompatActivity {
@@ -120,7 +116,7 @@ public class RandomTeam extends AppCompatActivity {
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(RandomTeam.this, Season3.class));
+        startActivity(new Intent(RandomTeam.this, Home.class));
     }
 
     public void goToLive(View v){

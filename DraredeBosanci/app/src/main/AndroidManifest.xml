@@ -28,7 +28,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name="Home.Season3"
+            android:name="Home.Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,12 +45,6 @@
             android:exported="false" />
         <activity
             android:name="Firebase.Login"
-            android:exported="false" />
-        <activity
-            android:name="Profile.UploadActivity"
-            android:exported="false" />
-        <activity
-            android:name="Home.Home"
             android:exported="false" />
         <activity
             android:name="Live.LiveSelected"

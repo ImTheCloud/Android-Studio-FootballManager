@@ -1,7 +1,4 @@
 package Live;
-import static Team.RandomTeam.timerFirst;
-import static Team.RandomTeam.timerHalfTime;
-import static Team.RandomTeam.timerSecond;
 import static Team.SelectedTeam.ttimerFirst;
 import static Team.SelectedTeam.ttimerHalfTime;
 import static Team.SelectedTeam.ttimerSecond;
@@ -17,7 +14,6 @@ import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 import java.util.List;
 
-import Home.Season3;
+import Home.Home;
 
 public class LiveSelected extends AppCompatActivity {
     private TextView TVPlayers1, TVPlayers2, TVStopWatch,goalT1,goalT2;
@@ -279,7 +275,7 @@ public class LiveSelected extends AppCompatActivity {
         }
     }
     public void goToHouse(View v){
-        startActivity(new Intent(LiveSelected.this, Season3.class));
+        startActivity(new Intent(LiveSelected.this, Home.class));
     }
 }
 

@@ -26,7 +26,7 @@ import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import Home.Season3;
+import Home.Home;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -247,7 +247,7 @@ public class LiveRandom extends AppCompatActivity {
         textView.setText(sb.toString());
     }
     public void goToHouse(View v){
-        startActivity(new Intent(LiveRandom.this, Season3.class));
+        startActivity(new Intent(LiveRandom.this, Home.class));
     }
 
 }
