@@ -27,7 +27,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private boolean isSoundEnabled = true;
     private DrawerLayout drawerLayout;
     FloatingActionButton compo;
-    private Button newGameButton,oldGame,liveGame,ranking;
+    private Button newGameButton,oldGame,ranking;
     private FirebaseAuth mAuth;
 
     @Override

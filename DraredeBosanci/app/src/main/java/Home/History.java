@@ -62,7 +62,6 @@ public class History extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
-// Récupérer une référence à l'emplacement "Game" de votre base de données Firebase
         database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -84,7 +83,7 @@ public class History extends AppCompatActivity {
                     ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                     ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
                     team2 += String.join(", ", players2) + "\n";
-                     team1 += String.join(", ", players1) + "\n";
+                    team1 += String.join(", ", players1) + "\n";
                 }
 
                 // Extraire les données de la localisation
@@ -141,7 +140,7 @@ public class History extends AppCompatActivity {
                 String goalDisplayData  = "Scores : " + "\n" + scores;
                 String timeDisplayData  = "Time : " + "\n" + timeDataString;
                 String dateDisplayData  = "Date : " + "\n" + dates;
-                String mailDisplayData  = "Mails : " + "\n" + mails;
+                String mailDisplayData  = "Mail : " + "\n" + mails;
 
 
                 teamDisplay.setText(teamDisplayData);
