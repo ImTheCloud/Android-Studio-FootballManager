@@ -21,7 +21,7 @@ import java.util.Map;
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay;
     private String half,timeFirstHalf,timeSecondHalf,time;
-    private Button deleteButton;
+    private Button deleteAll,deleteLast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +32,10 @@ public class History extends AppCompatActivity {
         goalDisplay = findViewById(R.id.Goals);
         timeDisplay = findViewById(R.id.Time);
         dateDisplay = findViewById(R.id.Date);
-        deleteButton = findViewById(R.id.Delete);
+        deleteAll = findViewById(R.id.DeleteAll);
+        deleteLast = findViewById(R.id.deleteLast);
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -48,6 +49,12 @@ public class History extends AppCompatActivity {
             }
         });
 
+        deleteLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(History.this, "Rien lol", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -112,7 +119,7 @@ public class History extends AppCompatActivity {
                 for (Map.Entry<String, Object> entry : dateData.entrySet()) {
                     Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
                     String date = ddateData.get("data").toString();
-                    dates += date;
+                    dates += date+ "\n";
                 }
 
 
