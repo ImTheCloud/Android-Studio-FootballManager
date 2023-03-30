@@ -71,12 +71,10 @@ public class LiveRandom extends AppCompatActivity {
 
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
-                    String email = currentUser.getEmail();
-                    Game user_mail = new Game(email);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
-                    UserRef.push().setValue(user_mail);
-
-
+                String email = currentUser.getEmail();
+                Game user_mail = new Game(email);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                UserRef.push().setValue(user_mail);
 
                 Game dateUser = new Game(date);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");

@@ -61,6 +61,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_selection);
+
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
@@ -94,7 +95,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                         LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
                         mMap.addMarker(new MarkerOptions()
                                 .position(location)
-                                .title("Custom Marker")
+                                .title("Game played here")
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
                     }
                 }
@@ -175,7 +176,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions()
                             .position(userLocation)
-                            .title("Game played here"));
+                            .title("User location"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                 }
             });
