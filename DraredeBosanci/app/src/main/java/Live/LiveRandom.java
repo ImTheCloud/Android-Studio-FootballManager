@@ -26,8 +26,12 @@ import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import Home.Home;
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,9 +85,23 @@ public class LiveRandom extends AppCompatActivity {
                 String goalTeam2 = goalT2.getText().toString();
 
 
-                Game game = new Game(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
-                UserRef.push().setValue(game);
+                DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                ValueEventListener valueEventListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int matchCount = (int) dataSnapshot.getChildrenCount() + 1; // obtenir le nombre de matches existants et ajouter 1 pour le prochain match
+                        String matchId = Integer.toString(matchCount); // convertir le compteur en chaîne de caractères pour l'utiliser comme clé d'enregistrement
+                        // ajouter le nouveau match à la base de données avec la clé unique basée sur le compteur
+                        Game game = new Game(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
+                        UserRef.child(matchId).setValue(game);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                };
+                UserRef.addListenerForSingleValueEvent(valueEventListener);
+
 
 
                 finishTimer();

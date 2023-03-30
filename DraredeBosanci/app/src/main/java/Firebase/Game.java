@@ -56,6 +56,9 @@ public class Game {
     }
 
 
+    public String getMail() {
+        return mail;
+    }
     public String getGoalTeam1() {
         return goalTeam1;
     }
