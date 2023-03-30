@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
         <service android:name="Music.MyMusicService" />
 
@@ -111,8 +114,8 @@
             android:name="Form.Form"
             android:exported="false" />
         <activity
-         android:name="Live.LiveRandom"
-         android:exported="false" />
+            android:name="Live.LiveRandom"
+            android:exported="false" />
         <activity
             android:name="Home.History"
             android:exported="false" />

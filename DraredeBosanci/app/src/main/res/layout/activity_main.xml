@@ -1,22 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/location_textview"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Location"
-        android:textSize="24sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="79dp">
 
-    <TextView
-        android:id="@+id/temperature_textview"
-        android:layout_width="216dp"
-        android:layout_height="39dp"
-        android:layout_centerInParent="true"
-        android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView1"
+                android:textSize="40sp"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textVew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/t3extView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/text3View2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/text85iew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextV5ew2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/te4tView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textV54iew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/te5tView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textVi5ew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextV7iew2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/te12xtView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/te45xtView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textVi75ew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/text787View2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/tex77tView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/te456xtVi75ew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/tex456tView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/text546View2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+            <TextView
+                android:id="@+id/textVi451ew2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView2"
+                android:textSize="40sp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
