@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,16 +25,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import Firebase.Game;
+import Home.Home;
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,8 +51,6 @@ public class LiveSelected extends AppCompatActivity {
     List<String> listPlayers1,listPlayers2;
     DatabaseReference UserRef;
     private FirebaseAuth mAuth;
-    private boolean isActive = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,43 +69,46 @@ public class LiveSelected extends AppCompatActivity {
         TVPlayers2 = findViewById(R.id.TVPlayers2);
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         bt_Save = findViewById(R.id.bt_Save);
-        isActive = true;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 String email = currentUser.getEmail();
+                Game user_mail = new Game(email);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                UserRef.push().setValue(user_mail);
 
-                String timerF = timerFirst.getText().toString();
-                String timerHF = timerHalfTime.getText().toString();
-                String timerS = timerSecond.getText().toString();
+                Game dateUser = new Game(date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                UserRef.push().setValue(dateUser);
+
+                Game map = new Game(userLocation);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+                UserRef.push().setValue(map);
+
+                String timerF = ttimerFirst.getText().toString();
+                String timerHF = ttimerHalfTime.getText().toString();
+                String timerS = ttimerSecond.getText().toString();
+                Game timeTotal = new Game(timerF,timerHF,timerS);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                UserRef.push().setValue(timeTotal);
+
+                Game teams = new Game(listPlayers1,listPlayers2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                UserRef.push().setValue(teams);
+
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();
-
-
-                DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
-                ValueEventListener valueEventListener = new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        int matchCount = (int) dataSnapshot.getChildrenCount() + 1; // obtenir le nombre de matches existants et ajouter 1 pour le prochain match
-                        String matchId = Integer.toString(matchCount); // convertir le compteur en chaîne de caractères pour l'utiliser comme clé d'enregistrement
-                        // ajouter le nouveau match à la base de données avec la clé unique basée sur le compteur
-                        Game game = new Game(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,listPlayers2,listPlayers1);
-                        UserRef.child(matchId).setValue(game);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                };
-                UserRef.addListenerForSingleValueEvent(valueEventListener);
-                finishTimer();
-                finish();
+                Game goals = new Game(goalTeam1, goalTeam2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                UserRef.push().setValue(goals);
 
                 Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LiveSelected.this, History.class));
@@ -148,7 +148,7 @@ public class LiveSelected extends AppCompatActivity {
             }
             TVPlayers1.setText(formattedPlayers1);
 
-           players2 = extras.getString("players_data2");
+            players2 = extras.getString("players_data2");
             listPlayers2 = Arrays.asList(players2.split(","));
             String formattedPlayers2 = "";
             for (String player : listPlayers2) {
@@ -192,25 +192,72 @@ public class LiveSelected extends AppCompatActivity {
             boolean notificationSent = false; // Initialize notificationSent to false
             @Override
             public void onTick(long millisUntilFinished) {
-                if (isActive) {
-                    int hours = (int) (millisUntilFinished / 3600000);
-                    int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
-                    int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
-                    String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                    TVStopWatch.setText(timeLeft);
-                    // Afficher le temps restant dans la notification
-                    String title = "Temps restant : " + timeLeft;
-                    NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-                    builder.setSmallIcon(R.drawable.timer);
-                    builder.setOnlyAlertOnce(true);
-                    NotificationManager manager = notificationHelper.getManager();
-                    manager.notify(1, builder.build());
-                }
+                int hours = (int) (millisUntilFinished / 3600000);
+                int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                TVStopWatch.setText(timeLeft);
+
+
+
+                // Afficher le temps restant dans la notification
+                String title = "Temps restant : " + timeLeft;
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
             }
             @Override
             public void onFinish() {
-                finishTimer();
+                TVStopWatch.setText("00:00:00");
 
+                // Display notification when timer finishes
+                String title = "Time up";
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+
+                // Ajouter l'Intent pour ouvrir l'activité "History"
+                Intent intent = new Intent(LiveSelected.this, History.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                builder.setContentIntent(pendingIntent);
+
+
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
+                // Reset the timer
+                timer = null;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                Game dateUser = new Game(date);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                UserRef.push().setValue(dateUser);
+
+                Game map = new Game(userLocation);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+                UserRef.push().setValue(map);
+
+                String timerF = ttimerFirst.getText().toString();
+                String timerHF = ttimerHalfTime.getText().toString();
+                String timerS = ttimerSecond.getText().toString();
+                Game timeTotal = new Game(timerF,timerHF,timerS);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                UserRef.push().setValue(timeTotal);
+
+                Game teams = new Game(listPlayers1,listPlayers2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                UserRef.push().setValue(teams);
+
+
+                String goalTeam1 = goalT1.getText().toString();
+                String goalTeam2 = goalT2.getText().toString();
+                Game goals = new Game(goalTeam1, goalTeam2);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                UserRef.push().setValue(goals);
+
+                Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LiveSelected.this, History.class));
             }
 
 
@@ -219,32 +266,6 @@ public class LiveSelected extends AppCompatActivity {
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void finishTimer() {
-        TVStopWatch.setText("00:00:00");
-        // Display notification when timer finishes
-        String title = "Finished Game";
-        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-        builder.setSmallIcon(R.drawable.timer);
-        builder.setOnlyAlertOnce(true);
-        // Ajouter l'Intent pour ouvrir l'activité "History"
-        Intent intent = new Intent(LiveSelected.this, History.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        builder.setContentIntent(pendingIntent);
-        NotificationManager manager = notificationHelper.getManager();
-        manager.notify(1, builder.build());
-        // Reset the timer
-        timer = null;
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        finishTimer();
-        super.onDestroy();
-        isActive = false;
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
