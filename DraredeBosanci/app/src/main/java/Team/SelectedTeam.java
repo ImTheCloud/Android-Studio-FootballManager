@@ -20,8 +20,6 @@ import Live.LiveSelected;
 public class SelectedTeam extends AppCompatActivity{
     private EditText etPlayers1,etPlayers2;
     public static EditText  ttimerFirst,ttimerHalfTime,ttimerSecond;
-    private LinearLayout linearLayoutBosanci1,linearLayoutBosanci2;
-    private Button playerDareDeBosanci;
 
 
     @Override
@@ -29,9 +27,6 @@ public class SelectedTeam extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_team);
 
-        linearLayoutBosanci1 = findViewById(R.id.linearLayoutBosanci1);
-        linearLayoutBosanci2 = findViewById(R.id.linearLayoutBosanci2);
-        playerDareDeBosanci = findViewById(R.id.bt_drareDeBosanci);
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
         ttimerFirst = findViewById(R.id.ID_Timer_halftime);
@@ -76,27 +71,6 @@ public class SelectedTeam extends AppCompatActivity{
         ttimerFirst.setFilters(new InputFilter[] { numberFilter });
         ttimerSecond.setFilters(new InputFilter[] { numberFilter });
 
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        playerDareDeBosanci.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (linearLayoutBosanci1.getVisibility() == View.VISIBLE && linearLayoutBosanci2.getVisibility() == View.VISIBLE) {
-                    linearLayoutBosanci1.setVisibility(View.INVISIBLE);
-                    linearLayoutBosanci2.setVisibility(View.INVISIBLE);
-                } else {
-                    linearLayoutBosanci1.setVisibility(View.VISIBLE);
-                    linearLayoutBosanci2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

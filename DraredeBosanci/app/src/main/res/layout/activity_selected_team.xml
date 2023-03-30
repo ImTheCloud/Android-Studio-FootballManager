@@ -45,21 +45,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
 
-    <Button
-        android:id="@+id/bt_drareDeBosanci"
-        android:layout_width="119dp"
-        android:layout_height="46dp"
-        android:backgroundTint="#000D2753"
-        android:text="Group Bosanci"
-        android:textColor="@android:color/white"
-        android:textSize="10dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
-
     <LinearLayout
         android:id="@+id/linearLayoutBosanci1"
         android:layout_width="wrap_content"
@@ -68,7 +53,6 @@
         android:background="#AA1C4285"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
@@ -147,7 +131,6 @@
         android:background="#AA1C4285"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
