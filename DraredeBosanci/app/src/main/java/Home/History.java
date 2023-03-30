@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
@@ -59,7 +60,8 @@ public class History extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
-        database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Game").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Extraire les données de la base de données Firebase pour les noms des joueurs et la localisation
@@ -71,54 +73,67 @@ public class History extends AppCompatActivity {
                     Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
                     Map<String, Object> mailData = (Map<String, Object>) gameData.get("Mail");
 
-                    // Extraire les données des noms des joueurs
+                    TreeMap<String, Object> sortedTeamsData = new TreeMap<>(teamsData);
+                    TreeMap<String, Object> sortedgoalsData = new TreeMap<>(goalsData);
+                    TreeMap<String, Object> sortedtimeData = new TreeMap<>(timeData);
+                    TreeMap<String, Object> sorteddateData = new TreeMap<>(dateData);
+                    TreeMap<String, Object> sortedgmailData = new TreeMap<>(mailData);
+
                     String team1 = "";
                     String team2 = "";
-                    for (Map.Entry<String, Object> entry : teamsData.entrySet()) {
+                    int gameNumber = 1; // initialiser le compteur
+                    for (Map.Entry<String, Object> entry : sortedTeamsData.entrySet()) {
                         Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
                         ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                         ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
-                        team2 += String.join(", ", players2) + "\n";
-                        team1 += String.join(", ", players1) + "\n";
+                        team1 += "Game " + gameNumber + " : "+ String.join(", ", players1) + "\n";
+                        team2 += "Game " + gameNumber + " : "+  String.join(", ", players2) + "\n";
+                        gameNumber++; // incrementer le compteur
                     }
 
-
-
-                    // Extraire les données des scores
                     String scores = "";
-                    for (Map.Entry<String, Object> entry : goalsData.entrySet()) {
+                    gameNumber = 1; // réinitialiser le compteur
+                    for (Map.Entry<String, Object> entry : sortedgoalsData.entrySet()) {
                         Map<String, Object> goalData = (Map<String, Object>) entry.getValue();
                         String goalTeam1 = goalData.get("goalTeam1").toString();
                         String goalTeam2 = goalData.get("goalTeam2").toString();
-                        scores += goalTeam1 + " : " + goalTeam2 + "\n";
+                        scores += "Game " + gameNumber + " : " + goalTeam1 + " : " + goalTeam2 + "\n";
+                        gameNumber++; // incrementer le compteur
                     }
 
-                    // Extraire les données de temps
+                    String timeDataString="";
                     List<String> times = new ArrayList<>();
-                    for (Map.Entry<String, Object> entry : timeData.entrySet()) {
+                    gameNumber = 1; // réinitialiser le compteur
+                    for (Map.Entry<String, Object> entry : sortedtimeData.entrySet()) {
                         Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
                         half = timePointData.get("half").toString();
                         timeFirstHalf = timePointData.get("timeFirstHalf").toString();
                         timeSecondHalf = timePointData.get("timeSecondHalf").toString();
                         time = timeFirstHalf + "'' " + half + "'' " + timeSecondHalf + "''";
-                        times.add(time);
+                        times.add("Game " + gameNumber + " : " + time);
+                        timeDataString += "Game " + gameNumber + " : " + time + "\n";
+                        gameNumber++; // incrementer le compteur
                     }
-                    String timeDataString = String.join("\n", times);
-
 
                     String dates = "";
-                    for (Map.Entry<String, Object> entry : dateData.entrySet()) {
+                    gameNumber = 1; // réinitialiser le compteur
+                    for (Map.Entry<String, Object> entry : sorteddateData.entrySet()) {
                         Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
                         String date = ddateData.get("data").toString();
-                        dates += date+ "\n";
+                        dates += "Game " + gameNumber + " : " +  date+ "\n";
+                        gameNumber++; // incrementer le compteur
                     }
 
                     String mails = "";
-                    for (Map.Entry<String, Object> entry : mailData.entrySet()) {
+                    gameNumber = 1; // réinitialiser le compteur
+                    for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
                         Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
                         String mail = ddateMail.get("data").toString();
-                        mails += mail+ "\n";
+                        mails += "Game " + gameNumber + " : " +  mail+"\n";
+                        gameNumber++; // incrementer le compteur
                     }
+
+
 
 
                     String teamDisplayData =
@@ -137,7 +152,8 @@ public class History extends AppCompatActivity {
                     mailDisplay.setText(mailDisplayData);
 
 
-                }   }
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
