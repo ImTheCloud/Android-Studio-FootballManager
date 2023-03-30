@@ -80,25 +80,25 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
         database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot != null && snapshot.getValue() != null) {
-                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
-                    Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
-
-                    // Ajouter des marqueurs à la carte pour chaque point de localisation dans la base de données
-                    for (Map.Entry<String, Object> entry : mapData.entrySet()) {
-                        Map<String, Object> mapPointData = (Map<String, Object>) entry.getValue();
-                        Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
-                        String latitude = userLocationData.get("latitude").toString();
-                        String longitude = userLocationData.get("longitude").toString();
-
-                        // Ajouter un marqueur à la carte pour cette localisation
-                        LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                        mMap.addMarker(new MarkerOptions()
-                                .position(location)
-                                .title("Game played here")
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
-                    }
-                }
+//                if(snapshot != null && snapshot.getValue() != null) {
+//                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
+//                    Map<String, Object> mapData = (Map<String, Object>) gameData.get("Map");
+//
+//                    // Ajouter des marqueurs à la carte pour chaque point de localisation dans la base de données
+//                    for (Map.Entry<String, Object> entry : mapData.entrySet()) {
+//                        Map<String, Object> mapPointData = (Map<String, Object>) entry.getValue();
+//                        Map<String, Object> userLocationData = (Map<String, Object>) mapPointData.get("userLocation");
+//                        String latitude = userLocationData.get("latitude").toString();
+//                        String longitude = userLocationData.get("longitude").toString();
+//
+//                        // Ajouter un marqueur à la carte pour cette localisation
+//                        LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+//                        mMap.addMarker(new MarkerOptions()
+//                                .position(location)
+//                                .title("Game played here")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
+//                    }
+//                }
             }
 
             @Override

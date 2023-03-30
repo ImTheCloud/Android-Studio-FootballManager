@@ -72,37 +72,22 @@ public class LiveRandom extends AppCompatActivity {
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 String email = currentUser.getEmail();
-                Game user_mail = new Game(email);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
-                UserRef.push().setValue(user_mail);
-
-                Game dateUser = new Game(date);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
-                UserRef.push().setValue(dateUser);
-
-                Game map = new Game(userLocation);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-                UserRef.push().setValue(map);
 
                 String timerF = timerFirst.getText().toString();
                 String timerHF = timerHalfTime.getText().toString();
                 String timerS = timerSecond.getText().toString();
-                Game timeTotal = new Game(timerF,timerHF,timerS);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-                UserRef.push().setValue(timeTotal);
-
-                Game teams = new Game(team1,team2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
-                UserRef.push().setValue(teams);
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();
-                Game goals = new Game(goalTeam1, goalTeam2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
-                UserRef.push().setValue(goals);
+
+
+                Game game = new Game(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                UserRef.push().setValue(game);
+
+
                 finishTimer();
                 finish();
-
                 Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LiveRandom.this, History.class));
             }
@@ -144,47 +129,47 @@ public class LiveRandom extends AppCompatActivity {
             TVStopWatch.setText(String.valueOf(totalTime));
         }
 
-                String timerString = TVStopWatch.getText().toString();
-                if (!TextUtils.isEmpty(timerString)) {
-                    try {
-                        int minutes = Integer.parseInt(timerString);
-                        totalTime = minutes * 60;
-                    } catch (NumberFormatException e) {
-                        // Invalid input, use default value
-                        totalTime = 45 * 60;
-                    }
+        String timerString = TVStopWatch.getText().toString();
+        if (!TextUtils.isEmpty(timerString)) {
+            try {
+                int minutes = Integer.parseInt(timerString);
+                totalTime = minutes * 60;
+            } catch (NumberFormatException e) {
+                // Invalid input, use default value
+                totalTime = 45 * 60;
+            }
+        }
+        // Cancel previous timer if there is one
+        if (timer != null) {
+            timer.cancel();
+        }
+        // Start a new timer
+        timer = new CountDownTimer(totalTime * 1000, 1000) {
+            boolean notificationSent = false; // Initialize notificationSent to false
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (isActive) {
+                    int hours = (int) (millisUntilFinished / 3600000);
+                    int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                    int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                    String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                    TVStopWatch.setText(timeLeft);
+                    // Afficher le temps restant dans la notification
+                    String title = "Temps restant : " + timeLeft;
+                    NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                    builder.setSmallIcon(R.drawable.timer);
+                    builder.setOnlyAlertOnce(true);
+                    NotificationManager manager = notificationHelper.getManager();
+                    manager.notify(1, builder.build());
                 }
-                // Cancel previous timer if there is one
-                if (timer != null) {
-                    timer.cancel();
-                }
-                // Start a new timer
-                timer = new CountDownTimer(totalTime * 1000, 1000) {
-                    boolean notificationSent = false; // Initialize notificationSent to false
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        if (isActive) {
-                            int hours = (int) (millisUntilFinished / 3600000);
-                            int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
-                            int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
-                            String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
-                            TVStopWatch.setText(timeLeft);
-                            // Afficher le temps restant dans la notification
-                            String title = "Temps restant : " + timeLeft;
-                            NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-                            builder.setSmallIcon(R.drawable.timer);
-                            builder.setOnlyAlertOnce(true);
-                            NotificationManager manager = notificationHelper.getManager();
-                            manager.notify(1, builder.build());
-                        }
-                    }
+            }
 
-                    @Override
-                    public void onFinish() {
-                        finishTimer();
-                    }
+            @Override
+            public void onFinish() {
+                finishTimer();
+            }
 
-                }.start();
+        }.start();
         timer = null;
     }
     // on create end
