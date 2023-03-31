@@ -45,13 +45,37 @@ public class SelectedTeam extends AppCompatActivity{
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
-
         };
 
+        for (Button button : buttons) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!etPlayers1.hasFocus() && !etPlayers2.hasFocus()) {
+                        Toast.makeText(getApplicationContext(), "Please select first a team", Toast.LENGTH_SHORT).show();
+                        button.setEnabled(true);
+                    } else {
+                        String player = button.getText().toString();
+                        String currentText;
+                        String newText;
+                        if (etPlayers1.hasFocus()) {
+                            currentText = etPlayers1.getText().toString();
+                            newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                            etPlayers1.setText(newText);
+                        } else if (etPlayers2.hasFocus()) {
+                            currentText = etPlayers2.getText().toString();
+                            newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                            etPlayers2.setText(newText);
+                        }
+                        disableButton(view);
+                    }
+                }
+            });
+        }
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Créer un InputFilter qui n'accepte que les nombres
         InputFilter numberFilter = new InputFilter() {
             @Override
             public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -66,34 +90,9 @@ public class SelectedTeam extends AppCompatActivity{
             }
         };
 
-// Attacher le InputFilter aux champs de texte
         ttimerHalfTime.setFilters(new InputFilter[] { numberFilter });
         ttimerFirst.setFilters(new InputFilter[] { numberFilter });
         ttimerSecond.setFilters(new InputFilter[] { numberFilter });
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        for (Button button : buttons) {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String player = button.getText().toString();
-                    String currentText;
-                    String newText;
-                    if (etPlayers1.hasFocus()) {
-                        currentText = etPlayers1.getText().toString();
-                        newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                        etPlayers1.setText(newText);
-                    } else if (etPlayers2.hasFocus()) {
-                        currentText = etPlayers2.getText().toString();
-                        newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                        etPlayers2.setText(newText);
-                    }
-                    disableButton(view);
-                }
-            });
-        }
 
     }
 

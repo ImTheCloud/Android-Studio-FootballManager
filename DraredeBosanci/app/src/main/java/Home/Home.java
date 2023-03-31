@@ -40,7 +40,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         oldGame = findViewById(R.id.BT_History);
         ranking = findViewById(R.id.BT_Ranking);
         newGameButton = findViewById(R.id.BT_New_Game);
-        compo = findViewById(R.id.BT_Compo);
         drawerLayout = findViewById(R.id.drawer_layout);
         LinearLayout layout_home = findViewById(R.id.layout_home);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -76,8 +75,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     oldGame.setVisibility(View.INVISIBLE);
                     ranking.setEnabled(false);
                     ranking.setVisibility(View.INVISIBLE);
-                    compo.setEnabled(false);
-                    compo.setVisibility(View.INVISIBLE);
+
                     layout_home.setEnabled(false);
                     layout_home.setVisibility(View.INVISIBLE);
                 }
@@ -88,8 +86,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     oldGame.setVisibility(View.VISIBLE);
                     ranking.setEnabled(true);
                     ranking.setVisibility(View.VISIBLE);
-                    compo.setEnabled(true);
-                    compo.setVisibility(View.VISIBLE);
+
                     newGameButton.setVisibility(View.VISIBLE);
                     newGameButton.setEnabled(true);
                     layout_home.setVisibility(View.VISIBLE);
@@ -154,14 +151,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
                 });
             }
-
-            compo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Home.this, CompoChoice.class);
-                    startActivity(intent);
-                }
-            });
         }
 
 // on create end
@@ -196,9 +185,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     mAuth.signOut();
                     startActivity(new Intent(Home.this, Login.class));
-
+                    break;
                 case R.id.nav_login:
                     startActivity(new Intent(Home.this, Login.class));
+                    break;
+                case R.id.nav_compo:
+                    startActivity(new Intent(Home.this, CompoChoice.class));
 
                     break;
 

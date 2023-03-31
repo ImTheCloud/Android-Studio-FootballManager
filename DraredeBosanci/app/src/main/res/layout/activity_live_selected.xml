@@ -61,6 +61,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"></Space>
         <TextView
             android:id="@+id/TVPlayers2"
             android:layout_width="wrap_content"

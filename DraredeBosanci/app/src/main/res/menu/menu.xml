@@ -18,6 +18,11 @@
             android:icon="@drawable/volume_up"
             android:title="Volume up"/>
 
+        <item
+            android:id="@+id/nav_compo"
+            android:icon="@drawable/field2"
+            android:title="Compo"/>
+
 
     </group>
     <item

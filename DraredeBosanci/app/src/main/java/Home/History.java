@@ -150,7 +150,7 @@ public class History extends AppCompatActivity {
                         half = timePointData.get("half").toString();
                         timeFirstHalf = timePointData.get("timeFirstHalf").toString();
                         timeSecondHalf = timePointData.get("timeSecondHalf").toString();
-                        time = timeFirstHalf + "'' " + half + "'' " + timeSecondHalf + "''";
+                        time = timeFirstHalf + "''  " + half + "''  " + timeSecondHalf + "''";
                         times.add("Game " + gameNumber + " : " + time);
                         timeDataString += "Game " + gameNumber + " : " + time + "\n";
                         gameNumber++; // incrementer le compteur
