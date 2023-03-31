@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -161,6 +162,8 @@ public class LiveRandom extends AppCompatActivity {
             timer.cancel();
         }
 
+
+
         // Start a new timer
         timer = new CountDownTimer(totalTime * 1000, 1000) {
             boolean notificationSent = false; // Initialize notificationSent to false
@@ -189,11 +192,13 @@ public class LiveRandom extends AppCompatActivity {
 
         }.start();
         timer = null;
+
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void finishTimer() {
+
         TVStopWatch.setText("00:00:00");
         // Display notification when timer finishes
         String title = "Finished Game";
@@ -201,13 +206,14 @@ public class LiveRandom extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.timer);
         builder.setOnlyAlertOnce(true);
         // Ajouter l'Intent pour ouvrir l'activité "History"
-        Intent intent = new Intent(LiveRandom.this, History.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(LiveRandom.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        builder.setContentIntent(pendingIntent);
+//        Intent intent = new Intent(LiveSelected.this, History.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+//        builder.setContentIntent(pendingIntent);
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
         // Reset the timer
         timer = null;
+
 
     }
 
@@ -218,23 +224,6 @@ public class LiveRandom extends AppCompatActivity {
         isActive = false;
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (timer == null) {
-            return;
-        }
-        if (!notificationSent) {
-            String title = "Time up";
-            NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-            builder.setSmallIcon(R.drawable.timer);
-            NotificationManager manager = notificationHelper.getManager();
-            manager.notify(1, builder.build());
-            // Update notificationSent flag to true
-            notificationSent = true;
-        }
-    }
     private void setPlayerOnTeam() {
         // Get players from intent extras and split them into two teams
         Bundle extras = getIntent().getExtras();

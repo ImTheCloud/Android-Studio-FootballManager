@@ -225,9 +225,9 @@ public class LiveSelected extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.timer);
         builder.setOnlyAlertOnce(true);
         // Ajouter l'Intent pour ouvrir l'activité "History"
-        Intent intent = new Intent(LiveSelected.this, History.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        builder.setContentIntent(pendingIntent);
+//        Intent intent = new Intent(LiveSelected.this, History.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+//        builder.setContentIntent(pendingIntent);
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
         // Reset the timer
