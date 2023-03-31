@@ -58,7 +58,7 @@ public class History extends AppCompatActivity {
                 mailDisplay.setText("");
 
                 loadingText.setVisibility(View.VISIBLE);
-                loadingText.setText("Nothing in the History");
+                loadingText.setText("No game played temporarily");
                 Toast.makeText(History.this, "All games have been deleted ", Toast.LENGTH_SHORT).show();
             }
         });

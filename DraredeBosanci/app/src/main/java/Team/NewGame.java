@@ -42,7 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
-public class TeamSelection extends AppCompatActivity implements OnMapReadyCallback {
+public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private EditText locationEditText;
     private Button fetchButton;
@@ -55,7 +55,7 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_selection);
+        setContentView(R.layout.activity_new_game);
 
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
@@ -114,8 +114,9 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
             String location = locationEditText.getText().toString();
             if (!location.isEmpty()) {
                 fetchTemperature(location);
+                Toast.makeText(NewGame.this, "New Meteo displayed", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(TeamSelection.this, "Enter a place", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewGame.this, "Enter a place", Toast.LENGTH_SHORT).show();
                 fetchTemperature(location);
             }
         });
@@ -202,10 +203,10 @@ public class TeamSelection extends AppCompatActivity implements OnMapReadyCallba
 
 
     public void goToRandomTeam(View v){
-        startActivity(new Intent(TeamSelection.this, RandomTeam.class));
+        startActivity(new Intent(NewGame.this, RandomTeam.class));
     }
     public void goToSelectedTeam(View v){
-        startActivity(new Intent(TeamSelection.this, SelectedTeam.class));
+        startActivity(new Intent(NewGame.this, SelectedTeam.class));
     }
 
 }

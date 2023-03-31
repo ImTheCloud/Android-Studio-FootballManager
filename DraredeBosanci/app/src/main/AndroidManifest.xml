@@ -56,7 +56,7 @@
             android:name="Team.SelectedTeam"
             android:exported="false" />
         <activity
-            android:name="Team.TeamSelection"
+            android:name="Team.NewGame"
             android:exported="false" />
         <activity
             android:name="Notif.Notification"
@@ -106,9 +106,6 @@
             android:exported="false" />
         <activity
             android:name="Form.FormRuben"
-            android:exported="false" />
-        <activity
-            android:name="Live.ChoiceGoal"
             android:exported="false" />
         <activity
             android:name="Form.Form"

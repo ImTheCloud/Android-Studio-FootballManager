@@ -16,7 +16,7 @@ import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.CompoChoice;
 import Form.Form;
-import Team.TeamSelection;
+import Team.NewGame;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +37,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         oldGame = findViewById(R.id.BT_History);
         ranking = findViewById(R.id.BT_Ranking);
+        newGameButton = findViewById(R.id.BT_New_Game);
         compo = findViewById(R.id.BT_Compo);
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -111,18 +112,33 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 userEmail = user.getEmail();
             }
 
-            newGameButton = findViewById(R.id.BT_New_Game);
-
-            if (userEmail != null) {
+        if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
+            newGameButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Only the referee can create game", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }else{
                 newGameButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(Home.this, TeamSelection.class));
+                        startActivity(new Intent(Home.this, NewGame.class));
+
+                    }
+                });
+            }
+
+            if (userEmail != null) {
+                ranking.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(Home.this, Form.class));
 
                     }
                 });
             } else {
-                newGameButton.setOnClickListener(new View.OnClickListener() {
+                ranking.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(getApplicationContext(), "Connect First", Toast.LENGTH_SHORT).show();
@@ -187,8 +203,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public void goToHistory(View v){
         startActivity(new Intent(Home.this, History.class));
     }
-    public void goToRanking(View v){
-        startActivity(new Intent(Home.this, Form.class));
-    }
+
 
 }

@@ -159,8 +159,8 @@
 
     <Button
         android:id="@+id/bt_Save"
-        android:layout_width="23dp"
-        android:layout_height="23dp"
+        android:layout_width="33dp"
+        android:layout_height="35dp"
         android:background="@drawable/button_selector4"
         android:drawablePadding="10dp"
         android:elevation="2dp"
@@ -169,8 +169,6 @@
         android:minHeight="0dp"
         android:padding="10dp"
         android:scaleType="fitCenter"
-        android:textColor="#000000"
-        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.958"
