@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.draredebosanci.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,6 +23,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import Team.NewGame;
 
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
@@ -46,22 +50,45 @@ public class History extends AppCompatActivity {
         loadingText.setVisibility(View.VISIBLE);
 
 
-        deleteAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                database.getReference().setValue(null);
-                teamDisplay.setText("");
-                goalDisplay.setText("");
-                timeDisplay.setText("");
-                dateDisplay.setText("");
-                mailDisplay.setText("");
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                loadingText.setVisibility(View.VISIBLE);
-                loadingText.setText("No game played temporarily");
-                Toast.makeText(History.this, "All games have been deleted ", Toast.LENGTH_SHORT).show();
-            }
-        });
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userEmail = null;
+        if (user != null) {
+            userEmail = user.getEmail();
+        }
+
+        if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
+            deleteAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), "Only the referee can delete all games", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            deleteAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                    database.getReference().setValue(null);
+
+                    mailDisplay.setVisibility(View.INVISIBLE);
+                    teamDisplay.setVisibility(View.INVISIBLE);
+                    goalDisplay.setVisibility(View.INVISIBLE);
+                    timeDisplay.setVisibility(View.INVISIBLE);
+                    dateDisplay.setVisibility(View.INVISIBLE);
+
+
+                    loadingText.setVisibility(View.VISIBLE);
+                    loadingText.setText("No game played");
+                    Toast.makeText(History.this, "All games have been deleted ", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -152,7 +179,7 @@ public class History extends AppCompatActivity {
 
                     String teamDisplayData =
                             "Team 1 : " + "\n" + team1 + "\n" +
-                                    "Team 2 : "  + "\n"+ team2 +  "\n"+ "\n";
+                                    "Team 2 : "  + "\n"+ team2 +  "\n";
                     String goalDisplayData  = "Scores : " + "\n" + scores;
                     String timeDisplayData  = "Time : " + "\n" + timeDataString;
                     String dateDisplayData  = "Date : " + "\n" + dates;
@@ -168,7 +195,7 @@ public class History extends AppCompatActivity {
 
                 }else{
                     loadingText.setVisibility(View.VISIBLE);
-                    loadingText.setText("Nothing in the History");
+                    loadingText.setText("No game played");
                 }
             }
 

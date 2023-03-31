@@ -138,7 +138,6 @@
         android:layout_height="55dp"
         android:backgroundTint="#004CAF50"
         android:elevation="4dp"
-        android:onClick="goToRanking"
         android:padding="16dp"
         android:text="Ranking"
         android:textColor="#FFFFFF"

@@ -11,4 +11,8 @@
     <color name="Green">#074209</color>
     <color name="Transparent">#00074209</color>
     <color name="Gray">#636363</color>
+    <color name="textview_background_color">#44000000</color>
+    <color name="textview_text_color">#FFFFFF</color>
+    <color name="textview_stroke_color">#989898</color>
+
 </resources>
