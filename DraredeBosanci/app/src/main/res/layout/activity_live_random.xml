@@ -19,21 +19,6 @@
 
 
     <Button
-        android:id="@+id/pause"
-        android:layout_width="59dp"
-        android:layout_height="48dp"
-        android:background="@drawable/button_selector"
-        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
-        android:onClick="goToHouse"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.852"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
-
-    <Button
         android:id="@+id/house"
         android:layout_width="59dp"
         android:layout_height="45dp"
