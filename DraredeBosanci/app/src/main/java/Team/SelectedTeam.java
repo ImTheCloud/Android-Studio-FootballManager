@@ -110,6 +110,24 @@ public class SelectedTeam extends AppCompatActivity{
     }
     public void goToLiveSelected(View v){
 
+        String timerHalfTimeString = ttimerHalfTime.getText().toString();
+        String timerFirstString = ttimerFirst.getText().toString();
+        String timerSecondString = ttimerSecond.getText().toString();
+
+        if(timerHalfTimeString.equals("") || timerFirstString.equals("") || timerSecondString.equals("")) {
+            Toast.makeText(getApplicationContext(), "Please insert time in each field", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String team1String1 = etPlayers1.getText().toString();
+        String team1String2 = etPlayers2.getText().toString();
+        if(team1String1.equals("") || team1String2.equals("") ) {
+            Toast.makeText(getApplicationContext(), "Please insert at least one name in each field", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
         Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
 
         String players = etPlayers1.getText().toString();

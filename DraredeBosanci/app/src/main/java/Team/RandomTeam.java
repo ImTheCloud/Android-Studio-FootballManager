@@ -99,19 +99,31 @@ public class RandomTeam extends AppCompatActivity {
         startActivity(new Intent(RandomTeam.this, Home.class));
     }
 
-    public void goToLive(View v){
+    public void goToLive(View v) {
+        String timerHalfTimeString = timerHalfTime.getText().toString();
+        String timerFirstString = timerFirst.getText().toString();
+        String timerSecondString = timerSecond.getText().toString();
 
+        if(timerHalfTimeString.equals("") || timerFirstString.equals("") || timerSecondString.equals("")) {
+            Toast.makeText(getApplicationContext(), "Please insert time in each field", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String team1String = etPlayers.getText().toString();
+        String[] players = team1String.split(",");
+
+        if(players.length < 2) {
+            Toast.makeText(getApplicationContext(), "Please insert at least two player names", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent i = new Intent(RandomTeam.this, LiveRandom.class);
         i.putExtra("Players", etPlayers.getText().toString());
-
-//        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.whistle_referee);
-//        mediaPlayer.start();
-
-        i.putExtra("timerFirst", timerFirst.getText().toString());
-        i.putExtra("timerHalf", timerHalfTime.getText().toString());
-        i.putExtra("timerSecond", timerSecond.getText().toString());
-
+        i.putExtra("timerFirst", timerFirstString);
+        i.putExtra("timerHalf", timerHalfTimeString);
+        i.putExtra("timerSecond", timerSecondString);
         startActivity(i);
     }
+
+
 }
