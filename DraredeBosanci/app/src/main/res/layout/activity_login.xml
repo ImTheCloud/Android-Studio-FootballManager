@@ -13,7 +13,7 @@
         android:gravity="center"
         android:padding="0dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/football"
+        app:srcCompat="@drawable/home"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/Green"
+                    android:backgroundTint="@color/black"
                     android:text="Login"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />

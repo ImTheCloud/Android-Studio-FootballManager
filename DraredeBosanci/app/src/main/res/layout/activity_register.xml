@@ -12,7 +12,7 @@
         android:gravity="center"
         android:padding="0dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/football"
+        app:srcCompat="@drawable/home"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="311dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             app:cardCornerRadius="30dp"
@@ -90,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/Green"
+                    android:backgroundTint="@color/black"
                     android:text="Sign Up"
                     android:textSize="18sp"
                     app:cornerRadius="20dp" />
@@ -101,8 +101,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:padding="8dp"
                     android:onClick="goToLogin"
+                    android:padding="8dp"
                     android:text="Already an user? Login"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
