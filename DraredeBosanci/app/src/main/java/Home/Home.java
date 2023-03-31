@@ -159,6 +159,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userEmail = null;
+        if (user != null) {
+            userEmail = user.getEmail();
+        }
             switch (item.getItemId()) {
                 case R.id.volume:
                     if (isSoundEnabled) {
@@ -182,12 +188,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     break;
 
                 case R.id.nav_logout:
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                    mAuth.signOut();
-                    startActivity(new Intent(Home.this, Login.class));
+
+                    if (userEmail != null) {
+                        mAuth.signOut();
+                        startActivity(new Intent(Home.this, Login.class));
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Already disconnected", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.nav_login:
-                    startActivity(new Intent(Home.this, Login.class));
+                    if (userEmail != null) {
+                        Toast.makeText(getApplicationContext(), "Already connected", Toast.LENGTH_SHORT).show();
+                    }else{
+                        startActivity(new Intent(Home.this, Login.class));
+                    }
                     break;
                 case R.id.nav_compo:
                     startActivity(new Intent(Home.this, CompoChoice.class));
