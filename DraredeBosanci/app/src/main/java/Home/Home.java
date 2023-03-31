@@ -50,7 +50,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             // Si l'utilisateur n'est pas connecté, afficher une alerte
-            Toast.makeText(getApplicationContext(), "You are not logged in", Toast.LENGTH_SHORT).show();
             navEmail.setText("No one is connected"); // Afficher "Personne n'est connecté" dans le TextView
         } else {
             // Si l'utilisateur est connecté, afficher son nom dans le TextView

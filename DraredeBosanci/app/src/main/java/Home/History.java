@@ -42,18 +42,25 @@ public class History extends AppCompatActivity {
 
         deleteAll = findViewById(R.id.DeleteAll);
 
+        TextView loadingText = findViewById(R.id.loading_text);
+        loadingText.setVisibility(View.VISIBLE);
+
+
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
                 database.getReference().setValue(null); // Supprime toutes les données de la base de données Firebase
                 // Mettre à jour l'interface utilisateur pour afficher que toutes les données ont été supprimées
-                teamDisplay.setText("Team :");
-                goalDisplay.setText("Goal :");
-                timeDisplay.setText("Time :");
-                dateDisplay.setText("Date :");
-                mailDisplay.setText("Mail :");
-                Toast.makeText(History.this, "Toutes les données ont été supprimées", Toast.LENGTH_SHORT).show();
+                teamDisplay.setText("");
+                goalDisplay.setText("");
+                timeDisplay.setText("");
+                dateDisplay.setText("");
+                mailDisplay.setText("");
+
+                loadingText.setVisibility(View.VISIBLE);
+                loadingText.setText("Nothing in the History");
+                Toast.makeText(History.this, "All games have been deleted ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -64,8 +71,16 @@ public class History extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                loadingText.setVisibility(View.GONE);
+
                 // Extraire les données de la base de données Firebase pour les noms des joueurs et la localisation
                 if(snapshot != null && snapshot.getValue() != null) {
+                    teamDisplay.setVisibility(View.VISIBLE);
+                    goalDisplay.setVisibility(View.VISIBLE);
+                    timeDisplay.setVisibility(View.VISIBLE);
+                    dateDisplay.setVisibility(View.VISIBLE);
+                    mailDisplay.setVisibility(View.VISIBLE);
+
                     Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
                     Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
                     Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
@@ -152,6 +167,9 @@ public class History extends AppCompatActivity {
                     mailDisplay.setText(mailDisplayData);
 
 
+                }else{
+                    loadingText.setVisibility(View.VISIBLE);
+                    loadingText.setText("Nothing in the History");
                 }
             }
 
