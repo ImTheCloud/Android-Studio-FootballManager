@@ -50,8 +50,7 @@ public class History extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                database.getReference().setValue(null); // Supprime toutes les données de la base de données Firebase
-                // Mettre à jour l'interface utilisateur pour afficher que toutes les données ont été supprimées
+                database.getReference().setValue(null);
                 teamDisplay.setText("");
                 goalDisplay.setText("");
                 timeDisplay.setText("");
@@ -175,7 +174,7 @@ public class History extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Gérer l'erreur
+
             }
         });
     }

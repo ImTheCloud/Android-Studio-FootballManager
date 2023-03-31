@@ -36,13 +36,16 @@ public class LiveRandom extends AppCompatActivity {
     private TextView TVPlayers, TVPlayers2, TVStopWatch,goalT1,goalT2;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
-    private Button mButton,mButton2,bt_Save;
+    private Button mButton,mButton2,bt_Save,pauseButton;
     private List<String> team1,team2;
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
     private Context context;
     private FirebaseAuth mAuth;
     private boolean isActive = false;
+
+    private long timeLeftInMillis;
+    private boolean isPaused = false;
 
 
     DatabaseReference UserRef;
@@ -61,10 +64,31 @@ public class LiveRandom extends AppCompatActivity {
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         bt_Save = findViewById(R.id.bt_Save);
         isActive = true;
-
+        pauseButton = findViewById(R.id.pause);
+        pauseButton.setBackgroundResource(R.drawable.baseline_pause_24);
         setPlayerOnTeam();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount++;
+                // Mise à jour du TextView
+                goalT1.setText(Integer.toString(mCount));
+            }
+        });
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount2++;
+                // Mise à jour du TextView
+                goalT2.setText(Integer.toString(mCount2));
+            }
+        });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,28 +132,7 @@ public class LiveRandom extends AppCompatActivity {
             }
         });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount++;
-                // Mise à jour du TextView
-                goalT1.setText(Integer.toString(mCount));
-            }
-        });
-        mButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount2++;
-                // Mise à jour du TextView
-                goalT2.setText(Integer.toString(mCount2));
-            }
-        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         Bundle extras = getIntent().getExtras();
@@ -143,6 +146,8 @@ public class LiveRandom extends AppCompatActivity {
             int totalTime = ttimerHalf+ ttimerFirst+ttimerSecond;
             TVStopWatch.setText(String.valueOf(totalTime));
         }
+
+
 
         String timerString = TVStopWatch.getText().toString();
         if (!TextUtils.isEmpty(timerString)) {
@@ -158,12 +163,39 @@ public class LiveRandom extends AppCompatActivity {
         if (timer != null) {
             timer.cancel();
         }
+
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isPaused) {
+                    // Set isPaused to true and cancel the timer
+                    isPaused = true;
+                    if (timer != null) {
+                        timer.cancel();
+                        TVStopWatch.setText("00:00:00"); // Stop displaying the remaining time
+                    }
+                    pauseButton.setBackgroundResource(R.drawable.baseline_restart_alt_24);
+
+                    Toast.makeText(LiveRandom.this, "Pause", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Set isPaused to false and start the timer again
+                    isPaused = false;
+                    if (timer != null) {
+                        timer.start();
+                    }
+                    pauseButton.setBackgroundResource(R.drawable.baseline_pause_24);
+                    Toast.makeText(LiveRandom.this, "Restart", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
         // Start a new timer
         timer = new CountDownTimer(totalTime * 1000, 1000) {
             boolean notificationSent = false; // Initialize notificationSent to false
             @Override
             public void onTick(long millisUntilFinished) {
-                if (isActive) {
+                if (isActive  && !isPaused) {
                     int hours = (int) (millisUntilFinished / 3600000);
                     int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
                     int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
@@ -189,6 +221,7 @@ public class LiveRandom extends AppCompatActivity {
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     private void finishTimer() {
         TVStopWatch.setText("00:00:00");
