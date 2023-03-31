@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import Firebase.Login;
@@ -40,6 +42,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         newGameButton = findViewById(R.id.BT_New_Game);
         compo = findViewById(R.id.BT_Compo);
         drawerLayout = findViewById(R.id.drawer_layout);
+        LinearLayout layout_home = findViewById(R.id.layout_home);
         NavigationView navigationView = findViewById(R.id.nav_view);
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         View header = navigationView.getHeaderView(0);
@@ -75,6 +78,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     ranking.setVisibility(View.INVISIBLE);
                     compo.setEnabled(false);
                     compo.setVisibility(View.INVISIBLE);
+                    layout_home.setEnabled(false);
+                    layout_home.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
@@ -87,6 +92,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     compo.setVisibility(View.VISIBLE);
                     newGameButton.setVisibility(View.VISIBLE);
                     newGameButton.setEnabled(true);
+                    layout_home.setVisibility(View.VISIBLE);
+                    layout_home.setEnabled(true);
+
+
                 }
 
                 @Override

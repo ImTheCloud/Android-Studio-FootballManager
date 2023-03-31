@@ -20,19 +20,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        tools:context="Firebase.Login">
+        android:gravity="center">
 
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="328dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="20dp">
 
             <LinearLayout
-                android:layout_width="330dp"
+                android:layout_width="339dp"
                 android:layout_height="211dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/custom_edittext"

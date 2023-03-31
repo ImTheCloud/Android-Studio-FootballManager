@@ -14,7 +14,7 @@
         android:gravity="center"
         android:padding="0dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/football"
+        app:srcCompat="@drawable/home"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -45,7 +45,30 @@
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/BT_Compo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="40dp"
+                        android:src="@drawable/field2"
+                        android:text="Compo"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:tint="@color/white"
+                        app:backgroundTint="@color/black" />
+
+                </RelativeLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -62,93 +85,90 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/BT_Compo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/field2"
-            android:tint="@color/white"
-            android:text="Compo"
-            android:textSize="12sp"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/lavender" />
-
-    </RelativeLayout>
-
-
-
-
-
-
     <!--   //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-
-
-    <Button
-        android:id="@+id/BT_New_Game"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#004CAF50"
-        android:elevation="4dp"
+    <LinearLayout
+        android:id="@+id/layout_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#88000000"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="16dp"
-        android:text="New Game"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:translationZ="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintVertical_bias="0.736">
 
-    <Button
-        android:id="@+id/BT_History"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#004CAF50"
-        android:elevation="4dp"
-        android:onClick="goToHistory"
-        android:padding="16dp"
-        android:text="History"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:translationZ="4dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616" />
+        <Button
+            android:id="@+id/BT_New_Game"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:backgroundTint="#99000000"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="New Game"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:translationZ="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.563" />
 
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="30dp"></Space>
 
-    <Button
-        android:id="@+id/BT_Ranking"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#004CAF50"
-        android:elevation="4dp"
-        android:padding="16dp"
-        android:text="Ranking"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:translationZ="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        <Button
+            android:id="@+id/BT_History"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:backgroundTint="#99000000"
+            android:elevation="4dp"
+            android:onClick="goToHistory"
+            android:padding="16dp"
+            android:text="History"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:translationZ="4dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.676" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="30dp"></Space>
+
+        <Button
+            android:id="@+id/BT_Ranking"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:backgroundTint="#99000000"
+            android:elevation="4dp"
+            android:padding="16dp"
+            android:text="Ranking"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:translationZ="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.797" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
