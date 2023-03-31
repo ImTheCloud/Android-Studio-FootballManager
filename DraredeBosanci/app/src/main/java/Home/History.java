@@ -183,7 +183,7 @@ public class History extends AppCompatActivity {
                     String goalDisplayData  = "Scores : " + "\n" + scores;
                     String timeDisplayData  = "Time : " + "\n" + timeDataString;
                     String dateDisplayData  = "Date : " + "\n" + dates;
-                    String mailDisplayData  = "Mail : " + "\n" + mails;
+                    String mailDisplayData  = "Referee : " + "\n" + mails;
 
 
                     teamDisplay.setText(teamDisplayData);
