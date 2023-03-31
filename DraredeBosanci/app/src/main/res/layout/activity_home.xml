@@ -14,11 +14,10 @@
         android:gravity="center"
         android:padding="0dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/home"
+        app:srcCompat="@drawable/home3"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
@@ -63,7 +62,7 @@
         android:id="@+id/layout_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#88000000"
+        android:background="#0079DA09"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
@@ -72,13 +71,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.769">
+        app:layout_constraintVertical_bias="0.451">
 
         <Button
             android:id="@+id/BT_New_Game"
             android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:backgroundTint="#99515151"
+            android:layout_height="60dp"
+            android:backgroundTint="#00515151"
             android:elevation="4dp"
             android:padding="16dp"
             android:text="New Game"
@@ -100,8 +99,8 @@
         <Button
             android:id="@+id/BT_History"
             android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:backgroundTint="#99515151"
+            android:layout_height="60dp"
+            android:backgroundTint="#00515151"
             android:elevation="4dp"
             android:onClick="goToHistory"
             android:padding="16dp"
@@ -125,8 +124,8 @@
         <Button
             android:id="@+id/BT_Ranking"
             android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:backgroundTint="#99515151"
+            android:layout_height="60dp"
+            android:backgroundTint="#00515151"
             android:elevation="4dp"
             android:padding="16dp"
             android:text="Ranking"

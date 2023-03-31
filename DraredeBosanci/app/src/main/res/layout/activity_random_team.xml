@@ -88,7 +88,6 @@
         app:layout_constraintVertical_bias="0.792" />
 
 
-
     <LinearLayout
         android:id="@+id/linearLayoutBosanci1"
         android:layout_width="wrap_content"
@@ -99,10 +98,10 @@
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098">
+        app:layout_constraintVertical_bias="0.093">
 
         <Button
             android:id="@+id/playerDany"

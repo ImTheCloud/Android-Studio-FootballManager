@@ -12,7 +12,7 @@ public class MyMusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mediaPlayer = MediaPlayer.create(this, R.raw.relax);
+        mediaPlayer = MediaPlayer.create(this, R.raw.home);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
         return START_STICKY;

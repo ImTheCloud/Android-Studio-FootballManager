@@ -71,7 +71,7 @@
                     android:drawablePadding="8dp"
                     android:hint="Email"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/signup_password"
@@ -83,7 +83,7 @@
                     android:drawablePadding="8dp"
                     android:hint="Password"
                     android:padding="8dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/signup_button"
