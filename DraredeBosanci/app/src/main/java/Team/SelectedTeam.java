@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,8 +74,43 @@ public class SelectedTeam extends AppCompatActivity{
                 }
             });
         }
+        final boolean[] isFirstTime = {true};
+        etPlayers1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isFirstTime[0]) {
+                    Toast.makeText(getApplicationContext(), "Please add a comma before a space", Toast.LENGTH_SHORT).show();
+                    isFirstTime[0] = false;
+                }
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        final boolean[] isFirstTime2 = {true};
+        etPlayers2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isFirstTime2[0]) {
+                    Toast.makeText(getApplicationContext(), "Please add a comma before a space", Toast.LENGTH_SHORT).show();
+                    isFirstTime2[0] = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         InputFilter numberFilter = new InputFilter() {

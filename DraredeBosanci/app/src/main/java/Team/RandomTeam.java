@@ -3,8 +3,10 @@ package Team;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +51,38 @@ public class RandomTeam extends AppCompatActivity {
 
         };
 
+        for (Button button : buttons) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String player = button.getText().toString();
+                    String currentText = etPlayers.getText().toString();
+                    String newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                    etPlayers.setText(newText);
+                    disableButton(view);
+                }
+            });
+        }
 
+        final boolean[] isFirstTime = {true};
+
+        etPlayers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isFirstTime[0]) {
+                    Toast.makeText(getApplicationContext(), "Please add a comma before a space", Toast.LENGTH_SHORT).show();                    isFirstTime[0] = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Créer un InputFilter qui n'accepte que les nombres
         InputFilter numberFilter = new InputFilter() {
             @Override
@@ -69,21 +102,6 @@ public class RandomTeam extends AppCompatActivity {
         timerHalfTime.setFilters(new InputFilter[] { numberFilter });
         timerFirst.setFilters(new InputFilter[] { numberFilter });
         timerSecond.setFilters(new InputFilter[] { numberFilter });
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        for (Button button : buttons) {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String player = button.getText().toString();
-                    String currentText = etPlayers.getText().toString();
-                    String newText = currentText.isEmpty() ? player : currentText + ", " + player;
-                    etPlayers.setText(newText);
-                    disableButton(view);
-                }
-            });
-        }
 
     }
 
