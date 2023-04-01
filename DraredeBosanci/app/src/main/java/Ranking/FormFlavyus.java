@@ -1,4 +1,4 @@
-package Form;
+package Ranking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.draredebosanci.R;
 
-public class FormIosif extends AppCompatActivity {
+public class FormFlavyus extends AppCompatActivity {
 
     private EditText etWin;
     private EditText etTie;
@@ -25,16 +25,16 @@ public class FormIosif extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_iosif);
+        setContentView(R.layout.activity_form_flavyus);
 
-        etWin = findViewById(R.id.ETWinIosif);
-        etTie = findViewById(R.id.ETTieIosif);
-        etLose = findViewById(R.id.ETLoseIosif);
-        etYellowCard = findViewById(R.id.ETYellowCardIosif);
-        et5Goal = findViewById(R.id.ET5GoalIosif);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteIosif);
-        tvGameWrite = findViewById(R.id.TVGameWriteIosif);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteIosif);
+        etWin = findViewById(R.id.ETWinFlavyus);
+        etTie = findViewById(R.id.ETTieFlavyus);
+        etLose = findViewById(R.id.ETLoseFlavyus);
+        etYellowCard = findViewById(R.id.ETYellowCardFlavyus);
+        et5Goal = findViewById(R.id.ET5GoalFlavyus);
+        tvPointsWrite = findViewById(R.id.TVPointsWriteFlavyus);
+        tvGameWrite = findViewById(R.id.TVGameWriteFlavyus);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWriteFlavyus);
 
         etWin.addTextChangedListener(textWatcher);
         etTie.addTextChangedListener(textWatcher);
@@ -44,8 +44,8 @@ public class FormIosif extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int counter = prefs.getInt("counterIosif", 0);
-        EditText etGoal = findViewById(R.id.ETGoalIosif);
+        int counter = prefs.getInt("counterFlavyus", 0);
+        EditText etGoal = findViewById(R.id.ETGoalFlavyus);
         etGoal.setText(String.valueOf(counter));
     }
     // on create end

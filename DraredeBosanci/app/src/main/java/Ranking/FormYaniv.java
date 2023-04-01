@@ -1,4 +1,4 @@
-package Form;
+package Ranking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.draredebosanci.R;
 
-public class FormRuben extends AppCompatActivity {
+public class FormYaniv extends AppCompatActivity {
 
     private EditText etWin;
     private EditText etTie;
@@ -25,31 +25,34 @@ public class FormRuben extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_ruben);
+        setContentView(R.layout.activity_form_yaniv);
 
-        etWin = findViewById(R.id.ETWinRuben);
-        etTie = findViewById(R.id.ETTieRuben);
-        etLose = findViewById(R.id.ETLoseRuben);
-        etYellowCard = findViewById(R.id.ETYellowCardRuben);
-        et5Goal = findViewById(R.id.ET5GoalRuben);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteRuben);
-        tvGameWrite = findViewById(R.id.TVGameWriteRuben);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteRuben);
+        etWin = findViewById(R.id.ETWinYaniv);
+        etTie = findViewById(R.id.ETTieYaniv);
+        etLose = findViewById(R.id.ETLoseYaniv);
+        etYellowCard = findViewById(R.id.ETYellowCardYaniv);
+        et5Goal = findViewById(R.id.ET5GoalYaniv);
+        tvPointsWrite = findViewById(R.id.TVPointsWriteYaniv);
+        tvGameWrite = findViewById(R.id.TVGameWriteYaniv);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWriteYaniv);
 
         etWin.addTextChangedListener(textWatcher);
         etTie.addTextChangedListener(textWatcher);
         etLose.addTextChangedListener(textWatcher);
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int counter = prefs.getInt("counterRuben", 0);
-        EditText etGoal = findViewById(R.id.ETGoalRuben);
+        int counter = prefs.getInt("counterYaniv", 0);
+        EditText etGoal = findViewById(R.id.ETGoalYaniv);
         etGoal.setText(String.valueOf(counter));
+
     }
-    // on create end
+
+// on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

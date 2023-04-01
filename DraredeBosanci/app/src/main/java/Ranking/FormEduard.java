@@ -1,4 +1,4 @@
-package Form;
+package Ranking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.draredebosanci.R;
 
-public class FormFlavyus extends AppCompatActivity {
+public class FormEduard extends AppCompatActivity {
 
     private EditText etWin;
     private EditText etTie;
@@ -25,16 +25,16 @@ public class FormFlavyus extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_flavyus);
+        setContentView(R.layout.activity_form_eduard);
 
-        etWin = findViewById(R.id.ETWinFlavyus);
-        etTie = findViewById(R.id.ETTieFlavyus);
-        etLose = findViewById(R.id.ETLoseFlavyus);
-        etYellowCard = findViewById(R.id.ETYellowCardFlavyus);
-        et5Goal = findViewById(R.id.ET5GoalFlavyus);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteFlavyus);
-        tvGameWrite = findViewById(R.id.TVGameWriteFlavyus);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteFlavyus);
+        etWin = findViewById(R.id.ETWinEduard);
+        etTie = findViewById(R.id.ETTieEduard);
+        etLose = findViewById(R.id.ETLoseEduard);
+        etYellowCard = findViewById(R.id.ETYellowCardEduard);
+        et5Goal = findViewById(R.id.ET5GoalEduard);
+        tvPointsWrite = findViewById(R.id.TVPointsWriteEduard);
+        tvGameWrite = findViewById(R.id.TVGameWriteEduard);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWriteEduard);
 
         etWin.addTextChangedListener(textWatcher);
         etTie.addTextChangedListener(textWatcher);
@@ -44,12 +44,16 @@ public class FormFlavyus extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int counter = prefs.getInt("counterFlavyus", 0);
-        EditText etGoal = findViewById(R.id.ETGoalFlavyus);
+        int counter = prefs.getInt("counterEduard", 10);
+        EditText etGoal = findViewById(R.id.ETGoalEduard);
         etGoal.setText(String.valueOf(counter));
+
+
     }
-    // on create end
+// on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,6 +74,8 @@ public class FormFlavyus extends AppCompatActivity {
             tvPointsWrite.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
+
+
         }
 
         @Override

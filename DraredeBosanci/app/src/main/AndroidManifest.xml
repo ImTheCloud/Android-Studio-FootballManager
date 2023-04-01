@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/foot"
+        android:icon="@drawable/baseline_sports_soccer_24"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
@@ -71,44 +71,44 @@
             android:name="Compo.Compo442"
             android:exported="false" />
         <activity
-            android:name="Form.FormClaudiu"
+            android:name="Ranking.RankClaudiu"
             android:exported="false" />
         <activity
-            android:name="Form.FormIosif"
+            android:name="Ranking.FormIosif"
             android:exported="false" />
         <activity
-            android:name="Form.FormSimon"
+            android:name="Ranking.FormSimon"
             android:exported="false" />
         <activity
-            android:name="Form.FormDavid"
+            android:name="Ranking.FormDavid"
             android:exported="false" />
         <activity
-            android:name="Form.FormLucian"
+            android:name="Ranking.FormLucian"
             android:exported="false" />
         <activity
-            android:name="Form.FormDany"
+            android:name="Ranking.FormDany"
             android:exported="false" />
         <activity
-            android:name="Form.FormYaniv"
+            android:name="Ranking.FormYaniv"
             android:exported="false"
             android:label="@string/title_activity_form_yaniv" />
         <activity
-            android:name="Form.FormEduard"
+            android:name="Ranking.FormEduard"
             android:exported="false" />
         <activity
-            android:name="Form.FormRoberto"
+            android:name="Ranking.FormRoberto"
             android:exported="false" />
         <activity
-            android:name="Form.FormDenis"
+            android:name="Ranking.FormDenis"
             android:exported="false" />
         <activity
-            android:name="Form.FormFlavyus"
+            android:name="Ranking.FormFlavyus"
             android:exported="false" />
         <activity
-            android:name="Form.FormRuben"
+            android:name="Ranking.FormRuben"
             android:exported="false" />
         <activity
-            android:name="Form.Form"
+            android:name="Ranking.Ranking"
             android:exported="false" />
         <activity
             android:name="Live.LiveRandom"

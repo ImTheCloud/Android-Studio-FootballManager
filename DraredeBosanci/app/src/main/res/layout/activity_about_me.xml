@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="I am a young developer passionate about new technologies and computing.\n\nRecently, I developed an application for my personal use, which took around one and a half months to complete.\n\nThroughout the process, I gained valuable insights into software design, programming languages, and user experience.\n\nThis experience has fueled my passion for software development.\n"
+                    android:text="I am a young developer passionate about new technologies and computing.\n\nI developed an application for my personal use, which took around one and a half months to complete.\n\nThroughout the process, I gained valuable insights into software design, programming languages, and user experience.\n\nThis experience has fueled my passion for software development.\n"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"

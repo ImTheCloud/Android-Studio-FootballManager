@@ -1,9 +1,8 @@
 package Firebase;
 
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.google.android.gms.maps.model.LatLng;
-
 import java.util.List;
 
 public class Game {
@@ -16,7 +15,7 @@ public class Game {
     String date;
     List<String> team2,team1;
 
-    public Game(String goalTeam1,String goalTeam2) {
+    public Game(String goalTeam1, String goalTeam2) {
         this.goalTeam1 = goalTeam1;
         this.goalTeam2 = goalTeam2;
     }
@@ -40,7 +39,6 @@ public class Game {
     public Game(String date) {
         this.date=date;
     }
-
 
     public String getGoalTeam1() {
         return goalTeam1;

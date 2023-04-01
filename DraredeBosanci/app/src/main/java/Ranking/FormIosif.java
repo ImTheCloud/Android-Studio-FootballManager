@@ -1,4 +1,4 @@
-package Form;
+package Ranking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.draredebosanci.R;
 
-public class FormEduard extends AppCompatActivity {
+public class FormIosif extends AppCompatActivity {
 
     private EditText etWin;
     private EditText etTie;
@@ -25,16 +25,16 @@ public class FormEduard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_eduard);
+        setContentView(R.layout.activity_form_iosif);
 
-        etWin = findViewById(R.id.ETWinEduard);
-        etTie = findViewById(R.id.ETTieEduard);
-        etLose = findViewById(R.id.ETLoseEduard);
-        etYellowCard = findViewById(R.id.ETYellowCardEduard);
-        et5Goal = findViewById(R.id.ET5GoalEduard);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteEduard);
-        tvGameWrite = findViewById(R.id.TVGameWriteEduard);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteEduard);
+        etWin = findViewById(R.id.ETWinIosif);
+        etTie = findViewById(R.id.ETTieIosif);
+        etLose = findViewById(R.id.ETLoseIosif);
+        etYellowCard = findViewById(R.id.ETYellowCardIosif);
+        et5Goal = findViewById(R.id.ET5GoalIosif);
+        tvPointsWrite = findViewById(R.id.TVPointsWriteIosif);
+        tvGameWrite = findViewById(R.id.TVGameWriteIosif);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWriteIosif);
 
         etWin.addTextChangedListener(textWatcher);
         etTie.addTextChangedListener(textWatcher);
@@ -44,16 +44,12 @@ public class FormEduard extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int counter = prefs.getInt("counterEduard", 10);
-        EditText etGoal = findViewById(R.id.ETGoalEduard);
+        int counter = prefs.getInt("counterIosif", 0);
+        EditText etGoal = findViewById(R.id.ETGoalIosif);
         etGoal.setText(String.valueOf(counter));
-
-
     }
-// on create end
+    // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -74,8 +70,6 @@ public class FormEduard extends AppCompatActivity {
             tvPointsWrite.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
-
-
         }
 
         @Override
