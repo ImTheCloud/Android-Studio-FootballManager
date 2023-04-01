@@ -118,45 +118,43 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             String location = locationEditText.getText().toString();
             if (!location.isEmpty()) {
                 fetchTemperature(location);
-                Toast.makeText(NewGame.this, "New Meteo displayed", Toast.LENGTH_SHORT).show();
+
             } else {
-                Toast.makeText(NewGame.this, "Enter a place", Toast.LENGTH_SHORT).show();
-                fetchTemperature(location);
+                Toast.makeText(this, "Enter a location", Toast.LENGTH_SHORT).show();
             }
         });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
     private void fetchTemperature(String location) {
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=fb665f2037e41531ac80292d5a31dc2c";
-
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONObject main = response.getJSONObject("main");
-                            int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
-                            temperatureTextView.setText(temperature + "°C");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        JSONObject main = response.getJSONObject("main");
+                        int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
+                        temperatureTextView.setText(temperature + "°C");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Invalid location", Toast.LENGTH_SHORT).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(this, "Error fetching weather", Toast.LENGTH_SHORT).show();
                 }
         );
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
+
+
 
 
 

@@ -1,45 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group
         android:checkableBehavior="single">
-
-
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
             android:title="About Me"/>
-
         <item
             android:id="@+id/volume"
             android:icon="@drawable/volume_up"
             android:title="Volume up"/>
-
         <item
             android:id="@+id/nav_compo"
             android:icon="@drawable/field2"
             android:title="Compo"/>
-
-
     </group>
-    <item
-        android:title="">
 
+    <item android:title=""
+        >
         <menu>
             <item
                 android:id="@+id/nav_login"
                 android:icon="@drawable/ic_login"
-                android:title="Log in"/>
+                android:title="Log in"
+                android:orderInCategory="1"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_logout_"
-                android:title="Log out"/>
-
+                android:title="Log out"
+                android:orderInCategory="2"/>
         </menu>
-
     </item>
 
 </menu>

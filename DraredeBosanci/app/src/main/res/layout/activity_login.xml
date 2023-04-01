@@ -74,6 +74,7 @@
                     android:drawablePadding="8dp"
                     android:hint="Email"
                     android:padding="8dp"
+                    android:textSize="15sp"
                     android:textColor="@color/white" />
 
                 <EditText
@@ -85,6 +86,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:drawablePadding="8dp"
                     android:hint="Password"
+                    android:textSize="15sp"
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColor="@color/white" />

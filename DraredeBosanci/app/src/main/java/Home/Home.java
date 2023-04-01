@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             navEmail.setText("No one is connected"); // Afficher "Personne n'est connecté" dans le TextView
         } else {
             // Si l'utilisateur est connecté, afficher son nom dans le TextView
-            navEmail.setText("Connected as " + currentUser.getEmail());
+            navEmail.setText("Connected as :" +"\n"+ currentUser.getEmail());
         }
 
             setSupportActionBar(toolbar);
