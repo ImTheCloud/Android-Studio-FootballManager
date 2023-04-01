@@ -1,11 +1,13 @@
 package Firebase;
 
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class Form {
     EditText fame,win,lose,tie,bonus,yellow,rank;
+    Spinner position;
 
-    public Form(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank) {
+    public Form(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
         this.fame = etFame;
         this.win = etWin;
         this.lose = etLose;
@@ -13,6 +15,7 @@ public class Form {
         this.bonus = et5Goal;
         this.yellow = etYellowCard;
         this.rank = etRank;
+        this.position = position;
     }
 
     // Rename the getter methods to avoid conflicts with EditText's getText() method
@@ -42,5 +45,9 @@ public class Form {
 
     public String getRankText() {
         return rank.getText().toString();
+    }
+
+    public String getPosition() {
+        return position.getSelectedItem().toString();
     }
 }

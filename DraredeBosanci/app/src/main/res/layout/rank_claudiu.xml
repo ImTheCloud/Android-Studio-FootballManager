@@ -505,8 +505,8 @@
 
     <Button
         android:id="@+id/bt_Save"
-        android:layout_width="33dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
         android:background="@drawable/button_selector4"
         android:drawablePadding="10dp"
         android:elevation="2dp"
@@ -517,7 +517,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />

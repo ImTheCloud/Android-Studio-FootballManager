@@ -36,8 +36,6 @@ public class History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-
-
         teamDisplay = findViewById(R.id.Team);
         goalDisplay = findViewById(R.id.Goals);
         timeDisplay = findViewById(R.id.Time);
@@ -71,7 +69,8 @@ public class History extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                    database.getReference().setValue(null);
+                    database.getReference().child("Game").removeValue();
+
 
                     mailDisplay.setVisibility(View.INVISIBLE);
                     teamDisplay.setVisibility(View.INVISIBLE);

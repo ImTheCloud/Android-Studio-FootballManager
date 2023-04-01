@@ -2,6 +2,7 @@ package Ranking;
 
 import static Team.NewGame.date;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -25,8 +26,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import Firebase.Form;
 import Firebase.Game;
@@ -81,10 +86,40 @@ public class RankClaudiu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank);
+
+                Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
-                UserRef.push().setValue(data);
+                String uniqueId = UserRef.push().getKey(); // generate unique id
+                UserRef.removeValue();
+                UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankClaudiu.this, "Game save", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        database.getReference("Player").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot != null && snapshot.getValue() != null) {
+                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
+                    Map<String, Object> data = (Map<String, Object>) gameData.get("Claudiu");
+
+                    String dataa = "";
+
+                    for (Map.Entry<String, Object> entry : data.entrySet()) {
+                        Map<String, Object> Data = (Map<String, Object>) entry.getValue();
+                        String date = Data.get("data").toString();
+                        dataa += "Game : " +  date+ "\n";
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
