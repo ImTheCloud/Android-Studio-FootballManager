@@ -83,7 +83,7 @@ public class RankClaudiu extends AppCompatActivity {
 
                 Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
-                UserRef.push().child("fame").setValue(data.getFameText());
+                UserRef.push().setValue(data);
                 Toast.makeText(RankClaudiu.this, "Game save", Toast.LENGTH_SHORT).show();
 
             }

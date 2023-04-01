@@ -15,36 +15,32 @@ public class Form {
         this.rank = etRank;
     }
 
-    public EditText getFame() {
-        return fame;
-    }
-
-    public EditText getWin() {
-        return win;
-    }
-
-    public EditText getLose() {
-        return lose;
-    }
-
-    public EditText getTie() {
-        return tie;
-    }
-
-    public EditText getBonus() {
-        return bonus;
-    }
-
-    public EditText getYellow() {
-        return yellow;
-    }
-
-    public EditText getRank() {
-        return rank;
-    }
-
-    // Rename this getter method to avoid conflict with EditText's getText() method
+    // Rename the getter methods to avoid conflicts with EditText's getText() method
     public String getFameText() {
         return fame.getText().toString();
+    }
+
+    public String getWinText() {
+        return win.getText().toString();
+    }
+
+    public String getLoseText() {
+        return lose.getText().toString();
+    }
+
+    public String getTieText() {
+        return tie.getText().toString();
+    }
+
+    public String getBonusText() {
+        return bonus.getText().toString();
+    }
+
+    public String getYellowText() {
+        return yellow.getText().toString();
+    }
+
+    public String getRankText() {
+        return rank.getText().toString();
     }
 }
