@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,60 +63,56 @@ public class RankClaudiu extends AppCompatActivity {
 
         bt_Save = findViewById(R.id.bt_Save);
         context = this;
-        etFame = findViewById(R.id.ETFameClaudiu);
-        etWin = findViewById(R.id.ETWinClaudiu);
-        etTie = findViewById(R.id.ETTieClaudiu);
-        etLose = findViewById(R.id.ETLoseClaudiu);
-        etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
-        et5Goal = findViewById(R.id.ET5GoalClaudiu);
-        etRank = findViewById(R.id.ETRankClaudiu);
+
         apiResult = findViewById(R.id.apiResult);
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
         tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
         tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
 
-        // Ajouter les écouteurs d'événements de modification de texte pour chaque EditText
-        etWin.addTextChangedListener(textWatcher);
-        etTie.addTextChangedListener(textWatcher);
-        etLose.addTextChangedListener(textWatcher);
-        etYellowCard.addTextChangedListener(textWatcher);
-        et5Goal.addTextChangedListener(textWatcher);
+        String[] positions = getResources().getStringArray(R.array.positions);
+        List<String> positionList = Arrays.asList(positions);
 
-        bt_Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPositionSpinner.setAdapter(adapter);
 
-
-                Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
-                String uniqueId = UserRef.push().getKey(); // generate unique id
-                UserRef.removeValue();
-                UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankClaudiu.this, "Game save", Toast.LENGTH_SHORT).show();
+         etFame = findViewById(R.id.ETFameClaudiu);
+         etWin = findViewById(R.id.ETWinClaudiu);
+         etTie = findViewById(R.id.ETTieClaudiu);
+         etLose = findViewById(R.id.ETLoseClaudiu);
+         etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
+         et5Goal = findViewById(R.id.ET5GoalClaudiu);
+         etRank = findViewById(R.id.ETRankClaudiu);
 
 
-            }
-        });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
-
+        database.getReference("Player").child("Claudiu").child("-NS58Tkdzkl2U5eEasi6").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot != null && snapshot.getValue() != null) {
-                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
-                    Map<String, Object> data = (Map<String, Object>) gameData.get("Claudiu");
+                if (snapshot.exists()) {
+                    String fame = snapshot.child("fameText").getValue(String.class);
+                    String win = snapshot.child("winText").getValue(String.class);
+                    String tie = snapshot.child("tieText").getValue(String.class);
+                    String lose = snapshot.child("loseText").getValue(String.class);
+                    String yellowCard = snapshot.child("yellowText").getValue(String.class);
+                    String fiveGoal = snapshot.child("bonusText").getValue(String.class);
+                    String rank = snapshot.child("rankText").getValue(String.class);
+                    String position = snapshot.child("position").getValue(String.class);
+                    int positionIndex = positionList.indexOf(position);
 
-                    String dataa = "";
 
-                    for (Map.Entry<String, Object> entry : data.entrySet()) {
-                        Map<String, Object> Data = (Map<String, Object>) entry.getValue();
-                        String date = Data.get("data").toString();
-                        dataa += "Game : " +  date+ "\n";
-                    }
+
+                    playerPositionSpinner.setSelection(positionIndex);
+                    etFame.setText(fame);
+                    etWin.setText(win);
+                    etTie.setText(tie);
+                    etLose.setText(lose);
+                    etYellowCard.setText(yellowCard);
+                    et5Goal.setText(fiveGoal);
+                    etRank.setText(rank);
                 }
-
             }
 
             @Override
@@ -125,16 +122,27 @@ public class RankClaudiu extends AppCompatActivity {
         });
 
 
+        bt_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                String uniqueId = "-NS58Tkdzkl2U5eEasi6"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
+                UserRef.child(uniqueId).setValue(data); // set value with unique id
+                Toast.makeText(RankClaudiu.this, "Game saved", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        etWin.addTextChangedListener(textWatcher);
+        etTie.addTextChangedListener(textWatcher);
+        etLose.addTextChangedListener(textWatcher);
+        etYellowCard.addTextChangedListener(textWatcher);
+        et5Goal.addTextChangedListener(textWatcher);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         apiResult = findViewById(R.id.apiResult);
-
-        // Set up spinner adapter
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.positions, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerPositionSpinner.setAdapter(adapter);
 
         // Set up Volley RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
