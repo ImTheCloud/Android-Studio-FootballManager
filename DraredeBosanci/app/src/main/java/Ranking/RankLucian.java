@@ -301,9 +301,13 @@ public class RankLucian extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        goToLeft();
+                        Intent intent = new Intent(RankLucian.this, RankRoberto.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        goToRight();
+                        Intent intent = new Intent(RankLucian.this, RankDavid.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     }
                 }
@@ -311,14 +315,14 @@ public class RankLucian extends AppCompatActivity {
         }
         return super.onTouchEvent(event);
     }
-    public void goToLeft(){
+    public void goToLeft(View v){
         Intent intent = new Intent(RankLucian.this, RankRoberto.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
-    public void goToRight(){
+    public void goToRight(View v){
         Intent intent = new Intent(RankLucian.this, RankDavid.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

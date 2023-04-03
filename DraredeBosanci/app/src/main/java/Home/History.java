@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import Ranking.Rank;
+
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
     private String half,timeFirstHalf,timeSecondHalf,time;
@@ -203,9 +205,10 @@ public class History extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         Intent intent = new Intent(this, Home.class);
         startActivity(intent);
-        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
 

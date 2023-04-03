@@ -41,6 +41,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
+import Ranking.Rank;
 import Team.TeamRandom;
 import Team.TeamSelect;
 
@@ -207,7 +208,14 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(NewGame.this, Home.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
     public void goToRandomTeam(View v){
         startActivity(new Intent(NewGame.this, TeamRandom.class));
     }
