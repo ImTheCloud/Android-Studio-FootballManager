@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class RankClaudiu extends AppCompatActivity {
     private Context context;
     DatabaseReference UserRef;
     private Spinner playerPositionSpinner;
+    private LinearLayout linearBig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,11 @@ public class RankClaudiu extends AppCompatActivity {
 
         bt_Save = findViewById(R.id.bt_Save);
         context = this;
+
+        TextView loading = findViewById(R.id.loading);
+        loading.setVisibility(View.VISIBLE);
+        linearBig =  findViewById(R.id.linearBig);
+        linearBig.setVisibility(View.INVISIBLE);
 
         apiResult = findViewById(R.id.apiResult);
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
@@ -99,6 +106,8 @@ public class RankClaudiu extends AppCompatActivity {
         database.getReference("Player").child("Claudiu").child("-NS58Tkdzkl2U5eEasi6").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                linearBig.setVisibility(View.VISIBLE);
+                loading.setVisibility(View.GONE);
                 if (snapshot.exists()) {
                     String fame = snapshot.child("fameText").getValue(String.class);
                     String win = snapshot.child("winText").getValue(String.class);
@@ -110,8 +119,6 @@ public class RankClaudiu extends AppCompatActivity {
                     String position = snapshot.child("position").getValue(String.class);
                     int positionIndex = positionList.indexOf(position);
 
-
-
                     playerPositionSpinner.setSelection(positionIndex);
                     etFame.setText(fame);
                     etWin.setText(win);
@@ -120,6 +127,10 @@ public class RankClaudiu extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
+                }
+                else{
+                    loading.setVisibility(View.VISIBLE);
+                    loading.setText("Loading...");
                 }
             }
 
@@ -161,7 +172,7 @@ public class RankClaudiu extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                makeApiRequest(queue, apiUrl);
+              //  makeApiRequest(queue, apiUrl);
             }
 
             @Override
