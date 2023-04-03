@@ -55,6 +55,8 @@ public class RankRuben extends AppCompatActivity {
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
+        bt_Save.setVisibility(View.INVISIBLE);
+
 
         TextView loading = findViewById(R.id.loading);
         loading.setVisibility(View.VISIBLE);
@@ -124,8 +126,11 @@ public class RankRuben extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
+                    bt_Save.setVisibility(View.VISIBLE);
+
                 }
                 else{
+                    bt_Save.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.VISIBLE);
                 }
             }
@@ -144,7 +149,10 @@ public class RankRuben extends AppCompatActivity {
                 String uniqueId = "-dataForRuben"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Ruben");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankRuben.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RankRuben.this, "Player profile save", Toast.LENGTH_SHORT).show();linearBig.setVisibility(View.VISIBLE);
+                linearBig.setVisibility(View.VISIBLE);
+                loading.setVisibility(View.GONE);
+
             }
         });
 
@@ -263,6 +271,7 @@ public class RankRuben extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<String, String>();
                 headers.put("X-RapidAPI-Key", "2e8e0f243bmshb40a5716fd99fb3p16e3e1jsn6b6864f3d84e");
                 headers.put("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
+
                 return headers;
             }
         };

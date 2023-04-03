@@ -55,6 +55,7 @@ public class RankClaudiu extends AppCompatActivity {
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
+        bt_Save.setVisibility(View.INVISIBLE);
 
         TextView loading = findViewById(R.id.loading);
         loading.setVisibility(View.VISIBLE);
@@ -123,8 +124,12 @@ public class RankClaudiu extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
+                    bt_Save.setVisibility(View.VISIBLE);
+
                 }
                 else{
+                    bt_Save.setVisibility(View.VISIBLE);
+
                     loading.setVisibility(View.VISIBLE);
                 }
             }
@@ -144,6 +149,8 @@ public class RankClaudiu extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankClaudiu.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                linearBig.setVisibility(View.VISIBLE);
+                loading.setVisibility(View.GONE);
             }
         });
 

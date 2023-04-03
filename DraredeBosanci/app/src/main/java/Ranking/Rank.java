@@ -41,7 +41,7 @@ public class Rank extends AppCompatActivity {
         startActivity(new Intent(Rank.this, RankRoberto.class));
     }
     public void goToFormLucian(View v){
-        startActivity(new Intent(Rank.this, rankLucian.class));
+        startActivity(new Intent(Rank.this, RankLucian.class));
     }
     public void goToFormDavid(View v){
         startActivity(new Intent(Rank.this, RankDavid.class));

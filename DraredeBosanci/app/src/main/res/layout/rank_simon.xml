@@ -555,7 +555,7 @@
         android:id="@+id/TXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DANY"
+        android:text="SIMON"
         android:textColor="#ffffff"
         android:textSize="32sp"
         android:textStyle="bold"
