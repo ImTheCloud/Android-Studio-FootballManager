@@ -278,4 +278,23 @@ public class RankSimon extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
+    }
+
+    public void goToLeft(View v){
+        Intent intent = new Intent(RankSimon.this, RankDavid.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+
+    public void goToRight(View v){
+        Intent intent = new Intent(RankSimon.this, RankYaniv.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 }

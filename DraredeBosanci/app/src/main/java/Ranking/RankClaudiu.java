@@ -151,7 +151,6 @@ public class RankClaudiu extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankClaudiu.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankClaudiu.this, Rank.class));
             }
         });
 
@@ -277,4 +276,26 @@ public class RankClaudiu extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
+    }
+
+    public void goToLeft(View v){
+        Intent intent = new Intent(RankClaudiu.this, RankFlavyus.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
+
+    public void goToRight(View v){
+        Intent intent = new Intent(RankClaudiu.this, RankRuben.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+
+
 }

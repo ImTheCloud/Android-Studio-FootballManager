@@ -564,11 +564,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
+
     <Button
-        android:id="@+id/bt_Save"
-        android:layout_width="25dp"
-        android:layout_height="27dp"
-        android:background="@drawable/button_selector4"
+        android:id="@+id/bt_previous"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:onClick="goToLeft"
+        android:background="@drawable/baseline_arrow_back_24"
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:fontFamily="sans-serif-medium"
@@ -578,9 +580,47 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.979"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="98dp"
+        android:layout_height="46dp"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:background="@drawable/button_selector"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:text="Save"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bt_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/baseline_arrow_forward_24"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:onClick="goToRight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
