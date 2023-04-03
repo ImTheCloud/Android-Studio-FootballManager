@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.example.draredebosanci.R;
 
+import Home.Home;
+
 public class Rank extends AppCompatActivity {
 
 
@@ -22,7 +24,14 @@ public class Rank extends AppCompatActivity {
 /////// on create end
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Rank.this, Home.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
 
     public void goToFormDany(View v){
         startActivity(new Intent(Rank.this, RankDany.class));

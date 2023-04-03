@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,7 +50,8 @@ public class RankDavid extends AppCompatActivity {
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
     DatabaseReference UserRef;
-
+    private float x1, x2;
+    private static final int MIN_DISTANCE = 150;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -288,15 +290,35 @@ public class RankDavid extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > MIN_DISTANCE) {
+                    if (x2 > x1) {
+                        goToLeft();
+                    } else {
+                        goToRight();
 
-    public void goToLeft(View v){
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+    public void goToLeft(){
         Intent intent = new Intent(RankDavid.this, RankLucian.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
-    public void goToRight(View v){
+    public void goToRight(){
         Intent intent = new Intent(RankDavid.this, RankSimon.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
