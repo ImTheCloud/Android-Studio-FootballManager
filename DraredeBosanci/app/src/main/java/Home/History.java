@@ -3,9 +3,7 @@ package Home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +17,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import Team.NewGame;
 
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
@@ -34,7 +29,7 @@ public class History extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.history);
 
         teamDisplay = findViewById(R.id.Team);
         goalDisplay = findViewById(R.id.Goals);

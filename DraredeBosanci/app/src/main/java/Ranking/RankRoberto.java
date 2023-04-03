@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Random;
 import Firebase.Form;
 
-public class RankClaudiu extends AppCompatActivity {
+public class RankRoberto extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite,tvapiResult;
@@ -51,7 +51,7 @@ public class RankClaudiu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_claudiu);
+        setContentView(R.layout.rank_roberto);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -62,17 +62,17 @@ public class RankClaudiu extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
-        tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
+        tvPointsWrite = findViewById(R.id.TVPointsWrite);
+        tvGameWrite = findViewById(R.id.TVGameWrite);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
 
-        etFame = findViewById(R.id.ETFameClaudiu);
-        etWin = findViewById(R.id.ETWinClaudiu);
-        etTie = findViewById(R.id.ETTieClaudiu);
-        etLose = findViewById(R.id.ETLoseClaudiu);
-        etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
-        et5Goal = findViewById(R.id.ET5GoalClaudiu);
-        etRank = findViewById(R.id.ETRankClaudiu);
+        etFame = findViewById(R.id.ETFame);
+        etWin = findViewById(R.id.ETWin);
+        etTie = findViewById(R.id.ETTie);
+        etLose = findViewById(R.id.ETLose);
+        etYellowCard = findViewById(R.id.ETYellowCard);
+        et5Goal = findViewById(R.id.ET5Goal);
+        etRank = findViewById(R.id.ETRank);
 
         String[] positions = getResources().getStringArray(R.array.positions);
         List<String> positionList = Arrays.asList(positions);
@@ -99,9 +99,10 @@ public class RankClaudiu extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("Claudiu").child("-dataForClaudiu").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("Roberto").child("-dataForRoberto").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 if (snapshot.exists()) {
                     linearBig.setVisibility(View.VISIBLE);
                     loading.setVisibility(View.GONE);
@@ -140,10 +141,10 @@ public class RankClaudiu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-dataForClaudiu"; // use the same unique id
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
+                String uniqueId = "-dataForRoberto"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Roberto");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankClaudiu.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RankRoberto.this, "Player profile save", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,11 +1,7 @@
 package Ranking;
 
-import static Team.NewGame.date;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -19,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,7 +28,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,21 +37,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
-
 import Firebase.Form;
-import Firebase.Game;
-
 
 public class RankRuben extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
-    private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite,apiResult;
+    private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite,tvapiResult;
     private Button bt_Save;
-    private Context context;
-    DatabaseReference UserRef;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
+    DatabaseReference UserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,25 +54,17 @@ public class RankRuben extends AppCompatActivity {
         setContentView(R.layout.rank_ruben);
 
         bt_Save = findViewById(R.id.bt_Save);
-        context = this;
+        tvapiResult = findViewById(R.id.apiResult);
 
         TextView loading = findViewById(R.id.loading);
         loading.setVisibility(View.VISIBLE);
         linearBig =  findViewById(R.id.linearBig);
         linearBig.setVisibility(View.INVISIBLE);
 
-        apiResult = findViewById(R.id.apiResult);
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         tvPointsWrite = findViewById(R.id.TVPointsWrite);
         tvGameWrite = findViewById(R.id.TVGameWrite);
         tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
-
-        String[] positions = getResources().getStringArray(R.array.positions);
-        List<String> positionList = Arrays.asList(positions);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerPositionSpinner.setAdapter(adapter);
 
         etFame = findViewById(R.id.ETFame);
         etWin = findViewById(R.id.ETWin);
@@ -93,6 +74,14 @@ public class RankRuben extends AppCompatActivity {
         et5Goal = findViewById(R.id.ET5Goal);
         etRank = findViewById(R.id.ETRank);
 
+        String[] positions = getResources().getStringArray(R.array.positions);
+        List<String> positionList = Arrays.asList(positions);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPositionSpinner.setAdapter(adapter);
+
+        // Ecrire que des chiffres
         etWin.setInputType(InputType.TYPE_CLASS_NUMBER);
         etTie.setInputType(InputType.TYPE_CLASS_NUMBER);
         etLose.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -100,15 +89,23 @@ public class RankRuben extends AppCompatActivity {
         et5Goal.setInputType(InputType.TYPE_CLASS_NUMBER);
         etRank.setInputType(InputType.TYPE_CLASS_NUMBER);
 
+        // Ajout ecouteur de temps
+        etWin.addTextChangedListener(textWatcher);
+        etTie.addTextChangedListener(textWatcher);
+        etLose.addTextChangedListener(textWatcher);
+        etYellowCard.addTextChangedListener(textWatcher);
+        et5Goal.addTextChangedListener(textWatcher);
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("Ruben").child("-NS58Tkdzkl2U5eEasi6").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("Ruben").child("-dataForRuben").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                linearBig.setVisibility(View.VISIBLE);
-                loading.setVisibility(View.GONE);
+
                 if (snapshot.exists()) {
+                    linearBig.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
                     String fame = snapshot.child("fameText").getValue(String.class);
                     String win = snapshot.child("winText").getValue(String.class);
                     String tie = snapshot.child("tieText").getValue(String.class);
@@ -130,7 +127,6 @@ public class RankRuben extends AppCompatActivity {
                 }
                 else{
                     loading.setVisibility(View.VISIBLE);
-                    loading.setText("Loading...");
                 }
             }
 
@@ -145,21 +141,15 @@ public class RankRuben extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-NS58Tkdzkl2U5eEasi6"; // use the same unique id
+                String uniqueId = "-dataForRuben"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Ruben");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankRuben.this, "Game saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RankRuben.this, "Player profile save", Toast.LENGTH_SHORT).show();
             }
         });
 
-        etWin.addTextChangedListener(textWatcher);
-        etTie.addTextChangedListener(textWatcher);
-        etLose.addTextChangedListener(textWatcher);
-        etYellowCard.addTextChangedListener(textWatcher);
-        et5Goal.addTextChangedListener(textWatcher);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        apiResult = findViewById(R.id.apiResult);
 
         // Set up Volley RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -177,7 +167,6 @@ public class RankRuben extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Do nothing
             }
         });
 
@@ -193,7 +182,6 @@ public class RankRuben extends AppCompatActivity {
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // Ne rien faire avant la modification du texte
         }
 
         @Override
@@ -210,12 +198,10 @@ public class RankRuben extends AppCompatActivity {
             tvPointsWrite.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
-
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            // Ne rien faire après la modification du texte
         }
     };
 
@@ -231,8 +217,8 @@ public class RankRuben extends AppCompatActivity {
         }
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void makeApiRequest(RequestQueue queue, String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -257,9 +243,9 @@ public class RankRuben extends AppCompatActivity {
                             // Display result
                             if (playerNames.size() > 0) {
                                 String randomPlayerName = getRandomPlayer(playerNames);
-                                apiResult.setText(String.format("Like : %s", randomPlayerName));
+                                tvapiResult.setText(String.format("Like : %s", randomPlayerName));
                             } else {
-                                apiResult.setText(String.format("No players found with position: %s", playerPositionSpinner.getSelectedItem().toString()));
+                                tvapiResult.setText(String.format("No players found with position: %s", playerPositionSpinner.getSelectedItem().toString()));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -268,7 +254,7 @@ public class RankRuben extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                apiResult.setText("That didn't work!");
+                tvapiResult.setText("That didn't work!");
             }
         }) {
             // Add headers to the request

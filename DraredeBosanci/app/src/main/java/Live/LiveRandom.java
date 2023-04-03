@@ -50,7 +50,7 @@ public class LiveRandom extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_random);
+        setContentView(R.layout.live_random);
         context = this;
         notificationHelper = new NotificationHelper(this);
         goalT1 = findViewById(R.id.TXT_ScoreTeam1);

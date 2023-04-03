@@ -23,7 +23,7 @@ public class Rank extends AppCompatActivity {
 
 
     public void goToFormDany(View v){
-        startActivity(new Intent(Rank.this, FormDany.class));
+        startActivity(new Intent(Rank.this, RankDany.class));
     }
     public void goToFormRuben(View v){
         startActivity(new Intent(Rank.this, RankRuben.class));
@@ -32,31 +32,31 @@ public class Rank extends AppCompatActivity {
         startActivity(new Intent(Rank.this, RankClaudiu.class));
     }
     public void goToFormFlavyus(View v){
-        startActivity(new Intent(Rank.this, FormFlavyus.class));
+        startActivity(new Intent(Rank.this, RankFlavyus.class));
     }
     public void goToFormDenis(View v){
-        startActivity(new Intent(Rank.this, FormDenis.class));
+        startActivity(new Intent(Rank.this, RankDenis.class));
     }
     public void goToFormRoberto(View v){
-        startActivity(new Intent(Rank.this, FormRoberto.class));
+        startActivity(new Intent(Rank.this, RankRoberto.class));
     }
     public void goToFormLucian(View v){
-        startActivity(new Intent(Rank.this, FormLucian.class));
+        startActivity(new Intent(Rank.this, rankLucian.class));
     }
     public void goToFormDavid(View v){
-        startActivity(new Intent(Rank.this, FormDavid.class));
+        startActivity(new Intent(Rank.this, RankDavid.class));
     }
     public void goToFormYaniv(View v){
-        startActivity(new Intent(Rank.this, FormYaniv.class));
+        startActivity(new Intent(Rank.this, RankYaniv.class));
     }
     public void goToFormIosif(View v){
-        startActivity(new Intent(Rank.this, FormIosif.class));
+        startActivity(new Intent(Rank.this, RankIosif.class));
     }
     public void goToFormSimon(View v){
-        startActivity(new Intent(Rank.this, FormSimon.class));
+        startActivity(new Intent(Rank.this, RankSimon.class));
     }
     public void goToFormEduard(View v){
-        startActivity(new Intent(Rank.this, FormEduard.class));
+        startActivity(new Intent(Rank.this, RankEduard.class));
     }
 
 

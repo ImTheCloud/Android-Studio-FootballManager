@@ -20,9 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
 
         <service android:name="Music.MyMusicService" />
 
@@ -62,7 +59,7 @@
             android:name="Notif.Notification"
             android:exported="false" />
         <activity
-            android:name="Compo.CompoChoice"
+            android:name="Compo.Compo"
             android:exported="false" />
         <activity
             android:name="Compo.Compo433"
@@ -74,35 +71,35 @@
             android:name="Ranking.RankClaudiu"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormIosif"
+            android:name="Ranking.RankIosif"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormSimon"
+            android:name="Ranking.RankSimon"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormDavid"
+            android:name="Ranking.RankDavid"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormLucian"
+            android:name="Ranking.rankLucian"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormDany"
+            android:name="Ranking.RankDany"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormYaniv"
+            android:name="Ranking.RankYaniv"
             android:exported="false"
             android:label="@string/title_activity_form_yaniv" />
         <activity
-            android:name="Ranking.FormEduard"
+            android:name="Ranking.RankEduard"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormRoberto"
+            android:name="Ranking.RankRoberto"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormDenis"
+            android:name="Ranking.RankDenis"
             android:exported="false" />
         <activity
-            android:name="Ranking.FormFlavyus"
+            android:name="Ranking.RankFlavyus"
             android:exported="false" />
         <activity
             android:name="Ranking.RankRuben"

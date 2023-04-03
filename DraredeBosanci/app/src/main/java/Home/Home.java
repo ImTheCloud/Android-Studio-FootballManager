@@ -15,7 +15,7 @@ import android.widget.Toast;
 import Firebase.Login;
 import Music.MyMusicService;
 import com.example.draredebosanci.R;
-import Compo.CompoChoice;
+import Compo.Compo;
 import Ranking.Rank;
 import Team.NewGame;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home);
 
         oldGame = findViewById(R.id.BT_History);
         ranking = findViewById(R.id.BT_Ranking);
@@ -203,7 +203,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
                     break;
                 case R.id.nav_compo:
-                    startActivity(new Intent(Home.this, CompoChoice.class));
+                    startActivity(new Intent(Home.this, Compo.class));
 
                     break;
 

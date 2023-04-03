@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login);
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-                View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot, null);
+                View dialogView = getLayoutInflater().inflate(R.layout.login_dialog_forgot, null);
                 EditText emailBox = dialogView.findViewById(R.id.emailBox);
                 builder.setView(dialogView);
                 AlertDialog dialog = builder.create();

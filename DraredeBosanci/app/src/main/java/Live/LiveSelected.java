@@ -51,7 +51,7 @@ public class LiveSelected extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_selected);
+        setContentView(R.layout.live_selected);
         context = this;
 
         notificationHelper = new NotificationHelper(this);

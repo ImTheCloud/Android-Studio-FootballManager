@@ -8,15 +8,12 @@ import android.view.View;
 
 import com.example.draredebosanci.R;
 
-import Compo.Compo433;
-import Compo.Compo442;
-
-public class CompoChoice extends AppCompatActivity {
+public class Compo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compo_choice);
+        setContentView(R.layout.compo);
 
     }
 

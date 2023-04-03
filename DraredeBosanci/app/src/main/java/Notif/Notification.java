@@ -16,7 +16,7 @@ public class Notification extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_random);
+        setContentView(R.layout.live_random);
 
         notificationHelper = new NotificationHelper(this);
     }
