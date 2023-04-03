@@ -126,7 +126,7 @@ public class RankClaudiu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etLose,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-NS58Tkdzkl2U5eEasi6"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
