@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import Home.Home;
+import Team.TeamRandom;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -91,41 +93,53 @@ public class LiveRandom extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                String email = currentUser.getEmail();
-                Game user_mail = new Game(email);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
-                UserRef.push().setValue(user_mail);
+                FirebaseAuth mAuthMail = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuthMail.getCurrentUser();
+                String userEmail = null;
+                if (user != null) {
+                    userEmail = user.getEmail();
+                }
 
-                Game dateUser = new Game(date);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
-                UserRef.push().setValue(dateUser);
+                if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
+                    Toast.makeText(getApplicationContext(), "Only the referee can save game", Toast.LENGTH_SHORT).show();
+                }else{
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    String email = currentUser.getEmail();
+                    Game user_mail = new Game(email);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
+                    UserRef.push().setValue(user_mail);
 
-                Game map = new Game(userLocation);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-                UserRef.push().setValue(map);
+                    Game dateUser = new Game(date);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
+                    UserRef.push().setValue(dateUser);
 
-                String timerF = timerFirst.getText().toString();
-                String timerHF = timerHalfTime.getText().toString();
-                String timerS = timerSecond.getText().toString();
-                Game timeTotal = new Game(timerF,timerHF,timerS);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-                UserRef.push().setValue(timeTotal);
+                    Game map = new Game(userLocation);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
+                    UserRef.push().setValue(map);
 
-                Game teams = new Game(team1,team2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
-                UserRef.push().setValue(teams);
+                    String timerF = timerFirst.getText().toString();
+                    String timerHF = timerHalfTime.getText().toString();
+                    String timerS = timerSecond.getText().toString();
+                    Game timeTotal = new Game(timerF,timerHF,timerS);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
+                    UserRef.push().setValue(timeTotal);
 
-                String goalTeam1 = goalT1.getText().toString();
-                String goalTeam2 = goalT2.getText().toString();
-                Game goals = new Game(goalTeam1, goalTeam2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
-                UserRef.push().setValue(goals);
-                finishTimer();
-                finish();
+                    Game teams = new Game(team1,team2);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
+                    UserRef.push().setValue(teams);
 
-                Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LiveRandom.this, History.class));
+                    String goalTeam1 = goalT1.getText().toString();
+                    String goalTeam2 = goalT2.getText().toString();
+                    Game goals = new Game(goalTeam1, goalTeam2);
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
+                    UserRef.push().setValue(goals);
+                    finishTimer();
+                    finish();
+                    Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(LiveRandom.this, History.class));
+
+                }
+
             }
         });
 

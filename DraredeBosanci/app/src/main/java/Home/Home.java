@@ -117,23 +117,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 userEmail = user.getEmail();
             }
 
-        if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
-            newGameButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), "Only the referee can create game", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }else{
-                newGameButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(Home.this, NewGame.class));
-
-                    }
-                });
-            }
-
             if (userEmail != null) {
                 ranking.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -142,11 +125,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                     }
                 });
-            } else {
-                ranking.setOnClickListener(new View.OnClickListener() {
+                newGameButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), "Connect First", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Home.this, NewGame.class));
+
+                    }
+                });
+            } else {
+                ranking.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                newGameButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
             }

@@ -73,6 +73,17 @@ public class LiveSelected extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth = FirebaseAuth.getInstance();
+                FirebaseAuth mAuthMail = FirebaseAuth.getInstance();
+                mAuthMail = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuthMail.getCurrentUser();
+                String userEmail = null;
+                if (user != null) {
+                    userEmail = user.getEmail();
+                }
+
+                if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
+                    Toast.makeText(getApplicationContext(), "Only the referee can save game", Toast.LENGTH_SHORT).show();
+                }else{
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 String email = currentUser.getEmail();
                 Game user_mail = new Game(email);
@@ -109,6 +120,7 @@ public class LiveSelected extends AppCompatActivity {
 
                 Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LiveSelected.this, History.class));
+                }
             }
         });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
