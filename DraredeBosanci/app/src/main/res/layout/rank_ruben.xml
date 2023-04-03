@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Ranking.RankClaudiu">
+    tools:context="Ranking.RankRuben">
 
 
     <ImageView
@@ -55,7 +55,7 @@
             tools:layout_editor_absoluteY="71dp">
 
             <TextView
-                android:id="@+id/TVFameClaudiu"
+                android:id="@+id/TVFame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/fame"
@@ -65,7 +65,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/ETFameClaudiu"
+                android:id="@+id/ETFame"
                 android:layout_width="251dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -99,7 +99,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVGameClaudiu"
+                    android:id="@+id/TVGame"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/game"
@@ -116,7 +116,7 @@
 
 
                 <TextView
-                    android:id="@+id/TVGameWriteClaudiu"
+                    android:id="@+id/TVGameWrite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -141,7 +141,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVPointsClaudiu"
+                    android:id="@+id/TVPoints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/point"
@@ -158,7 +158,7 @@
 
 
                 <TextView
-                    android:id="@+id/TVPointsWriteClaudiu"
+                    android:id="@+id/TVPointsWrite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -192,7 +192,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVRankClaudiu"
+                    android:id="@+id/TVRank"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/podium"
@@ -207,7 +207,7 @@
                     app:layout_constraintVertical_bias="0.81" />
 
                 <EditText
-                    android:id="@+id/ETRankClaudiu"
+                    android:id="@+id/ETRank"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="172dp"
@@ -234,7 +234,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVWinClaudiu"
+                    android:id="@+id/TVWin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/win"
@@ -249,7 +249,7 @@
                     app:layout_constraintVertical_bias="0.286" />
 
                 <EditText
-                    android:id="@+id/ETWinClaudiu"
+                    android:id="@+id/ETWin"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="180dp"
@@ -285,7 +285,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVLoseClaudiu"
+                    android:id="@+id/TVLose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/lose"
@@ -301,7 +301,7 @@
 
 
                 <EditText
-                    android:id="@+id/ETLoseClaudiu"
+                    android:id="@+id/ETLose"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="200dp"
@@ -328,7 +328,7 @@
 
 
                 <TextView
-                    android:id="@+id/TVTieClaudiu"
+                    android:id="@+id/TVTie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/tie"
@@ -343,7 +343,7 @@
                     app:layout_constraintVertical_bias="0.43" />
 
                 <EditText
-                    android:id="@+id/ETTieClaudiu"
+                    android:id="@+id/ETTie"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="180dp"
@@ -379,7 +379,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVBonus5GoalClaudiu"
+                    android:id="@+id/TVBonus5Goal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/foot"
@@ -393,7 +393,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/ET5GoalClaudiu"
+                    android:id="@+id/ET5Goal"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="104dp"
@@ -419,7 +419,7 @@
                 tools:layout_editor_absoluteY="71dp">
 
                 <TextView
-                    android:id="@+id/TVYellowCardClaudiu"
+                    android:id="@+id/TVYellowCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/yellow"
@@ -435,7 +435,7 @@
 
 
                 <EditText
-                    android:id="@+id/ETYellowCardClaudiu"
+                    android:id="@+id/ETYellowCard"
                     android:layout_width="31dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="116dp"
@@ -463,7 +463,7 @@
 
 
             <TextView
-                android:id="@+id/TVWinRateClaudiu"
+                android:id="@+id/TVWinRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/winrate"
@@ -479,7 +479,7 @@
                 app:layout_constraintVertical_bias="0.661" />
 
             <TextView
-                android:id="@+id/TVWinRateWriteClaudiu"
+                android:id="@+id/TVWinRateWrite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -539,10 +539,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/TXT_"
+        android:id="@+id/TXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CLAUDIU"
+        android:text="RUBEN"
         android:textColor="#ffffff"
         android:textSize="32sp"
         android:textStyle="bold"
