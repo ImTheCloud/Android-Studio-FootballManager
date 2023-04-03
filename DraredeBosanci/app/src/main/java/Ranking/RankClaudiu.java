@@ -26,6 +26,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.draredebosanci.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -101,6 +103,19 @@ public class RankClaudiu extends AppCompatActivity {
         etLose.addTextChangedListener(textWatcher);
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
+
+        // Vérifiez si l'utilisateur est connecté avec l'adresse e-mail spécifiée
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.getEmail().equals("claudiuppdc7@yahoo.com")) {
+        } else {
+            etFame.setEnabled(false);
+            etWin.setEnabled(false);
+            etTie.setEnabled(false);
+            etLose.setEnabled(false);
+            etYellowCard.setEnabled(false);
+            et5Goal.setEnabled(false);
+            etRank.setEnabled(false);
+        }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
