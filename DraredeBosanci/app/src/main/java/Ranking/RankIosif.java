@@ -2,6 +2,8 @@ package Ranking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -31,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOError;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -150,8 +154,8 @@ public class RankIosif extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Iosif");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankIosif.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                linearBig.setVisibility(View.VISIBLE);
-                loading.setVisibility(View.GONE);
+                startActivity(new Intent(RankIosif.this, Rank.class));
+
             }
         });
 

@@ -80,7 +80,7 @@
             android:name="Ranking.RankDavid"
             android:exported="false" />
         <activity
-            android:name="Ranking.rankLucian"
+            android:name="Ranking.RankLucian"
             android:exported="false" />
         <activity
             android:name="Ranking.RankDany"

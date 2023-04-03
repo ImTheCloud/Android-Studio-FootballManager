@@ -2,6 +2,8 @@ package Ranking;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -149,8 +151,7 @@ public class RankClaudiu extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankClaudiu.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                linearBig.setVisibility(View.VISIBLE);
-                loading.setVisibility(View.GONE);
+                startActivity(new Intent(RankClaudiu.this, Rank.class));
             }
         });
 
