@@ -102,7 +102,8 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Gérer l'erreur
+                Toast.makeText( NewGame.this, "Error retrieving game data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -239,6 +239,8 @@ public class LiveRandom extends AppCompatActivity {
         textView.setText(sb.toString());
     }
     public void goToHouse(View v){
+        finishTimer();
+        finish();
         startActivity(new Intent(LiveRandom.this, Home.class));
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.View;
@@ -34,7 +35,12 @@ public class RandomTeam extends AppCompatActivity {
         timerFirst = findViewById(R.id.ID_Timer_first);
         timerSecond = findViewById(R.id.ID_Timer_second);
 
-         etPlayers = findViewById(R.id.ID_Player);
+        timerHalfTime.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timerSecond.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+
+        etPlayers = findViewById(R.id.ID_Player);
          Button[] buttons = new Button[] {
                 findViewById(R.id.playerClaudiu),
                 findViewById(R.id.playerRuben),
@@ -64,44 +70,6 @@ public class RandomTeam extends AppCompatActivity {
             });
         }
 
-        final boolean[] isFirstTime = {true};
-
-        etPlayers.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isFirstTime[0]) {
-                    Toast.makeText(getApplicationContext(), "Please add a comma before a space", Toast.LENGTH_SHORT).show();                    isFirstTime[0] = false;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Créer un InputFilter qui n'accepte que les nombres
-        InputFilter numberFilter = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-                for (int i = start; i < end; i++) {
-                    if (!Character.isDigit(source.charAt(i))) {
-                        // Afficher un toast si l'utilisateur entre autre chose qu'un nombre
-                        Toast.makeText(getApplicationContext(), "Only number", Toast.LENGTH_SHORT).show();
-                        return "";
-                    }
-                }
-                return null;
-            }
-        };
-
-// Attacher le InputFilter aux champs de texte
-        timerHalfTime.setFilters(new InputFilter[] { numberFilter });
-        timerFirst.setFilters(new InputFilter[] { numberFilter });
-        timerSecond.setFilters(new InputFilter[] { numberFilter });
 
     }
 

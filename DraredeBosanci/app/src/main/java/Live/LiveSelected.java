@@ -265,6 +265,8 @@ public class LiveSelected extends AppCompatActivity {
         }
     }
     public void goToHouse(View v){
+        finishTimer();
+        finish();
         startActivity(new Intent(LiveSelected.this, Home.class));
     }
 }

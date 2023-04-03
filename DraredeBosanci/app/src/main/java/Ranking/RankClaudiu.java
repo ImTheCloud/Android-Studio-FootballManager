@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -85,6 +86,13 @@ public class RankClaudiu extends AppCompatActivity {
          et5Goal = findViewById(R.id.ET5GoalClaudiu);
          etRank = findViewById(R.id.ETRankClaudiu);
 
+        etWin.setInputType(InputType.TYPE_CLASS_NUMBER);
+        etTie.setInputType(InputType.TYPE_CLASS_NUMBER);
+        etLose.setInputType(InputType.TYPE_CLASS_NUMBER);
+        etYellowCard.setInputType(InputType.TYPE_CLASS_NUMBER);
+        et5Goal.setInputType(InputType.TYPE_CLASS_NUMBER);
+        etRank.setInputType(InputType.TYPE_CLASS_NUMBER);
+
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -125,13 +133,11 @@ public class RankClaudiu extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-NS58Tkdzkl2U5eEasi6"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankClaudiu.this, "Game saved", Toast.LENGTH_SHORT).show();
-
             }
         });
 
