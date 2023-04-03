@@ -170,7 +170,6 @@ public class RankEduard extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Eduard");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankEduard.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankEduard.this, Rank.class));
 
             }
         });

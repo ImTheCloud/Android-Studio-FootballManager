@@ -167,7 +167,6 @@ public class RankSimon extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Simon");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankSimon.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankSimon.this, Rank.class));
 
             }
         });

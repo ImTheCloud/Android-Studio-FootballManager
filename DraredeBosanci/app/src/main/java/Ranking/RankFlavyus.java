@@ -169,7 +169,6 @@ public class RankFlavyus extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Flavyus");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankFlavyus.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankFlavyus.this, Rank.class));
 
             }
         });

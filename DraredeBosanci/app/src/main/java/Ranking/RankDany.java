@@ -169,7 +169,6 @@ public class RankDany extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Dany");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankDany.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankDany.this, Rank.class));
 
             }
         });

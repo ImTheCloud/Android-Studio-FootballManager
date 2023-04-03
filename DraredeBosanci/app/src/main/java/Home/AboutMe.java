@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import com.example.draredebosanci.R;
 
-public class Contact extends AppCompatActivity {
+public class AboutMe extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_me);
+        setContentView(R.layout.nav_about_me);
 
     }
 }

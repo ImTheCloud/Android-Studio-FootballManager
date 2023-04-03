@@ -181,7 +181,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 break;
             case R.id.nav_about:
-                startActivity(new Intent(Home.this, Contact.class));
+                startActivity(new Intent(Home.this, AboutMe.class));
                 break;
 
             case R.id.nav_logout:
@@ -202,6 +202,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_compo:
                 startActivity(new Intent(Home.this, Compo.class));
+
+                break;
+            case R.id.nav_help:
+                startActivity(new Intent(Home.this, Help.class));
 
                 break;
 

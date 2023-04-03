@@ -44,6 +44,9 @@
             android:name="Firebase.Register"
             android:exported="false" />
         <activity
+            android:name="Home.Help"
+            android:exported="false" />
+        <activity
             android:name="Firebase.Login"
             android:exported="false" />
         <activity
@@ -117,7 +120,7 @@
             android:name="Team.TeamRandom"
             android:exported="false" />
         <activity
-            android:name="Home.Contact"
+            android:name="Home.AboutMe"
             android:exported="false" />
     </application>
 

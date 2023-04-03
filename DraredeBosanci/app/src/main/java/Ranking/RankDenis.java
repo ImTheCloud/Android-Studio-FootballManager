@@ -169,7 +169,6 @@ public class RankDenis extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Denis");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankDenis.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankDenis.this, Rank.class));
 
             }
         });

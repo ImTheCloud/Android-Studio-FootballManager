@@ -168,7 +168,6 @@ public class RankYaniv extends AppCompatActivity {
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Yaniv");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankYaniv.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RankYaniv.this, Rank.class));
 
             }
         });
