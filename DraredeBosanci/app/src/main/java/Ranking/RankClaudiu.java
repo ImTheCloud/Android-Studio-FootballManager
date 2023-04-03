@@ -85,13 +85,13 @@ public class RankClaudiu extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         playerPositionSpinner.setAdapter(adapter);
 
-         etFame = findViewById(R.id.ETFameClaudiu);
-         etWin = findViewById(R.id.ETWinClaudiu);
-         etTie = findViewById(R.id.ETTieClaudiu);
-         etLose = findViewById(R.id.ETLoseClaudiu);
-         etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
-         et5Goal = findViewById(R.id.ET5GoalClaudiu);
-         etRank = findViewById(R.id.ETRankClaudiu);
+        etFame = findViewById(R.id.ETFameClaudiu);
+        etWin = findViewById(R.id.ETWinClaudiu);
+        etTie = findViewById(R.id.ETTieClaudiu);
+        etLose = findViewById(R.id.ETLoseClaudiu);
+        etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
+        et5Goal = findViewById(R.id.ET5GoalClaudiu);
+        etRank = findViewById(R.id.ETRankClaudiu);
 
         etWin.setInputType(InputType.TYPE_CLASS_NUMBER);
         etTie.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -172,7 +172,7 @@ public class RankClaudiu extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //  makeApiRequest(queue, apiUrl);
+                //  makeApiRequest(queue, apiUrl);
             }
 
             @Override
@@ -186,10 +186,10 @@ public class RankClaudiu extends AppCompatActivity {
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-private String getRandomPlayer(List<String> players) {
-    int randomIndex = new Random().nextInt(players.size());
-    return players.get(randomIndex);
-}
+    private String getRandomPlayer(List<String> players) {
+        int randomIndex = new Random().nextInt(players.size());
+        return players.get(randomIndex);
+    }
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -232,7 +232,7 @@ private String getRandomPlayer(List<String> players) {
     }
 
 
- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void makeApiRequest(RequestQueue queue, String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
