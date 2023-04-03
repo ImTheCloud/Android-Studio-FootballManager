@@ -50,10 +50,10 @@
             android:name="Live.LiveSelected"
             android:exported="false" />
         <activity
-            android:name="Team.SelectedTeam"
+            android:name="Team.TeamSelect"
             android:exported="false" />
         <activity
-            android:name="Team.NewGame"
+            android:name="Home.NewGame"
             android:exported="false" />
         <activity
             android:name="Notif.Notification"
@@ -114,7 +114,7 @@
             android:name="Home.History"
             android:exported="false" />
         <activity
-            android:name="Team.RandomTeam"
+            android:name="Team.TeamRandom"
             android:exported="false" />
         <activity
             android:name="Home.Contact"

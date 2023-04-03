@@ -1,9 +1,9 @@
 package Live;
-import static Team.RandomTeam.timerFirst;
-import static Team.RandomTeam.timerHalfTime;
-import static Team.RandomTeam.timerSecond;
-import static Team.NewGame.date;
-import static Team.NewGame.userLocation;
+import static Team.TeamRandom.timerFirst;
+import static Team.TeamRandom.timerHalfTime;
+import static Team.TeamRandom.timerSecond;
+import static Home.NewGame.date;
+import static Home.NewGame.userLocation;
 
 import android.app.NotificationManager;
 import android.content.Context;

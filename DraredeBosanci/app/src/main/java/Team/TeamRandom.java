@@ -14,7 +14,7 @@ import com.example.draredebosanci.R;
 import Home.Home;
 import Live.LiveRandom;
 
-public class RandomTeam extends AppCompatActivity {
+public class TeamRandom extends AppCompatActivity {
 
     private EditText etPlayers;
 
@@ -23,7 +23,7 @@ public class RandomTeam extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.random_team);
+        setContentView(R.layout.team_random);
 
 
         timerHalfTime = findViewById(R.id.ID_Timer_halftime);
@@ -77,7 +77,7 @@ public class RandomTeam extends AppCompatActivity {
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(RandomTeam.this, Home.class));
+        startActivity(new Intent(TeamRandom.this, Home.class));
     }
 
     public void goToLive(View v) {
@@ -98,7 +98,7 @@ public class RandomTeam extends AppCompatActivity {
             return;
         }
 
-        Intent i = new Intent(RandomTeam.this, LiveRandom.class);
+        Intent i = new Intent(TeamRandom.this, LiveRandom.class);
         i.putExtra("Players", etPlayers.getText().toString());
         i.putExtra("timerFirst", timerFirstString);
         i.putExtra("timerHalf", timerHalfTimeString);

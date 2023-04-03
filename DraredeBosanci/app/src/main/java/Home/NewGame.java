@@ -1,4 +1,4 @@
-package Team;
+package Home;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
+import Team.TeamRandom;
+import Team.TeamSelect;
+
 public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private EditText locationEditText;
@@ -54,7 +57,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_game);
+        setContentView(R.layout.h_new_game);
 
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
@@ -206,10 +209,10 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
 
 
     public void goToRandomTeam(View v){
-        startActivity(new Intent(NewGame.this, RandomTeam.class));
+        startActivity(new Intent(NewGame.this, TeamRandom.class));
     }
     public void goToSelectedTeam(View v){
-        startActivity(new Intent(NewGame.this, SelectedTeam.class));
+        startActivity(new Intent(NewGame.this, TeamSelect.class));
     }
 
 }

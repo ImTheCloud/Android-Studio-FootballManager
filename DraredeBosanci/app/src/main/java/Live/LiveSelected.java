@@ -1,9 +1,9 @@
 package Live;
-import static Team.SelectedTeam.ttimerFirst;
-import static Team.SelectedTeam.ttimerHalfTime;
-import static Team.SelectedTeam.ttimerSecond;
-import static Team.NewGame.date;
-import static Team.NewGame.userLocation;
+import static Team.TeamSelect.ttimerFirst;
+import static Team.TeamSelect.ttimerHalfTime;
+import static Team.TeamSelect.ttimerSecond;
+import static Home.NewGame.date;
+import static Home.NewGame.userLocation;
 
 import android.app.NotificationManager;
 import android.content.Context;

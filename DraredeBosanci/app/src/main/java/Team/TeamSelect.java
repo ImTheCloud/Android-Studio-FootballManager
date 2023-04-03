@@ -15,7 +15,7 @@ import com.example.draredebosanci.R;
 import Home.Home;
 import Live.LiveSelected;
 
-public class SelectedTeam extends AppCompatActivity{
+public class TeamSelect extends AppCompatActivity{
     private EditText etPlayers1,etPlayers2;
     public static EditText  ttimerFirst,ttimerHalfTime,ttimerSecond;
 
@@ -23,7 +23,7 @@ public class SelectedTeam extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selected_team);
+        setContentView(R.layout.team_select);
 
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
@@ -92,7 +92,7 @@ public class SelectedTeam extends AppCompatActivity{
     }
 
     public void goToHouse(View v){
-        startActivity(new Intent(SelectedTeam.this, Home.class));
+        startActivity(new Intent(TeamSelect.this, Home.class));
     }
     public void goToLiveSelected(View v){
 
@@ -114,7 +114,7 @@ public class SelectedTeam extends AppCompatActivity{
 
 
 
-        Intent i = new Intent(SelectedTeam.this, LiveSelected.class);
+        Intent i = new Intent(TeamSelect.this, LiveSelected.class);
 
         String players = etPlayers1.getText().toString();
         i.putExtra("players_data", players);
