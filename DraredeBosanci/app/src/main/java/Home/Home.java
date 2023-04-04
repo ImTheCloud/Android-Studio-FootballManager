@@ -60,7 +60,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE
                 || (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
             imageView.setImageResource(R.drawable.football_tablette);
-            history.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
         }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
