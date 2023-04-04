@@ -18,11 +18,14 @@ public class Compo433 extends AppCompatActivity {
 
     }
 
-    public void goTo442(View v){
-        startActivity(new Intent(Compo433.this, Compo442.class));
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Compo433.this, Compo.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
-    public void goTo433(View v){
-        startActivity(new Intent(Compo433.this, Compo433.class));
-    }
 }

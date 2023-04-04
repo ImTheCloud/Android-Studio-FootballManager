@@ -292,5 +292,7 @@ public class LiveSelected extends AppCompatActivity {
         finishTimer();
         finish();
         startActivity(new Intent(LiveSelected.this, Home.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 }

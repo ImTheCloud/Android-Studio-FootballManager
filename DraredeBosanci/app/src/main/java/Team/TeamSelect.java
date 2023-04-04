@@ -100,6 +100,8 @@ public class TeamSelect extends AppCompatActivity{
     }
     public void goToHouse(View v){
         startActivity(new Intent(TeamSelect.this, Home.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
     public void goToLiveSelected(View v){
 
@@ -134,5 +136,6 @@ public class TeamSelect extends AppCompatActivity{
 
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 }

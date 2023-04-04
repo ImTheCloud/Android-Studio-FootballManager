@@ -267,6 +267,8 @@ public class LiveRandom extends AppCompatActivity {
         finishTimer();
         finish();
         startActivity(new Intent(LiveRandom.this, Home.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
 }

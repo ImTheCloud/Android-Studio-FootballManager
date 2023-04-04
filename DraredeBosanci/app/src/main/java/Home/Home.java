@@ -182,6 +182,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             case R.id.nav_about:
                 startActivity(new Intent(Home.this, AboutMe.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
                 break;
 
             case R.id.nav_logout:
@@ -203,14 +205,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                     startActivity(new Intent(Home.this, Login.class));
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
                 }
                 break;
             case R.id.nav_compo:
                 startActivity(new Intent(Home.this, Compo.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
 
                 break;
             case R.id.nav_help:
                 startActivity(new Intent(Home.this, Help.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
 
                 break;
 
@@ -221,6 +228,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     public void goToNewGame(View v){
         startActivity(new Intent(Home.this, NewGame.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
 

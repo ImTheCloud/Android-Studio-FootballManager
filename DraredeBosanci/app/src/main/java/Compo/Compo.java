@@ -19,9 +19,13 @@ public class Compo extends AppCompatActivity {
 
     public void goTo442(View v){
         startActivity(new Intent(this, Compo442.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
     public void goTo433(View v){
         startActivity(new Intent(this, Compo433.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 }

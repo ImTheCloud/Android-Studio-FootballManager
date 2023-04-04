@@ -89,6 +89,8 @@ public class TeamRandom extends AppCompatActivity {
 
     public void goToHouse(View v){
         startActivity(new Intent(TeamRandom.this, Home.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
     public void goToLive(View v) {
