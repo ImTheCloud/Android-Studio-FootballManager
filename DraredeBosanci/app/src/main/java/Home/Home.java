@@ -225,7 +225,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         newGameButton.setEnabled(false);
         return true;
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Home.this, Home.class);
+        startActivity(intent);
 
+    }
     public void goToNewGame(View v){
         startActivity(new Intent(Home.this, NewGame.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
