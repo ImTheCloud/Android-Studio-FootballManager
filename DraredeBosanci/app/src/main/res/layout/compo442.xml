@@ -28,7 +28,6 @@
         android:hint="PLAYER"
         android:textColor="#FFFFFF"
         android:textColorHint="#BDBDBD"
-
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
