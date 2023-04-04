@@ -187,7 +187,7 @@ public class RankDavid extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //  makeApiRequest(queue, apiUrl);
+                  makeApiRequest(queue, apiUrl);
             }
 
             @Override
