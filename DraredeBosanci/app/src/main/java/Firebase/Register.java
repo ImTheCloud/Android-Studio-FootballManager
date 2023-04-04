@@ -54,8 +54,9 @@ public class Register extends AppCompatActivity {
                                             Toast.makeText(Register.this,"User registered successfully, please verify your email",Toast.LENGTH_SHORT).show();
                                             signupEmail.setText("");
                                             signupPassword.setText("");
-                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                                             startActivity(new Intent(Register.this, Login.class));
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         }else
                                         {
                                             Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -74,7 +75,8 @@ public class Register extends AppCompatActivity {
     }
 
     public void goToLogin(View view) {
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
         startActivity(new Intent(Register.this, Login.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }
