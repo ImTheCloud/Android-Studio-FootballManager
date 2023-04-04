@@ -5,10 +5,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +34,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     FloatingActionButton compo;
     private Button newGameButton,history,ranking;
     private FirebaseAuth mAuth;
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         View header = navigationView.getHeaderView(0);
         TextView navEmail = (TextView) header.findViewById(R.id.navEmail);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // format tablette
+        imageView = findViewById(R.id.imageView);
+
+        Configuration configuration = getResources().getConfiguration();
+        if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE
+                || (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            imageView.setImageResource(R.drawable.football_tablette);
+            history.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+        }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         mAuth = FirebaseAuth.getInstance();
