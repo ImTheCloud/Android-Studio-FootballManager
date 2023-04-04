@@ -137,6 +137,7 @@ public class LiveRandom extends AppCompatActivity {
                     finish();
                     Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LiveRandom.this, History.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
                 }
 
@@ -226,6 +227,16 @@ public class LiveRandom extends AppCompatActivity {
         timer = null;
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(LiveRandom.this, TeamRandom.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     @Override

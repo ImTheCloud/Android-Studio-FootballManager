@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.draredebosanci.R;
-
+import Home.NewGame;
 import Home.Home;
 import Live.LiveSelected;
 
@@ -90,7 +90,14 @@ public class TeamSelect extends AppCompatActivity{
         button.setEnabled(false);
         button.setAlpha(0.5f);
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(TeamSelect.this, NewGame.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
     public void goToHouse(View v){
         startActivity(new Intent(TeamSelect.this, Home.class));
     }
@@ -126,5 +133,6 @@ public class TeamSelect extends AppCompatActivity{
         i.putExtra("timerSecond", ttimerSecond.getText().toString());
 
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }

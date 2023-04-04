@@ -13,6 +13,8 @@ import com.example.draredebosanci.R;
 
 import Home.Home;
 import Live.LiveRandom;
+import Home.NewGame;
+import Ranking.RankClaudiu;
 
 public class TeamRandom extends AppCompatActivity {
 
@@ -76,6 +78,15 @@ public class TeamRandom extends AppCompatActivity {
         button.setAlpha(0.5f);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(TeamRandom.this, NewGame.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+
     public void goToHouse(View v){
         startActivity(new Intent(TeamRandom.this, Home.class));
     }
@@ -104,6 +115,7 @@ public class TeamRandom extends AppCompatActivity {
         i.putExtra("timerHalf", timerHalfTimeString);
         i.putExtra("timerSecond", timerSecondString);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 

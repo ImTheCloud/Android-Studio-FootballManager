@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import Home.Home;
+import Team.TeamSelect;
 
 public class LiveSelected extends AppCompatActivity {
     private TextView TVPlayers1, TVPlayers2, TVStopWatch,goalT1,goalT2;
@@ -120,6 +121,8 @@ public class LiveSelected extends AppCompatActivity {
 
                 Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LiveSelected.this, History.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
                 }
             }
         });
@@ -275,6 +278,15 @@ public class LiveSelected extends AppCompatActivity {
             // Update notificationSent flag to true
             notificationSent = true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(LiveSelected.this, TeamSelect.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
     public void goToHouse(View v){
         finishTimer();

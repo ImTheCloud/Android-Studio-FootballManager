@@ -42,6 +42,7 @@ import java.util.Calendar;
 import java.util.Map;
 
 import Ranking.Rank;
+import Ranking.RankClaudiu;
 import Team.TeamRandom;
 import Team.TeamSelect;
 
@@ -208,6 +209,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         }
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -215,12 +217,17 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         Intent intent = new Intent(NewGame.this, Home.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
     public void goToRandomTeam(View v){
         startActivity(new Intent(NewGame.this, TeamRandom.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
     public void goToSelectedTeam(View v){
         startActivity(new Intent(NewGame.this, TeamSelect.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
 }
