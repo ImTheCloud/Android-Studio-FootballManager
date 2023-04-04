@@ -8,10 +8,7 @@
             android:id="@+id/volume"
             android:icon="@drawable/volume_up"
             android:title="Volume up"/>
-        <item
-            android:id="@+id/nav_compo"
-            android:icon="@drawable/field2"
-            android:title="Compo"/>
+
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info"
@@ -20,6 +17,10 @@
             android:id="@+id/nav_help"
             android:icon="@drawable/baseline_help_24"
             android:title="Help"/>
+        <item
+            android:id="@+id/nav_compo"
+            android:icon="@drawable/field2"
+            android:title="Compo"/>
 
 
     </group>
