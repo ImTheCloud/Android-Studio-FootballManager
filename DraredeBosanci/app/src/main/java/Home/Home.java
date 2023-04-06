@@ -249,10 +249,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        Intent intent = new Intent(Home.this, Home.class);
-        startActivity(intent);
+        finishAffinity(); // Utiliser finishAffinity() au lieu de finish() pour fermer toutes les activités de l'application
+        System.exit(0); // Utiliser System.exit(0) pour quitter l'application complètement
     }
+
+
 
     public void goToNewGame(View v) {
         startActivity(new Intent(Home.this, NewGame.class));
