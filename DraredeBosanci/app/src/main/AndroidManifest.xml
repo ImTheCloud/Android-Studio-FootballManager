@@ -51,13 +51,16 @@
             android:exported="false" />
         <activity
             android:name="Live.LiveSelected"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Team.TeamSelect"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Home.NewGame"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Notif.Notification"
             android:exported="false" />
@@ -114,13 +117,15 @@
             android:exported="false" />
         <activity
             android:name="Live.LiveRandom"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Home.History"
             android:exported="false" />
         <activity
             android:name="Team.TeamRandom"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Home.AboutMe"
             android:exported="false" />

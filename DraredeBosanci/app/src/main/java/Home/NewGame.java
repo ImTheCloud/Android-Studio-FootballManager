@@ -90,12 +90,12 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                         String latitude = userLocationData.get("latitude").toString();
                         String longitude = userLocationData.get("longitude").toString();
 
-                        // Ajouter un marqueur à la carte pour cette localisation
-                        LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                        mMap.addMarker(new MarkerOptions()
-                                .position(location)
-                                .title("Game played here")
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
+//                        // Ajouter un marqueur à la carte pour cette localisation
+//                        LatLng location = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+//                        mMap.addMarker(new MarkerOptions()
+//                                .position(location)
+//                                .title("Game played here")
+//                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker)));
                     }
                 }
             }

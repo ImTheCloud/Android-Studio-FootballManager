@@ -253,10 +253,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(Home.this, Home.class);
-        startActivity(intent);
-
+        System.exit(0); // Ajout de cette ligne pour quitter complètement l'application
     }
+
     public void goToNewGame(View v) {
         startActivity(new Intent(Home.this, NewGame.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
