@@ -87,6 +87,7 @@ New Game :\n\
 -The temperature can be displayed according to the name of the city indicated\n\
 -You can choose between 2 random teams and 2 predefined teams.\n\
 -You must always add at least 2 players to start a match.\n\
+-Make sure to choose the team before selecting a player if you do it in the predefined teams.\n\
 -When completing the teams, always add a comma between each player.\n\
 -You must always complete the time fields, you can set it to '0' if you want.\n\
 -Press the soccer ball icon to add a goal.\n"
