@@ -164,20 +164,25 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
 
+        // Placer la caméra à la latitude et longitude spécifiées
+        LatLng newLocation = new LatLng(50.827346, 4.296998);
+        mMap.addMarker(new MarkerOptions()
+                .position(newLocation)
+                .title("Here we play"))
+                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15f));
 
-
-        // Check if we have permission to access the user's location.
+        // Vérifier si nous avons la permission d'accéder à la localisation de l'utilisateur
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission from the user to access their location.
+            // Demander la permission à l'utilisateur d'accéder à sa localisation
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         } else {
-            // If we have permission, get the user's last known location and move the camera there.
+            // Si nous avons la permission, obtenir la dernière localisation connue de l'utilisateur et déplacer la caméra à cet endroit
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
-                    userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions()
                             .position(userLocation)
                             .title("User location"));
@@ -186,13 +191,14 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             });
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // If the user grants permission, get the user's last known location and move the camera there.
+                // Si l'utilisateur accorde la permission, obtenir la dernière localisation connue de l'utilisateur et déplacer la caméra à cet endroit
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
@@ -208,6 +214,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     }
+
 
 
     @Override
