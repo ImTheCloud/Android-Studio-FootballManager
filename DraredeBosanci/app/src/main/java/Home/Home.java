@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -20,12 +22,15 @@ import Firebase.Login;
 import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.Compo;
+import Notif.NotificationHelper;
 import Ranking.Rank;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +41,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FirebaseAuth mAuth;
     private ImageView imageView;
 
+    private NotificationHelper notificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         View header = navigationView.getHeaderView(0);
         TextView navEmail = (TextView) header.findViewById(R.id.navEmail);
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // format tablette
@@ -250,11 +257,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         startActivity(intent);
 
     }
-    public void goToNewGame(View v){
+    public void goToNewGame(View v) {
         startActivity(new Intent(Home.this, NewGame.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
+        NotificationHelper notificationHelper = new NotificationHelper(this);
+        NotificationCompat.Builder builder = notificationHelper.createNotification("It's time to go play soccer :)");
+        builder.setSmallIcon(R.drawable.baseline_sports_soccer_24);
+        NotificationManager manager = notificationHelper.getManager();
+        manager.notify(1, builder.build());
     }
+
 
 
 }
