@@ -12,6 +12,8 @@ import android.widget.Space;
 
 import com.example.draredebosanci.R;
 
+import Home.Home;
+
 public class Compo extends AppCompatActivity {
     private ImageView imageView;
     private Space space;
@@ -46,4 +48,5 @@ public class Compo extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
     }
+
 }

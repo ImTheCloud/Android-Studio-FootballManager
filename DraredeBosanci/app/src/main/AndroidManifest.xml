@@ -66,10 +66,12 @@
             android:exported="false" />
         <activity
             android:name="Compo.Compo433"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Compo.Compo442"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="Ranking.RankClaudiu"
             android:exported="false" />

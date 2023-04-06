@@ -261,11 +261,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         startActivity(new Intent(Home.this, NewGame.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-        NotificationHelper notificationHelper = new NotificationHelper(this);
-        NotificationCompat.Builder builder = notificationHelper.createNotification("It's time to go play soccer :)");
-        builder.setSmallIcon(R.drawable.baseline_sports_soccer_24);
-        NotificationManager manager = notificationHelper.getManager();
-        manager.notify(1, builder.build());
+//        NotificationHelper notificationHelper = new NotificationHelper(this);
+//        NotificationCompat.Builder builder = notificationHelper.createNotification("It's time to go play soccer :)");
+//        builder.setSmallIcon(R.drawable.baseline_sports_soccer_24);
+//        NotificationManager manager = notificationHelper.getManager();
+//        manager.notify(1, builder.build());
     }
 
 
