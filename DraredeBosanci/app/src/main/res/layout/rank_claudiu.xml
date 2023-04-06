@@ -568,9 +568,9 @@
             <TextView
                 android:id="@+id/apiResult"
                 android:layout_width="0dp"
-                android:layout_height="44dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="*"
+                android:text=""
                 android:textColor="#ffffff"
                 android:textSize="10sp"
                 android:textStyle="bold" />

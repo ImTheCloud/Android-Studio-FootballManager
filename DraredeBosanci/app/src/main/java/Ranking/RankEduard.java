@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
@@ -167,12 +168,15 @@ public class RankEduard extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                    Toast.makeText(RankEduard.this, "Only the referee can save the profil", Toast.LENGTH_SHORT).show();
+                } else {
                 Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForEduard"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Eduard");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankEduard.this, "Player profile save", Toast.LENGTH_SHORT).show();
-
+                }
             }
         });
 
