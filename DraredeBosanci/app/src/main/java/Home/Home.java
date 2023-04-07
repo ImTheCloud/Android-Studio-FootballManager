@@ -5,15 +5,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +19,7 @@ import Firebase.Login;
 import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.Compo;
-import Notif.NotificationHelper;
+
 import Ranking.Rank;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +27,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

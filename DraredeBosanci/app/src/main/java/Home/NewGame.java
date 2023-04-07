@@ -3,7 +3,6 @@ package Home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -33,16 +31,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
-
-import Ranking.Rank;
-import Ranking.RankClaudiu;
 import Team.TeamRandom;
 import Team.TeamSelect;
 
@@ -164,25 +157,20 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
+        mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
 
-        // Placer la caméra à la latitude et longitude spécifiées
-        LatLng newLocation = new LatLng(50.827346, 4.296998);
-        mMap.addMarker(new MarkerOptions()
-                .position(newLocation)
-                .title("Here we play"))
-                .setIcon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15f));
 
-        // Vérifier si nous avons la permission d'accéder à la localisation de l'utilisateur
+
+        // Check if we have permission to access the user's location.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Demander la permission à l'utilisateur d'accéder à sa localisation
+            // Request permission from the user to access their location.
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         } else {
-            // Si nous avons la permission, obtenir la dernière localisation connue de l'utilisateur et déplacer la caméra à cet endroit
+            // If we have permission, get the user's last known location and move the camera there.
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
-                    LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions()
                             .position(userLocation)
                             .title("User location"));
@@ -191,14 +179,13 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             });
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Si l'utilisateur accorde la permission, obtenir la dernière localisation connue de l'utilisateur et déplacer la caméra à cet endroit
+                // If the user grants permission, get the user's last known location and move the camera there.
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
@@ -214,7 +201,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     }
-
 
 
     @Override
