@@ -95,7 +95,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText( NewGame.this, "Error retrieving game data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -140,7 +139,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                 },
                 error -> {
                     error.printStackTrace();
-                    Toast.makeText(this, "Error fetching weather", Toast.LENGTH_SHORT).show();
                 }
         );
 
@@ -157,10 +155,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
-
-
 
         // Check if we have permission to access the user's location.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -177,8 +172,16 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                 }
             });
+
+            // Add a marker with a custom icon at the specified coordinates
+            LatLng markerLocation = new LatLng(50.827346, 4.296998);
+            mMap.addMarker(new MarkerOptions()
+                    .position(markerLocation)
+                    .title("Our field")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker))); // Set the custom icon here
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
