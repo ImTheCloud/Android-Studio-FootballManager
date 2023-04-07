@@ -182,14 +182,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         switch (item.getItemId()) {
             case R.id.volume:
                 if (isSoundEnabled) {
-                    // Désactiver le son
                     isSoundEnabled = false;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
                     startService(intent);
                     item.setIcon(R.drawable.volume_off);
                     item.setTitle("Volume off");
                 } else {
-                    // Réactiver le son
                     isSoundEnabled = true;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
                     stopService(intent);
@@ -200,16 +198,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_about:
                 startActivity(new Intent(Home.this, AboutMe.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
                 break;
-
             case R.id.nav_logout:
-
                 if (userEmail != null) {
                     mAuth.signOut();
                     startActivity(new Intent(Home.this, Login.class));
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
                 }else{
                     Toast.makeText(getApplicationContext(), "Already disconnected", Toast.LENGTH_SHORT).show();
                 }
@@ -217,25 +211,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_login:
                 if (userEmail != null) {
                     Toast.makeText(getApplicationContext(), "Already connected", Toast.LENGTH_SHORT).show();
-
                 }else{
-
                     startActivity(new Intent(Home.this, Login.class));
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
                 }
                 break;
             case R.id.nav_compo:
                 startActivity(new Intent(Home.this, Compo.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-
                 break;
             case R.id.nav_help:
                 startActivity(new Intent(Home.this, Help.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-
                 break;
 
         }

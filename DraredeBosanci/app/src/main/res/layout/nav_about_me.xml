@@ -46,7 +46,7 @@
 
 
                 <TextView
-                    android:id="@+id/loginText"
+                    android:id="@+id/ABOUTTEXT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="About me"
@@ -56,6 +56,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="I am a young developer passionate about new technologies and computing.\n\nI developed an application for my personal use, which took around one and a half months to complete.\n\nThroughout the process, I gained valuable insights into software design, programming languages, and user experience.\n\nThis experience has fueled my passion for software development.\n"
@@ -110,6 +111,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.956" />
+
+                <Button
+                    android:id="@+id/fr"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_selector"
+                    android:text="FR"/>
 
             </LinearLayout>
             </ScrollView>
