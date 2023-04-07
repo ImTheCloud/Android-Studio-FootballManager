@@ -1,5 +1,6 @@
 package Home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,22 +67,41 @@ public class History extends AppCompatActivity {
             deleteAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                    database.getReference().child("Game").removeValue();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                    builder.setTitle("Confirmation")
+                            .setMessage("Are you sure you want to delete the entire history ?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Code de suppression de l'historique
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                                    database.getReference().child("Game").removeValue();
 
+                                    // Code pour cacher les éléments d'affichage
+                                    mailDisplay.setVisibility(View.INVISIBLE);
+                                    teamDisplay.setVisibility(View.INVISIBLE);
+                                    goalDisplay.setVisibility(View.INVISIBLE);
+                                    timeDisplay.setVisibility(View.INVISIBLE);
+                                    dateDisplay.setVisibility(View.INVISIBLE);
+                                    deleteAll.setEnabled(false);
 
-                    mailDisplay.setVisibility(View.INVISIBLE);
-                    teamDisplay.setVisibility(View.INVISIBLE);
-                    goalDisplay.setVisibility(View.INVISIBLE);
-                    timeDisplay.setVisibility(View.INVISIBLE);
-                    dateDisplay.setVisibility(View.INVISIBLE);
-
-
-                    loadingText.setVisibility(View.VISIBLE);
-                    loadingText.setText("No game played");
-                    Toast.makeText(History.this, "All games have been deleted ", Toast.LENGTH_SHORT).show();
+                                    // Code pour afficher le texte de chargement
+                                    loadingText.setVisibility(View.VISIBLE);
+                                    loadingText.setText("No game played");
+                                    Toast.makeText(History.this, "All games have been deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create()
+                            .show();
                 }
             });
+
         }
 
 
@@ -192,6 +213,8 @@ public class History extends AppCompatActivity {
                 }else{
                     loadingText.setVisibility(View.VISIBLE);
                     loadingText.setText("No game played");
+                    deleteAll.setEnabled(false);
+
                 }
             }
 
