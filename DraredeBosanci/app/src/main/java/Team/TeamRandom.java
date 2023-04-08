@@ -51,6 +51,12 @@ public class TeamRandom extends AppCompatActivity {
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
+                 findViewById(R.id.playerKami),
+                 findViewById(R.id.playerMarius),
+                 findViewById(R.id.playerAlex),
+                 findViewById(R.id.playerTimote),
+                 findViewById(R.id.playerBogdan),
+                 findViewById(R.id.playerVasi),
 
         };
 
@@ -60,7 +66,7 @@ public class TeamRandom extends AppCompatActivity {
                 public void onClick(View view) {
                     String player = button.getText().toString();
                     String currentText = etPlayers.getText().toString();
-                    String newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                    String newText = currentText.isEmpty() ? player : currentText + "," + player;
                     etPlayers.setText(newText);
                     disableButton(view);
                 }

@@ -187,6 +187,9 @@ public class History extends AppCompatActivity {
                     for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
                         Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
                         String mail = ddateMail.get("data").toString();
+                        if (mail.equals("claudiuppdc7@yahoo.com")) {
+                            mail = "Claudiu";
+                        }
                         mails += "Game " + gameNumber + " : " +  mail+"\n";
                         gameNumber++; // incrementer le compteur
                     }
@@ -200,7 +203,7 @@ public class History extends AppCompatActivity {
                     String goalDisplayData  = "Scores : " + "\n" + scores;
                     String timeDisplayData  = "Time : " + "\n" + timeDataString;
                     String dateDisplayData  = "Date : " + "\n" + dates;
-                    String mailDisplayData  = "Referee : " + "\n" + mails;
+                    String mailDisplayData = "Referee : " + "\n" + mails;
 
 
                     teamDisplay.setText(teamDisplayData);

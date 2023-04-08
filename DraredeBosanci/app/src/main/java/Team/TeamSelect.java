@@ -27,8 +27,8 @@ public class TeamSelect extends AppCompatActivity{
 
         etPlayers1 = findViewById(R.id.ID_Team1);
         etPlayers2 = findViewById(R.id.ID_Team2);
-        ttimerFirst = findViewById(R.id.ID_Timer_halftime);
-        ttimerHalfTime = findViewById(R.id.ID_Timer_first);
+        ttimerFirst = findViewById(R.id.ID_Timer_first);
+        ttimerHalfTime = findViewById(R.id.ID_Timer_halftime);
         ttimerSecond = findViewById(R.id.ID_Timer_second);
 
         ttimerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -48,6 +48,12 @@ public class TeamSelect extends AppCompatActivity{
                 findViewById(R.id.playerEdaurd),
                 findViewById(R.id.playerYaniv),
                 findViewById(R.id.playerIosif),
+                findViewById(R.id.playerKami),
+                findViewById(R.id.playerMarius),
+                findViewById(R.id.playerAlex),
+                findViewById(R.id.playerTimote),
+                findViewById(R.id.playerBogdan),
+                findViewById(R.id.playerVasi),
         };
 
         for (Button button : buttons) {
@@ -63,11 +69,11 @@ public class TeamSelect extends AppCompatActivity{
                         String newText;
                         if (etPlayers1.hasFocus()) {
                             currentText = etPlayers1.getText().toString();
-                            newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                            newText = currentText.isEmpty() ? player : currentText + "," + player;
                             etPlayers1.setText(newText);
                         } else if (etPlayers2.hasFocus()) {
                             currentText = etPlayers2.getText().toString();
-                            newText = currentText.isEmpty() ? player : currentText + ", " + player;
+                            newText = currentText.isEmpty() ? player : currentText + "," + player;
                             etPlayers2.setText(newText);
                         }
                         disableButton(view);
@@ -105,8 +111,9 @@ public class TeamSelect extends AppCompatActivity{
     }
     public void goToLiveSelected(View v){
 
-        String timerHalfTimeString = ttimerHalfTime.getText().toString();
+
         String timerFirstString = ttimerFirst.getText().toString();
+        String timerHalfTimeString = ttimerHalfTime.getText().toString();
         String timerSecondString = ttimerSecond.getText().toString();
 
         if(timerHalfTimeString.equals("") || timerFirstString.equals("") || timerSecondString.equals("")) {
