@@ -16,9 +16,8 @@ public class Player extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank);
+        setContentView(R.layout.player);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
 
 
 /////// on create end
@@ -69,6 +68,10 @@ public class Player extends AppCompatActivity {
     public void goToFormEduard(View v){
         startActivity(new Intent(Player.this, RankEduard.class));
     }
+    public void goToFormRank(View v){
+        startActivity(new Intent(Player.this, Rank.class));
+    }
+
 
 
 
