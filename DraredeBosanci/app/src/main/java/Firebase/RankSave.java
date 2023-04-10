@@ -36,101 +36,102 @@ public class RankSave {
         this.point12 = point12;
     }
 
-    public EditText getName1() {
-        return name1;
+    public String getName1() {
+        return name1.getText().toString();
     }
 
-    public EditText getName2() {
-        return name2;
+    public String getName2() {
+        return name2.getText().toString();
     }
 
-    public EditText getName3() {
-        return name3;
+    public String getName3() {
+        return name3.getText().toString();
     }
 
-    public EditText getName4() {
-        return name4;
+    public String getName4() {
+        return name4.getText().toString();
     }
 
-    public EditText getName5() {
-        return name5;
+    public String getName5() {
+        return name5.getText().toString();
     }
 
-    public EditText getName6() {
-        return name6;
+    public String getName6() {
+        return name6.getText().toString();
     }
 
-    public EditText getName7() {
-        return name7;
+    public String getName7() {
+        return name7.getText().toString();
     }
 
-    public EditText getName8() {
-        return name8;
+    public String getName8() {
+        return name8.getText().toString();
     }
 
-    public EditText getName9() {
-        return name9;
+    public String getName9() {
+        return name9.getText().toString();
     }
 
-    public EditText getName10() {
-        return name10;
+    public String getName10() {
+        return name10.getText().toString();
     }
 
-    public EditText getName11() {
-        return name11;
+    public String getName11() {
+        return name11.getText().toString();
     }
 
-    public EditText getName12() {
-        return name12;
+    public String getName12() {
+        return name12.getText().toString();
     }
 
-    public EditText getPoint1() {
-        return point1;
+    public String getPoint1() {
+        return point1.getText().toString();
     }
 
-    public EditText getPoint2() {
-        return point2;
+    public String getPoint2() {
+        return point2.getText().toString();
     }
 
-    public EditText getPoint3() {
-        return point3;
+    public String getPoint3() {
+        return point3.getText().toString();
     }
 
-    public EditText getPoint4() {
-        return point4;
+    public String getPoint4() {
+        return point4.getText().toString();
     }
 
-    public EditText getPoint5() {
-        return point5;
+    public String getPoint5() {
+        return point5.getText().toString();
     }
 
-    public EditText getPoint6() {
-        return point6;
+    public String getPoint6() {
+        return point6.getText().toString();
     }
 
-    public EditText getPoint7() {
-        return point7;
+    public String getPoint7() {
+        return point7.getText().toString();
     }
 
-    public EditText getPoint8() {
-        return point8;
+    public String getPoint8() {
+        return point8.getText().toString();
     }
 
-    public EditText getPoint9() {
-        return point9;
+    public String getPoint9() {
+        return point9.getText().toString();
     }
 
-    public EditText getPoint10() {
-        return point10;
+    public String getPoint10() {
+        return point10.getText().toString();
     }
 
-    public EditText getPoint11() {
-        return point11;
+    public String getPoint11() {
+        return point11.getText().toString();
     }
 
-    public EditText getPoint12() {
-        return point12;
+    public String getPoint12() {
+        return point12.getText().toString();
     }
+
 
 
 }

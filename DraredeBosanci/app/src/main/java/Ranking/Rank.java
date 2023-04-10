@@ -67,8 +67,8 @@ public class Rank extends AppCompatActivity {
             public void onClick(View v) {
                     RankSave data = new RankSave(name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12,point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12);
                     String uniqueId = "-rank"; // utiliser le même identifiant unique
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Rank/rank");
-                    UserRef.child(uniqueId).setValue(data); 
+                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Rank");
+                    UserRef.child(uniqueId).setValue(data);
                     Toast.makeText(Rank.this, "Ranking save", Toast.LENGTH_SHORT).show();
 
             }
