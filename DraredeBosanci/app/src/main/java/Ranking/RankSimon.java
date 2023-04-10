@@ -146,10 +146,8 @@ public class RankSimon extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
-                    bt_Save.setVisibility(View.VISIBLE);
                 }
                 else{
-                    bt_Save.setVisibility(View.VISIBLE);
 
                     loading.setVisibility(View.VISIBLE);
                 }
@@ -161,19 +159,22 @@ public class RankSimon extends AppCompatActivity {
             }
         });
 
+        bt_Save.setVisibility(View.INVISIBLE);
 
+        if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+            bt_Save.setVisibility(View.VISIBLE);
+
+        }
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                    Toast.makeText(RankSimon.this, "Only the referee can save the profil", Toast.LENGTH_SHORT).show();
-                } else {
+
                 Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForSimon"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Simon");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
                 Toast.makeText(RankSimon.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 
