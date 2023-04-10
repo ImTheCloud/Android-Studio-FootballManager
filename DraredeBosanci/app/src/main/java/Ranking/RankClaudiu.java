@@ -147,12 +147,9 @@ public class RankClaudiu extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
-                    bt_Save.setVisibility(View.VISIBLE);
 
                 }
                 else{
-                    bt_Save.setVisibility(View.VISIBLE);
-
                     loading.setVisibility(View.VISIBLE);
                 }
             }
@@ -163,20 +160,22 @@ public class RankClaudiu extends AppCompatActivity {
             }
         });
 
+        bt_Save.setVisibility(View.INVISIBLE);
 
+        if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+            bt_Save.setVisibility(View.VISIBLE);
+
+        }
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-                    Toast.makeText(RankClaudiu.this, "Only the referee can save the profil", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Si l'utilisateur est connecté en tant que "claudiuppdc7@yahoo.com", sauvegarder les données
+
                     Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                     String uniqueId = "-dataForClaudiu"; // utiliser le même identifiant unique
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                     UserRef.child(uniqueId).setValue(data); // définir la valeur avec l'identifiant unique
                     Toast.makeText(RankClaudiu.this, "Player profile save", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 
