@@ -10,11 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.draredebosanci.R;
 
-import org.w3c.dom.Text;
-
-import Ranking.Rank;
-import Ranking.RankClaudiu;
-
 public class Help extends AppCompatActivity {
 
     private Button aboutMe,fr;

@@ -20,7 +20,7 @@ import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.Compo;
 
-import Ranking.Rank;
+import Ranking.Player;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -138,7 +138,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             ranking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Home.this, Rank.class));
+                    startActivity(new Intent(Home.this, Player.class));
 
                 }
             });

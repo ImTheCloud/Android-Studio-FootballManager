@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import Ranking.Rank;
-
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
     private String half,timeFirstHalf,timeSecondHalf,time;

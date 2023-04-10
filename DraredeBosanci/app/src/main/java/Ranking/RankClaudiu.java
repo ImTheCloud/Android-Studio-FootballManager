@@ -48,7 +48,9 @@ import Firebase.Form;
 public class RankClaudiu extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
-    private TextView tvPointsWrite,tvGameWrite,tvWinRateWrite,tvapiResult;
+    private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
+
+    public static TextView TVPointsWriteClaudiu;
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
@@ -71,7 +73,7 @@ public class RankClaudiu extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        tvPointsWrite = findViewById(R.id.TVPointsWriteClaudiu);
+        TVPointsWriteClaudiu = findViewById(R.id.TVPointsWriteClaudiu);
         tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
         tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
 
@@ -226,7 +228,7 @@ public class RankClaudiu extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            tvPointsWrite.setText(String.valueOf(points));
+            TVPointsWriteClaudiu.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
@@ -305,7 +307,7 @@ public class RankClaudiu extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankClaudiu.this, Rank.class);
+        Intent intent = new Intent(RankClaudiu.this, Player.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
