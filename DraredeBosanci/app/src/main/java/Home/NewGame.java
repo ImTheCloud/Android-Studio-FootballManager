@@ -58,8 +58,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
 
-
-
         TextView dateTextView = findViewById(R.id.date_textview);
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -174,7 +172,7 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             });
 
             // Add a marker with a custom icon at the specified coordinates
-            LatLng markerLocation = new LatLng(50.827346, 4.296998);
+            LatLng markerLocation = new LatLng(50.827511 , 4.297444);
             mMap.addMarker(new MarkerOptions()
                     .position(markerLocation)
                     .title("Our field")
