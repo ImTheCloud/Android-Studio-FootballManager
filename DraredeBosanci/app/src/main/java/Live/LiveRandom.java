@@ -4,7 +4,6 @@ import static Team.TeamRandom.timerHalfTime;
 import static Team.TeamRandom.timerSecond;
 import static Home.NewGame.date;
 import static Home.NewGame.userLocation;
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import Home.GameSave;
 import Home.History;
 import Notif.NotificationHelper;
@@ -29,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import Home.Home;
 import Team.TeamRandom;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -40,13 +36,10 @@ public class LiveRandom extends AppCompatActivity {
     private Button mButton,mButton2,bt_Save;
     private List<String> team1,team2;
     private NotificationHelper notificationHelper;
-    boolean notificationSent = false;
     private Context context;
     private FirebaseAuth mAuth;
     private boolean isActive = false;
 
-    private long timeLeftInMillis;
-    private boolean isPaused = false;
 
     DatabaseReference UserRef;
     @Override
@@ -64,7 +57,6 @@ public class LiveRandom extends AppCompatActivity {
         TVStopWatch = findViewById(R.id.TV_StopWatch);
         bt_Save = findViewById(R.id.bt_Save);
         isActive = true;
-
 
         setPlayerOnTeam();
 
@@ -88,7 +80,8 @@ public class LiveRandom extends AppCompatActivity {
                 goalT2.setText(Integer.toString(mCount2));
             }
         });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +137,6 @@ public class LiveRandom extends AppCompatActivity {
             }
         });
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         Bundle extras = getIntent().getExtras();
@@ -173,8 +165,6 @@ public class LiveRandom extends AppCompatActivity {
         if (timer != null) {
             timer.cancel();
         }
-
-
 
         // Start a new timer
         timer = new CountDownTimer(totalTime * 1000, 1000) {
@@ -217,19 +207,11 @@ public class LiveRandom extends AppCompatActivity {
         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
         builder.setSmallIcon(R.drawable.timer);
         builder.setOnlyAlertOnce(true);
-        // Ajouter l'Intent pour ouvrir l'activité "History"
-//        Intent intent = new Intent(LiveSelected.this, History.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-//        builder.setContentIntent(pendingIntent);
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
         // Reset the timer
         timer = null;
-
-
     }
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -271,7 +253,6 @@ public class LiveRandom extends AppCompatActivity {
         finish();
         startActivity(new Intent(LiveRandom.this, Home.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
     }
 
 }

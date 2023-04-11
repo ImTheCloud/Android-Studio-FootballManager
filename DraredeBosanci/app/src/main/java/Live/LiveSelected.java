@@ -4,7 +4,6 @@ import static Team.TeamSelect.ttimerHalfTime;
 import static Team.TeamSelect.ttimerSecond;
 import static Home.NewGame.date;
 import static Home.NewGame.userLocation;
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import Home.GameSave;
 import Notif.NotificationHelper;
 import Home.History;
@@ -27,10 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Arrays;
 import java.util.List;
-
 import Home.Home;
 import Team.TeamSelect;
 
@@ -42,9 +37,9 @@ public class LiveSelected extends AppCompatActivity {
     private NotificationHelper notificationHelper;
     boolean notificationSent = false;
     private Context context;
-    String players1,players2;
-    List<String> listPlayers1,listPlayers2;
-    DatabaseReference UserRef;
+    private String players1,players2;
+    private List<String> listPlayers1,listPlayers2;
+    private DatabaseReference UserRef;
     private FirebaseAuth mAuth;
     private boolean isActive = false;
 
@@ -68,6 +63,25 @@ public class LiveSelected extends AppCompatActivity {
         bt_Save = findViewById(R.id.bt_Save);
         isActive = true;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount++;
+                // Mise à jour du TextView
+                goalT1.setText(Integer.toString(mCount));
+            }
+        });
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Incrémentation de l'entier
+                mCount2++;
+                // Mise à jour du TextView
+                goalT2.setText(Integer.toString(mCount2));
+            }
+        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         bt_Save.setOnClickListener(new View.OnClickListener() {
@@ -126,29 +140,7 @@ public class LiveSelected extends AppCompatActivity {
                 }
             }
         });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount++;
 
-                // Mise à jour du TextView
-                goalT1.setText(Integer.toString(mCount));
-
-            }
-        });
-        mButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount2++;
-
-                // Mise à jour du TextView
-                goalT2.setText(Integer.toString(mCount2));
-
-            }
-        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -219,10 +211,7 @@ public class LiveSelected extends AppCompatActivity {
             @Override
             public void onFinish() {
                 finishTimer();
-
             }
-
-
         }.start();
         timer = null;
     }
@@ -235,15 +224,10 @@ public class LiveSelected extends AppCompatActivity {
         NotificationCompat.Builder builder = notificationHelper.createNotification(title);
         builder.setSmallIcon(R.drawable.timer);
         builder.setOnlyAlertOnce(true);
-        // Ajouter l'Intent pour ouvrir l'activité "History"
-//        Intent intent = new Intent(LiveSelected.this, History.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(LiveSelected.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-//        builder.setContentIntent(pendingIntent);
         NotificationManager manager = notificationHelper.getManager();
         manager.notify(1, builder.build());
         // Reset the timer
         timer = null;
-
     }
 
     @Override
@@ -252,8 +236,6 @@ public class LiveSelected extends AppCompatActivity {
         super.onDestroy();
         isActive = false;
     }
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -261,22 +243,15 @@ public class LiveSelected extends AppCompatActivity {
             return;
         }
 
-        // Send notification only if it hasn't been sent before
         if (!notificationSent) {
             String title = "Time up";
-
             NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-
             builder.setSmallIcon(R.drawable.timer);
-
             NotificationManager manager = notificationHelper.getManager();
             manager.notify(1, builder.build());
-
-            // Update notificationSent flag to true
             notificationSent = true;
         }
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -290,6 +265,5 @@ public class LiveSelected extends AppCompatActivity {
         finish();
         startActivity(new Intent(LiveSelected.this, Home.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
     }
 }
