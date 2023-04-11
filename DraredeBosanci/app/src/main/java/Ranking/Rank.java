@@ -71,6 +71,34 @@ public class Rank extends AppCompatActivity {
         parent_layout = findViewById(R.id.parent_layout);
         parent_layout.setVisibility(View.INVISIBLE);
 
+        
+        EditText[] editTextArray = new EditText[] {
+                findViewById(R.id.name1),
+                findViewById(R.id.name2),
+                findViewById(R.id.name3),
+                findViewById(R.id.name4),
+                findViewById(R.id.name5),
+                findViewById(R.id.name6),
+                findViewById(R.id.name7),
+                findViewById(R.id.name8),
+                findViewById(R.id.name9),
+                findViewById(R.id.name10),
+                findViewById(R.id.name11),
+                findViewById(R.id.name12)
+        };
+
+        for (EditText editText : editTextArray) {
+            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean hasFocus) {
+                    if (hasFocus) {
+                        ((EditText) view).setText("");
+                    }
+                }
+            });
+        }
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
         database.getReference("Rank").child("-rank").addListenerForSingleValueEvent(new ValueEventListener() {
