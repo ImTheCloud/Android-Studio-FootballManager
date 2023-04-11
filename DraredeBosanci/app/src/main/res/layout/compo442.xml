@@ -19,23 +19,23 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355">
+        app:layout_constraintVertical_bias="0.259">
 
         <EditText
             android:id="@+id/player1"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -46,12 +46,13 @@
 
         <EditText
             android:id="@+id/player2"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -60,22 +61,24 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514">
+        app:layout_constraintVertical_bias="0.459">
 
         <EditText
             android:id="@+id/player3"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -86,13 +89,14 @@
 
         <EditText
             android:id="@+id/player4"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -101,23 +105,24 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.602">
+        app:layout_constraintVertical_bias="0.544">
 
         <EditText
             android:id="@+id/player5"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -128,12 +133,13 @@
 
         <EditText
             android:id="@+id/player6"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -142,22 +148,23 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734">
+        app:layout_constraintVertical_bias="0.748">
 
         <EditText
             android:id="@+id/player7"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -168,13 +175,14 @@
 
         <EditText
             android:id="@+id/player8"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -183,7 +191,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,12 +202,13 @@
 
         <EditText
             android:id="@+id/player9"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -210,12 +219,13 @@
 
         <EditText
             android:id="@+id/player10"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -224,7 +234,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -236,12 +246,13 @@
 
         <EditText
             android:id="@+id/player11"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />

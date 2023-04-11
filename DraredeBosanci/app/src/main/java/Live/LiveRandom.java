@@ -260,9 +260,12 @@ public class LiveRandom extends AppCompatActivity {
     }
     private void setTeamText(TextView textView, List<String> players) {
         StringBuilder sb = new StringBuilder();
-        sb.append(TextUtils.join("\n", players));
+        for (String player : players) {
+            sb.append("\u2022 ").append(player).append("\n");
+        }
         textView.setText(sb.toString());
     }
+
     public void goToHouse(View v){
         finishTimer();
         finish();

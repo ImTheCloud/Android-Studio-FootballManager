@@ -17,51 +17,57 @@
         tools:layout_editor_absoluteX="37dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.295">
+        app:layout_constraintVertical_bias="0.255">
 
 
         <EditText
             android:id="@+id/player3"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="181dp" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.386">
+        app:layout_constraintVertical_bias="0.346">
 
         <EditText
             android:id="@+id/player1"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -72,38 +78,41 @@
 
         <EditText
             android:id="@+id/player2"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.589">
+        app:layout_constraintVertical_bias="0.547">
 
         <EditText
             android:id="@+id/player5"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -114,62 +123,70 @@
 
         <EditText
             android:id="@+id/player6"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652">
-
-
+        app:layout_constraintVertical_bias="0.638">
         <EditText
             android:id="@+id/player4"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="429dp" />
 
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739">
+        app:layout_constraintVertical_bias="0.745">
 
         <EditText
             android:id="@+id/player7"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -180,13 +197,14 @@
 
         <EditText
             android:id="@+id/player8"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -195,7 +213,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -206,12 +224,13 @@
 
         <EditText
             android:id="@+id/player9"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -222,12 +241,14 @@
 
         <EditText
             android:id="@+id/player10"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
+
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -236,7 +257,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -248,12 +269,13 @@
 
         <EditText
             android:id="@+id/player11"
-            android:layout_width="70dp"
-            android:layout_height="61dp"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
-            android:hint="PLAYER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -280,6 +302,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

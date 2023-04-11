@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.draredebosanci.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,44 @@ public class Compo433 extends AppCompatActivity {
             player11 = findViewById(R.id.player11);
 
             bt_Save = findViewById(R.id.bt_Save);
+
+            player1.setText("Loading...");
+            player2.setText("Loading...");
+            player3.setText("Loading...");
+            player4.setText("Loading...");
+            player5.setText("Loading...");
+            player6.setText("Loading...");
+            player7.setText("Loading...");
+            player8.setText("Loading...");
+            player9.setText("Loading...");
+            player10.setText("Loading...");
+            player11.setText("Loading...");
+
+            EditText[] editTextArray = new EditText[] {
+
+                    findViewById(R.id.player1),
+                    findViewById(R.id.player2),
+                    findViewById(R.id.player3),
+                    findViewById(R.id.player4),
+                    findViewById(R.id.player5),
+                    findViewById(R.id.player6),
+                    findViewById(R.id.player7),
+                    findViewById(R.id.player8),
+                    findViewById(R.id.player9),
+                    findViewById(R.id.player10),
+                    findViewById(R.id.player11)
+            };
+
+            for (EditText editText : editTextArray) {
+                editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean hasFocus) {
+                        if (hasFocus) {
+                            ((EditText) view).setText("");
+                        }
+                    }
+                });
+            }
 
 
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");

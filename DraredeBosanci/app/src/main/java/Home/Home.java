@@ -122,10 +122,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -217,8 +213,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 break;
             case R.id.nav_compo:
-                startActivity(new Intent(Home.this, Compo.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                if (userEmail != null) {
+                    startActivity(new Intent(Home.this, Compo.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
+                }
+
 
                 break;
             case R.id.nav_help:
