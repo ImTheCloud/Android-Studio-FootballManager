@@ -247,5 +247,26 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="98dp"
+        android:layout_height="46dp"
+        android:background="@drawable/button_selector"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:text="Save"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
