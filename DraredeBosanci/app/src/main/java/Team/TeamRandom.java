@@ -14,7 +14,6 @@ import com.example.draredebosanci.R;
 import Home.Home;
 import Live.LiveRandom;
 import Home.NewGame;
-import Ranking.RankClaudiu;
 
 public class TeamRandom extends AppCompatActivity {
 

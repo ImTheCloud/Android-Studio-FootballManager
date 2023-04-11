@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,9 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankYaniv extends AppCompatActivity {
+public class StatYaniv extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
@@ -180,11 +179,11 @@ public class RankYaniv extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForYaniv"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Yaniv");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankYaniv.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatYaniv.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -315,7 +314,7 @@ public class RankYaniv extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankYaniv.this, Player.class);
+        Intent intent = new Intent(StatYaniv.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -330,11 +329,11 @@ public class RankYaniv extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankYaniv.this, RankSimon.class);
+                        Intent intent = new Intent(StatYaniv.this, StatSimon.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankYaniv.this, RankEduard.class);
+                        Intent intent = new Intent(StatYaniv.this, StatEduard.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -345,14 +344,14 @@ public class RankYaniv extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankYaniv.this, RankSimon.class);
+        Intent intent = new Intent(StatYaniv.this, StatSimon.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankYaniv.this, RankEduard.class);
+        Intent intent = new Intent(StatYaniv.this, StatEduard.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

@@ -2,29 +2,22 @@ package Compo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.draredebosanci.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import Firebase.CompoSave;
-
 public class Compo433 extends AppCompatActivity {
-
-    EditText player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11;
-    Button bt_Save;
-    DatabaseReference UserRef;
+    private EditText player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11;
+    private Button bt_Save;
+    private DatabaseReference UserRef;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -41,20 +34,7 @@ public class Compo433 extends AppCompatActivity {
             player9 = findViewById(R.id.player9);
             player10 = findViewById(R.id.player10);
             player11 = findViewById(R.id.player11);
-
             bt_Save = findViewById(R.id.bt_Save);
-
-            player1.setText("Loading...");
-            player2.setText("Loading...");
-            player3.setText("Loading...");
-            player4.setText("Loading...");
-            player5.setText("Loading...");
-            player6.setText("Loading...");
-            player7.setText("Loading...");
-            player8.setText("Loading...");
-            player9.setText("Loading...");
-            player10.setText("Loading...");
-            player11.setText("Loading...");
 
             EditText[] editTextArray = new EditText[] {
 
@@ -112,10 +92,7 @@ public class Compo433 extends AppCompatActivity {
                         player9.setText(pl9);
                         player10.setText(pl10);
                         player11.setText(pl11);
-
                     }
-
-
                 }
 
                 @Override
@@ -127,11 +104,10 @@ public class Compo433 extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     CompoSave data = new CompoSave(player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11);
-                    String uniqueId = "-Compo433"; // utiliser le même identifiant unique
+                    String uniqueId = "-Compo433";
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Compo");
                     UserRef.child(uniqueId).setValue(data);
-                    Toast.makeText(Compo433.this, "Compo 4-4-3 save", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(Compo433.this, "Compo save", Toast.LENGTH_SHORT).show();
                 }
             });
     }

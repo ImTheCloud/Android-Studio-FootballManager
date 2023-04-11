@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +14,13 @@ import android.widget.Toast;
 
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import Firebase.Form;
-import Firebase.RankSave;
-
-public class Rank extends AppCompatActivity {
+public class Ranking extends AppCompatActivity {
 
     EditText name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12;
     EditText point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12;
@@ -208,11 +204,11 @@ public class Rank extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    RankSave data = new RankSave(name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12,point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12);
+                    RankingSave data = new RankingSave(name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12,point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12);
                     String uniqueId = "-rank"; // utiliser le même identifiant unique
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Rank");
                     UserRef.child(uniqueId).setValue(data);
-                    Toast.makeText(Rank.this, "Ranking save", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Ranking.this, "Ranking save", Toast.LENGTH_SHORT).show();
 
             }
         });

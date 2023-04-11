@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,13 +43,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankDany extends AppCompatActivity {
+public class StatRuben extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
-    public static TextView TVPointsWriteDany;
+    public static TextView TVPointsWriteRuben;
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
@@ -59,7 +58,7 @@ public class RankDany extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_dany);
+        setContentView(R.layout.rank_ruben);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -72,7 +71,7 @@ public class RankDany extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        TVPointsWriteDany = findViewById(R.id.TVPointsWriteDany);
+        TVPointsWriteRuben = findViewById(R.id.TVPointsWriteRuben);
         tvGameWrite = findViewById(R.id.TVGameWrite);
         tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
 
@@ -119,7 +118,6 @@ public class RankDany extends AppCompatActivity {
             etRank.setEnabled(false);
 
         }
-
         etFame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -131,7 +129,7 @@ public class RankDany extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("Dany").child("-dataForDany").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("Ruben").child("-dataForRuben").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -156,6 +154,7 @@ public class RankDany extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
+
                 }
                 else{
                     loading.setVisibility(View.VISIBLE);
@@ -167,22 +166,23 @@ public class RankDany extends AppCompatActivity {
 
             }
         });
+
         bt_Save.setVisibility(View.INVISIBLE);
 
         if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
             bt_Save.setVisibility(View.VISIBLE);
 
         }
-
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-dataForDany"; // use the same unique id
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Dany");
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                String uniqueId = "-dataForRuben"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Ruben");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankDany.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatRuben.this, "Player profile save", Toast.LENGTH_SHORT).show();linearBig.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -201,7 +201,7 @@ public class RankDany extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 //makeApiRequest(queue, apiUrl);
+              //  makeApiRequest(queue, apiUrl);
             }
 
             @Override
@@ -234,7 +234,7 @@ public class RankDany extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            TVPointsWriteDany.setText(String.valueOf(points));
+            TVPointsWriteRuben.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
@@ -302,6 +302,7 @@ public class RankDany extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<String, String>();
                 headers.put("X-RapidAPI-Key", "2e8e0f243bmshb40a5716fd99fb3p16e3e1jsn6b6864f3d84e");
                 headers.put("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
+
                 return headers;
             }
         };
@@ -309,12 +310,11 @@ public class RankDany extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankDany.this, Player.class);
+        Intent intent = new Intent(StatRuben.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -329,11 +329,11 @@ public class RankDany extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankDany.this, RankIosif.class);
+                        Intent intent = new Intent(StatRuben.this, StatDany.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankDany.this, RankRuben.class);
+                        Intent intent = new Intent(StatRuben.this, StatClaudiu.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -343,16 +343,15 @@ public class RankDany extends AppCompatActivity {
         }
         return super.onTouchEvent(event);
     }
-
     public void goToLeft(View v){
-        Intent intent = new Intent(RankDany.this, RankIosif.class);
+        Intent intent = new Intent(StatRuben.this, StatDany.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankDany.this, RankRuben.class);
+        Intent intent = new Intent(StatRuben.this, StatClaudiu.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

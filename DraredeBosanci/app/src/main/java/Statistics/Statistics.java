@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,7 @@ import com.example.draredebosanci.R;
 
 import Home.Home;
 
-public class Player extends AppCompatActivity {
+public class Statistics extends AppCompatActivity {
 
 
     @Override
@@ -27,49 +27,49 @@ public class Player extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(Player.this, Home.class);
+        Intent intent = new Intent(Statistics.this, Home.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     public void goToFormDany(View v){
-        startActivity(new Intent(Player.this, RankDany.class));
+        startActivity(new Intent(Statistics.this, StatDany.class));
     }
     public void goToFormRuben(View v){
-        startActivity(new Intent(Player.this, RankRuben.class));
+        startActivity(new Intent(Statistics.this, StatRuben.class));
     }
     public void goToFormClaudiu(View v){
-        startActivity(new Intent(Player.this, RankClaudiu.class));
+        startActivity(new Intent(Statistics.this, StatClaudiu.class));
     }
     public void goToFormFlavyus(View v){
-        startActivity(new Intent(Player.this, RankFlavyus.class));
+        startActivity(new Intent(Statistics.this, StatFlavyus.class));
     }
     public void goToFormDenis(View v){
-        startActivity(new Intent(Player.this, RankDenis.class));
+        startActivity(new Intent(Statistics.this, StatDenis.class));
     }
     public void goToFormRoberto(View v){
-        startActivity(new Intent(Player.this, RankRoberto.class));
+        startActivity(new Intent(Statistics.this, StatRoberto.class));
     }
     public void goToFormLucian(View v){
-        startActivity(new Intent(Player.this, RankLucian.class));
+        startActivity(new Intent(Statistics.this, StatLucian.class));
     }
     public void goToFormDavid(View v){
-        startActivity(new Intent(Player.this, RankDavid.class));
+        startActivity(new Intent(Statistics.this, StatDavid.class));
     }
     public void goToFormYaniv(View v){
-        startActivity(new Intent(Player.this, RankYaniv.class));
+        startActivity(new Intent(Statistics.this, StatYaniv.class));
     }
     public void goToFormIosif(View v){
-        startActivity(new Intent(Player.this, RankIosif.class));
+        startActivity(new Intent(Statistics.this, StatIosif.class));
     }
     public void goToFormSimon(View v){
-        startActivity(new Intent(Player.this, RankSimon.class));
+        startActivity(new Intent(Statistics.this, StatSimon.class));
     }
     public void goToFormEduard(View v){
-        startActivity(new Intent(Player.this, RankEduard.class));
+        startActivity(new Intent(Statistics.this, StatEduard.class));
     }
     public void goToFormRank(View v){
-        startActivity(new Intent(Player.this, Rank.class));
+        startActivity(new Intent(Statistics.this, Ranking.class));
     }
 
 

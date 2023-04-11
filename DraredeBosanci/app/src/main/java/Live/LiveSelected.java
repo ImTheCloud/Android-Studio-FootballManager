@@ -19,7 +19,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import Firebase.Game;
+import Home.GameSave;
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
@@ -87,33 +87,33 @@ public class LiveSelected extends AppCompatActivity {
                 }else{
                 FirebaseUser currentUser = mAuth.getCurrentUser();
                 String email = currentUser.getEmail();
-                Game user_mail = new Game(email);
+                GameSave user_mail = new GameSave(email);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
                 UserRef.push().setValue(user_mail);
 
-                Game dateUser = new Game(date);
+                GameSave dateUser = new GameSave(date);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
                 UserRef.push().setValue(dateUser);
 
-                Game map = new Game(userLocation);
+                GameSave map = new GameSave(userLocation);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
                 UserRef.push().setValue(map);
 
                 String timerF = ttimerFirst.getText().toString();
                 String timerHF = ttimerHalfTime.getText().toString();
                 String timerS = ttimerSecond.getText().toString();
-                Game timeTotal = new Game(timerF,timerHF,timerS);
+                GameSave timeTotal = new GameSave(timerF,timerHF,timerS);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
                 UserRef.push().setValue(timeTotal);
 
-                Game teams = new Game(listPlayers1,listPlayers2);
+                GameSave teams = new GameSave(listPlayers1,listPlayers2);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
                 UserRef.push().setValue(teams);
 
 
                 String goalTeam1 = goalT1.getText().toString();
                 String goalTeam2 = goalT2.getText().toString();
-                Game goals = new Game(goalTeam1, goalTeam2);
+                GameSave goals = new GameSave(goalTeam1, goalTeam2);
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
                 UserRef.push().setValue(goals);
                 finishTimer();

@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,13 +43,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankRuben extends AppCompatActivity {
+public class StatDavid extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
-    public static TextView TVPointsWriteRuben;
+    public static TextView TVPointsWriteDavid;
+
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
@@ -59,7 +59,7 @@ public class RankRuben extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_ruben);
+        setContentView(R.layout.rank_david);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -72,7 +72,7 @@ public class RankRuben extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        TVPointsWriteRuben = findViewById(R.id.TVPointsWriteRuben);
+        TVPointsWriteDavid = findViewById(R.id.TVPointsWriteDavid);
         tvGameWrite = findViewById(R.id.TVGameWrite);
         tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
 
@@ -127,10 +127,11 @@ public class RankRuben extends AppCompatActivity {
                 }
             }
         });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("Ruben").child("-dataForRuben").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("David").child("-dataForDavid").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -155,7 +156,6 @@ public class RankRuben extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
-
                 }
                 else{
                     loading.setVisibility(View.VISIBLE);
@@ -178,12 +178,11 @@ public class RankRuben extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-dataForRuben"; // use the same unique id
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Ruben");
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                String uniqueId = "-dataForDavid"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/David");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankRuben.this, "Player profile save", Toast.LENGTH_SHORT).show();linearBig.setVisibility(View.VISIBLE);
-
+                Toast.makeText(StatDavid.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -202,7 +201,7 @@ public class RankRuben extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //  makeApiRequest(queue, apiUrl);
+              //    makeApiRequest(queue, apiUrl);
             }
 
             @Override
@@ -235,7 +234,7 @@ public class RankRuben extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            TVPointsWriteRuben.setText(String.valueOf(points));
+            TVPointsWriteDavid.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
@@ -303,7 +302,6 @@ public class RankRuben extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<String, String>();
                 headers.put("X-RapidAPI-Key", "2e8e0f243bmshb40a5716fd99fb3p16e3e1jsn6b6864f3d84e");
                 headers.put("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
-
                 return headers;
             }
         };
@@ -315,7 +313,7 @@ public class RankRuben extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankRuben.this, Player.class);
+        Intent intent = new Intent(StatDavid.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -330,11 +328,11 @@ public class RankRuben extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankRuben.this, RankDany.class);
+                        Intent intent = new Intent(StatDavid.this, StatLucian.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankRuben.this, RankClaudiu.class);
+                        Intent intent = new Intent(StatDavid.this, StatSimon.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -345,14 +343,14 @@ public class RankRuben extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankRuben.this, RankDany.class);
+        Intent intent = new Intent(StatDavid.this, StatLucian.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankRuben.this, RankClaudiu.class);
+        Intent intent = new Intent(StatDavid.this, StatSimon.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

@@ -1,7 +1,6 @@
 package Compo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -34,19 +33,14 @@ public class Compo extends AppCompatActivity {
             layoutParams.width = (int) getResources().getDimension(R.dimen.space_width);
             space.setLayoutParams(layoutParams);
         }
-
     }
-
     public void goTo442(View v){
         startActivity(new Intent(this, Compo442.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
     }
-
     public void goTo433(View v){
         startActivity(new Intent(this, Compo433.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
     }
-
 }

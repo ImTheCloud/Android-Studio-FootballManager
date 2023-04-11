@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,14 +43,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankDavid extends AppCompatActivity {
+public class StatRoberto extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
-    public static TextView TVPointsWriteDavid;
-
+    public static TextView TVPointsWriteRoberto;
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
@@ -60,12 +58,11 @@ public class RankDavid extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_david);
+        setContentView(R.layout.rank_roberto);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
         bt_Save.setVisibility(View.INVISIBLE);
-
 
         TextView loading = findViewById(R.id.loading);
         loading.setVisibility(View.VISIBLE);
@@ -73,7 +70,7 @@ public class RankDavid extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        TVPointsWriteDavid = findViewById(R.id.TVPointsWriteDavid);
+        TVPointsWriteRoberto = findViewById(R.id.TVPointsWriteRoberto);
         tvGameWrite = findViewById(R.id.TVGameWrite);
         tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
 
@@ -128,11 +125,10 @@ public class RankDavid extends AppCompatActivity {
                 }
             }
         });
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("David").child("-dataForDavid").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("Roberto").child("-dataForRoberto").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -157,8 +153,10 @@ public class RankDavid extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
+
                 }
                 else{
+
                     loading.setVisibility(View.VISIBLE);
                 }
             }
@@ -179,11 +177,11 @@ public class RankDavid extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-dataForDavid"; // use the same unique id
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/David");
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                String uniqueId = "-dataForRoberto"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Roberto");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankDavid.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatRoberto.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -202,7 +200,7 @@ public class RankDavid extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //    makeApiRequest(queue, apiUrl);
+            //      makeApiRequest(queue, apiUrl);
             }
 
             @Override
@@ -235,7 +233,7 @@ public class RankDavid extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            TVPointsWriteDavid.setText(String.valueOf(points));
+            TVPointsWriteRoberto.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
@@ -310,11 +308,12 @@ public class RankDavid extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankDavid.this, Player.class);
+        Intent intent = new Intent(StatRoberto.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -329,11 +328,11 @@ public class RankDavid extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankDavid.this, RankLucian.class);
+                        Intent intent = new Intent(StatRoberto.this, StatDenis.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankDavid.this, RankSimon.class);
+                        Intent intent = new Intent(StatRoberto.this, StatLucian.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -344,14 +343,14 @@ public class RankDavid extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankDavid.this, RankLucian.class);
+        Intent intent = new Intent(StatRoberto.this, StatDenis.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankDavid.this, RankSimon.class);
+        Intent intent = new Intent(StatRoberto.this, StatLucian.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

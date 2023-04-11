@@ -1,13 +1,13 @@
-package Firebase;
+package Statistics;
 
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class Form {
+public class StatisticsSave {
     EditText fame,win,lose,tie,bonus,yellow,rank;
     Spinner position;
 
-    public Form(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
+    public StatisticsSave(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
         this.fame = etFame;
         this.win = etWin;
         this.lose = etLose;
@@ -18,7 +18,6 @@ public class Form {
         this.position = position;
     }
 
-    // Rename the getter methods to avoid conflicts with EditText's getText() method
     public String getFameText() {
         return fame.getText().toString();
     }

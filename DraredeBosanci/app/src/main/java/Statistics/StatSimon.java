@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,25 +43,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankFlavyus extends AppCompatActivity {
+public class StatSimon extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
-    public static TextView TVPointsWriteFlavyus;
-
+    public static TextView TVPointsWriteSimon;
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
     DatabaseReference UserRef;
     private float x1, x2;
     private static final int MIN_DISTANCE = 150;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_flavyus);
+        setContentView(R.layout.rank_simon);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -73,7 +70,7 @@ public class RankFlavyus extends AppCompatActivity {
         linearBig.setVisibility(View.INVISIBLE);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        TVPointsWriteFlavyus = findViewById(R.id.TVPointsWriteFlavyus);
+        TVPointsWriteSimon = findViewById(R.id.TVPointsWriteSimon);
         tvGameWrite = findViewById(R.id.TVGameWrite);
         tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
 
@@ -131,7 +128,7 @@ public class RankFlavyus extends AppCompatActivity {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child("Flavyus").child("-dataForFlavyus").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference("Player").child("Simon").child("-dataForSimon").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -156,11 +153,8 @@ public class RankFlavyus extends AppCompatActivity {
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
                     etRank.setText(rank);
-
-
                 }
                 else{
-
 
                     loading.setVisibility(View.VISIBLE);
                 }
@@ -182,11 +176,11 @@ public class RankFlavyus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
-                String uniqueId = "-dataForFlavyus"; // use the same unique id
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Flavyus");
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                String uniqueId = "-dataForSimon"; // use the same unique id
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Simon");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankFlavyus.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatSimon.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -205,7 +199,7 @@ public class RankFlavyus extends AppCompatActivity {
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-             //    makeApiRequest(queue, apiUrl);
+              //   makeApiRequest(queue, apiUrl);
             }
 
             @Override
@@ -238,7 +232,7 @@ public class RankFlavyus extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            TVPointsWriteFlavyus.setText(String.valueOf(points));
+            TVPointsWriteSimon.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
@@ -313,12 +307,11 @@ public class RankFlavyus extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankFlavyus.this, Player.class);
+        Intent intent = new Intent(StatSimon.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -333,13 +326,14 @@ public class RankFlavyus extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankFlavyus.this, RankClaudiu.class);
+                        Intent intent = new Intent(StatSimon.this, StatDavid.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankFlavyus.this, RankDenis.class);
+                        Intent intent = new Intent(StatSimon.this, StatYaniv.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
                     }
                 }
                 break;
@@ -347,14 +341,14 @@ public class RankFlavyus extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankFlavyus.this, RankClaudiu.class);
+        Intent intent = new Intent(StatSimon.this, StatDavid.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankFlavyus.this, RankDenis.class);
+        Intent intent = new Intent(StatSimon.this, StatYaniv.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

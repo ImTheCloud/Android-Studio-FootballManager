@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,9 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankIosif extends AppCompatActivity {
+public class StatIosif extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
@@ -180,11 +179,11 @@ public class RankIosif extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForIosif"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Iosif");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankIosif.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatIosif.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -316,7 +315,7 @@ public class RankIosif extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankIosif.this, Player.class);
+        Intent intent = new Intent(StatIosif.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -331,11 +330,11 @@ public class RankIosif extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankIosif.this, RankEduard.class);
+                        Intent intent = new Intent(StatIosif.this, StatEduard.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankIosif.this, RankDany.class);
+                        Intent intent = new Intent(StatIosif.this, StatDany.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -346,14 +345,14 @@ public class RankIosif extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankIosif.this, RankEduard.class);
+        Intent intent = new Intent(StatIosif.this, StatEduard.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankIosif.this, RankDany.class);
+        Intent intent = new Intent(StatIosif.this, StatDany.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

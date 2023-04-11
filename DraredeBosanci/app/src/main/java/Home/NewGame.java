@@ -42,7 +42,10 @@ import Team.TeamSelect;
 public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private EditText locationEditText;
+    private TextView dateTextView;
     private Button fetchButton;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
     private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
@@ -57,16 +60,31 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
-
-        TextView dateTextView = findViewById(R.id.date_textview);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateTextView = findViewById(R.id.date_textview);
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         date = dateFormat.format(calendar.getTime());
         dateTextView.setText(date);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        fetchTemperature("Anderlecht");
+        fetchButton.setOnClickListener(v -> {
+            String location = locationEditText.getText().toString();
+            if (!location.isEmpty()) {
+                fetchTemperature(location);
+
+            } else {
+                Toast.makeText(this, "Enter a location", Toast.LENGTH_SHORT).show();
+            }
+        });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
         database.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -90,32 +108,13 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
+        // On create end
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        fetchTemperature("Anderlecht");
-
-        fetchButton.setOnClickListener(v -> {
-            String location = locationEditText.getText().toString();
-            if (!location.isEmpty()) {
-                fetchTemperature(location);
-
-            } else {
-                Toast.makeText(this, "Enter a location", Toast.LENGTH_SHORT).show();
-            }
-        });
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     }
 
     private void fetchTemperature(String location) {
@@ -144,19 +143,15 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         queue.add(request);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
 
-        // Check if we have permission to access the user's location.
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission from the user to access their location.
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
         } else {
-            // If we have permission, get the user's last known location and move the camera there.
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
@@ -167,13 +162,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ourField, 15f));
                 }
             });
-
-//            // Add a marker with a custom icon at the specified coordinates
-//            LatLng markerLocation = new LatLng(50.827511 , 4.297444);
-//            mMap.addMarker(new MarkerOptions()
-//                    .position(markerLocation)
-//                    .title("Our field")
-//                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker))); // Set the custom icon here
         }
     }
 
@@ -183,13 +171,11 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
 
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // If the user grants permission, get the user's last known location and move the camera there.
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                     if (location != null) {
-//                        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                         LatLng ourField = new LatLng(50.827511 , 4.297444);
                         mMap.addMarker(new MarkerOptions()
                                 .position(ourField)
@@ -200,11 +186,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     }
-
-
-
-
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

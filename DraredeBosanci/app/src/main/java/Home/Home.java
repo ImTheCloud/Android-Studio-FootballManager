@@ -1,10 +1,8 @@
 package Home;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,53 +14,51 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import Firebase.Login;
+import Firebase.Register;
 import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.Compo;
-
-import Ranking.Player;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import Statistics.Statistics;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private boolean isSoundEnabled = true;
     private DrawerLayout drawerLayout;
-    FloatingActionButton compo;
-    private Button newGameButton,history,ranking;
+    private Button newGameButton,history,statistics;
     private FirebaseAuth mAuth;
     private ImageView imageView;
+    private TextView navEmail;
+    private Toolbar toolbar;
+    private View header;
+    private LinearLayout layout_home;
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
         history = findViewById(R.id.BT_History);
-        ranking = findViewById(R.id.BT_Ranking);
+        statistics = findViewById(R.id.BT_Statistics);
         newGameButton = findViewById(R.id.BT_New_Game);
         drawerLayout = findViewById(R.id.drawer_layout);
-        LinearLayout layout_home = findViewById(R.id.layout_home);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
-        View header = navigationView.getHeaderView(0);
-        TextView navEmail = (TextView) header.findViewById(R.id.navEmail);
-
+        layout_home = findViewById(R.id.layout_home);
+        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
+        header = navigationView.getHeaderView(0);
+        navEmail = (TextView) header.findViewById(R.id.navEmail);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // format tablette
         imageView = findViewById(R.id.imageView);
-
         Configuration configuration = getResources().getConfiguration();
         if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE
                 || (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {
             imageView.setImageResource(R.drawable.football_tablette);
         }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
         mAuth = FirebaseAuth.getInstance();
         // Vérifier si l'utilisateur est connecté
@@ -81,7 +77,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -89,8 +84,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 newGameButton.setEnabled(false);
                 history.setEnabled(false);
                 history.setVisibility(View.INVISIBLE);
-                ranking.setEnabled(false);
-                ranking.setVisibility(View.INVISIBLE);
+                statistics.setEnabled(false);
+                statistics.setVisibility(View.INVISIBLE);
 
                 layout_home.setEnabled(false);
                 layout_home.setVisibility(View.INVISIBLE);
@@ -100,25 +95,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             public void onDrawerClosed(@NonNull View drawerView) {
                 history.setEnabled(true);
                 history.setVisibility(View.VISIBLE);
-                ranking.setEnabled(true);
-                ranking.setVisibility(View.VISIBLE);
+                statistics.setEnabled(true);
+                statistics.setVisibility(View.VISIBLE);
 
                 newGameButton.setVisibility(View.VISIBLE);
                 newGameButton.setEnabled(true);
                 layout_home.setVisibility(View.VISIBLE);
                 layout_home.setEnabled(true);
-
-
             }
-
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                // Nothing to do here
             }
 
             @Override
             public void onDrawerStateChanged(int newState) {
-                // Nothing to do here
             }
         });
 
@@ -131,11 +121,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
         if (userEmail != null) {
-            ranking.setOnClickListener(new View.OnClickListener() {
+            statistics.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Home.this, Player.class));
-
+                    startActivity(new Intent(Home.this, Statistics.class));
                 }
             });
             history.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +134,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
             });
         } else {
-            ranking.setOnClickListener(new View.OnClickListener() {
+            statistics.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View view) {
@@ -156,8 +145,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
-
-
                 }
             });
         }
@@ -165,7 +152,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -219,12 +205,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }else{
                     Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
                 }
-
-
                 break;
             case R.id.nav_help:
                 startActivity(new Intent(Home.this, Help.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                break;
+            case R.id.nav_register:
+                if (userEmail != null) {
+                    Toast.makeText(getApplicationContext(), "Log out First", Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(new Intent(Home.this, Register.class));
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                }
                 break;
 
         }
@@ -234,19 +226,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity(); // Utiliser finishAffinity() au lieu de finish() pour fermer toutes les activités de l'application
-        System.exit(0); // Utiliser System.exit(0) pour quitter l'application complètement
+        finishAffinity();
+        System.exit(0);
     }
-
-
-
     public void goToNewGame(View v) {
         startActivity(new Intent(Home.this, NewGame.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
     }
-
-
-
 }
 

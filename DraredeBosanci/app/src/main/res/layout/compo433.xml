@@ -38,9 +38,7 @@
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
+            android:text="Loading..."
             android:textStyle="bold"
             tools:layout_editor_absoluteX="40dp"
             tools:layout_editor_absoluteY="181dp" />
@@ -60,16 +58,13 @@
 
         <EditText
             android:id="@+id/player1"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
         <Space
@@ -78,16 +73,13 @@
 
         <EditText
             android:id="@+id/player2"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -105,16 +97,13 @@
 
         <EditText
             android:id="@+id/player5"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
         <Space
@@ -123,16 +112,13 @@
 
         <EditText
             android:id="@+id/player6"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -150,16 +136,13 @@
         app:layout_constraintVertical_bias="0.638">
         <EditText
             android:id="@+id/player4"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="53dp"
             tools:layout_editor_absoluteY="429dp" />
@@ -179,14 +162,13 @@
 
         <EditText
             android:id="@+id/player7"
-
+            android:text="Loading..."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
             android:textColor="#FFFFFF"
             android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
@@ -204,9 +186,7 @@
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
+            android:text="Loading..."
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -230,9 +210,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
+            android:text="Loading..."
             android:textStyle="bold" />
 
         <Space
@@ -241,7 +219,7 @@
 
         <EditText
             android:id="@+id/player10"
-
+            android:text="Loading..."
             android:background="@android:color/transparent"
             android:drawableBottom="@drawable/t_shirt"
             android:ems="4"
@@ -249,8 +227,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -275,9 +251,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#BDBDBD"
+            android:text="Loading..."
             android:textStyle="bold" />
     </LinearLayout>
 

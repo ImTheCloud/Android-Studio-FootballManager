@@ -42,7 +42,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="Ranking.Rank"
+            android:name="Statistics.Ranking"
             android:exported="false" />
         <activity
             android:name="Firebase.Register"
@@ -80,44 +80,44 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="Ranking.RankClaudiu"
+            android:name="Statistics.StatClaudiu"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankIosif"
+            android:name="Statistics.StatIosif"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankSimon"
+            android:name="Statistics.StatSimon"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankDavid"
+            android:name="Statistics.StatDavid"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankLucian"
+            android:name="Statistics.StatLucian"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankDany"
+            android:name="Statistics.StatDany"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankYaniv"
+            android:name="Statistics.StatYaniv"
             android:exported="false"
             android:label="@string/title_activity_form_yaniv" />
         <activity
-            android:name="Ranking.RankEduard"
+            android:name="Statistics.StatEduard"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankRoberto"
+            android:name="Statistics.StatRoberto"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankDenis"
+            android:name="Statistics.StatDenis"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankFlavyus"
+            android:name="Statistics.StatFlavyus"
             android:exported="false" />
         <activity
-            android:name="Ranking.RankRuben"
+            android:name="Statistics.StatRuben"
             android:exported="false" />
         <activity
-            android:name="Ranking.Player"
+            android:name="Statistics.Statistics"
             android:exported="false" />
         <activity
             android:name="Live.LiveRandom"

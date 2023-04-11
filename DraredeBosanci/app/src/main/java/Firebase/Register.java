@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.draredebosanci.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +19,6 @@ public class Register extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText signupEmail, signupPassword;
     private Button signupButton;
-    private TextView loginRedirectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,6 @@ public class Register extends AppCompatActivity {
         signupEmail = findViewById(R.id.signup_email);
         signupPassword = findViewById(R.id.signup_password);
         signupButton = findViewById(R.id.signup_button);
-        loginRedirectText = findViewById(R.id.loginRedirectText);
         signupPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +48,9 @@ public class Register extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful() ){
-                                            Toast.makeText(Register.this,"User registered successfully, please verify your email",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Register.this,"User registered, verify your email",Toast.LENGTH_SHORT).show();
                                             signupEmail.setText("");
                                             signupPassword.setText("");
-
                                             startActivity(new Intent(Register.this, Login.class));
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                         }else
@@ -75,7 +71,6 @@ public class Register extends AppCompatActivity {
     }
 
     public void goToLogin(View view) {
-
         startActivity(new Intent(Register.this, Login.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }

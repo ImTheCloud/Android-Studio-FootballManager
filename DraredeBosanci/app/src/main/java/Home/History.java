@@ -1,5 +1,4 @@
 package Home;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +22,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class History extends AppCompatActivity {
-    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay;
+    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay,loadingText;
     private String half,timeFirstHalf,timeSecondHalf,time;
     private Button deleteAll;
 
@@ -38,12 +36,10 @@ public class History extends AppCompatActivity {
         timeDisplay = findViewById(R.id.Time);
         dateDisplay = findViewById(R.id.Date);
         mailDisplay = findViewById(R.id.Mail);
-
         deleteAll = findViewById(R.id.DeleteAll);
 
-        TextView loadingText = findViewById(R.id.loading_text);
+        loadingText = findViewById(R.id.loading_text);
         loadingText.setVisibility(View.VISIBLE);
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -192,9 +188,6 @@ public class History extends AppCompatActivity {
                         gameNumber++; // incrementer le compteur
                     }
 
-
-
-
                     String teamDisplayData =
                             "Team 1 : " + "\n" + team1 + "\n" +
                                     "Team 2 : "  + "\n"+ team2 +  "\n";
@@ -203,25 +196,20 @@ public class History extends AppCompatActivity {
                     String dateDisplayData  = "Date : " + "\n" + dates;
                     String mailDisplayData = "Referee : " + "\n" + mails;
 
-
                     teamDisplay.setText(teamDisplayData);
                     goalDisplay.setText(goalDisplayData);
                     timeDisplay.setText(timeDisplayData);
                     dateDisplay.setText(dateDisplayData);
                     mailDisplay.setText(mailDisplayData);
 
-
                 }else{
                     loadingText.setVisibility(View.VISIBLE);
                     loadingText.setText("No game played");
                     deleteAll.setEnabled(false);
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

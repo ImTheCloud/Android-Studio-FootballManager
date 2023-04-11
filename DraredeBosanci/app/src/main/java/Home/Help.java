@@ -1,20 +1,15 @@
 package Home;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.draredebosanci.R;
 
 public class Help extends AppCompatActivity {
-
     private Button aboutMe,fr;
     private TextView text,textTitle;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +19,6 @@ public class Help extends AppCompatActivity {
         text= findViewById(R.id.text);
         textTitle= findViewById(R.id.textTitle);
 
-
         aboutMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,7 +26,6 @@ public class Help extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         fr.setOnClickListener(new View.OnClickListener() {
             @Override

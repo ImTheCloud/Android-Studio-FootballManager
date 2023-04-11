@@ -1,7 +1,6 @@
 package Firebase;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.draredebosanci.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +24,7 @@ import Home.Home;
 
 public class Login extends AppCompatActivity {
     private EditText loginEmail, loginPassword;
-    private TextView signupRedirectText,forgotPassword;
+    private TextView forgotPassword;
     private Button loginButton;
     private FirebaseAuth auth;
 
@@ -38,7 +36,6 @@ public class Login extends AppCompatActivity {
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
-        signupRedirectText = findViewById(R.id.signUpRedirectText);
         forgotPassword = findViewById(R.id.forgot_password);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,16 +95,10 @@ public class Login extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        if (auth.getCurrentUser() != null && !auth.getCurrentUser().isEmailVerified()) {
-                                            Toast.makeText(Login.this, "Please verify your email address before logging in", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }else{
                                             Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
                                             startActivity(new Intent(Login.this, Home.class));
                                             finish();
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -127,8 +118,6 @@ public class Login extends AppCompatActivity {
         });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     }
     @Override
     public void onBackPressed() {
@@ -139,7 +128,6 @@ public class Login extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
     public void goToSignUp(View v) {
-
         startActivity(new Intent(Login.this, Register.class));
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }

@@ -1,20 +1,8 @@
-package Firebase;
+package Compo;
 
 import android.widget.EditText;
-
 public class CompoSave {
-    EditText player1;
-    EditText player2;
-    EditText player3;
-    EditText player4;
-    EditText player5;
-    EditText player6;
-    EditText player7;
-    EditText player8;
-    EditText player9;
-    EditText player10;
-    EditText player11;
-
+    EditText player1,player2,player3,player4,player5,player6,player7,player8,player9,player10,player11;
 
     public CompoSave(EditText player1, EditText player2, EditText player3, EditText player4, EditText player5, EditText player6, EditText player7, EditText player8, EditText player9, EditText player10, EditText player11) {
         this.player1 = player1;
@@ -29,7 +17,6 @@ public class CompoSave {
         this.player10 = player10;
         this.player11 = player11;
     }
-
 
     public String getPlayer1() {
         return player1.getText().toString();

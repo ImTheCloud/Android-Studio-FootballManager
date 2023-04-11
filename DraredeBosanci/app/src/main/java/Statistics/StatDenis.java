@@ -1,4 +1,4 @@
-package Ranking;
+package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,9 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import Firebase.Form;
 
-public class RankDenis extends AppCompatActivity {
+public class StatDenis extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
@@ -177,11 +176,11 @@ public class RankDenis extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Form data = new Form(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForDenis"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Denis");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id
-                Toast.makeText(RankDenis.this, "Player profile save", Toast.LENGTH_SHORT).show();
+                Toast.makeText(StatDenis.this, "Player profile save", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -312,7 +311,7 @@ public class RankDenis extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-        Intent intent = new Intent(RankDenis.this, Player.class);
+        Intent intent = new Intent(StatDenis.this, Statistics.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
@@ -327,11 +326,11 @@ public class RankDenis extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(RankDenis.this, RankFlavyus.class);
+                        Intent intent = new Intent(StatDenis.this, StatFlavyus.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                        Intent intent = new Intent(RankDenis.this, RankRoberto.class);
+                        Intent intent = new Intent(StatDenis.this, StatRoberto.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -342,14 +341,14 @@ public class RankDenis extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-        Intent intent = new Intent(RankDenis.this, RankFlavyus.class);
+        Intent intent = new Intent(StatDenis.this, StatFlavyus.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
     public void goToRight(View v){
-        Intent intent = new Intent(RankDenis.this, RankRoberto.class);
+        Intent intent = new Intent(StatDenis.this, StatRoberto.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
