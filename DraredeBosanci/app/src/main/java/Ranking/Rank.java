@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class Rank extends AppCompatActivity {
     EditText point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12;
     Button bt_Save;
     DatabaseReference UserRef;
+    private LinearLayout parent_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,84 @@ public class Rank extends AppCompatActivity {
 
         bt_Save = findViewById(R.id.bt_Save);
         bt_Save.setVisibility(View.INVISIBLE);
+
+        parent_layout = findViewById(R.id.parent_layout);
+        parent_layout.setVisibility(View.INVISIBLE);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        database.getReference("Rank").child("-rank").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    parent_layout.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
+
+                    String pt1 = snapshot.child("point1").getValue(String.class);
+                    String pt2 = snapshot.child("point2").getValue(String.class);
+                    String pt3 = snapshot.child("point3").getValue(String.class);
+                    String pt4 = snapshot.child("point4").getValue(String.class);
+                    String pt5 = snapshot.child("point5").getValue(String.class);
+                    String pt6 = snapshot.child("point6").getValue(String.class);
+                    String pt7 = snapshot.child("point7").getValue(String.class);
+                    String pt8 = snapshot.child("point8").getValue(String.class);
+                    String pt9= snapshot.child("point9").getValue(String.class);
+                    String pt10 = snapshot.child("point10").getValue(String.class);
+                    String pt11 = snapshot.child("point11").getValue(String.class);
+                    String pt12 = snapshot.child("point12").getValue(String.class);
+
+                    String nm1 = snapshot.child("name1").getValue(String.class);
+                    String nm2 = snapshot.child("name2").getValue(String.class);
+                    String nm3 = snapshot.child("name3").getValue(String.class);
+                    String nm4 = snapshot.child("name4").getValue(String.class);
+                    String nm5 = snapshot.child("name5").getValue(String.class);
+                    String nm6 = snapshot.child("name6").getValue(String.class);
+                    String nm7 = snapshot.child("name7").getValue(String.class);
+                    String nm8 = snapshot.child("name8").getValue(String.class);
+                    String nm9= snapshot.child("name9").getValue(String.class);
+                    String nm10 = snapshot.child("name10").getValue(String.class);
+                    String nm11 = snapshot.child("name11").getValue(String.class);
+                    String nm12 = snapshot.child("name12").getValue(String.class);
+
+                    name1.setText(nm1);
+                    name2.setText(nm2);
+                    name3.setText(nm3);
+                    name4.setText(nm4);
+                    name5.setText(nm5);
+                    name6.setText(nm6);
+                    name7.setText(nm7);
+                    name8.setText(nm8);
+                    name9.setText(nm9);
+                    name10.setText(nm10);
+                    name11.setText(nm11);
+                    name12.setText(nm12);
+
+                    point1.setText(pt1);
+                    point2.setText(pt2);
+                    point3.setText(pt3);
+                    point4.setText(pt4);
+                    point5.setText(pt5);
+                    point6.setText(pt6);
+                    point7.setText(pt7);
+                    point8.setText(pt8);
+                    point9.setText(pt9);
+                    point10.setText(pt10);
+                    point11.setText(pt11);
+                    point12.setText(pt12);
+
+                }
+
+                else{
+                    loading.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
             bt_Save.setVisibility(View.VISIBLE);
