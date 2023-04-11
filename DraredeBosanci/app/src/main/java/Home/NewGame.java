@@ -145,39 +145,21 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-
-
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
 
-        // Check if we have permission to access the user's location.
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permission from the user to access their location.
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-        } else {
-            // If we have permission, get the user's last known location and move the camera there.
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-                if (location != null) {
-                    userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions()
-                            .position(userLocation)
-                            .title("User location"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
-                }
-            });
+        // Move the camera to the specified coordinates (50.827511, 4.297444)
+        LatLng cameraLocation = new LatLng(50.827511, 4.297444);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cameraLocation, 15f));
 
-            // Add a marker with a custom icon at the specified coordinates
-            LatLng markerLocation = new LatLng(50.827511 , 4.297444);
-            mMap.addMarker(new MarkerOptions()
-                    .position(markerLocation)
-                    .title("Our field")
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker))); // Set the custom icon here
-        }
+        // Add a marker with a custom icon at the specified coordinates
+        mMap.addMarker(new MarkerOptions()
+                .position(cameraLocation)
+                .title("Our field")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.green_marker))); // Set the custom icon here
     }
 
     @Override
@@ -202,6 +184,9 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     }
+
+
+
 
 
     @Override
