@@ -8,17 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.draredebosanci.R;
-
 import Home.Home;
 import Live.LiveRandom;
 import Home.NewGame;
 
 public class TeamRandom extends AppCompatActivity {
-
     private EditText etPlayers;
-
     public static EditText  timerFirst,timerHalfTime,timerSecond;
 
     @Override

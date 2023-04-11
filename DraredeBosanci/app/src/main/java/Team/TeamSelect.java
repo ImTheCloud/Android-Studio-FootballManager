@@ -1,7 +1,6 @@
 package Team;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.draredebosanci.R;
 import Home.NewGame;
 import Home.Home;
@@ -18,7 +16,6 @@ import Live.LiveSelected;
 public class TeamSelect extends AppCompatActivity{
     private EditText etPlayers1,etPlayers2;
     public static EditText  ttimerFirst,ttimerHalfTime,ttimerSecond;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +78,10 @@ public class TeamSelect extends AppCompatActivity{
                 }
             });
         }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    }
-
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
     public void disableButton(View view) {
         Button button = (Button) view;
         button.setEnabled(false);
@@ -128,8 +119,6 @@ public class TeamSelect extends AppCompatActivity{
             return;
         }
 
-
-
         Intent i = new Intent(TeamSelect.this, LiveSelected.class);
 
         String players = etPlayers1.getText().toString();
@@ -143,6 +132,5 @@ public class TeamSelect extends AppCompatActivity{
 
         startActivity(i);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
     }
 }

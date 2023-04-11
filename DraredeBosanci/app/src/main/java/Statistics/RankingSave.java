@@ -1,14 +1,9 @@
 package Statistics;
 
 import android.widget.EditText;
-
 public class RankingSave {
-
-
     EditText name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12;
     EditText point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12;
-
-
     public RankingSave(EditText name1, EditText name2, EditText name3, EditText name4, EditText name5, EditText name6, EditText name7, EditText name8, EditText name9, EditText name10, EditText name11, EditText name12, EditText point1, EditText point2, EditText point3, EditText point4, EditText point5, EditText point6, EditText point7, EditText point8, EditText point9, EditText point10, EditText point11, EditText point12) {
         this.name1 = name1;
         this.name2 = name2;

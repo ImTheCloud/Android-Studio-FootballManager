@@ -1,27 +1,19 @@
 package Statistics;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.draredebosanci.R;
-
 import Home.Home;
 
 public class Statistics extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.player);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-
-/////// on create end
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     @Override
     public void onBackPressed() {

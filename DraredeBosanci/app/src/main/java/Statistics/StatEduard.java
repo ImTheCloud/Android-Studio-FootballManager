@@ -2,7 +2,6 @@ package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -53,7 +52,7 @@ public class StatEduard extends AppCompatActivity {
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
-    DatabaseReference UserRef;
+    private DatabaseReference UserRef;
     private float x1, x2;
     private static final int MIN_DISTANCE = 150;
 
@@ -181,7 +180,7 @@ public class StatEduard extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                SaveStats data = new SaveStats(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForEduard"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Eduard");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id

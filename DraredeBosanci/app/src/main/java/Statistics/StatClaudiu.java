@@ -2,7 +2,6 @@ package Statistics;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,12 +47,11 @@ public class StatClaudiu extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult;
-
     public static TextView TVPointsWriteClaudiu;
     private Button bt_Save;
     private Spinner playerPositionSpinner;
     private LinearLayout linearBig;
-    DatabaseReference UserRef;
+    private DatabaseReference UserRef;
     private float x1, x2;
     private static final int MIN_DISTANCE = 150;
 
@@ -178,7 +176,7 @@ public class StatClaudiu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    StatisticsSave data = new StatisticsSave(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                    SaveStats data = new SaveStats(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                     String uniqueId = "-dataForClaudiu"; // utiliser le même identifiant unique
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                     UserRef.child(uniqueId).setValue(data); // définir la valeur avec l'identifiant unique
@@ -350,13 +348,10 @@ public class StatClaudiu extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-
     public void goToRight(View v){
         Intent intent = new Intent(StatClaudiu.this, StatFlavyus.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-
-
 
 }
