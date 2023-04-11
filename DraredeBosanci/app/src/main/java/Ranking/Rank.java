@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,7 +72,7 @@ public class Rank extends AppCompatActivity {
         parent_layout = findViewById(R.id.parent_layout);
         parent_layout.setVisibility(View.INVISIBLE);
 
-        
+
         EditText[] editTextArray = new EditText[] {
                 findViewById(R.id.name1),
                 findViewById(R.id.name2),
@@ -176,7 +177,32 @@ public class Rank extends AppCompatActivity {
 
         if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
             bt_Save.setVisibility(View.VISIBLE);
+        }else{
+            name1.setEnabled(false);
+            name2.setEnabled(false);
+            name3.setEnabled(false);
+            name4.setEnabled(false);
+            name5.setEnabled(false);
+            name6.setEnabled(false);
+            name7.setEnabled(false);
+            name8.setEnabled(false);
+            name9.setEnabled(false);
+            name10.setEnabled(false);
+            name11.setEnabled(false);
+            name12.setEnabled(false);
 
+            point1.setEnabled(false);
+            point2.setEnabled(false);
+            point3.setEnabled(false);
+            point4.setEnabled(false);
+            point5.setEnabled(false);
+            point6.setEnabled(false);
+            point7.setEnabled(false);
+            point8.setEnabled(false);
+            point9.setEnabled(false);
+            point10.setEnabled(false);
+            point11.setEnabled(false);
+            point12.setEnabled(false);
         }
 
         bt_Save.setOnClickListener(new View.OnClickListener() {
