@@ -59,7 +59,7 @@ public class StatIosif extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_iosif);
+        setContentView(R.layout.stat_iosif);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -178,7 +178,7 @@ public class StatIosif extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SaveStats data = new SaveStats(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                Stat_Save data = new Stat_Save(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                 String uniqueId = "-dataForIosif"; // use the same unique id
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Iosif");
                 UserRef.child(uniqueId).setValue(data); // set value with unique id

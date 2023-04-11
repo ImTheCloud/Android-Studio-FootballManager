@@ -58,7 +58,7 @@ public class StatClaudiu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank_claudiu);
+        setContentView(R.layout.stat_claudiu);
 
         bt_Save = findViewById(R.id.bt_Save);
         tvapiResult = findViewById(R.id.apiResult);
@@ -176,7 +176,7 @@ public class StatClaudiu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    SaveStats data = new SaveStats(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
+                    Stat_Save data = new Stat_Save(etFame,etWin,etLose,etTie,et5Goal,etYellowCard,etRank,playerPositionSpinner);
                     String uniqueId = "-dataForClaudiu"; // utiliser le même identifiant unique
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player/Claudiu");
                     UserRef.child(uniqueId).setValue(data); // définir la valeur avec l'identifiant unique

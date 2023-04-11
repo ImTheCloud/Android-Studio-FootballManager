@@ -133,7 +133,7 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1" /> <!-- Ajout d'un espace pour pousser le deuxième bouton à la fin -->
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/BT_Selected_Team"
@@ -154,7 +154,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
     </LinearLayout>
-
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

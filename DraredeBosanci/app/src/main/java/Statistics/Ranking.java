@@ -31,7 +31,7 @@ public class Ranking extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rank);
+        setContentView(R.layout.ranking);
 
         point1 = findViewById(R.id.point1);
         point2 = findViewById(R.id.point2);

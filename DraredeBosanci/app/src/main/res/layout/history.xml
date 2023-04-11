@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="Home.History">
 
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
@@ -31,8 +30,6 @@
             android:layout_centerInParent="true" />
 
     </RelativeLayout>
-
-
 
     <Button
             android:id="@+id/DeleteAll"
@@ -151,8 +148,6 @@
                     app:layout_constraintHorizontal_bias="0.078"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
 
             </LinearLayout>
 

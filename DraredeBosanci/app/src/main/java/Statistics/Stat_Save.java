@@ -3,11 +3,11 @@ package Statistics;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class SaveStats {
+public class Stat_Save {
     EditText fame,win,lose,tie,bonus,yellow,rank;
     Spinner position;
 
-    public SaveStats(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
+    public Stat_Save(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
         this.fame = etFame;
         this.win = etWin;
         this.lose = etLose;
