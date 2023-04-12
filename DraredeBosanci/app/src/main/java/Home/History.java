@@ -24,7 +24,7 @@ import java.util.TreeMap;
 public class History extends AppCompatActivity {
     private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay,loadingText;
     private String half,timeFirstHalf,timeSecondHalf,time;
-    private Button deleteAll;
+    private Button deleteAll,deleteLast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class History extends AppCompatActivity {
         dateDisplay = findViewById(R.id.Date);
         mailDisplay = findViewById(R.id.Mail);
         deleteAll = findViewById(R.id.DeleteAll);
+        deleteLast = findViewById(R.id.deleteLast);
 
         loadingText = findViewById(R.id.loading_text);
         loadingText.setVisibility(View.VISIBLE);
@@ -67,23 +68,107 @@ public class History extends AppCompatActivity {
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // Code de suppression de l'historique
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
                                     database.getReference().child("Game").removeValue();
 
-                                    // Code pour cacher les éléments d'affichage
                                     mailDisplay.setVisibility(View.INVISIBLE);
                                     teamDisplay.setVisibility(View.INVISIBLE);
                                     goalDisplay.setVisibility(View.INVISIBLE);
                                     timeDisplay.setVisibility(View.INVISIBLE);
                                     dateDisplay.setVisibility(View.INVISIBLE);
                                     deleteAll.setEnabled(false);
+                                    deleteLast.setEnabled(false);
 
-                                    // Code pour afficher le texte de chargement
                                     loadingText.setVisibility(View.VISIBLE);
                                     loadingText.setText("No game played");
                                     Toast.makeText(History.this, "All games have been deleted", Toast.LENGTH_SHORT).show();
                                 }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            });
+
+
+            deleteLast.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                    builder.setTitle("Confirmation")
+                            .setMessage("Are you sure you want to delete the last game ?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+
+                                    // Supprimer le dernier élément dans le nœud "Date"
+                                    database.getReference().child("Game").child("Date").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+
+                                    // Supprimer le dernier élément dans le nœud "Goals"
+                                    database.getReference().child("Game").child("Goals").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+
+                                    // Supprimer le dernier élément dans le nœud "Mail"
+                                    database.getReference().child("Game").child("Mail").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+
+                                    // Supprimer le dernier élément dans le nœud "Map"
+                                    database.getReference().child("Game").child("Map").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+                                    // Supprimer le dernier élément dans le nœud "Team1"
+                                    database.getReference().child("Game").child("Teams").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+
+
+                                    // Supprimer le dernier élément dans le nœud "Time"
+                                    database.getReference().child("Game").child("Time").orderByKey().limitToLast(1).get()
+                                            .addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
+                                                        snapshot.getRef().removeValue();
+                                                    }
+                                                }
+                                            });
+
+                                }
+
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                 @Override
@@ -204,6 +289,7 @@ public class History extends AppCompatActivity {
                     loadingText.setVisibility(View.VISIBLE);
                     loadingText.setText("No game played");
                     deleteAll.setEnabled(false);
+                    deleteLast.setEnabled(false);
                 }
             }
             @Override
