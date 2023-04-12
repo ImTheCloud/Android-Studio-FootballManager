@@ -1,5 +1,4 @@
 package Home;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -42,11 +41,10 @@ import Team.TeamSelect;
 public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private EditText locationEditText;
-    private TextView dateTextView;
+    private TextView dateTextView,temperatureTextView;
     private Button fetchButton;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
-    private TextView temperatureTextView;
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     public static LatLng userLocation,ourField;
