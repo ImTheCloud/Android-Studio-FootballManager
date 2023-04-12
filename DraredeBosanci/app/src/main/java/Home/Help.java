@@ -32,6 +32,7 @@ public class Help extends AppCompatActivity {
             public void onClick(View v) {
                 aboutMe.setText("BESOIN PLUS D'AIDE ?");
                 textTitle.setText("AIDE");
+                fr.setVisibility(View.INVISIBLE);
                 text.setText("\nAccès :\nAccès utilisateur non connecté / enregistré :\n"+
                        "-Accès à la création de partie :\n\n" +
                        "Accès de l'utilisateur connecté :\n" +

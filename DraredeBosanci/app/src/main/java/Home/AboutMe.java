@@ -21,6 +21,7 @@ public class AboutMe extends AppCompatActivity {
         fr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fr.setVisibility(View.INVISIBLE);
                 ABOUTTEXT.setText("A PROPOS DE MOI");
                 text.setText("Je suis un jeune développeur passionné par les nouvelles technologies et l'informatique. " +
                         "\n\nJ'ai développé une application pour mon usage personnel, ce qui m'a pris environ un mois et demi." +

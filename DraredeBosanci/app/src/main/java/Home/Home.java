@@ -218,7 +218,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 }
                 break;
-
+            case R.id.nav_rules:
+                startActivity(new Intent(Home.this, Rules.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                break;
         }
         newGameButton.setEnabled(false);
         return true;

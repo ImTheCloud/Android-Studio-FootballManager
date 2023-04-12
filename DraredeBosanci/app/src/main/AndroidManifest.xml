@@ -42,6 +42,9 @@
                 android:value="" />
         </activity>
         <activity
+            android:name="Home.Rules"
+            android:exported="false" />
+        <activity
             android:name="Statistics.Ranking"
             android:exported="false" />
         <activity
