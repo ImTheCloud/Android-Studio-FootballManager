@@ -109,8 +109,6 @@ public class History extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loadingText.setVisibility(View.GONE);
-
-                // Extraire les données de la base de données Firebase pour les noms des joueurs et la localisation
                 if(snapshot != null && snapshot.getValue() != null) {
                     teamDisplay.setVisibility(View.VISIBLE);
                     goalDisplay.setVisibility(View.VISIBLE);
@@ -133,29 +131,29 @@ public class History extends AppCompatActivity {
 
                     String team1 = "";
                     String team2 = "";
-                    int gameNumber = 1; // initialiser le compteur
+                    int gameNumber = 1;
                     for (Map.Entry<String, Object> entry : sortedTeamsData.entrySet()) {
                         Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
                         ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
                         ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
                         team1 += "Game " + gameNumber + " : "+ String.join(", ", players1) + "\n";
                         team2 += "Game " + gameNumber + " : "+  String.join(", ", players2) + "\n";
-                        gameNumber++; // incrementer le compteur
+                        gameNumber++;
                     }
 
                     String scores = "";
-                    gameNumber = 1; // réinitialiser le compteur
+                    gameNumber = 1;
                     for (Map.Entry<String, Object> entry : sortedgoalsData.entrySet()) {
                         Map<String, Object> goalData = (Map<String, Object>) entry.getValue();
                         String goalTeam1 = goalData.get("goalTeam1").toString();
                         String goalTeam2 = goalData.get("goalTeam2").toString();
                         scores += "Game " + gameNumber + " : " + goalTeam1 + " : " + goalTeam2 + "\n";
-                        gameNumber++; // incrementer le compteur
+                        gameNumber++;
                     }
 
                     String timeDataString="";
                     List<String> times = new ArrayList<>();
-                    gameNumber = 1; // réinitialiser le compteur
+                    gameNumber = 1;
                     for (Map.Entry<String, Object> entry : sortedtimeData.entrySet()) {
                         Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
                         half = timePointData.get("half").toString();
@@ -164,20 +162,20 @@ public class History extends AppCompatActivity {
                         time = timeFirstHalf + "''  " + half + "''  " + timeSecondHalf + "''";
                         times.add("Game " + gameNumber + " : " + time);
                         timeDataString += "Game " + gameNumber + " : " + time + "\n";
-                        gameNumber++; // incrementer le compteur
+                        gameNumber++;
                     }
 
                     String dates = "";
-                    gameNumber = 1; // réinitialiser le compteur
+                    gameNumber = 1;
                     for (Map.Entry<String, Object> entry : sorteddateData.entrySet()) {
                         Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
                         String date = ddateData.get("data").toString();
                         dates += "Game " + gameNumber + " : " +  date+ "\n";
-                        gameNumber++; // incrementer le compteur
+                        gameNumber++;
                     }
 
                     String mails = "";
-                    gameNumber = 1; // réinitialiser le compteur
+                    gameNumber = 1;
                     for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
                         Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
                         String mail = ddateMail.get("data").toString();
@@ -185,7 +183,7 @@ public class History extends AppCompatActivity {
                             mail = "Claudiu";
                         }
                         mails += "Game " + gameNumber + " : " +  mail+"\n";
-                        gameNumber++; // incrementer le compteur
+                        gameNumber++;
                     }
 
                     String teamDisplayData =
