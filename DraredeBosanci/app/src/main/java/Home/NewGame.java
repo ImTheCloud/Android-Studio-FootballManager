@@ -156,9 +156,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                 if (location != null) {
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     ourField = new LatLng(50.827511 , 4.297444);
-                    mMap.addMarker(new MarkerOptions()
-                            .position(ourField)
-                            .title("Our field"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ourField, 15f));
                 }
             });
@@ -177,15 +174,13 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                 mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                     if (location != null) {
                         LatLng ourField = new LatLng(50.827511 , 4.297444);
-                        mMap.addMarker(new MarkerOptions()
-                                .position(ourField)
-                                .title("Our field"));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ourField, 15f));
                     }
                 });
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
