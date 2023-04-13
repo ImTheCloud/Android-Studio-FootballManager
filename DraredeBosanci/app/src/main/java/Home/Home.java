@@ -61,15 +61,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         mAuth = FirebaseAuth.getInstance();
-        // Vérifier si l'utilisateur est connecté
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            // Si l'utilisateur n'est pas connecté, afficher une alerte
-            navEmail.setText("No one is connected"); // Afficher "Personne n'est connecté" dans le TextView
+            navEmail.setText("No user currently connected");
         } else {
-            // Si l'utilisateur est connecté, afficher son nom dans le TextView
-            navEmail.setText("Connected as :" +"\n"+ currentUser.getEmail());
+            navEmail.setText(currentUser.getEmail());
         }
+
 
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);

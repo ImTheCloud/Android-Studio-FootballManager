@@ -24,7 +24,7 @@ public class AboutMe extends AppCompatActivity {
                 fr.setVisibility(View.INVISIBLE);
                 ABOUTTEXT.setText("A PROPOS DE MOI");
                 text.setText("Je suis un jeune développeur passionné par les nouvelles technologies et l'informatique. " +
-                        "\n\nJ'ai développé une application pour mon usage personnel, ce qui m'a pris environ un mois et demi." +
+                        "\n\nJ'ai développé une application pour mon usage personnel, ce qui m'a pris environ deux mois." +
                         "\n\n Tout au long du processus, j'ai acquis des connaissances précieuses sur la conception de logiciels, les langages de programmation et l'expérience utilisateur. " +
                         "\n\nCette expérience a alimenté ma passion pour le développement de logiciels.\n\n");
             }
