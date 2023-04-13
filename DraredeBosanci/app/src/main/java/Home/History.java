@@ -58,6 +58,12 @@ public class History extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Only the referee can delete all games", Toast.LENGTH_SHORT).show();
                 }
             });
+            deleteLast.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), "Only the referee can delete the last game", Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             deleteAll.setOnClickListener(new View.OnClickListener() {
                 @Override

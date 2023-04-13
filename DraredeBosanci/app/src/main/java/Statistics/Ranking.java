@@ -208,6 +208,8 @@ public class Ranking extends AppCompatActivity {
                     String uniqueId = "-rank"; // utiliser le même identifiant unique
                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Rank");
                     UserRef.child(uniqueId).setValue(data);
+
+
                     Toast.makeText(Ranking.this, "Ranking save", Toast.LENGTH_SHORT).show();
 
             }
