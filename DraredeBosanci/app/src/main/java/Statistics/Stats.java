@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,26 +184,38 @@ public class Stats extends AppCompatActivity {
         });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        FirebaseDatabase databasee = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference myRef = databasee.getReference("Player");
+        DatabaseReference myRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Player");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Player> players = new ArrayList<>();
+                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                    String playerName = playerSnapshot.child("name").getValue(String.class);
+                    String playerPoints = playerSnapshot.child("point").getValue(String.class);
+                    Player player = new Player(playerName, Integer.parseInt(playerPoints));
+                    players.add(player);
+                }
+
+                // trier la liste en fonction des points
+                Collections.sort(players, Collections.reverseOrder());
+
+                // créer les chaînes de caractères pour les TextViews
                 StringBuilder namesSb = new StringBuilder();
                 StringBuilder pointsSb = new StringBuilder();
                 StringBuilder rankSb = new StringBuilder();
                 int rankCounter = 1;
 
-                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                for (Player player : players) {
                     rankSb.append(rankCounter).append("\n");
-                    rankCounter++;
-                    String playerName = playerSnapshot.child("name").getValue(String.class);
-                    String playerPoints = playerSnapshot.child("point").getValue(String.class);
+                    String playerName = player.getName();
+                    String playerPoints = String.valueOf(player.getPoints());
                     namesSb.append(playerName).append("\n");
                     pointsSb.append(playerPoints).append("\n");
+                    rankCounter++;
                 }
 
+                // afficher les chaînes de caractères dans les TextViews
                 TextView name1TextView = findViewById(R.id.name1);
                 name1TextView.setText(namesSb.toString());
 
@@ -211,12 +224,13 @@ public class Stats extends AppCompatActivity {
 
                 TextView rank1TextView = findViewById(R.id.Rank1);
                 rank1TextView.setText(rankSb.toString());
-
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
             }
         });
+
 
 
 
