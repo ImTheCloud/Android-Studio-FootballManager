@@ -421,14 +421,7 @@ public class Statistics extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        Intent intent = new Intent(Statistics.this, Home.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
-    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -445,13 +438,11 @@ public class Statistics extends AppCompatActivity {
                         if (currentPosition > 0) {
                             playerNameSpinner.setSelection(currentPosition - 1);
                         }
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
                         int currentPosition = playerNameSpinner.getSelectedItemPosition();
                         if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
                             playerNameSpinner.setSelection(currentPosition + 1);
                         }
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     }
                 }
@@ -464,7 +455,6 @@ public class Statistics extends AppCompatActivity {
         if (currentPosition > 0) {
             playerNameSpinner.setSelection(currentPosition - 1);
         }
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void goToRight(View v){
@@ -472,7 +462,14 @@ public class Statistics extends AppCompatActivity {
         if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
             playerNameSpinner.setSelection(currentPosition + 1);
         }
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Statistics.this, Home.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
     }
 
 }
