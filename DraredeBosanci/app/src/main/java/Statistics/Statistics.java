@@ -53,7 +53,7 @@ public class Statistics extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult,loading;
-    public static TextView TVPointsWriteClaudiu;
+    public static TextView TVPointsWrite;
     private Button bt_Save;
     private Spinner playerPositionSpinner,playerNameSpinner;
     private LinearLayout linearBig;
@@ -77,16 +77,16 @@ public class Statistics extends AppCompatActivity {
         loading.setVisibility(View.VISIBLE);
         linearBig =  findViewById(R.id.linearBig);
         linearBig.setVisibility(View.INVISIBLE);
-        TVPointsWriteClaudiu = findViewById(R.id.TVPointsWriteClaudiu);
-        tvGameWrite = findViewById(R.id.TVGameWriteClaudiu);
-        tvWinRateWrite = findViewById(R.id.TVWinRateWriteClaudiu);
-        etFame = findViewById(R.id.ETFameClaudiu);
-        etWin = findViewById(R.id.ETWinClaudiu);
-        etTie = findViewById(R.id.ETTieClaudiu);
-        etLose = findViewById(R.id.ETLoseClaudiu);
-        etYellowCard = findViewById(R.id.ETYellowCardClaudiu);
-        et5Goal = findViewById(R.id.ET5GoalClaudiu);
-        etRank = findViewById(R.id.ETRankClaudiu);
+        TVPointsWrite = findViewById(R.id.TVPointsWrite);
+        tvGameWrite = findViewById(R.id.TVGameWrite);
+        tvWinRateWrite = findViewById(R.id.TVWinRateWrite);
+        etFame = findViewById(R.id.ETFame);
+        etWin = findViewById(R.id.ETWin);
+        etTie = findViewById(R.id.ETTie);
+        etLose = findViewById(R.id.ETLose);
+        etYellowCard = findViewById(R.id.ETYellowCard);
+        et5Goal = findViewById(R.id.ET5Goal);
+        etRank = findViewById(R.id.ETRank);
 
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         String[] positions = getResources().getStringArray(R.array.positions);
@@ -218,13 +218,13 @@ public class Statistics extends AppCompatActivity {
                 }
 
                 // afficher les chaînes de caractères dans les TextViews
-                TextView name1TextView = findViewById(R.id.name1);
+                TextView name1TextView = findViewById(R.id.name);
                 name1TextView.setText(namesSb.toString());
 
-                TextView pointsTextView = findViewById(R.id.point1);
+                TextView pointsTextView = findViewById(R.id.point);
                 pointsTextView.setText(pointsSb.toString());
 
-                TextView rank1TextView = findViewById(R.id.Rank1);
+                TextView rank1TextView = findViewById(R.id.Rank);
                 rank1TextView.setText(rankSb.toString());
             }
 
@@ -262,7 +262,7 @@ public class Statistics extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner,TVPointsWriteClaudiu);
+                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
                 String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
                 UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
@@ -319,7 +319,7 @@ public class Statistics extends AppCompatActivity {
             int totalGames = valueWin + valueTie + valueLose;
             double winRate = totalGames > 0 ? ((double) valueWin / totalGames) * 100 : 0.0;
             int points = ((valueWin * 3) + valueTie + bonus5Goal) - (valueYellowCard / 3);
-            TVPointsWriteClaudiu.setText(String.valueOf(points));
+            TVPointsWrite.setText(String.valueOf(points));
             tvGameWrite.setText(String.valueOf(totalGames));
             tvWinRateWrite.setText(String.format("%.0f%%", winRate));
         }
