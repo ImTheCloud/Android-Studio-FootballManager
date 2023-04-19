@@ -363,12 +363,16 @@ public class Stats extends AppCompatActivity {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        //Intent intent = new Intent(Stats.this, StatRuben.class);
-                 //       startActivity(intent);
+                        int currentPosition = playerNameSpinner.getSelectedItemPosition();
+                        if (currentPosition > 0) {
+                            playerNameSpinner.setSelection(currentPosition - 1);
+                        }
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
-                     //   Intent intent = new Intent(Stats.this, StatFlavyus.class);
-                  //      startActivity(intent);
+                        int currentPosition = playerNameSpinner.getSelectedItemPosition();
+                        if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
+                            playerNameSpinner.setSelection(currentPosition + 1);
+                        }
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     }
@@ -378,14 +382,18 @@ public class Stats extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
     public void goToLeft(View v){
-      //  Intent intent = new Intent(Stats.this, StatRuben.class);
-      //  startActivity(intent);
+        int currentPosition = playerNameSpinner.getSelectedItemPosition();
+        if (currentPosition > 0) {
+            playerNameSpinner.setSelection(currentPosition - 1);
+        }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void goToRight(View v){
-     //   Intent intent = new Intent(Stats.this, StatFlavyus.class);
-     //   startActivity(intent);
+        int currentPosition = playerNameSpinner.getSelectedItemPosition();
+        if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
+            playerNameSpinner.setSelection(currentPosition + 1);
+        }
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
