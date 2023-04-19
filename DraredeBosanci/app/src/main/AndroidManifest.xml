@@ -45,9 +45,6 @@
             android:name="Home.Rules"
             android:exported="false" />
         <activity
-            android:name="Statistics.Ranking"
-            android:exported="false" />
-        <activity
             android:name="Firebase.Register"
             android:exported="false" />
         <activity
@@ -83,7 +80,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="Statistics.Stats"
+            android:name="Statistics.Statistics"
             android:exported="false" />
         <activity
             android:name="Statistics.StatSimon"
@@ -97,9 +94,6 @@
             android:exported="false" />
         <activity
             android:name="Statistics.StatRuben"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.Statistics"
             android:exported="false" />
         <activity
             android:name="Live.LiveRandom"
