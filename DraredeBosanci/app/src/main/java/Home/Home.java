@@ -119,12 +119,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
         if (userEmail != null) {
-            statistics.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(Home.this, Statistics.class));
-                }
-            });
+            statistics.setOnClickListener(view -> startActivity(new Intent(Home.this, Statistics.class)));
             history.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
