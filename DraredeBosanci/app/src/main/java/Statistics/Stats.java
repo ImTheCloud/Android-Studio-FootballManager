@@ -181,13 +181,48 @@ public class Stats extends AppCompatActivity {
                 builder.show();
             }
         });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        FirebaseDatabase databasee = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference myRef = databasee.getReference("Player");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                StringBuilder namesSb = new StringBuilder();
+                StringBuilder pointsSb = new StringBuilder();
+                StringBuilder rankSb = new StringBuilder();
+                int rankCounter = 1;
+
+                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                    rankSb.append(rankCounter).append("\n");
+                    rankCounter++;
+                    String playerName = playerSnapshot.child("name").getValue(String.class);
+                    String playerPoints = playerSnapshot.child("point").getValue(String.class);
+                    namesSb.append(playerName).append("\n");
+                    pointsSb.append(playerPoints).append("\n");
+                }
+
+                TextView name1TextView = findViewById(R.id.name1);
+                name1TextView.setText(namesSb.toString());
+
+                TextView pointsTextView = findViewById(R.id.point1);
+                pointsTextView.setText(pointsSb.toString());
+
+                TextView rank1TextView = findViewById(R.id.Rank1);
+                rank1TextView.setText(rankSb.toString());
+
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
 
 
 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
         playerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -211,7 +246,7 @@ public class Stats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner);
+                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner,TVPointsWriteClaudiu);
                 String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
                 UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
