@@ -177,6 +177,7 @@ public class Statistics extends AppCompatActivity {
                         newPlayerRef.child("fameText").setValue("");
                         newPlayerRef.child("loseText").setValue("");
                         newPlayerRef.child("name").setValue(newPlayerName);
+                        newPlayerRef.child("point").setValue("0");
                         newPlayerRef.child("position").setValue("");
                         newPlayerRef.child("rankText").setValue("");
                         newPlayerRef.child("tieText").setValue("");
@@ -185,6 +186,57 @@ public class Statistics extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Player");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Player> players = new ArrayList<>();
+                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                    String playerName = playerSnapshot.child("name").getValue(String.class);
+                    String playerPoints = playerSnapshot.child("point").getValue(String.class);
+                    if (playerPoints != null) {
+                        Player player = new Player(playerName, Integer.parseInt(playerPoints));
+                        players.add(player);
+                    }
+
+                }
+
+                // trier la liste en fonction des points
+                Collections.sort(players, Collections.reverseOrder());
+
+                // créer les chaînes de caractères pour les TextViews
+                StringBuilder namesSb = new StringBuilder();
+                StringBuilder pointsSb = new StringBuilder();
+                StringBuilder rankSb = new StringBuilder();
+                int rankCounter = 1;
+
+                for (Player player : players) {
+                    rankSb.append(rankCounter).append("\n");
+                    String playerName = player.getName();
+                    String playerPoints = String.valueOf(player.getPoints());
+                    namesSb.append(playerName).append("\n");
+                    pointsSb.append(playerPoints).append("\n");
+                    rankCounter++;
+                }
+
+                // afficher les chaînes de caractères dans les TextViews
+                TextView name1TextView = findViewById(R.id.name);
+                name1TextView.setText(namesSb.toString());
+
+                TextView pointsTextView = findViewById(R.id.point);
+                pointsTextView.setText(pointsSb.toString());
+
+                TextView rank1TextView = findViewById(R.id.Rank);
+                rank1TextView.setText(rankSb.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
             }
         });
 
@@ -217,12 +269,15 @@ public class Statistics extends AppCompatActivity {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
         // Set up Volley RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
 
         // Set up API URL
         String teamId = "541";
         String apiUrl = String.format("https://api-football-v1.p.rapidapi.com/v3/players/squads?team=%s", teamId);
+
+        // Set up listener for spinner item selection
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -238,94 +293,7 @@ public class Statistics extends AppCompatActivity {
 
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private void retrieveDataFromDatabase(String uniqueId) {
-        DatabaseReference myRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Player");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    ArrayList<Player> players = new ArrayList<>();
-                    for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
-                        String playerName = playerSnapshot.child("name").getValue(String.class);
-                        String playerPoints = playerSnapshot.child("point").getValue(String.class);
-                        Player player = new Player(playerName, Integer.parseInt(playerPoints));
-                        players.add(player);
-                    }
 
-                    // trier la liste en fonction des points
-                    Collections.sort(players, Collections.reverseOrder());
-
-                    // créer les chaînes de caractères pour les TextViews
-                    StringBuilder namesSb = new StringBuilder();
-                    StringBuilder pointsSb = new StringBuilder();
-                    StringBuilder rankSb = new StringBuilder();
-                    int rankCounter = 1;
-
-                    for (Player player : players) {
-                        rankSb.append(rankCounter).append("\n");
-                        String playerName = player.getName();
-                        String playerPoints = String.valueOf(player.getPoints());
-                        namesSb.append(playerName).append("\n");
-                        pointsSb.append(playerPoints).append("\n");
-                        rankCounter++;
-                    }
-
-                    TextView name1TextView = findViewById(R.id.name);
-                    name1TextView.setText(namesSb.toString());
-
-                    TextView pointsTextView = findViewById(R.id.point);
-                    pointsTextView.setText(pointsSb.toString());
-
-                    TextView rank1TextView = findViewById(R.id.Rank);
-                    rank1TextView.setText(rankSb.toString());
-                } else {
-                    // le snapshot est vide, rien à faire
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // traitement de l'erreur d'accès à la base de données
-            }
-        });
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child(uniqueId).addListenerForSingleValueEvent(new ValueEventListener() {
-            // votre onDataChange et onCancelled methods ici
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    linearBig.setVisibility(View.VISIBLE);
-                    loading.setVisibility(View.GONE);
-                    String fame = snapshot.child("fameText").getValue(String.class);
-                    String win = snapshot.child("winText").getValue(String.class);
-                    String tie = snapshot.child("tieText").getValue(String.class);
-                    String lose = snapshot.child("loseText").getValue(String.class);
-                    String yellowCard = snapshot.child("yellowText").getValue(String.class);
-                    String fiveGoal = snapshot.child("bonusText").getValue(String.class);
-                    String rank = snapshot.child("rankText").getValue(String.class);
-                    String position = snapshot.child("position").getValue(String.class);
-                    int positionIndex = positionList.indexOf(position);
-
-                    playerPositionSpinner.setSelection(positionIndex);
-                    etFame.setText(fame);
-                    etWin.setText(win);
-                    etTie.setText(tie);
-                    etLose.setText(lose);
-                    etYellowCard.setText(yellowCard);
-                    et5Goal.setText(fiveGoal);
-                    etRank.setText(rank);
-                } else {
-                    loading.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // traitement de l'erreur d'accès à la base de données
-            }
-        });
-    }
     private String getRandomPlayer(List<String> players) {
         int randomIndex = new Random().nextInt(players.size());
         return players.get(randomIndex);
@@ -421,7 +389,14 @@ public class Statistics extends AppCompatActivity {
         // Add request to queue
         queue.add(stringRequest);
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(Statistics.this, Home.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -438,11 +413,13 @@ public class Statistics extends AppCompatActivity {
                         if (currentPosition > 0) {
                             playerNameSpinner.setSelection(currentPosition - 1);
                         }
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     } else {
                         int currentPosition = playerNameSpinner.getSelectedItemPosition();
                         if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
                             playerNameSpinner.setSelection(currentPosition + 1);
                         }
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     }
                 }
@@ -455,6 +432,7 @@ public class Statistics extends AppCompatActivity {
         if (currentPosition > 0) {
             playerNameSpinner.setSelection(currentPosition - 1);
         }
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public void goToRight(View v){
@@ -462,14 +440,49 @@ public class Statistics extends AppCompatActivity {
         if (currentPosition < playerNameSpinner.getAdapter().getCount() - 1) {
             playerNameSpinner.setSelection(currentPosition + 1);
         }
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        Intent intent = new Intent(Statistics.this, Home.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_innn, R.anim.fade_out);
+
+    // Define a separate method to retrieve data from the database based on the selected spinner item
+    private void retrieveDataFromDatabase(String uniqueId) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        database.getReference("Player").child(uniqueId).addListenerForSingleValueEvent(new ValueEventListener() {
+            // your onDataChange and onCancelled methods here
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    linearBig.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
+                    String fame = snapshot.child("fameText").getValue(String.class);
+                    String win = snapshot.child("winText").getValue(String.class);
+                    String tie = snapshot.child("tieText").getValue(String.class);
+                    String lose = snapshot.child("loseText").getValue(String.class);
+                    String yellowCard = snapshot.child("yellowText").getValue(String.class);
+                    String fiveGoal = snapshot.child("bonusText").getValue(String.class);
+                    String rank = snapshot.child("rankText").getValue(String.class);
+                    String position = snapshot.child("position").getValue(String.class);
+                    int positionIndex = positionList.indexOf(position);
+
+                    playerPositionSpinner.setSelection(positionIndex);
+                    etFame.setText(fame);
+                    etWin.setText(win);
+                    etTie.setText(tie);
+                    etLose.setText(lose);
+                    etYellowCard.setText(yellowCard);
+                    et5Goal.setText(fiveGoal);
+                    etRank.setText(rank);
+
+                } else {
+                    loading.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }
