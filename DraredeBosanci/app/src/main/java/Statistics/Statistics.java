@@ -3,7 +3,6 @@ package Statistics;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,15 +51,13 @@ import Home.Home;
 public class Statistics extends AppCompatActivity {
 
     private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
-    private TextView tvGameWrite,tvWinRateWrite,tvapiResult,loading;
-    public static TextView TVPointsWrite;
-    private Button bt_Save;
+    private TextView tvGameWrite,tvWinRateWrite,tvapiResult,loading,TVPointsWrite;
+    private Button bt_Save,addPlayerButton;
     private Spinner playerPositionSpinner,playerNameSpinner;
     private LinearLayout linearBig;
     private DatabaseReference UserRef;
     private float x1, x2;
     private static final int MIN_DISTANCE = 150;
-
     private List<String> positionList,playerNames;
     private ArrayAdapter<String> adapterName;
 
@@ -87,14 +84,11 @@ public class Statistics extends AppCompatActivity {
         etYellowCard = findViewById(R.id.ETYellowCard);
         et5Goal = findViewById(R.id.ET5Goal);
         etRank = findViewById(R.id.ETRank);
-
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
-        String[] positions = getResources().getStringArray(R.array.positions);
-         positionList = Arrays.asList(positions);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerPositionSpinner.setAdapter(adapter);
-
+        playerNameSpinner = findViewById(R.id.playerNameSpinner);
+        addPlayerButton = findViewById(R.id.add_player_button);
+        bt_Save.setVisibility(View.INVISIBLE);
+        addPlayerButton.setVisibility(View.INVISIBLE);
 
         // Ecrire que des chiffres
         etWin.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -111,9 +105,21 @@ public class Statistics extends AppCompatActivity {
         etYellowCard.addTextChangedListener(textWatcher);
         et5Goal.addTextChangedListener(textWatcher);
 
-        // Vérifiez si l'utilisateur est connecté avec l'adresse e-mail spécifiée
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        String[] positions = getResources().getStringArray(R.array.positions);
+        positionList = Arrays.asList(positions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPositionSpinner.setAdapter(adapter);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null && user.getEmail().equals("claudiuppdc7@yahoo.com")) {
+            bt_Save.setVisibility(View.VISIBLE);
+            addPlayerButton.setVisibility(View.VISIBLE);
         } else {
             etFame.setEnabled(false);
             etWin.setEnabled(false);
@@ -134,8 +140,6 @@ public class Statistics extends AppCompatActivity {
         });
 
 
-        playerNameSpinner = findViewById(R.id.playerNameSpinner);
-
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference playersRef = database.getReference("Player");
 
@@ -154,9 +158,8 @@ public class Statistics extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        Button addPlayerButton = findViewById(R.id.add_player_button);
-        addPlayerButton.setVisibility(View.INVISIBLE);
         addPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,59 +187,6 @@ public class Statistics extends AppCompatActivity {
                 builder.show();
             }
         });
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        DatabaseReference myRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Player");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<Player> players = new ArrayList<>();
-                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
-                    String playerName = playerSnapshot.child("name").getValue(String.class);
-                    String playerPoints = playerSnapshot.child("point").getValue(String.class);
-                    Player player = new Player(playerName, Integer.parseInt(playerPoints));
-                    players.add(player);
-                }
-
-                // trier la liste en fonction des points
-                Collections.sort(players, Collections.reverseOrder());
-
-                // créer les chaînes de caractères pour les TextViews
-                StringBuilder namesSb = new StringBuilder();
-                StringBuilder pointsSb = new StringBuilder();
-                StringBuilder rankSb = new StringBuilder();
-                int rankCounter = 1;
-
-                for (Player player : players) {
-                    rankSb.append(rankCounter).append("\n");
-                    String playerName = player.getName();
-                    String playerPoints = String.valueOf(player.getPoints());
-                    namesSb.append(playerName).append("\n");
-                    pointsSb.append(playerPoints).append("\n");
-                    rankCounter++;
-                }
-
-                // afficher les chaînes de caractères dans les TextViews
-                TextView name1TextView = findViewById(R.id.name);
-                name1TextView.setText(namesSb.toString());
-
-                TextView pointsTextView = findViewById(R.id.point);
-                pointsTextView.setText(pointsSb.toString());
-
-                TextView rank1TextView = findViewById(R.id.Rank);
-                rank1TextView.setText(rankSb.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-
-
-
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -252,28 +202,20 @@ public class Statistics extends AppCompatActivity {
         });
 
 
-        bt_Save.setVisibility(View.INVISIBLE);
-
-        if (TextUtils.equals("claudiuppdc7@yahoo.com", FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
-            bt_Save.setVisibility(View.VISIBLE);
-            addPlayerButton.setVisibility(View.VISIBLE);
-        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
                 String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
                 UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
                 Toast.makeText(Statistics.this, "Player profile save", Toast.LENGTH_SHORT).show();
-
             }
         });
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
         // Set up Volley RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -281,8 +223,6 @@ public class Statistics extends AppCompatActivity {
         // Set up API URL
         String teamId = "541";
         String apiUrl = String.format("https://api-football-v1.p.rapidapi.com/v3/players/squads?team=%s", teamId);
-
-        // Set up listener for spinner item selection
         playerPositionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -298,7 +238,94 @@ public class Statistics extends AppCompatActivity {
 
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void retrieveDataFromDatabase(String uniqueId) {
+        DatabaseReference myRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Player");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    ArrayList<Player> players = new ArrayList<>();
+                    for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                        String playerName = playerSnapshot.child("name").getValue(String.class);
+                        String playerPoints = playerSnapshot.child("point").getValue(String.class);
+                        Player player = new Player(playerName, Integer.parseInt(playerPoints));
+                        players.add(player);
+                    }
 
+                    // trier la liste en fonction des points
+                    Collections.sort(players, Collections.reverseOrder());
+
+                    // créer les chaînes de caractères pour les TextViews
+                    StringBuilder namesSb = new StringBuilder();
+                    StringBuilder pointsSb = new StringBuilder();
+                    StringBuilder rankSb = new StringBuilder();
+                    int rankCounter = 1;
+
+                    for (Player player : players) {
+                        rankSb.append(rankCounter).append("\n");
+                        String playerName = player.getName();
+                        String playerPoints = String.valueOf(player.getPoints());
+                        namesSb.append(playerName).append("\n");
+                        pointsSb.append(playerPoints).append("\n");
+                        rankCounter++;
+                    }
+
+                    TextView name1TextView = findViewById(R.id.name);
+                    name1TextView.setText(namesSb.toString());
+
+                    TextView pointsTextView = findViewById(R.id.point);
+                    pointsTextView.setText(pointsSb.toString());
+
+                    TextView rank1TextView = findViewById(R.id.Rank);
+                    rank1TextView.setText(rankSb.toString());
+                } else {
+                    // le snapshot est vide, rien à faire
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // traitement de l'erreur d'accès à la base de données
+            }
+        });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        database.getReference("Player").child(uniqueId).addListenerForSingleValueEvent(new ValueEventListener() {
+            // votre onDataChange et onCancelled methods ici
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    linearBig.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
+                    String fame = snapshot.child("fameText").getValue(String.class);
+                    String win = snapshot.child("winText").getValue(String.class);
+                    String tie = snapshot.child("tieText").getValue(String.class);
+                    String lose = snapshot.child("loseText").getValue(String.class);
+                    String yellowCard = snapshot.child("yellowText").getValue(String.class);
+                    String fiveGoal = snapshot.child("bonusText").getValue(String.class);
+                    String rank = snapshot.child("rankText").getValue(String.class);
+                    String position = snapshot.child("position").getValue(String.class);
+                    int positionIndex = positionList.indexOf(position);
+
+                    playerPositionSpinner.setSelection(positionIndex);
+                    etFame.setText(fame);
+                    etWin.setText(win);
+                    etTie.setText(tie);
+                    etLose.setText(lose);
+                    etYellowCard.setText(yellowCard);
+                    et5Goal.setText(fiveGoal);
+                    etRank.setText(rank);
+                } else {
+                    loading.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // traitement de l'erreur d'accès à la base de données
+            }
+        });
+    }
     private String getRandomPlayer(List<String> players) {
         int randomIndex = new Random().nextInt(players.size());
         return players.get(randomIndex);
@@ -446,48 +473,6 @@ public class Statistics extends AppCompatActivity {
             playerNameSpinner.setSelection(currentPosition + 1);
         }
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    }
-
-    // Define a separate method to retrieve data from the database based on the selected spinner item
-    private void retrieveDataFromDatabase(String uniqueId) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        database.getReference("Player").child(uniqueId).addListenerForSingleValueEvent(new ValueEventListener() {
-            // your onDataChange and onCancelled methods here
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-
-                    linearBig.setVisibility(View.VISIBLE);
-                    loading.setVisibility(View.GONE);
-                    String fame = snapshot.child("fameText").getValue(String.class);
-                    String win = snapshot.child("winText").getValue(String.class);
-                    String tie = snapshot.child("tieText").getValue(String.class);
-                    String lose = snapshot.child("loseText").getValue(String.class);
-                    String yellowCard = snapshot.child("yellowText").getValue(String.class);
-                    String fiveGoal = snapshot.child("bonusText").getValue(String.class);
-                    String rank = snapshot.child("rankText").getValue(String.class);
-                    String position = snapshot.child("position").getValue(String.class);
-                    int positionIndex = positionList.indexOf(position);
-
-                    playerPositionSpinner.setSelection(positionIndex);
-                    etFame.setText(fame);
-                    etWin.setText(win);
-                    etTie.setText(tie);
-                    etLose.setText(lose);
-                    etYellowCard.setText(yellowCard);
-                    et5Goal.setText(fiveGoal);
-                    etRank.setText(rank);
-
-                } else {
-                    loading.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 }
