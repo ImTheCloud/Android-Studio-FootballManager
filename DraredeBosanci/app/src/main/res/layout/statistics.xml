@@ -56,16 +56,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp">
     <LinearLayout
+        android:id="@+id/linearBig"
+
         android:layout_width="match_parent"
         android:layout_height="584dp"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteY="46dp">
 
-
-
             <LinearLayout
-                android:id="@+id/linearBig"
                 style="@style/TextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -273,7 +272,6 @@
                             app:layout_constraintVertical_bias="0.794" />
                     </LinearLayout>
 
-
                     <LinearLayout
                         style="@style/TextViewStyle"
                         android:layout_width="150dp"
@@ -283,12 +281,13 @@
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="71dp">
 
+
                         <TextView
-                            android:id="@+id/TVWinClaudiu"
+                            android:id="@+id/TVTieClaudiu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/win"
-                            android:text=" Win : "
+                            android:drawableLeft="@drawable/tie"
+                            android:text=" Tie : "
                             android:textColor="#ffffff"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -297,10 +296,10 @@
                             app:layout_constraintHorizontal_bias="0.044"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.286" />
+                            app:layout_constraintVertical_bias="0.43" />
 
                         <EditText
-                            android:id="@+id/ETWinClaudiu"
+                            android:id="@+id/ETTieClaudiu"
                             android:layout_width="31dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="180dp"
@@ -313,9 +312,11 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.276" />
+                            app:layout_constraintVertical_bias="0.419" />
 
                     </LinearLayout>
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -380,13 +381,12 @@
                         tools:layout_editor_absoluteX="0dp"
                         tools:layout_editor_absoluteY="71dp">
 
-
                         <TextView
-                            android:id="@+id/TVTieClaudiu"
+                            android:id="@+id/TVWinClaudiu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/tie"
-                            android:text=" Tie : "
+                            android:drawableLeft="@drawable/win"
+                            android:text=" Win : "
                             android:textColor="#ffffff"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -395,10 +395,10 @@
                             app:layout_constraintHorizontal_bias="0.044"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.43" />
+                            app:layout_constraintVertical_bias="0.286" />
 
                         <EditText
-                            android:id="@+id/ETTieClaudiu"
+                            android:id="@+id/ETWinClaudiu"
                             android:layout_width="31dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="180dp"
@@ -411,9 +411,10 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.419" />
+                            app:layout_constraintVertical_bias="0.276" />
 
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -598,9 +599,17 @@
 
             </LinearLayout>
 
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="100dp"></Space>
+        <TextView
+            android:id="@+id/bas"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="↓        ↓"
+            android:textColor="#ffffff"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
 
             <LinearLayout
                 android:id="@+id/linearRank"
@@ -614,6 +623,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.614">
+
+                <TextView
+                    android:id="@+id/ranking"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ranking"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:gravity="center" />
 
                 <LinearLayout
                     style="@style/TextViewStyle"
