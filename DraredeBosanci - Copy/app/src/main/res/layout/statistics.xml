@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Statistics.Statistics">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/stade1"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-16dp">
+
+        <LinearLayout
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/BT_Rank"
+                        android:layout_width="150dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#004CAF50"
+                        android:drawableLeft="@drawable/podium"
+                        android:elevation="4dp"
+                        android:onClick="goToFormRank"
+                        android:padding="10dp"
+                        android:text="Ranking"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Dany"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#004CAF50"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormDany"
+                        android:padding="10dp"
+                        android:text="Dany"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_Lucian"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormLucian"
+                        android:padding="10dp"
+                        android:text="Lucian"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Ruben"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormRuben"
+                        android:padding="10dp"
+                        android:text="Ruben"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_David"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormDavid"
+                        android:padding="10dp"
+                        android:text="David"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Claudiu"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormClaudiu"
+                        android:padding="10dp"
+                        android:text="Claudiu"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_Simon"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormSimon"
+                        android:padding="10dp"
+                        android:text="Simon"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Flavyus"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormFlavyus"
+                        android:padding="10dp"
+                        android:text="Flavyus"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_Yaniv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormYaniv"
+                        android:padding="10dp"
+                        android:text="Yaniv"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Denis"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormDenis"
+                        android:padding="10dp"
+                        android:text="Denis"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_Eduard"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormEduard"
+                        android:padding="10dp"
+                        android:text="Eduard"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/BT_Roberto"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormRoberto"
+                        android:padding="10dp"
+                        android:text="Roberto"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+                    <Button
+                        android:id="@+id/BT_Iosif"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#00071227"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:elevation="4dp"
+                        android:onClick="goToFormIosif"
+                        android:padding="10dp"
+                        android:text="Iosif"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:translationZ="4dp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

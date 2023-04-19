@@ -5,9 +5,11 @@ import android.widget.Spinner;
 
 public class Stat_Save {
     EditText fame,win,lose,tie,bonus,yellow,rank;
-    Spinner position;
+    Spinner position,name;
 
-    public Stat_Save(EditText etFame, EditText etWin, EditText etLose, EditText etTie, EditText et5Goal, EditText etYellowCard, EditText etRank, Spinner position) {
+    public Stat_Save(EditText etFame, EditText etWin, EditText etLose,
+                     EditText etTie, EditText et5Goal, EditText etYellowCard,
+                     EditText etRank, Spinner position,Spinner name) {
         this.fame = etFame;
         this.win = etWin;
         this.lose = etLose;
@@ -16,7 +18,9 @@ public class Stat_Save {
         this.yellow = etYellowCard;
         this.rank = etRank;
         this.position = position;
+        this.name=name;
     }
+
 
     public String getFameText() {
         return fame.getText().toString();
@@ -48,5 +52,8 @@ public class Stat_Save {
 
     public String getPosition() {
         return position.getSelectedItem().toString();
+    }
+    public String getName() {
+        return name.getSelectedItem().toString();
     }
 }

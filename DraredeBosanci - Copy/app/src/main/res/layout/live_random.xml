@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Live.LiveRandom">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/live"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <Button
+        android:id="@+id/house"
+        android:layout_width="59dp"
+        android:layout_height="45dp"
+
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableStart="@drawable/house"
+        android:onClick="goToHouse"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_timer"
+        style="@style/TextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.221">
+
+        <TextView
+            android:id="@+id/TVPlayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Players1 "
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/TVPlayers2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Players2 "
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/TextViewStyle"
+        android:id="@+id/Goals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.926">
+
+
+        <Button
+            android:id="@+id/bt_Goal1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_selector2"
+            android:drawablePadding="10dp"
+            android:elevation="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.223"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.887" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"></Space>
+
+        <TextView
+            android:id="@+id/TXT_ScoreTeam1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.424"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.89" />
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"></Space>
+        <TextView
+            android:id="@+id/TXT_barr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textColor="#ffffff"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.89" />
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"></Space>
+        <TextView
+            android:id="@+id/TXT_ScoreTeam2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#ffffff"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.628"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.89" />
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent"></Space>
+        <Button
+            android:id="@+id/bt_Goal2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_selector2"
+            android:drawablePadding="10dp"
+            android:elevation="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.808"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.887" />
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/bt_Save"
+        android:layout_width="33dp"
+        android:layout_height="35dp"
+        android:background="@drawable/button_selector4"
+        android:drawablePadding="10dp"
+        android:elevation="2dp"
+        android:fontFamily="sans-serif-medium"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.981" />
+
+
+    <TextView
+        android:id="@+id/LIVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Live"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/TV_StopWatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.066" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
