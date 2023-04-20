@@ -45,9 +45,6 @@
             android:name="Home.Rules"
             android:exported="false" />
         <activity
-            android:name="Statistics.Ranking"
-            android:exported="false" />
-        <activity
             android:name="Firebase.Register"
             android:exported="false" />
         <activity
@@ -82,43 +79,6 @@
             android:name="Compo.Compo442"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="Statistics.StatClaudiu"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatIosif"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatSimon"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatDavid"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatLucian"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatDany"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatYaniv"
-            android:exported="false"
-            android:label="@string/title_activity_form_yaniv" />
-        <activity
-            android:name="Statistics.StatEduard"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatRoberto"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatDenis"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatFlavyus"
-            android:exported="false" />
-        <activity
-            android:name="Statistics.StatRuben"
-            android:exported="false" />
         <activity
             android:name="Statistics.Statistics"
             android:exported="false" />

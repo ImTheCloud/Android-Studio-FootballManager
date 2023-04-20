@@ -16,14 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import Home.GameSave;
+
 import Home.History;
 import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import Home.Home;
 import Team.TeamRandom;
 import java.util.Arrays;
@@ -96,38 +100,31 @@ public class LiveRandom extends AppCompatActivity {
                 if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
                     Toast.makeText(getApplicationContext(), "Only the referee can save game", Toast.LENGTH_SHORT).show();
                 }else{
+                    mAuth = FirebaseAuth.getInstance();
                     FirebaseUser currentUser = mAuth.getCurrentUser();
                     String email = currentUser.getEmail();
-                    GameSave user_mail = new GameSave(email);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
-                    UserRef.push().setValue(user_mail);
-
-                    GameSave dateUser = new GameSave(date);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
-                    UserRef.push().setValue(dateUser);
-
-                    GameSave map = new GameSave(userLocation);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-                    UserRef.push().setValue(map);
-
                     String timerF = timerFirst.getText().toString();
                     String timerHF = timerHalfTime.getText().toString();
                     String timerS = timerSecond.getText().toString();
-                    GameSave timeTotal = new GameSave(timerF,timerHF,timerS);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-                    UserRef.push().setValue(timeTotal);
-
-                    GameSave teams = new GameSave(team1,team2);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
-                    UserRef.push().setValue(teams);
-
                     String goalTeam1 = goalT1.getText().toString();
                     String goalTeam2 = goalT2.getText().toString();
-                    GameSave goals = new GameSave(goalTeam1, goalTeam2);
-                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
-                    UserRef.push().setValue(goals);
+                    DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                    ValueEventListener valueEventListener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            int matchCount = (int) dataSnapshot.getChildrenCount() + 1;
+                            String matchId = Integer.toString(matchCount);
+                            GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
+                            UserRef.child(matchId).setValue(game);
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    };
+                    UserRef.addListenerForSingleValueEvent(valueEventListener);
                     finishTimer();
                     finish();
+
                     Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LiveRandom.this, History.class));
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

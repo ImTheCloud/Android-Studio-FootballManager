@@ -207,89 +207,89 @@ public class History extends AppCompatActivity {
                     dateDisplay.setVisibility(View.VISIBLE);
                     mailDisplay.setVisibility(View.VISIBLE);
 
-                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
-                    Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
-                    Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
-                    Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
-                    Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
-                    Map<String, Object> mailData = (Map<String, Object>) gameData.get("Mail");
-
-                    TreeMap<String, Object> sortedTeamsData = new TreeMap<>(teamsData);
-                    TreeMap<String, Object> sortedgoalsData = new TreeMap<>(goalsData);
-                    TreeMap<String, Object> sortedtimeData = new TreeMap<>(timeData);
-                    TreeMap<String, Object> sorteddateData = new TreeMap<>(dateData);
-                    TreeMap<String, Object> sortedgmailData = new TreeMap<>(mailData);
-
-                    String team1 = "";
-                    String team2 = "";
-                    int gameNumber = 1;
-                    for (Map.Entry<String, Object> entry : sortedTeamsData.entrySet()) {
-                        Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
-                        ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
-                        ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
-                        team1 += "Game " + gameNumber + " : "+ String.join(", ", players1) + "\n";
-                        team2 += "Game " + gameNumber + " : "+  String.join(", ", players2) + "\n";
-                        gameNumber++;
-                    }
-
-                    String scores = "";
-                    gameNumber = 1;
-                    for (Map.Entry<String, Object> entry : sortedgoalsData.entrySet()) {
-                        Map<String, Object> goalData = (Map<String, Object>) entry.getValue();
-                        String goalTeam1 = goalData.get("goalTeam1").toString();
-                        String goalTeam2 = goalData.get("goalTeam2").toString();
-                        scores += "Game " + gameNumber + " : " + goalTeam1 + " : " + goalTeam2 + "\n";
-                        gameNumber++;
-                    }
-
-                    String timeDataString="";
-                    List<String> times = new ArrayList<>();
-                    gameNumber = 1;
-                    for (Map.Entry<String, Object> entry : sortedtimeData.entrySet()) {
-                        Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
-                        half = timePointData.get("half").toString();
-                        timeFirstHalf = timePointData.get("timeFirstHalf").toString();
-                        timeSecondHalf = timePointData.get("timeSecondHalf").toString();
-                        time = timeFirstHalf + "''  " + half + "''  " + timeSecondHalf + "''";
-                        times.add("Game " + gameNumber + " : " + time);
-                        timeDataString += "Game " + gameNumber + " : " + time + "\n";
-                        gameNumber++;
-                    }
-
-                    String dates = "";
-                    gameNumber = 1;
-                    for (Map.Entry<String, Object> entry : sorteddateData.entrySet()) {
-                        Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
-                        String date = ddateData.get("data").toString();
-                        dates += "Game " + gameNumber + " : " +  date+ "\n";
-                        gameNumber++;
-                    }
-
-                    String mails = "";
-                    gameNumber = 1;
-                    for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
-                        Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
-                        String mail = ddateMail.get("data").toString();
-                        if (mail.equals("claudiuppdc7@yahoo.com")) {
-                            mail = "Claudiu";
-                        }
-                        mails += "Game " + gameNumber + " : " +  mail+"\n";
-                        gameNumber++;
-                    }
-
-                    String teamDisplayData =
-                            "Team 1 : " + "\n" + team1 + "\n" +
-                                    "Team 2 : "  + "\n"+ team2 +  "\n";
-                    String goalDisplayData  = "Scores : " + "\n" + scores;
-                    String timeDisplayData  = "Time : " + "\n" + timeDataString;
-                    String dateDisplayData  = "Date : " + "\n" + dates;
-                    String mailDisplayData = "Referee : " + "\n" + mails;
-
-                    teamDisplay.setText(teamDisplayData);
-                    goalDisplay.setText(goalDisplayData);
-                    timeDisplay.setText(timeDisplayData);
-                    dateDisplay.setText(dateDisplayData);
-                    mailDisplay.setText(mailDisplayData);
+//                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
+//                    Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
+//                    Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
+//                    Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
+//                    Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
+//                    Map<String, Object> mailData = (Map<String, Object>) gameData.get("Mail");
+//
+//                    TreeMap<String, Object> sortedTeamsData = new TreeMap<>(teamsData);
+//                    TreeMap<String, Object> sortedgoalsData = new TreeMap<>(goalsData);
+//                    TreeMap<String, Object> sortedtimeData = new TreeMap<>(timeData);
+//                    TreeMap<String, Object> sorteddateData = new TreeMap<>(dateData);
+//                    TreeMap<String, Object> sortedgmailData = new TreeMap<>(mailData);
+//
+//                    String team1 = "";
+//                    String team2 = "";
+//                    int gameNumber = 1;
+//                    for (Map.Entry<String, Object> entry : sortedTeamsData.entrySet()) {
+//                        Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
+//                        ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
+//                        ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
+//                        team1 += "Game " + gameNumber + " : "+ String.join(", ", players1) + "\n";
+//                        team2 += "Game " + gameNumber + " : "+  String.join(", ", players2) + "\n";
+//                        gameNumber++;
+//                    }
+//
+//                    String scores = "";
+//                    gameNumber = 1;
+//                    for (Map.Entry<String, Object> entry : sortedgoalsData.entrySet()) {
+//                        Map<String, Object> goalData = (Map<String, Object>) entry.getValue();
+//                        String goalTeam1 = goalData.get("goalTeam1").toString();
+//                        String goalTeam2 = goalData.get("goalTeam2").toString();
+//                        scores += "Game " + gameNumber + " : " + goalTeam1 + " : " + goalTeam2 + "\n";
+//                        gameNumber++;
+//                    }
+//
+//                    String timeDataString="";
+//                    List<String> times = new ArrayList<>();
+//                    gameNumber = 1;
+//                    for (Map.Entry<String, Object> entry : sortedtimeData.entrySet()) {
+//                        Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
+//                        half = timePointData.get("half").toString();
+//                        timeFirstHalf = timePointData.get("timeFirstHalf").toString();
+//                        timeSecondHalf = timePointData.get("timeSecondHalf").toString();
+//                        time = timeFirstHalf + "''  " + half + "''  " + timeSecondHalf + "''";
+//                        times.add("Game " + gameNumber + " : " + time);
+//                        timeDataString += "Game " + gameNumber + " : " + time + "\n";
+//                        gameNumber++;
+//                    }
+//
+//                    String dates = "";
+//                    gameNumber = 1;
+//                    for (Map.Entry<String, Object> entry : sorteddateData.entrySet()) {
+//                        Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
+//                        String date = ddateData.get("data").toString();
+//                        dates += "Game " + gameNumber + " : " +  date+ "\n";
+//                        gameNumber++;
+//                    }
+//
+//                    String mails = "";
+//                    gameNumber = 1;
+//                    for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
+//                        Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
+//                        String mail = ddateMail.get("data").toString();
+//                        if (mail.equals("claudiuppdc7@yahoo.com")) {
+//                            mail = "Claudiu";
+//                        }
+//                        mails += "Game " + gameNumber + " : " +  mail+"\n";
+//                        gameNumber++;
+//                    }
+//
+//                    String teamDisplayData =
+//                            "Team 1 : " + "\n" + team1 + "\n" +
+//                                    "Team 2 : "  + "\n"+ team2 +  "\n";
+//                    String goalDisplayData  = "Scores : " + "\n" + scores;
+//                    String timeDisplayData  = "Time : " + "\n" + timeDataString;
+//                    String dateDisplayData  = "Date : " + "\n" + dates;
+//                    String mailDisplayData = "Referee : " + "\n" + mails;
+//
+//                    teamDisplay.setText(teamDisplayData);
+//                    goalDisplay.setText(goalDisplayData);
+//                    timeDisplay.setText(timeDisplayData);
+//                    dateDisplay.setText(dateDisplayData);
+//                    mailDisplay.setText(mailDisplayData);
 
                 }else{
                     loadingText.setVisibility(View.VISIBLE);

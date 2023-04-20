@@ -16,14 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import Home.GameSave;
+
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Arrays;
 import java.util.List;
 import Home.Home;
@@ -99,39 +103,32 @@ public class LiveSelected extends AppCompatActivity {
                 if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
                     Toast.makeText(getApplicationContext(), "Only the referee can save game", Toast.LENGTH_SHORT).show();
                 }else{
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                String email = currentUser.getEmail();
-                GameSave user_mail = new GameSave(email);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Mail");
-                UserRef.push().setValue(user_mail);
 
-                GameSave dateUser = new GameSave(date);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Date");
-                UserRef.push().setValue(dateUser);
-
-                GameSave map = new GameSave(userLocation);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Map");
-                UserRef.push().setValue(map);
-
-                String timerF = ttimerFirst.getText().toString();
-                String timerHF = ttimerHalfTime.getText().toString();
-                String timerS = ttimerSecond.getText().toString();
-                GameSave timeTotal = new GameSave(timerF,timerHF,timerS);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Time");
-                UserRef.push().setValue(timeTotal);
-
-                GameSave teams = new GameSave(listPlayers1,listPlayers2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Teams");
-                UserRef.push().setValue(teams);
-
-
-                String goalTeam1 = goalT1.getText().toString();
-                String goalTeam2 = goalT2.getText().toString();
-                GameSave goals = new GameSave(goalTeam1, goalTeam2);
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game/Goals");
-                UserRef.push().setValue(goals);
-                finishTimer();
-                finish();
+                    mAuth = FirebaseAuth.getInstance();
+                    FirebaseUser currentUser = mAuth.getCurrentUser();
+                    String email = currentUser.getEmail();
+                    String timerF = ttimerFirst.getText().toString();
+                    String timerHF = ttimerHalfTime.getText().toString();
+                    String timerS = ttimerSecond.getText().toString();
+                    String goalTeam1 = goalT1.getText().toString();
+                    String goalTeam2 = goalT2.getText().toString();
+                    DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                    ValueEventListener valueEventListener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            int matchCount = (int) dataSnapshot.getChildrenCount() + 1; // obtenir le nombre de matches existants et ajouter 1 pour le prochain match
+                            String matchId = Integer.toString(matchCount); // convertir le compteur en chaîne de caractères pour l'utiliser comme clé d'enregistrement
+                            // ajouter le nouveau match à la base de données avec la clé unique basée sur le compteur
+                            GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,listPlayers2,listPlayers1);
+                            UserRef.child(matchId).setValue(game);
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    };
+                    UserRef.addListenerForSingleValueEvent(valueEventListener);
+                    finishTimer();
+                    finish();
 
                 Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LiveSelected.this, History.class));
