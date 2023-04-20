@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
@@ -105,8 +106,8 @@ public class History extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
-                                    // Supprimer le dernier élément dans le nœud "Date"
-                                    database.getReference().child("Game").child("Date").orderByKey().limitToLast(1).get()
+                                    // Supprimer le dernier élément dans le nœud "Games"
+                                    database.getReference().child("Game").orderByKey().limitToLast(1).get()
                                             .addOnCompleteListener(task -> {
                                                 if (task.isSuccessful()) {
                                                     for (DataSnapshot snapshot : task.getResult().getChildren()) {
@@ -114,57 +115,7 @@ public class History extends AppCompatActivity {
                                                     }
                                                 }
                                             });
-
-                                    // Supprimer le dernier élément dans le nœud "Goals"
-                                    database.getReference().child("Game").child("Goals").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-
-                                    // Supprimer le dernier élément dans le nœud "Mail"
-                                    database.getReference().child("Game").child("Mail").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-
-                                    // Supprimer le dernier élément dans le nœud "Map"
-                                    database.getReference().child("Game").child("Map").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-                                    // Supprimer le dernier élément dans le nœud "Team1"
-                                    database.getReference().child("Game").child("Teams").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-
-
-                                    // Supprimer le dernier élément dans le nœud "Time"
-                                    database.getReference().child("Game").child("Time").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-
+                                    retrieveDataHistory();
                                 }
 
                             })
@@ -179,11 +130,72 @@ public class History extends AppCompatActivity {
                 }
             });
 
+
         }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        deleteLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference gameRef = database.getReference("Game");
+                gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int gameCount = (int) snapshot.getChildrenCount();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                        builder.setTitle("Confirmation")
+                                .setMessage("Are you sure you want to delete the last game ?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Supprimer le dernier élément dans le nœud "Game"
+                                        gameRef.child(Integer.toString(gameCount)).removeValue();
+                                        retrieveDataHistory();
+                                        Toast.makeText(History.this, "Last game deleted", Toast.LENGTH_SHORT).show();
+                                        if (gameCount == 1) {
+                                            teamDisplay.setVisibility(View.INVISIBLE);
+                                            deleteAll.setEnabled(false);
+                                            deleteLast.setEnabled(false);
+                                            loadingText.setVisibility(View.VISIBLE);
+                                            loadingText.setText("No game played");
+                                        }
+                                    }
 
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .create()
+                                .show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        });
+
+
+        retrieveDataHistory();
+        //On create end
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+        @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    private void retrieveDataHistory() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
         database.getReference("Game").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -228,28 +240,28 @@ public class History extends AppCompatActivity {
                             gameData.append("\n");
                             gameData.append("Score : ");
                             gameData.append(goal1);
-                            gameData.append(" - ");
+                            gameData.append(" : ");
                             gameData.append(goal2);
                             gameData.append("\n");
                             gameData.append("Time : ");
                             gameData.append(timeFirstHalf);
-                            gameData.append("\" ");
+                            gameData.append("\"   ");
                             gameData.append(halfText);
-                            gameData.append("\" ");
+                            gameData.append("\"   ");
                             gameData.append(timeSecondHalf);
-                            gameData.append("\"");
+                            gameData.append("\"  ");
                             gameData.append("\n\n");
 
                             gameNumber++;
 
-                    }
+                        }
                     }
 
                     teamDisplay.setText(gameData.toString());
 
 
 
-            } else {
+                } else {
                     loadingText.setVisibility(View.VISIBLE);
                     loadingText.setText("No game played");
                     deleteAll.setEnabled(false);
@@ -263,13 +275,5 @@ public class History extends AppCompatActivity {
         });
     }
 
-        @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        Intent intent = new Intent(this, Home.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
-}
 
