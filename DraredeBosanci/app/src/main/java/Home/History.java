@@ -73,6 +73,7 @@ public class History extends AppCompatActivity {
                                     database.getReference().child("Game").removeValue();
 
                                     teamDisplay.setVisibility(View.INVISIBLE);
+
                                     deleteAll.setEnabled(false);
                                     deleteLast.setEnabled(false);
 
@@ -204,10 +205,18 @@ public class History extends AppCompatActivity {
                             String halfText = gameSnapshot.child("half").getValue(String.class);
                             String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
                             String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
+                            String email = gameSnapshot.child("email").getValue(String.class);
+                            if (email.equals("claudiuppdc7@yahoo.com")) {
+                                email = "Claudiu";
+                            }
+
 
                             gameData.append("Game ");
                             gameData.append(gameNumber);
                             gameData.append(" : ");
+                            gameData.append("\n");
+                            gameData.append("Referee : ");
+                            gameData.append(email);
                             gameData.append("\n");
                             gameData.append("Date : ");
                             gameData.append(dataText);

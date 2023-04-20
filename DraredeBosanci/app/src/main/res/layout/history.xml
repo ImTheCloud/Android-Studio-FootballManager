@@ -71,7 +71,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/TextViewStyle"
 
                 android:orientation="vertical">
 
@@ -93,6 +92,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    style="@style/TextViewStyle"
                     android:id="@+id/Team"
                     android:visibility="gone"
                     android:layout_width="match_parent"

@@ -14,14 +14,14 @@ public class GameSave {
     String date;
     List<String> team2,team1;
 
-    public GameSave(LatLng userLocation, String goalTeam1, String goalTeam2, String timerF, String timerS, String timerHF, String email, String date, List<String> team2, List<String> team1) {
+    public GameSave(LatLng userLocation, String goalTeam1, String goalTeam2, String timerF, String timerS, String timerHF, String mail, String date, List<String> team2, List<String> team1) {
         this.userLocation = userLocation;
         this.goalTeam1 = goalTeam1;
         this.goalTeam2 = goalTeam2;
         this.timeFirstHalf = timerF;
         this.timeSecondHalf = timerS;
         this.half = timerHF;
-        this.mail = email;
+        this.mail = mail;
         this.date = date;
         this.team1 = team1;
         this.team2 = team2;
@@ -53,6 +53,9 @@ public class GameSave {
     }
     public String getData() {
         return date;
+    }
+    public String getEmail() {
+        return mail;
     }
 
 }
