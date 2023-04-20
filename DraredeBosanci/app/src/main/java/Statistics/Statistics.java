@@ -213,7 +213,7 @@ public class Statistics extends AppCompatActivity {
                             retrievePlayersFromDatabase();
 
                         } else {
-                            Toast.makeText(Statistics.this, "The fields cannot be empty", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Statistics.this, "Enter a name please", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -285,8 +285,9 @@ private void retrievePlayersFromDatabase() {
                 String playerName = playerSnapshot.child("name").getValue(String.class);
                 playerNames.add(playerName);
             }
-            ArrayAdapter<String> adapterName = new ArrayAdapter<>(Statistics.this, android.R.layout.simple_spinner_item, playerNames);
-            playerNameSpinner.setAdapter(adapterName);
+            StatSpinner adapter = new StatSpinner(Statistics.this, R.layout.stat_spinner, playerNames.toArray(new String[playerNames.size()]));
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            playerNameSpinner.setAdapter(adapter);
         }
         @Override
         public void onCancelled(DatabaseError databaseError) {
@@ -294,6 +295,7 @@ private void retrievePlayersFromDatabase() {
         }
     });
 }
+
 
     private String getRandomPlayer(List<String> players) {
         int randomIndex = new Random().nextInt(players.size());
