@@ -53,7 +53,7 @@ import Home.Home;
 
 public class Statistics extends AppCompatActivity {
 
-    private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etRank,etFame;
+    private EditText etWin,etTie,etLose,etYellowCard,et5Goal,etFame;
     private TextView tvGameWrite,tvWinRateWrite,tvapiResult,loading,TVPointsWrite;
     private Button bt_Save,addPlayerButton, bt_delete;
     private Spinner playerPositionSpinner,playerNameSpinner;
@@ -88,7 +88,6 @@ public class Statistics extends AppCompatActivity {
         etLose = findViewById(R.id.ETLose);
         etYellowCard = findViewById(R.id.ETYellowCard);
         et5Goal = findViewById(R.id.ET5Goal);
-        etRank = findViewById(R.id.ETRank);
         playerPositionSpinner = findViewById(R.id.playerPositionSpinner);
         playerNameSpinner = findViewById(R.id.playerNameSpinner);
         addPlayerButton = findViewById(R.id.add_player_button);
@@ -102,7 +101,6 @@ public class Statistics extends AppCompatActivity {
         etLose.setInputType(InputType.TYPE_CLASS_NUMBER);
         etYellowCard.setInputType(InputType.TYPE_CLASS_NUMBER);
         et5Goal.setInputType(InputType.TYPE_CLASS_NUMBER);
-        etRank.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // Ajout ecouteur de temps
         etWin.addTextChangedListener(textWatcher);
@@ -140,7 +138,6 @@ public class Statistics extends AppCompatActivity {
             etLose.setEnabled(false);
             etYellowCard.setEnabled(false);
             et5Goal.setEnabled(false);
-            etRank.setEnabled(false);
         }
 
         etFame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -249,7 +246,7 @@ public class Statistics extends AppCompatActivity {
         bt_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, etRank, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
+                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
                 String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
                 UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
                 UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
@@ -462,6 +459,8 @@ private void retrievePlayersFromDatabase() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    linearBig.setVisibility(View.VISIBLE);
+                    loading.setVisibility(View.GONE);
                     ArrayList<Player> players = new ArrayList<>();
                     for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
                         String playerName = playerSnapshot.child("name").getValue(String.class);
@@ -500,7 +499,7 @@ private void retrievePlayersFromDatabase() {
                     TextView rank1TextView = findViewById(R.id.Rank);
                     rank1TextView.setText(rankSb.toString());
                 } else {
-                    // le snapshot est vide, rien à faire
+                    loading.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -524,7 +523,6 @@ private void retrievePlayersFromDatabase() {
                     String lose = snapshot.child("loseText").getValue(String.class);
                     String yellowCard = snapshot.child("yellowText").getValue(String.class);
                     String fiveGoal = snapshot.child("bonusText").getValue(String.class);
-                    String rank = snapshot.child("rankText").getValue(String.class);
                     String position = snapshot.child("position").getValue(String.class);
                     int positionIndex = positionList.indexOf(position);
 
@@ -535,7 +533,6 @@ private void retrievePlayersFromDatabase() {
                     etLose.setText(lose);
                     etYellowCard.setText(yellowCard);
                     et5Goal.setText(fiveGoal);
-                    etRank.setText(rank);
                 } else {
                     loading.setVisibility(View.VISIBLE);
                 }

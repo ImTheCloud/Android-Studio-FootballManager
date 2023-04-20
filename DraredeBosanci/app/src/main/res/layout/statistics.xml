@@ -117,38 +117,60 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    style="@style/TextViewStyle"
-                    android:layout_width="match_parent"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="71dp">
 
-                    <TextView
-                        android:id="@+id/TVFame"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        style="@style/TextViewStyle"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/baseline_person_24"
-                        android:text=" Fame : "
-                        android:textColor="#ffffff"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="71dp">
 
-                    <EditText
-                        android:id="@+id/ETFame"
-                        android:layout_width="251dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:background="@android:color/transparent"
-                        android:drawableStart="@android:color/transparent"
-                        android:ems="4"
-                        android:hint="   FAME"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#BDBDBD"
-                        android:textStyle="italic" />
+                        <TextView
+                            android:id="@+id/TVPoints"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/point"
+                            android:text=" Points : "
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.027"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.735" />
 
+
+                        <TextView
+                            android:id="@+id/TVPointsWrite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.435"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.721" />
+                    </LinearLayout>
                 </LinearLayout>
+
+
+
+
 
 
                 <LinearLayout
@@ -200,100 +222,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.215" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/TextViewStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="71dp">
-
-                        <TextView
-                            android:id="@+id/TVPoints"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/point"
-                            android:text=" Points : "
-                            android:textColor="#ffffff"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.027"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.735" />
-
-
-                        <TextView
-                            android:id="@+id/TVPointsWrite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="#ffffff"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.435"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.721" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="71dp">
-
-                    <LinearLayout
-                        style="@style/TextViewStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="71dp">
-
-                        <TextView
-                            android:id="@+id/TVRank"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/podium"
-                            android:text=" Rank : "
-                            android:textColor="#ffffff"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.027"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.81" />
-
-                        <EditText
-                            android:id="@+id/ETRank"
-                            android:layout_width="31dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="172dp"
-                            android:background="@android:color/transparent"
-                            android:ems="4"
-                            android:hint="0"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#BDBDBD"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.794" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -536,7 +464,39 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <LinearLayout
+                    style="@style/TextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="71dp">
 
+                    <TextView
+                        android:id="@+id/TVFame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/baseline_person_24"
+                        android:text=" Fame : "
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ETFame"
+                        android:layout_width="251dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@android:color/transparent"
+                        android:ems="4"
+                        android:hint="   FAME"
+                        android:textColor="#FFFFFF"
+                        android:textColorHint="#BDBDBD"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
                 <LinearLayout
                     style="@style/TextViewStyle"
                     android:layout_width="match_parent"
