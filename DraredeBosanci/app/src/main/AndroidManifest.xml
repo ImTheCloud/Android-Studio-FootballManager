@@ -57,6 +57,9 @@
             android:name="Firebase.Login"
             android:exported="false" />
         <activity
+            android:name="Home.Meteo"
+            android:exported="false" />
+        <activity
             android:name="Live.LiveSelected"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -66,8 +69,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="Home.NewGame"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="false" />
         <activity
             android:name="Notif.Notification"
             android:exported="false" />

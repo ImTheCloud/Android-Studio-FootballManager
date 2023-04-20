@@ -221,7 +221,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.nav_meteo:
-//                startActivity(new Intent(Home.this, Map.class));
+               startActivity(new Intent(Home.this, Meteo.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
         }
