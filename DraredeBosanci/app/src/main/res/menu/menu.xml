@@ -45,6 +45,14 @@
                 android:id="@+id/volume"
                 android:icon="@drawable/volume_up"
                 android:title="Volume up" />
+            <item
+                android:id="@+id/nav_gamePosition"
+                android:icon="@drawable/baseline_location_on_24"
+                android:title="Map" />
+            <item
+                android:id="@+id/nav_meteo"
+                android:icon="@drawable/meteo"
+                android:title="Meteo" />
 
         </menu>
 

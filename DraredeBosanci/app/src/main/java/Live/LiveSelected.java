@@ -3,7 +3,7 @@ import static Team.TeamSelect.ttimerFirst;
 import static Team.TeamSelect.ttimerHalfTime;
 import static Team.TeamSelect.ttimerSecond;
 import static Home.NewGame.date;
-import static Home.NewGame.userLocation;
+import static Home.Map.userLocation;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
