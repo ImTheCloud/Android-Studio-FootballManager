@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class History extends AppCompatActivity {
-    private TextView teamDisplay,goalDisplay,timeDisplay,dateDisplay,mailDisplay,loadingText;
-    private String half,timeFirstHalf,timeSecondHalf,time;
+    private TextView teamDisplay,loadingText;
+
     private Button deleteAll,deleteLast;
 
     @Override
@@ -32,13 +32,8 @@ public class History extends AppCompatActivity {
         setContentView(R.layout.history);
 
         teamDisplay = findViewById(R.id.Team);
-        goalDisplay = findViewById(R.id.Goals);
-        timeDisplay = findViewById(R.id.Time);
-        dateDisplay = findViewById(R.id.Date);
-        mailDisplay = findViewById(R.id.Mail);
         deleteAll = findViewById(R.id.DeleteAll);
         deleteLast = findViewById(R.id.deleteLast);
-
         loadingText = findViewById(R.id.loading_text);
         loadingText.setVisibility(View.VISIBLE);
 
@@ -51,7 +46,7 @@ public class History extends AppCompatActivity {
             userEmail = user.getEmail();
         }
 
-        if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
+        if (!"claudiuppdc7@yahoo.com".equals(userEmail)) {
             deleteAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -64,7 +59,7 @@ public class History extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Only the referee can delete the last game", Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
+        } else {
             deleteAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -77,11 +72,7 @@ public class History extends AppCompatActivity {
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
                                     database.getReference().child("Game").removeValue();
 
-                                    mailDisplay.setVisibility(View.INVISIBLE);
                                     teamDisplay.setVisibility(View.INVISIBLE);
-                                    goalDisplay.setVisibility(View.INVISIBLE);
-                                    timeDisplay.setVisibility(View.INVISIBLE);
-                                    dateDisplay.setVisibility(View.INVISIBLE);
                                     deleteAll.setEnabled(false);
                                     deleteLast.setEnabled(false);
 
@@ -192,7 +183,6 @@ public class History extends AppCompatActivity {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
 
         database.getReference("Game").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -200,111 +190,72 @@ public class History extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 loadingText.setVisibility(View.GONE);
-                if(snapshot != null && snapshot.getValue() != null) {
+                if (snapshot != null && snapshot.getValue() != null) {
+
                     teamDisplay.setVisibility(View.VISIBLE);
-                    goalDisplay.setVisibility(View.VISIBLE);
-                    timeDisplay.setVisibility(View.VISIBLE);
-                    dateDisplay.setVisibility(View.VISIBLE);
-                    mailDisplay.setVisibility(View.VISIBLE);
+                    StringBuilder gameData = new StringBuilder();
+                    int gameNumber = 1;
 
-//                    Map<String, Object> gameData = (Map<String, Object>) snapshot.getValue();
-//                    Map<String, Object> teamsData = (Map<String, Object>) gameData.get("Teams");
-//                    Map<String, Object> goalsData = (Map<String, Object>) gameData.get("Goals");
-//                    Map<String, Object> timeData = (Map<String, Object>) gameData.get("Time");
-//                    Map<String, Object> dateData = (Map<String, Object>) gameData.get("Date");
-//                    Map<String, Object> mailData = (Map<String, Object>) gameData.get("Mail");
-//
-//                    TreeMap<String, Object> sortedTeamsData = new TreeMap<>(teamsData);
-//                    TreeMap<String, Object> sortedgoalsData = new TreeMap<>(goalsData);
-//                    TreeMap<String, Object> sortedtimeData = new TreeMap<>(timeData);
-//                    TreeMap<String, Object> sorteddateData = new TreeMap<>(dateData);
-//                    TreeMap<String, Object> sortedgmailData = new TreeMap<>(mailData);
-//
-//                    String team1 = "";
-//                    String team2 = "";
-//                    int gameNumber = 1;
-//                    for (Map.Entry<String, Object> entry : sortedTeamsData.entrySet()) {
-//                        Map<String, Object> teamData = (Map<String, Object>) entry.getValue();
-//                        ArrayList<String> players1 = (ArrayList<String>) teamData.get("team1");
-//                        ArrayList<String> players2 = (ArrayList<String>) teamData.get("team2");
-//                        team1 += "Game " + gameNumber + " : "+ String.join(", ", players1) + "\n";
-//                        team2 += "Game " + gameNumber + " : "+  String.join(", ", players2) + "\n";
-//                        gameNumber++;
-//                    }
-//
-//                    String scores = "";
-//                    gameNumber = 1;
-//                    for (Map.Entry<String, Object> entry : sortedgoalsData.entrySet()) {
-//                        Map<String, Object> goalData = (Map<String, Object>) entry.getValue();
-//                        String goalTeam1 = goalData.get("goalTeam1").toString();
-//                        String goalTeam2 = goalData.get("goalTeam2").toString();
-//                        scores += "Game " + gameNumber + " : " + goalTeam1 + " : " + goalTeam2 + "\n";
-//                        gameNumber++;
-//                    }
-//
-//                    String timeDataString="";
-//                    List<String> times = new ArrayList<>();
-//                    gameNumber = 1;
-//                    for (Map.Entry<String, Object> entry : sortedtimeData.entrySet()) {
-//                        Map<String, Object> timePointData = (Map<String, Object>) entry.getValue();
-//                        half = timePointData.get("half").toString();
-//                        timeFirstHalf = timePointData.get("timeFirstHalf").toString();
-//                        timeSecondHalf = timePointData.get("timeSecondHalf").toString();
-//                        time = timeFirstHalf + "''  " + half + "''  " + timeSecondHalf + "''";
-//                        times.add("Game " + gameNumber + " : " + time);
-//                        timeDataString += "Game " + gameNumber + " : " + time + "\n";
-//                        gameNumber++;
-//                    }
-//
-//                    String dates = "";
-//                    gameNumber = 1;
-//                    for (Map.Entry<String, Object> entry : sorteddateData.entrySet()) {
-//                        Map<String, Object> ddateData = (Map<String, Object>) entry.getValue();
-//                        String date = ddateData.get("data").toString();
-//                        dates += "Game " + gameNumber + " : " +  date+ "\n";
-//                        gameNumber++;
-//                    }
-//
-//                    String mails = "";
-//                    gameNumber = 1;
-//                    for (Map.Entry<String, Object> entry : sortedgmailData.entrySet()) {
-//                        Map<String, Object> ddateMail = (Map<String, Object>) entry.getValue();
-//                        String mail = ddateMail.get("data").toString();
-//                        if (mail.equals("claudiuppdc7@yahoo.com")) {
-//                            mail = "Claudiu";
-//                        }
-//                        mails += "Game " + gameNumber + " : " +  mail+"\n";
-//                        gameNumber++;
-//                    }
-//
-//                    String teamDisplayData =
-//                            "Team 1 : " + "\n" + team1 + "\n" +
-//                                    "Team 2 : "  + "\n"+ team2 +  "\n";
-//                    String goalDisplayData  = "Scores : " + "\n" + scores;
-//                    String timeDisplayData  = "Time : " + "\n" + timeDataString;
-//                    String dateDisplayData  = "Date : " + "\n" + dates;
-//                    String mailDisplayData = "Referee : " + "\n" + mails;
-//
-//                    teamDisplay.setText(teamDisplayData);
-//                    goalDisplay.setText(goalDisplayData);
-//                    timeDisplay.setText(timeDisplayData);
-//                    dateDisplay.setText(dateDisplayData);
-//                    mailDisplay.setText(mailDisplayData);
+                    for (DataSnapshot gameSnapshot : snapshot.getChildren()) {
+                        if (gameSnapshot.getValue() != null) {
+                            String dataText = gameSnapshot.child("data").getValue(String.class);
+                            String goal1 = gameSnapshot.child("goalTeam1").getValue(String.class);
+                            String goal2 = gameSnapshot.child("goalTeam2").getValue(String.class);
+                            String halfText = gameSnapshot.child("half").getValue(String.class);
+                            String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
+                            String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
 
-                }else{
+                            gameData.append("Game ");
+                            gameData.append(gameNumber);
+                            gameData.append(" : ");
+                            gameData.append("\n");
+                            gameData.append("Date : ");
+                            gameData.append(dataText);
+                            gameData.append("\n");
+                            gameData.append("Team 1 : ");
+                            gameData.append(gameSnapshot.child("team1").getValue());
+                            gameData.append("\n");
+                            gameData.append("Team 2 : ");
+                            gameData.append(gameSnapshot.child("team2").getValue());
+                            gameData.append("\n");
+                            gameData.append("Score : ");
+                            gameData.append(goal1);
+                            gameData.append(" - ");
+                            gameData.append(goal2);
+                            gameData.append("\n");
+                            gameData.append("Time : ");
+                            gameData.append(timeFirstHalf);
+                            gameData.append("\" ");
+                            gameData.append(halfText);
+                            gameData.append("\" ");
+                            gameData.append(timeSecondHalf);
+                            gameData.append("\"");
+                            gameData.append("\n\n");
+
+                            gameNumber++;
+
+                    }
+                    }
+
+                    teamDisplay.setText(gameData.toString());
+
+
+
+            } else {
                     loadingText.setVisibility(View.VISIBLE);
                     loadingText.setText("No game played");
                     deleteAll.setEnabled(false);
                     deleteLast.setEnabled(false);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
 
-    @Override
+        @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
