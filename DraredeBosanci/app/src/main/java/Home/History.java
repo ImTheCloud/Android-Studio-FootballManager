@@ -207,59 +207,62 @@ public class History extends AppCompatActivity {
 
                     teamDisplay.setVisibility(View.VISIBLE);
                     StringBuilder gameData = new StringBuilder();
-                    int gameNumber = 1;
+                    int gameNumber = (int) snapshot.getChildrenCount();
 
+                    List<DataSnapshot> games = new ArrayList<>();
                     for (DataSnapshot gameSnapshot : snapshot.getChildren()) {
                         if (gameSnapshot.getValue() != null) {
-                            String dataText = gameSnapshot.child("data").getValue(String.class);
-                            String goal1 = gameSnapshot.child("goalTeam1").getValue(String.class);
-                            String goal2 = gameSnapshot.child("goalTeam2").getValue(String.class);
-                            String halfText = gameSnapshot.child("half").getValue(String.class);
-                            String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
-                            String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
-                            String email = gameSnapshot.child("email").getValue(String.class);
-                            if (email.equals("claudiuppdc7@yahoo.com")) {
-                                email = "Claudiu";
-                            }
-
-                            gameData.append("Game ");
-                            gameData.append(gameNumber);
-                            gameData.append(" : ");
-                            gameData.append("\n");
-                            gameData.append("Referee : ");
-                            gameData.append(email);
-                            gameData.append("\n");
-                            gameData.append("Date : ");
-                            gameData.append(dataText);
-                            gameData.append("\n");
-                            gameData.append("Team 1 : ");
-                            gameData.append(gameSnapshot.child("team1").getValue());
-                            gameData.append("\n");
-                            gameData.append("Team 2 : ");
-                            gameData.append(gameSnapshot.child("team2").getValue());
-                            gameData.append("\n");
-                            gameData.append("Score : ");
-                            gameData.append(goal1);
-                            gameData.append(" : ");
-                            gameData.append(goal2);
-                            gameData.append("\n");
-                            gameData.append("Time : ");
-                            gameData.append(timeFirstHalf);
-                            gameData.append("\"   ");
-                            gameData.append(halfText);
-                            gameData.append("\"   ");
-                            gameData.append(timeSecondHalf);
-                            gameData.append("\"  ");
-                            gameData.append("\n\n");
-
-                            gameNumber++;
-
+                            games.add(gameSnapshot);
                         }
                     }
 
+                    for (int i = games.size() - 1; i >= 0; i--) {
+                        DataSnapshot gameSnapshot = games.get(i);
+                        String dataText = gameSnapshot.child("data").getValue(String.class);
+                        String goal1 = gameSnapshot.child("goalTeam1").getValue(String.class);
+                        String goal2 = gameSnapshot.child("goalTeam2").getValue(String.class);
+                        String halfText = gameSnapshot.child("half").getValue(String.class);
+                        String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
+                        String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
+                        String email = gameSnapshot.child("email").getValue(String.class);
+                        if (email.equals("claudiuppdc7@yahoo.com")) {
+                            email = "Claudiu";
+                        }
+
+                        gameData.append("Game ");
+                        gameData.append(gameNumber);
+                        gameData.append(" : ");
+                        gameData.append("\n");
+                        gameData.append("Referee : ");
+                        gameData.append(email);
+                        gameData.append("\n");
+                        gameData.append("Date : ");
+                        gameData.append(dataText);
+                        gameData.append("\n");
+                        gameData.append("Team 1 : ");
+                        gameData.append(gameSnapshot.child("team1").getValue());
+                        gameData.append("\n");
+                        gameData.append("Team 2 : ");
+                        gameData.append(gameSnapshot.child("team2").getValue());
+                        gameData.append("\n");
+                        gameData.append("Score : ");
+                        gameData.append(goal1);
+                        gameData.append(" : ");
+                        gameData.append(goal2);
+                        gameData.append("\n");
+                        gameData.append("Time : ");
+                        gameData.append(timeFirstHalf);
+                        gameData.append("\"   ");
+                        gameData.append(halfText);
+                        gameData.append("\"   ");
+                        gameData.append(timeSecondHalf);
+                        gameData.append("\"  ");
+                        gameData.append("\n\n");
+
+                        gameNumber--;
+                    }
+
                     teamDisplay.setText(gameData.toString());
-
-
 
                 } else {
                     loadingText.setVisibility(View.VISIBLE);
@@ -275,5 +278,6 @@ public class History extends AppCompatActivity {
         });
     }
 
-    }
+
+}
 
