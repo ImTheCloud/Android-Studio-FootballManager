@@ -43,7 +43,6 @@
             android:minHeight="0dp"
             android:padding="10dp"
             android:drawableLeft="@drawable/baseline_person_24"
-
             android:scaleType="fitCenter"
             android:text="Add Player"
             android:textSize="11sp"
@@ -72,14 +71,16 @@
     </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/scroll_view"
+
         android:layout_width="match_parent"
-        android:layout_height="584dp"
+        android:layout_height="570dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp">
+
     <LinearLayout
         android:id="@+id/linearBig"
-
         android:layout_width="match_parent"
         android:layout_height="584dp"
         android:gravity="center"
