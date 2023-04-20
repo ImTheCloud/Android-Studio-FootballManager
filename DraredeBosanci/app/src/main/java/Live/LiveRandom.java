@@ -123,11 +123,10 @@ public class LiveRandom extends AppCompatActivity {
                     };
                     UserRef.addListenerForSingleValueEvent(valueEventListener);
                     finishTimer();
-                    finish();
+
 
                     Toast.makeText(LiveRandom.this, "Game save", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LiveRandom.this, History.class));
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    bt_Save.setEnabled(false);
 
                 }
 
@@ -251,5 +250,12 @@ public class LiveRandom extends AppCompatActivity {
         startActivity(new Intent(LiveRandom.this, Home.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+    public void goToHistory(View v){
+        finishTimer();
+        finish();
+        startActivity(new Intent(LiveRandom.this, History.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
 
 }

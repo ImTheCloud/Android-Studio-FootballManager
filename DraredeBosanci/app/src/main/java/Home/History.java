@@ -210,7 +210,6 @@ public class History extends AppCompatActivity {
                                 email = "Claudiu";
                             }
 
-
                             gameData.append("Game ");
                             gameData.append(gameNumber);
                             gameData.append(" : ");

@@ -21,19 +21,36 @@
     <Button
         android:id="@+id/house"
         android:layout_width="59dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/button_selector"
         android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
-        android:drawableStart="@drawable/house"
+        android:drawableTop="@drawable/house"
         android:onClick="goToHouse"
+        android:text="Home"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.007" />
 
+    <Button
+        android:id="@+id/history"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableTop="@drawable/history"
+        android:onClick="goToHistory"
+        android:text="History"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.007" />
 
     <LinearLayout
         android:id="@+id/layout_timer"

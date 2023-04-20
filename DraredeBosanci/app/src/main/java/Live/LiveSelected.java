@@ -128,11 +128,10 @@ public class LiveSelected extends AppCompatActivity {
                     };
                     UserRef.addListenerForSingleValueEvent(valueEventListener);
                     finishTimer();
-                    finish();
+
 
                 Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LiveSelected.this, History.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    bt_Save.setEnabled(false);
 
                 }
             }
@@ -261,6 +260,12 @@ public class LiveSelected extends AppCompatActivity {
         finishTimer();
         finish();
         startActivity(new Intent(LiveSelected.this, Home.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void goToHistory(View v){
+        finishTimer();
+        finish();
+        startActivity(new Intent(LiveSelected.this, History.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }
