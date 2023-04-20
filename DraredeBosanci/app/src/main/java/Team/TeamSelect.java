@@ -93,7 +93,7 @@ public class TeamSelect extends AppCompatActivity{
         finish();
         Intent intent = new Intent(TeamSelect.this, NewGame.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
     public void goToHouse(View v){
         startActivity(new Intent(TeamSelect.this, Home.class));

@@ -79,13 +79,15 @@ public class TeamRandom extends AppCompatActivity {
         button.setAlpha(0.5f);
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
         Intent intent = new Intent(TeamRandom.this, NewGame.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
     }
 
     public void goToHouse(View v){
