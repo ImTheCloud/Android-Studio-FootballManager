@@ -2,9 +2,11 @@ package Home;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ public class Meteo extends AppCompatActivity {
     private EditText locationEditText;
     private TextView temperatureTextView;
     private Button fetchButton;
+    private ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,8 @@ public class Meteo extends AppCompatActivity {
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
+        image = (ImageView) findViewById(R.id.imageView);
+
 
         fetchTemperature("Anderlecht");
 
@@ -52,6 +58,14 @@ public class Meteo extends AppCompatActivity {
                         JSONObject main = response.getJSONObject("main");
                         int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
                         temperatureTextView.setText(temperature + "°C");
+
+                        // Add the code to display an image based on temperature
+                        if (temperature < 10) {
+                            image.setImageResource(R.drawable.cloud);
+                        } else {
+                            image.setImageResource(R.drawable.sun);
+                        }
+
                         Toast.makeText(this, "The meteo in " + location + " is displayed", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -65,6 +79,5 @@ public class Meteo extends AppCompatActivity {
         );
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
-
     }
-    }
+}
