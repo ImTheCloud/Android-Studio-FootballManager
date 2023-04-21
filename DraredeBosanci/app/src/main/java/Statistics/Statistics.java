@@ -126,19 +126,39 @@ public class Statistics extends AppCompatActivity {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null && user.getEmail().equals("claudiuppdc7@yahoo.com")) {
-            bt_Save.setVisibility(View.VISIBLE);
-            bt_delete.setVisibility(View.VISIBLE);
-            addPlayerButton.setVisibility(View.VISIBLE);
-        } else {
-            etFame.setEnabled(false);
-            etWin.setEnabled(false);
-            etTie.setEnabled(false);
-            etLose.setEnabled(false);
-            etYellowCard.setEnabled(false);
-            et5Goal.setEnabled(false);
-        }
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference adminRef = database.getReference("Referee");
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Get the list of email addresses from the database
+                    ArrayList<String> emailList = new ArrayList<>();
+                    for (DataSnapshot emailSnapshot : snapshot.getChildren()) {
+                        String email = emailSnapshot.getValue(String.class);
+                        emailList.add(email);
+                    }
+                    // Check if the user's email is in the list
+                    if (emailList.contains(userEmail)) {
+                        bt_Save.setVisibility(View.VISIBLE);
+                        bt_delete.setVisibility(View.VISIBLE);
+                        addPlayerButton.setVisibility(View.VISIBLE);
+                    } else {
+                        etFame.setEnabled(false);
+                        etWin.setEnabled(false);
+                        etTie.setEnabled(false);
+                        etLose.setEnabled(false);
+                        etYellowCard.setEnabled(false);
+                        et5Goal.setEnabled(false);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
 
         etFame.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -149,8 +169,6 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference playersRef = database.getReference("Player");
         playersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

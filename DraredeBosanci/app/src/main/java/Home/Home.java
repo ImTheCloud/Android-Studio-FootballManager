@@ -186,6 +186,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         FirebaseUser user = mAuth.getCurrentUser();
         String userEmail = null;
 
+        if (user != null) {
+            userEmail = user.getEmail();
+        }
 
         switch (item.getItemId()) {
             case R.id.volume:
@@ -241,8 +244,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.nav_gamePosition:
-                startActivity(new Intent(Home.this, Map.class));
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                if (userEmail != null) {
+                    startActivity(new Intent(Home.this, Map.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Log in First", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.nav_meteo:
                startActivity(new Intent(Home.this, Meteo.class));
@@ -273,7 +281,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) { // check if the email already exists
-                                                Toast.makeText(Home.this, "You are already an Referee", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Home.this, "You are already a Referee", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 UserRef.addListenerForSingleValueEvent(new ValueEventListener() { // add a listener to get the count of child nodes
                                                     @Override
@@ -282,7 +290,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                         String emailKey = "email" + (count + 1); // generate a unique email key
                                                         UserRef.child(emailKey).setValue(email); // set email address as the value under the email key
 
-                                                        Toast.makeText(Home.this, "You are now an Referee", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(Home.this, "You are now a Referee", Toast.LENGTH_SHORT).show();
                                                     }
 
                                                     @Override
