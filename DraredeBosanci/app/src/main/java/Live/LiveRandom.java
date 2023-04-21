@@ -101,7 +101,7 @@ public class LiveRandom extends AppCompatActivity {
                     userEmail = user.getEmail();
                 }
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                DatabaseReference adminRef = database.getReference("Admin");
+                DatabaseReference adminRef = database.getReference("Referee");
                 String finalUserEmail = userEmail;
                 adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

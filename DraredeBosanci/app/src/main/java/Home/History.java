@@ -48,7 +48,7 @@ public class History extends AppCompatActivity {
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference adminRef = database.getReference("Admin");
+        DatabaseReference adminRef = database.getReference("Referee");
         String finalUserEmail = userEmail;
         adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -208,7 +208,7 @@ public class History extends AppCompatActivity {
                         String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
                         String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
                         String email = gameSnapshot.child("email").getValue(String.class);
-                     
+
 
                         gameData.append("Game ");
                         gameData.append(gameNumber);

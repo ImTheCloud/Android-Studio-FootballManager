@@ -267,7 +267,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                                 if (input.getText().toString().equals("1070")) {
                                     AdmiSave data = new AdmiSave(email);
-                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Admin");
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Referee");
                                     Query query = UserRef.orderByValue().equalTo(email); // create a query to search for the email
                                     query.addListenerForSingleValueEvent(new ValueEventListener() { // add a listener to retrieve the search result
                                         @Override
