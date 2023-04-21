@@ -82,7 +82,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            navEmail.setText("No user currently connected");
+            navEmail.setText("No user connected");
         } else {
             navEmail.setText(currentUser.getEmail());
         }

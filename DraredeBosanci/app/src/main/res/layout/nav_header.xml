@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="90dp"
     android:gravity="bottom"
     android:padding="16dp"
     android:orientation="vertical"
@@ -12,7 +12,7 @@
         android:id="@+id/navEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No user currently connected"
+        android:text="No user connected"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"

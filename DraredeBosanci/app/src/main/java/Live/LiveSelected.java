@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
@@ -28,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import Home.Home;
@@ -92,50 +95,62 @@ public class LiveSelected extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth = FirebaseAuth.getInstance();
-                FirebaseAuth mAuthMail = FirebaseAuth.getInstance();
-                mAuthMail = FirebaseAuth.getInstance();
-                FirebaseUser user = mAuthMail.getCurrentUser();
+                FirebaseUser user = mAuth.getCurrentUser();
                 String userEmail = null;
                 if (user != null) {
                     userEmail = user.getEmail();
                 }
 
-                if(!"claudiuppdc7@yahoo.com".equals(userEmail)){
-                    Toast.makeText(getApplicationContext(), "Only the referee can save game", Toast.LENGTH_SHORT).show();
-                }else{
-
-                    mAuth = FirebaseAuth.getInstance();
-                    FirebaseUser currentUser = mAuth.getCurrentUser();
-                    String email = currentUser.getEmail();
-                    String timerF = ttimerFirst.getText().toString();
-                    String timerHF = ttimerHalfTime.getText().toString();
-                    String timerS = ttimerSecond.getText().toString();
-                    String goalTeam1 = goalT1.getText().toString();
-                    String goalTeam2 = goalT2.getText().toString();
-                    DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
-                    ValueEventListener valueEventListener = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            int matchCount = (int) dataSnapshot.getChildrenCount() + 1; // obtenir le nombre de matches existants et ajouter 1 pour le prochain match
-                            String matchId = Integer.toString(matchCount); // convertir le compteur en chaîne de caractères pour l'utiliser comme clé d'enregistrement
-                            // ajouter le nouveau match à la base de données avec la clé unique basée sur le compteur
-                            GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,listPlayers2,listPlayers1);
-                            UserRef.child(matchId).setValue(game);
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                DatabaseReference adminRef = database.getReference("Admin");
+                String finalUserEmail = userEmail;
+                adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        // Get the list of email addresses from the database
+                        ArrayList<String> emailList = new ArrayList<>();
+                        for (DataSnapshot emailSnapshot : snapshot.getChildren()) {
+                            String email = emailSnapshot.getValue(String.class);
+                            emailList.add(email);
                         }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                        // Check if the user's email is in the list
+                        if (emailList.contains(finalUserEmail)) {
+                            mAuth = FirebaseAuth.getInstance();
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            String email = currentUser.getEmail();
+                            String timerF = ttimerFirst.getText().toString();
+                            String timerHF = ttimerHalfTime.getText().toString();
+                            String timerS = ttimerSecond.getText().toString();
+                            String goalTeam1 = goalT1.getText().toString();
+                            String goalTeam2 = goalT2.getText().toString();
+                            DatabaseReference UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                            ValueEventListener valueEventListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    int matchCount = (int) dataSnapshot.getChildrenCount() + 1;
+                                    String matchId = Integer.toString(matchCount);
+                                    GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,listPlayers2,listPlayers1);
+                                    UserRef.child(matchId).setValue(game);
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            };
+                            UserRef.addListenerForSingleValueEvent(valueEventListener);
+                            finishTimer();
+                            Toast.makeText(LiveSelected.this, "Game saved", Toast.LENGTH_SHORT).show();
+                            bt_Save.setEnabled(false);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Only the referee can save the game", Toast.LENGTH_SHORT).show();
                         }
-                    };
-                    UserRef.addListenerForSingleValueEvent(valueEventListener);
-                    finishTimer();
-
-
-                Toast.makeText(LiveSelected.this, "Game save", Toast.LENGTH_SHORT).show();
-                    bt_Save.setEnabled(false);
-
-                }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
         });
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Bundle extras = getIntent().getExtras();
