@@ -334,14 +334,24 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                     String refereeEmail = childSnapshot.getValue(String.class);
                                                     referees.append(refereeEmail).append(", ");
                                                 }
-                                                Toast.makeText(Home.this, "Referees: " + referees.toString(), Toast.LENGTH_SHORT).show();
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                                                builder.setTitle("Referees");
+                                                builder.setMessage(referees.toString());
+                                                builder.setPositiveButton("OK", null);
+                                                builder.show();
                                             }
                                         }
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
                                         }
                                     });
+                                }else if(input.getText().toString().equals("view codes")) {
 
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                                                builder.setTitle("Codes");
+                                                builder.setMessage("view codes\nview referees\nadd referee\ndelete referees\ndelete history\ndelete player\ndelete compo");
+                                                builder.setPositiveButton("OK", null);
+                                                builder.show();
                                 }else{
                                     Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
