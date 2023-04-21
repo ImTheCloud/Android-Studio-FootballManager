@@ -273,7 +273,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                     userEmail = user.getEmail();
                                 }
 
-                                if (input.getText().toString().equals("1070")) {
+                                if (input.getText().toString().equals("add referee")) {
                                     AdmiSave data = new AdmiSave(email);
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Referee");
                                     Query query = UserRef.orderByValue().equalTo(email); // create a query to search for the email
@@ -306,13 +306,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                             Toast.makeText(Home.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                } else {
+                                } else if(input.getText().toString().equals("delete referees")) {
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Referee");
+                                    UserRef.removeValue();
+                                    Toast.makeText(Home.this, "you have removed all the referees", Toast.LENGTH_SHORT).show();
+                                }else{
                                     Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
                             }
-
-
-
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
