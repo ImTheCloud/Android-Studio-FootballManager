@@ -3,7 +3,7 @@ import static Team.TeamRandom.timerFirst;
 import static Team.TeamRandom.timerHalfTime;
 import static Team.TeamRandom.timerSecond;
 import static Home.NewGame.date;
-import static Home.NewGame.userLocation;
+import static Home.Map.userLocation;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import Home.History;
 import Notif.NotificationHelper;
 import com.example.draredebosanci.R;
@@ -38,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 public class LiveRandom extends AppCompatActivity {
+
     private TextView TVPlayers, TVPlayers2, TVStopWatch,goalT1,goalT2;
     private CountDownTimer timer;
     private int totalTime = 45 * 60,mCount = 0,mCount2 = 0;
@@ -54,6 +53,8 @@ public class LiveRandom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_random);
+        System.out.println(userLocation+"------------------aaaaaaa------------------\n\n\n\n\n\n\n");
+
         context = this;
         notificationHelper = new NotificationHelper(this);
         goalT1 = findViewById(R.id.TXT_ScoreTeam1);
@@ -128,6 +129,7 @@ public class LiveRandom extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     int matchCount = (int) dataSnapshot.getChildrenCount() + 1;
                                     String matchId = Integer.toString(matchCount);
+                                    System.out.println(userLocation+"------------------aaaaaaa------------------\n\n\n\n\n\n\n");
                                     GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
                                     UserRef.child(matchId).setValue(game);
                                 }
