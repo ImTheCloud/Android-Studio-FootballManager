@@ -3,18 +3,13 @@ package Home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.draredebosanci.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,10 +19,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import Team.TeamRandom;
 import Team.TeamSelect;
 
@@ -41,7 +34,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
     private FusedLocationProviderClient mFusedLocationClient;
     private final int REQUEST_LOCATION_PERMISSION = 1;
     public static LatLng userLocation,ourField;
-
     public static String date;
 
     @Override
@@ -55,12 +47,9 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
         date = dateFormat.format(calendar.getTime());
         dateTextView.setText(date);
 
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
 
         // On create end
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,8 +67,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    ourField = new LatLng(50.827511 , 4.297444);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                 }
             });
         }
@@ -97,8 +84,6 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                 mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                     if (location != null) {
                         userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                        LatLng ourField = new LatLng(50.827511 , 4.297444);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                     }
                 });
             }
