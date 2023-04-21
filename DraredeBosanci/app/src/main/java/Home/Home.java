@@ -260,7 +260,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                 final EditText input = new EditText(Home.this);
                 builder.setView(input);
-                builder.setTitle("Code").setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                builder.setTitle("Enter a referee code").setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 mAuth = FirebaseAuth.getInstance();
@@ -309,7 +309,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                 } else if(input.getText().toString().equals("delete referees")) {
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Referee");
                                     UserRef.removeValue();
-                                    Toast.makeText(Home.this, "you have removed all the referees", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Home.this, "You have removed all the referees", Toast.LENGTH_SHORT).show();
+                                }else if(input.getText().toString().equals("delete history")) {
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
+                                    UserRef.removeValue();
+                                    Toast.makeText(Home.this, "You have deleted the entire history", Toast.LENGTH_SHORT).show();
+                                }else if(input.getText().toString().equals("delete player")) {
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
+                                    UserRef.removeValue();
+                                    Toast.makeText(Home.this, "You have deleted all players", Toast.LENGTH_SHORT).show();
+                                }else if(input.getText().toString().equals("delete compo")) {
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Compo");
+                                    UserRef.removeValue();
+                                    Toast.makeText(Home.this, "You have deleted compos", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
