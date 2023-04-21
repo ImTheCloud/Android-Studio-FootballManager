@@ -34,6 +34,10 @@
     <item android:title="App">
         <menu>
             <item
+                android:id="@+id/volume"
+                android:icon="@drawable/volume_up"
+                android:title="Volume up" />
+            <item
                 android:id="@+id/nav_gamePosition"
                 android:icon="@drawable/baseline_location_on_24"
                 android:title="Map" />
@@ -45,6 +49,7 @@
                 android:id="@+id/nav_compo"
                 android:icon="@drawable/field2"
                 android:title="Compo" />
+
         </menu>
 
 
@@ -64,11 +69,6 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
                 android:title="About Me" />
-            <item
-                android:id="@+id/volume"
-                android:icon="@drawable/volume_up"
-                android:title="Volume up" />
-
         </menu>
     </item>
 
