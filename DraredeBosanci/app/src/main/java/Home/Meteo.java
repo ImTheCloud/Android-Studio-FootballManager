@@ -30,12 +30,9 @@ public class Meteo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meteo);
         locationEditText = findViewById(R.id.city);
-        fetchButton = findViewById(R.id.BT_meteo);
+        fetchButton = findViewById(R.id.searchMeteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
         image = (ImageView) findViewById(R.id.imageView);
-
-
-        fetchTemperature("Anderlecht");
 
         fetchButton.setOnClickListener(v -> {
             String location = locationEditText.getText().toString();
@@ -48,6 +45,10 @@ public class Meteo extends AppCompatActivity {
     }
 
     private void fetchTemperature(String location) {
+        if (location.isEmpty()) {
+            Toast.makeText(this, "Enter a city please", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=fb665f2037e41531ac80292d5a31dc2c";
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -55,6 +56,7 @@ public class Meteo extends AppCompatActivity {
                 null,
                 response -> {
                     try {
+                        Toast.makeText(this, "The meteo in " + location + " is displayed", Toast.LENGTH_SHORT).show();
                         JSONObject main = response.getJSONObject("main");
                         int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
                         temperatureTextView.setText(temperature + "°C");
@@ -66,7 +68,6 @@ public class Meteo extends AppCompatActivity {
                             image.setImageResource(R.drawable.sun);
                         }
 
-                        Toast.makeText(this, "The meteo in " + location + " is displayed", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(this, "City invalid", Toast.LENGTH_SHORT).show();
