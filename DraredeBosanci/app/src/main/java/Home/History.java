@@ -233,11 +233,11 @@ public class History extends AppCompatActivity {
                         gameData.append("\n");
                         gameData.append("Time : ");
                         gameData.append(timeFirstHalf);
-                        gameData.append("\"   ");
-                        gameData.append(halfText);
-                        gameData.append("\"   ");
-                        gameData.append(timeSecondHalf);
                         gameData.append("\"  ");
+                        gameData.append(halfText);
+                        gameData.append("\"  ");
+                        gameData.append(timeSecondHalf);
+                        gameData.append("\" ");
                         gameData.append("\n\n");
 
                         gameNumber--;
