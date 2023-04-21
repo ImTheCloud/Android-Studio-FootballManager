@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -259,7 +260,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_referee:
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                 final EditText input = new EditText(Home.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 builder.setView(input);
+
                 builder.setTitle("Enter a referee code").setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
