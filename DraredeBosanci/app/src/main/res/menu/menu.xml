@@ -20,31 +20,18 @@
                 android:icon="@drawable/ic_logout_"
                 android:title="Log out"
                 android:orderInCategory="3" />
-
+            <item
+                android:id="@+id/nav_admin"
+                android:icon="@drawable/baseline_person_24"
+                android:title="Admin"
+                android:orderInCategory="4" />
         </menu>
     </item>
 
 
 
-    <item android:title="Info">
+    <item android:title="App">
         <menu>
-
-        <item
-            android:id="@+id/nav_rules"
-            android:icon="@drawable/rule"
-            android:title="Rules" />
-        <item
-            android:id="@+id/nav_help"
-            android:icon="@drawable/baseline_help_24"
-            android:title="Help" />
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info"
-            android:title="About Me" />
-            <item
-                android:id="@+id/volume"
-                android:icon="@drawable/volume_up"
-                android:title="Volume up" />
             <item
                 android:id="@+id/nav_gamePosition"
                 android:icon="@drawable/baseline_location_on_24"
@@ -53,17 +40,34 @@
                 android:id="@+id/nav_meteo"
                 android:icon="@drawable/meteo"
                 android:title="Meteo" />
-
-        </menu>
-
-
-    </item>
-    <item android:title="Team">
-        <menu>
             <item
                 android:id="@+id/nav_compo"
                 android:icon="@drawable/field2"
                 android:title="Compo" />
+        </menu>
+
+
+    </item>
+    <item android:title="Info">
+        <menu>
+
+            <item
+                android:id="@+id/nav_rules"
+                android:icon="@drawable/rule"
+                android:title="Rules" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/baseline_help_24"
+                android:title="Help" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info"
+                android:title="About Me" />
+            <item
+                android:id="@+id/volume"
+                android:icon="@drawable/volume_up"
+                android:title="Volume up" />
+
         </menu>
     </item>
 

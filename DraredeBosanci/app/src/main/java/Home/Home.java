@@ -1,14 +1,19 @@
 package Home;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +28,9 @@ import Statistics.Statistics;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -142,19 +150,33 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 }
             });
         }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Menu navMenu = navigationView.getMenu();
+        MenuItem navLoginItem = navMenu.findItem(R.id.nav_login);
+        MenuItem navLogoutItem = navMenu.findItem(R.id.nav_logout);
+        MenuItem navAdminItem = navMenu.findItem(R.id.nav_admin);
+
+        if (user != null) {
+            userEmail = user.getEmail();
+            navLoginItem.setVisible(false);
+
+        }else{
+            navAdminItem.setVisible(false);
+            navLogoutItem.setVisible(false);
+        }
     }
 
 // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         String userEmail = null;
-        if (user != null) {
-            userEmail = user.getEmail();
-        }
+
+
         switch (item.getItemId()) {
             case R.id.volume:
                 if (isSoundEnabled) {
@@ -176,21 +198,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
             case R.id.nav_logout:
-                if (userEmail != null) {
-                    mAuth.signOut();
-                    startActivity(new Intent(Home.this, Login.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Already disconnected", Toast.LENGTH_SHORT).show();
-                }
+                mAuth.signOut();
+                startActivity(new Intent(Home.this, Login.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
             case R.id.nav_login:
-                if (userEmail != null) {
-                    Toast.makeText(getApplicationContext(), "Already connected", Toast.LENGTH_SHORT).show();
-                }else{
-                    startActivity(new Intent(Home.this, Login.class));
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                }
+                startActivity(new Intent(Home.this, Login.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 break;
             case R.id.nav_compo:
                 if (userEmail != null) {
@@ -224,6 +238,31 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                startActivity(new Intent(Home.this, Meteo.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
+            case R.id.nav_admin:
+                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                final EditText input = new EditText(Home.this);
+                builder.setView(input);
+                builder.setTitle("Code").setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (input.getText().toString().equals("1070")) { // Check if the user input is equal to "1070"
+                                    Toast.makeText(Home.this, "You are now an Admin", Toast.LENGTH_SHORT).show(); // Display a Toast message with the text "admin"
+                                }else{
+                                    Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show(); // Display a Toast message with the text "admin"
+
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+                break;
+
         }
         newGameButton.setEnabled(false);
         return true;
