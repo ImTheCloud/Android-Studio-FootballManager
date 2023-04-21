@@ -322,6 +322,26 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Compo");
                                     UserRef.removeValue();
                                     Toast.makeText(Home.this, "You have deleted compos", Toast.LENGTH_SHORT).show();
+                                }else if(input.getText().toString().equals("view referees")) {
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                                    database.getReference("Referee").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists()) {
+                                                StringBuilder referees = new StringBuilder();
+                                                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                                                    String refereeEmail = childSnapshot.getValue(String.class);
+                                                    referees.append(refereeEmail).append(", ");
+                                                }
+                                                Toast.makeText(Home.this, "Referees: " + referees.toString(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
+
                                 }else{
                                     Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
