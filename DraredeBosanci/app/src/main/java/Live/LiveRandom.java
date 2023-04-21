@@ -3,7 +3,7 @@ import static Team.TeamRandom.timerFirst;
 import static Team.TeamRandom.timerHalfTime;
 import static Team.TeamRandom.timerSecond;
 import static Home.NewGame.date;
-import static Home.Map.userLocation;
+import static Home.NewGame.userLocation;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;

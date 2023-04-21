@@ -1,19 +1,27 @@
 package Home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-
 import android.widget.TextView;
 import com.example.draredebosanci.R;
+import com.google.android.gms.maps.model.LatLng;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import Team.TeamRandom;
 import Team.TeamSelect;
 
 public class NewGame extends AppCompatActivity {
+    public static LatLng userLocation;
     private TextView dateTextView;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
@@ -32,6 +40,18 @@ public class NewGame extends AppCompatActivity {
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         date = dateFormat.format(calendar.getTime());
         dateTextView.setText(date);
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+
+        userLocation = new LatLng(latitude, longitude);
+
 
         // On create end
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
