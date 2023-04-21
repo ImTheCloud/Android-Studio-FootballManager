@@ -165,14 +165,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Menu navMenu = navigationView.getMenu();
         MenuItem navLoginItem = navMenu.findItem(R.id.nav_login);
         MenuItem navLogoutItem = navMenu.findItem(R.id.nav_logout);
-        MenuItem navAdminItem = navMenu.findItem(R.id.nav_admin);
+        MenuItem navRefereeItem = navMenu.findItem(R.id.nav_referee);
 
         if (user != null) {
             userEmail = user.getEmail();
             navLoginItem.setVisible(false);
 
         }else{
-            navAdminItem.setVisible(false);
+            navRefereeItem.setVisible(false);
             navLogoutItem.setVisible(false);
         }
     }
@@ -248,7 +248,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                startActivity(new Intent(Home.this, Meteo.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
-            case R.id.nav_admin:
+            case R.id.nav_referee:
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                 final EditText input = new EditText(Home.this);
                 builder.setView(input);
@@ -273,7 +273,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) { // check if the email already exists
-                                                Toast.makeText(Home.this, "You are already an Admin", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Home.this, "You are already an Referee", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 UserRef.addListenerForSingleValueEvent(new ValueEventListener() { // add a listener to get the count of child nodes
                                                     @Override
@@ -282,7 +282,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                         String emailKey = "email" + (count + 1); // generate a unique email key
                                                         UserRef.child(emailKey).setValue(email); // set email address as the value under the email key
 
-                                                        Toast.makeText(Home.this, "You are now an Admin", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(Home.this, "You are now an Referee", Toast.LENGTH_SHORT).show();
                                                     }
 
                                                     @Override

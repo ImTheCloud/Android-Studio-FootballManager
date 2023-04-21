@@ -47,138 +47,121 @@ public class History extends AppCompatActivity {
             userEmail = user.getEmail();
         }
 
-        if (!"claudiuppdc7@yahoo.com".equals(userEmail)) {
-            deleteAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), "Only the referee can delete all games", Toast.LENGTH_SHORT).show();
-                }
-            });
-            deleteLast.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), "Only the referee can delete the last game", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            deleteAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
-                    builder.setTitle("Confirmation")
-                            .setMessage("Are you sure you want to delete the entire history ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                                    database.getReference().child("Game").removeValue();
-
-                                    teamDisplay.setVisibility(View.INVISIBLE);
-
-                                    deleteAll.setEnabled(false);
-                                    deleteLast.setEnabled(false);
-
-                                    loadingText.setVisibility(View.VISIBLE);
-                                    loadingText.setText("No game played");
-                                    Toast.makeText(History.this, "All games have been deleted", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .create()
-                            .show();
-                }
-            });
-
-
-            deleteLast.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
-                    builder.setTitle("Confirmation")
-                            .setMessage("Are you sure you want to delete the last game ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-
-                                    // Supprimer le dernier élément dans le nœud "Games"
-                                    database.getReference().child("Game").orderByKey().limitToLast(1).get()
-                                            .addOnCompleteListener(task -> {
-                                                if (task.isSuccessful()) {
-                                                    for (DataSnapshot snapshot : task.getResult().getChildren()) {
-                                                        snapshot.getRef().removeValue();
-                                                    }
-                                                }
-                                            });
-                                    retrieveDataHistory();
-                                }
-
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .create()
-                            .show();
-                }
-            });
-
-
-        }
-
-
-        deleteLast.setOnClickListener(new View.OnClickListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference adminRef = database.getReference("Admin");
+        String finalUserEmail = userEmail;
+        adminRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
-                DatabaseReference gameRef = database.getReference("Game");
-                gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        int gameCount = (int) snapshot.getChildrenCount();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
-                        builder.setTitle("Confirmation")
-                                .setMessage("Are you sure you want to delete the last game ?")
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // Supprimer le dernier élément dans le nœud "Game"
-                                        gameRef.child(Integer.toString(gameCount)).removeValue();
-                                        retrieveDataHistory();
-                                        Toast.makeText(History.this, "Last game deleted", Toast.LENGTH_SHORT).show();
-                                        if (gameCount == 1) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Get the list of email addresses from the database
+                ArrayList<String> emailList = new ArrayList<>();
+                for (DataSnapshot emailSnapshot : snapshot.getChildren()) {
+                    String email = emailSnapshot.getValue(String.class);
+                    emailList.add(email);
+                }
+                // Check if the user's email is in the list
+                if (!emailList.contains(finalUserEmail)) {
+                    deleteAll.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getApplicationContext(), "Only the referee can delete all games", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    deleteLast.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getApplicationContext(), "Only the referee can delete the last game", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    deleteAll.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                            builder.setTitle("Confirmation")
+                                    .setMessage("Are you sure you want to delete the entire history ?")
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                                            database.getReference().child("Game").removeValue();
+
                                             teamDisplay.setVisibility(View.INVISIBLE);
+
                                             deleteAll.setEnabled(false);
                                             deleteLast.setEnabled(false);
+
                                             loadingText.setVisibility(View.VISIBLE);
                                             loadingText.setText("No game played");
+                                            Toast.makeText(History.this, "All games have been deleted", Toast.LENGTH_SHORT).show();
                                         }
-                                    }
+                                    })
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .create()
+                                    .show();
+                        }
+                    });
 
-                                })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .create()
-                                .show();
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                    deleteLast.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+                            DatabaseReference gameRef = database.getReference("Game");
+                            gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    int gameCount = (int) snapshot.getChildrenCount();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                                    builder.setTitle("Confirmation")
+                                            .setMessage("Are you sure you want to delete the last game ?")
+                                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    // Delete the last element in the "Game" node
+                                                    gameRef.child(Integer.toString(gameCount)).removeValue();
+                                                    retrieveDataHistory();
+                                                    Toast.makeText(History.this, "Last game deleted", Toast.LENGTH_SHORT).show();
+                                                    if (gameCount == 1) {
+                                                        teamDisplay.setVisibility(View.INVISIBLE);
+                                                        deleteAll.setEnabled(false);
+                                                        deleteLast.setEnabled(false);
+                                                        loadingText.setVisibility(View.VISIBLE);
+                                                        loadingText.setText("No game played");
+                                                    }
+                                                }
+
+                                            })
+                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+                                            .create()
+                                            .show();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+
+
 
 
         retrieveDataHistory();
@@ -225,9 +208,7 @@ public class History extends AppCompatActivity {
                         String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
                         String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
                         String email = gameSnapshot.child("email").getValue(String.class);
-                        if (email.equals("claudiuppdc7@yahoo.com")) {
-                            email = "Claudiu";
-                        }
+                     
 
                         gameData.append("Game ");
                         gameData.append(gameNumber);
