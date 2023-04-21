@@ -92,6 +92,18 @@ public class Compo433 extends AppCompatActivity {
                         player9.setText(pl9);
                         player10.setText(pl10);
                         player11.setText(pl11);
+                    }else{
+                        player1.setText("");
+                        player2.setText("");
+                        player3.setText("");
+                        player4.setText("");
+                        player5.setText("");
+                        player6.setText("");
+                        player7.setText("");
+                        player8.setText("");
+                        player9.setText("");
+                        player10.setText("");
+                        player11.setText("");
                     }
                 }
 

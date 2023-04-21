@@ -321,7 +321,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                 }else if(input.getText().toString().equals("delete compo")) {
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Compo");
                                     UserRef.removeValue();
-                                    Toast.makeText(Home.this, "You have deleted compos", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Home.this, "You have deleted compo", Toast.LENGTH_SHORT).show();
                                 }else if(input.getText().toString().equals("view referees")) {
 
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -332,7 +332,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 StringBuilder referees = new StringBuilder();
                                                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                                                     String refereeEmail = childSnapshot.getValue(String.class);
-                                                    referees.append(refereeEmail).append(", ");
+                                                    referees.append(refereeEmail).append("\n");
                                                 }
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                                                 builder.setTitle("Referees");
@@ -340,6 +340,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                                 builder.setPositiveButton("OK", null);
                                                 builder.show();
                                             }
+
+
                                         }
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
