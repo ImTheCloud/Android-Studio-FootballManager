@@ -80,8 +80,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
                 if (location != null) {
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                    System.out.println(userLocation+"------------------aaaaaaa------------------\n\n\n\n\n\n\n");
-
                     ourField = new LatLng(50.827511 , 4.297444);
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
                 }
