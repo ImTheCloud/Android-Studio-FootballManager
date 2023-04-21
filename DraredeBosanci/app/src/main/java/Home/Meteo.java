@@ -19,29 +19,27 @@ import org.json.JSONObject;
 
 public class Meteo extends AppCompatActivity {
     private EditText locationEditText;
-    private TextView dateTextView,temperatureTextView;
+    private TextView temperatureTextView;
     private Button fetchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meteo);
-
         locationEditText = findViewById(R.id.city);
         fetchButton = findViewById(R.id.BT_meteo);
         temperatureTextView = findViewById(R.id.temperature_textview);
 
         fetchTemperature("Anderlecht");
+
         fetchButton.setOnClickListener(v -> {
             String location = locationEditText.getText().toString();
             if (!location.isEmpty()) {
                 fetchTemperature(location);
-
             } else {
-                Toast.makeText(this, "Enter a location", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Enter a city please", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     private void fetchTemperature(String location) {
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=fb665f2037e41531ac80292d5a31dc2c";
@@ -54,18 +52,19 @@ public class Meteo extends AppCompatActivity {
                         JSONObject main = response.getJSONObject("main");
                         int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
                         temperatureTextView.setText(temperature + "°C");
-
+                        Toast.makeText(this, "The meteo in " + location + " is displayed", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Invalid location", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "City invalid", Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
                     error.printStackTrace();
+                    Toast.makeText(this, "City invalid", Toast.LENGTH_SHORT).show();
                 }
         );
-
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
+
     }
-}
+    }
