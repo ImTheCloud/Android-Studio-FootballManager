@@ -6,25 +6,26 @@
     <item android:title="Account">
         <menu>
             <item
+                android:id="@+id/nav_admin"
+                android:icon="@drawable/baseline_person_24"
+                android:title="Admin"
+/>
+            <item
                 android:id="@+id/nav_register"
                 android:icon="@drawable/baseline_library_books_24"
                 android:title="Register"
-                android:orderInCategory="1" />
+/>
             <item
                 android:id="@+id/nav_login"
                 android:icon="@drawable/ic_login"
                 android:title="Log in"
-                android:orderInCategory="2" />
+/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_logout_"
                 android:title="Log out"
-                android:orderInCategory="3" />
-            <item
-                android:id="@+id/nav_admin"
-                android:icon="@drawable/baseline_person_24"
-                android:title="Admin"
-                android:orderInCategory="4" />
+     />
+
         </menu>
     </item>
 

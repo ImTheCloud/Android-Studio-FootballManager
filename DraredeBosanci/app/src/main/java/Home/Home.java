@@ -1,4 +1,7 @@
 package Home;
+import static Home.NewGame.date;
+import static Home.NewGame.userLocation;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import Firebase.Login;
 import Firebase.Register;
+import Live.GameSave;
 import Music.MyMusicService;
 import com.example.draredebosanci.R;
 import Compo.Compo;
@@ -29,7 +33,11 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -43,7 +51,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private Toolbar toolbar;
     private View header;
     private LinearLayout layout_home;
-    private NavigationView navigationView;
+    private NavigationView navigationView;    private DatabaseReference UserRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,13 +255,56 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 builder.setTitle("Code").setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (input.getText().toString().equals("1070")) { // Check if the user input is equal to "1070"
-                                    Toast.makeText(Home.this, "You are now an Admin", Toast.LENGTH_SHORT).show(); // Display a Toast message with the text "admin"
-                                }else{
-                                    Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show(); // Display a Toast message with the text "admin"
+                                mAuth = FirebaseAuth.getInstance();
+                                FirebaseAuth mAuthMail = FirebaseAuth.getInstance();
+                                FirebaseUser user = mAuthMail.getCurrentUser();
+                                String userEmail = null;
+                                String email = user.getEmail();
 
+                                if (user != null) {
+                                    userEmail = user.getEmail();
+                                }
+
+                                if (input.getText().toString().equals("1070")) {
+                                    AdmiSave data = new AdmiSave(email);
+                                    UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Admin");
+                                    Query query = UserRef.orderByValue().equalTo(email); // create a query to search for the email
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() { // add a listener to retrieve the search result
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            if (dataSnapshot.exists()) { // check if the email already exists
+                                                Toast.makeText(Home.this, "You are already an Admin", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                UserRef.addListenerForSingleValueEvent(new ValueEventListener() { // add a listener to get the count of child nodes
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        long count = dataSnapshot.getChildrenCount(); // get the count of child nodes
+                                                        String emailKey = "email" + (count + 1); // generate a unique email key
+                                                        UserRef.child(emailKey).setValue(email); // set email address as the value under the email key
+
+                                                        Toast.makeText(Home.this, "You are now an Admin", Toast.LENGTH_SHORT).show();
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                        Toast.makeText(Home.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            Toast.makeText(Home.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
                             }
+
+
+
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
