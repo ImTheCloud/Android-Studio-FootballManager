@@ -6,6 +6,7 @@ import static Home.NewGame.date;
 import static Home.NewGame.userLocation;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import Home.History;
@@ -46,15 +48,15 @@ public class LiveRandom extends AppCompatActivity {
     private Context context;
     private FirebaseAuth mAuth;
     private boolean isActive = false;
-
+    private long timePaused = 0;
+    private long pauseStart = 0;
+    long startTime = System.currentTimeMillis();
 
     DatabaseReference UserRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_random);
-        System.out.println(userLocation+"------------------aaaaaaa------------------\n\n\n\n\n\n\n");
-
         context = this;
         notificationHelper = new NotificationHelper(this);
         goalT1 = findViewById(R.id.TXT_ScoreTeam1);
@@ -129,7 +131,6 @@ public class LiveRandom extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     int matchCount = (int) dataSnapshot.getChildrenCount() + 1;
                                     String matchId = Integer.toString(matchCount);
-                                    System.out.println(userLocation+"------------------aaaaaaa------------------\n\n\n\n\n\n\n");
                                     GameSave game = new GameSave(userLocation,goalTeam1,goalTeam2,timerF,timerS,timerHF,email,date,team2,team1);
                                     UserRef.child(matchId).setValue(game);
                                 }
@@ -155,6 +156,14 @@ public class LiveRandom extends AppCompatActivity {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        extractTimerValuesFromIntent();
+        startTimer();
+
+
+    }
+    // on create end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private void extractTimerValuesFromIntent() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String timerHalf = extras.getString("timerHalf");
@@ -163,21 +172,26 @@ public class LiveRandom extends AppCompatActivity {
             int ttimerFirst = (timerFirst != null && !timerFirst.isEmpty()) ? (int) Double.parseDouble(timerFirst) : 0;
             String timerSecond = extras.getString("timerSecond");
             int ttimerSecond = (timerSecond != null && !timerSecond.isEmpty()) ? (int) Double.parseDouble(timerSecond) : 0;
-            int totalTime = ttimerHalf+ ttimerFirst+ttimerSecond;
+            int totalTime = ttimerHalf + ttimerFirst + ttimerSecond;
             TVStopWatch.setText(String.valueOf(totalTime));
         }
+    }
+
+    private void startTimer() {
 
         String timerString = TVStopWatch.getText().toString();
         if (!TextUtils.isEmpty(timerString)) {
             try {
                 int minutes = Integer.parseInt(timerString);
-                totalTime = minutes * 60;
+                totalTime = minutes * 60; // Update totalTime with user input
             } catch (NumberFormatException e) {
                 // Invalid input, use default value
-                totalTime = 45 * 60;
             }
+        } else {
+            // No timer value entered, use default value
+            totalTime = 45 * 60;
         }
-        // Cancel previous timer if there is one
+
         if (timer != null) {
             timer.cancel();
         }
@@ -194,7 +208,7 @@ public class LiveRandom extends AppCompatActivity {
                     String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                     TVStopWatch.setText(timeLeft);
                     // Afficher le temps restant dans la notification
-                    String title = "Temps restant : " + timeLeft;
+                    String title = "Time left : " + timeLeft;
                     NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                     builder.setSmallIcon(R.drawable.timer);
                     builder.setOnlyAlertOnce(true);
@@ -207,16 +221,65 @@ public class LiveRandom extends AppCompatActivity {
             public void onFinish() {
                 finishTimer();
             }
-
         }.start();
-        timer = null;
-
     }
-    // on create end
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void goToPause(View v) {
+        pauseStartTimer();
+    }
+
+    public void pauseStartTimer(){
+        Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
+
+        if (timer != null) {
+            if (timePaused == 0) { // Timer is not paused
+                // Pause the timer
+                timer.cancel();
+                pauseStart = System.currentTimeMillis();
+                timePaused = pauseStart - startTime; // Calculate the correct timePaused value
+
+                // Change the icon of the pauseStart button to "baseline_play_arrow_24"
+                pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+            } else { // Timer is paused
+                // Resume the timer
+                long remainingTime = (totalTime * 1000) - timePaused;
+                timer = new CountDownTimer(remainingTime, 1000) {
+                    boolean notificationSent = false; // Initialize notificationSent to false
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if (isActive) {
+                            // Update the timer
+                            int hours = (int) (millisUntilFinished / 3600000);
+                            int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                            int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                            String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                            TVStopWatch.setText(timeLeft);
+                            // Your existing code for displaying the notification goes here
+                        }
+                    }
+                    @Override
+                    public void onFinish() {
+                        finishTimer();
+                    }
+                }.start();
+                startTime = System.currentTimeMillis() - timePaused; // Set the correct startTime value
+                timePaused = 0;
+
+                // Change the icon of the pauseStart button to "baseline_pause_24"
+                pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+            }
+        } else {
+            // Timer is not running, so start it
+            extractTimerValuesFromIntent();
+            startTime = System.currentTimeMillis(); // Initialize the startTime variable
+            startTimer();
+
+            // Change the icon of the pauseStart button to "baseline_pause_24"
+            pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+        }
+    }
     private void finishTimer() {
-
+        pauseStartTimer();
         TVStopWatch.setText("00:00:00");
         // Display notification when timer finishes
         String title = "Finished Game";
@@ -230,8 +293,10 @@ public class LiveRandom extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
         finish();
+        finishTimer();
         Intent intent = new Intent(LiveRandom.this, TeamRandom.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -276,6 +341,38 @@ public class LiveRandom extends AppCompatActivity {
         startActivity(new Intent(LiveRandom.this, History.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
+    public void goToRefresh(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to restart the game with new teams ?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        setPlayerOnTeam();
+                        goalT1.setText("0");
+                        goalT2.setText("0");
+
+                        if (timer != null) {
+                            timer.cancel();
+                        }
+                        extractTimerValuesFromIntent();
+                        Toast.makeText(getApplicationContext(), "The game has been restarted", Toast.LENGTH_SHORT).show();
+                        startTimer();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
+
+
+
+
 
 
 }

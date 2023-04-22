@@ -52,6 +52,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.007" />
 
+    <Button
+        android:id="@+id/refresh"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableTop="@drawable/baseline_restart_alt_24"
+        android:onClick="goToRefresh"
+        android:text="Refresh"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/pauseStart"
+        android:layout_width="38dp"
+        android:layout_height="22dp"
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableTop="@drawable/baseline_pause_24"
+        android:onClick="goToPause"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.086" />
+
     <LinearLayout
         android:id="@+id/layout_timer"
         style="@style/TextViewStyle"
