@@ -233,7 +233,7 @@ public class LiveRandom extends AppCompatActivity {
             }
         }.start();
     }
-    
+
     public void goToPause(View v) {
         Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
 
@@ -370,6 +370,9 @@ public class LiveRandom extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         setPlayerOnTeam();
+                        goalT1.setText("0");
+                        goalT2.setText("0");
+
                         Toast.makeText(getApplicationContext(), "Team changed", Toast.LENGTH_SHORT).show();
 
                     }

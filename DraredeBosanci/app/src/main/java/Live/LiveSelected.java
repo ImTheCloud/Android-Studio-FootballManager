@@ -175,8 +175,7 @@ public class LiveSelected extends AppCompatActivity {
         }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         extractTimerValuesFromIntent();
-
-
+        startTimer();
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,6 +236,18 @@ public class LiveSelected extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                // Update the timer text
+                TVStopWatch.setText("00:00:00");
+
+                // Update the notification title to indicate that the timer has finished
+                String title = "Timer finished!";
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
+
+                // Finish the timer
                 finishTimer();
             }
         }.start();
@@ -244,7 +255,7 @@ public class LiveSelected extends AppCompatActivity {
 
     public void goToPause(View v) {
         Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
-        startTimer();
+
         if (timer != null) {
             if (timePaused == 0) { // Timer is not paused
                 // Pause the timer
@@ -254,6 +265,15 @@ public class LiveSelected extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_play_arrow_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+
+                // Update the notification with the paused time left value
+                String timeLeft = TVStopWatch.getText().toString();
+                String title = "Time left : " + timeLeft;
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
             } else { // Timer is paused
                 // Resume the timer
                 long remainingTime = (totalTime * 1000) - timePaused;
@@ -268,7 +288,14 @@ public class LiveSelected extends AppCompatActivity {
                             int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
                             String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                             TVStopWatch.setText(timeLeft);
-                            // Your existing code for displaying the notification goes here
+
+                            // Update the notification with the resumed time left value
+                            String title = "Time left : " + timeLeft;
+                            NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                            builder.setSmallIcon(R.drawable.timer);
+                            builder.setOnlyAlertOnce(true);
+                            NotificationManager manager = notificationHelper.getManager();
+                            manager.notify(1, builder.build());
                         }
                     }
                     @Override
@@ -346,5 +373,25 @@ public class LiveSelected extends AppCompatActivity {
         finish();
         startActivity(new Intent(LiveSelected.this, History.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+    public void goToRefresh(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to reset the goals to 0?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        goalT1.setText("0");
+                        goalT2.setText("0");
+
+                        Toast.makeText(getApplicationContext(), "Goals reset", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

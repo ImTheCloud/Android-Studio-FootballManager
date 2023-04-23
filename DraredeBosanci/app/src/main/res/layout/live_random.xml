@@ -17,7 +17,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-
     <Button
         android:id="@+id/house"
         android:layout_width="59dp"
@@ -243,23 +242,20 @@
 
     <Button
         android:id="@+id/bt_Save"
-        android:layout_width="33dp"
-        android:layout_height="35dp"
-        android:background="@drawable/button_selector4"
-        android:drawablePadding="10dp"
-        android:elevation="2dp"
-        android:fontFamily="sans-serif-medium"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:padding="10dp"
-        android:scaleType="fitCenter"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_selector"
+        android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
+        android:drawableTop="@drawable/baseline_save_24"
+        android:onClick="goToRefresh"
+
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.981" />
-
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/LIVE"
