@@ -71,8 +71,8 @@
 
     <Button
         android:id="@+id/pauseStart"
-        android:layout_width="38dp"
-        android:layout_height="22dp"
+        android:layout_width="29dp"
+        android:layout_height="23dp"
         android:background="@drawable/button_selector"
         android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
         android:drawableTop="@drawable/baseline_pause_24"

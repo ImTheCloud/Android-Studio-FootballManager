@@ -158,8 +158,6 @@ public class LiveRandom extends AppCompatActivity {
 
         extractTimerValuesFromIntent();
         startTimer();
-
-
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,16 +217,24 @@ public class LiveRandom extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                // Update the timer text
+                TVStopWatch.setText("00:00:00");
+
+                // Update the notification title to indicate that the timer has finished
+                String title = "Timer finished!";
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
+
+                // Finish the timer
                 finishTimer();
             }
         }.start();
     }
-
+    
     public void goToPause(View v) {
-        pauseStartTimer();
-    }
-
-    public void pauseStartTimer(){
         Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
 
         if (timer != null) {
@@ -240,6 +246,15 @@ public class LiveRandom extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_play_arrow_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+
+                // Update the notification with the paused time left value
+                String timeLeft = TVStopWatch.getText().toString();
+                String title = "Time left : " + timeLeft;
+                NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                builder.setSmallIcon(R.drawable.timer);
+                builder.setOnlyAlertOnce(true);
+                NotificationManager manager = notificationHelper.getManager();
+                manager.notify(1, builder.build());
             } else { // Timer is paused
                 // Resume the timer
                 long remainingTime = (totalTime * 1000) - timePaused;
@@ -254,7 +269,14 @@ public class LiveRandom extends AppCompatActivity {
                             int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
                             String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                             TVStopWatch.setText(timeLeft);
-                            // Your existing code for displaying the notification goes here
+
+                            // Update the notification with the resumed time left value
+                            String title = "Time left : " + timeLeft;
+                            NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+                            builder.setSmallIcon(R.drawable.timer);
+                            builder.setOnlyAlertOnce(true);
+                            NotificationManager manager = notificationHelper.getManager();
+                            manager.notify(1, builder.build());
                         }
                     }
                     @Override
@@ -278,8 +300,8 @@ public class LiveRandom extends AppCompatActivity {
             pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
         }
     }
+
     private void finishTimer() {
-        pauseStartTimer();
         TVStopWatch.setText("00:00:00");
         // Display notification when timer finishes
         String title = "Finished Game";
@@ -344,19 +366,12 @@ public class LiveRandom extends AppCompatActivity {
 
     public void goToRefresh(View v){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to restart the game with new teams ?")
+        builder.setMessage("Are you sure you want to change the teams?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         setPlayerOnTeam();
-                        goalT1.setText("0");
-                        goalT2.setText("0");
+                        Toast.makeText(getApplicationContext(), "Team changed", Toast.LENGTH_SHORT).show();
 
-                        if (timer != null) {
-                            timer.cancel();
-                        }
-                        extractTimerValuesFromIntent();
-                        Toast.makeText(getApplicationContext(), "The game has been restarted", Toast.LENGTH_SHORT).show();
-                        startTimer();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -367,12 +382,5 @@ public class LiveRandom extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
-
-
-
-
-
 
 }

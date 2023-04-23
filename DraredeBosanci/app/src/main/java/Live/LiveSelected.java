@@ -6,6 +6,7 @@ import static Home.NewGame.date;
 import static Home.NewGame.userLocation;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,11 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-
 import Notif.NotificationHelper;
 import Home.History;
 import com.example.draredebosanci.R;
@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +48,9 @@ public class LiveSelected extends AppCompatActivity {
     private DatabaseReference UserRef;
     private FirebaseAuth mAuth;
     private boolean isActive = false;
-
+    long startTime = System.currentTimeMillis();
+    private long timePaused = 0;
+    private long pauseStart = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,32 +174,46 @@ public class LiveSelected extends AppCompatActivity {
 
         }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Bundle extrass = getIntent().getExtras();
-        if (extrass != null) {
-            String timerHalf = extrass.getString("timerHalf");
+        extractTimerValuesFromIntent();
+
+
+    }
+    // on create end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void extractTimerValuesFromIntent() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String timerHalf = extras.getString("timerHalf");
             int ttimerHalf = (timerHalf != null && !timerHalf.isEmpty()) ? (int) Double.parseDouble(timerHalf) : 0;
-            String timerFirst = extrass.getString("timerFirst");
+            String timerFirst = extras.getString("timerFirst");
             int ttimerFirst = (timerFirst != null && !timerFirst.isEmpty()) ? (int) Double.parseDouble(timerFirst) : 0;
-            String timerSecond = extrass.getString("timerSecond");
+            String timerSecond = extras.getString("timerSecond");
             int ttimerSecond = (timerSecond != null && !timerSecond.isEmpty()) ? (int) Double.parseDouble(timerSecond) : 0;
-            int totalTime = ttimerHalf+ ttimerFirst+ttimerSecond;
+            int totalTime = ttimerHalf + ttimerFirst + ttimerSecond;
             TVStopWatch.setText(String.valueOf(totalTime));
         }
+    }
+
+    private void startTimer() {
 
         String timerString = TVStopWatch.getText().toString();
         if (!TextUtils.isEmpty(timerString)) {
             try {
                 int minutes = Integer.parseInt(timerString);
-                totalTime = minutes * 60;
+                totalTime = minutes * 60; // Update totalTime with user input
             } catch (NumberFormatException e) {
                 // Invalid input, use default value
-                totalTime = 45 * 60;
             }
+        } else {
+            // No timer value entered, use default value
+            totalTime = 45 * 60;
         }
-        // Cancel previous timer if there is one
+
         if (timer != null) {
             timer.cancel();
         }
+
         // Start a new timer
         timer = new CountDownTimer(totalTime * 1000, 1000) {
             boolean notificationSent = false; // Initialize notificationSent to false
@@ -211,7 +226,7 @@ public class LiveSelected extends AppCompatActivity {
                     String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
                     TVStopWatch.setText(timeLeft);
                     // Afficher le temps restant dans la notification
-                    String title = "Temps restant : " + timeLeft;
+                    String title = "Time left : " + timeLeft;
                     NotificationCompat.Builder builder = notificationHelper.createNotification(title);
                     builder.setSmallIcon(R.drawable.timer);
                     builder.setOnlyAlertOnce(true);
@@ -219,15 +234,64 @@ public class LiveSelected extends AppCompatActivity {
                     manager.notify(1, builder.build());
                 }
             }
+
             @Override
             public void onFinish() {
                 finishTimer();
             }
         }.start();
-        timer = null;
     }
-    // on create end
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void goToPause(View v) {
+        Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
+        startTimer();
+        if (timer != null) {
+            if (timePaused == 0) { // Timer is not paused
+                // Pause the timer
+                timer.cancel();
+                pauseStart = System.currentTimeMillis();
+                timePaused = pauseStart - startTime; // Calculate the correct timePaused value
+
+                // Change the icon of the pauseStart button to "baseline_play_arrow_24"
+                pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+            } else { // Timer is paused
+                // Resume the timer
+                long remainingTime = (totalTime * 1000) - timePaused;
+                timer = new CountDownTimer(remainingTime, 1000) {
+                    boolean notificationSent = false; // Initialize notificationSent to false
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if (isActive) {
+                            // Update the timer
+                            int hours = (int) (millisUntilFinished / 3600000);
+                            int minutes = (int) ((millisUntilFinished % 3600000) / 60000);
+                            int seconds = (int) ((millisUntilFinished % 3600000) % 60000) / 1000;
+                            String timeLeft = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                            TVStopWatch.setText(timeLeft);
+                            // Your existing code for displaying the notification goes here
+                        }
+                    }
+                    @Override
+                    public void onFinish() {
+                        finishTimer();
+                    }
+                }.start();
+                startTime = System.currentTimeMillis() - timePaused; // Set the correct startTime value
+                timePaused = 0;
+
+                // Change the icon of the pauseStart button to "baseline_pause_24"
+                pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+            }
+        } else {
+            // Timer is not running, so start it
+            extractTimerValuesFromIntent();
+            startTime = System.currentTimeMillis(); // Initialize the startTime variable
+            startTimer();
+
+            // Change the icon of the pauseStart button to "baseline_pause_24"
+            pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+        }
+    }
     private void finishTimer() {
         TVStopWatch.setText("00:00:00");
         // Display notification when timer finishes
