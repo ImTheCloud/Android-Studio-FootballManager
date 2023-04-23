@@ -115,15 +115,19 @@ public class Statistics extends AppCompatActivity {
             scrollView.getLayoutParams().height = 700;
         }
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        String[] positions = getResources().getStringArray(R.array.positions);
-        positionList = Arrays.asList(positions);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerPositionSpinner.setAdapter(adapter);
-
-
+        bt_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
+                String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
+                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
+                UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
+                Toast.makeText(Statistics.this, "Player profile save", Toast.LENGTH_SHORT).show();
+            }
+        });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -166,6 +170,24 @@ public class Statistics extends AppCompatActivity {
                 if (hasFocus) {
                     ((EditText) view).setText("");
                 }
+            }
+        });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        String[] positions = getResources().getStringArray(R.array.positions);
+        positionList = Arrays.asList(positions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, positionList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPositionSpinner.setAdapter(adapter);
+
+        playerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String uniqueId = playerNameSpinner.getSelectedItem().toString();
+                retrieveDataFromDatabase(uniqueId);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
@@ -246,31 +268,7 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        playerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String uniqueId = playerNameSpinner.getSelectedItem().toString();
-                retrieveDataFromDatabase(uniqueId);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        bt_Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Stat_Save data = new Stat_Save(etFame, etWin, etLose, etTie, et5Goal, etYellowCard, playerPositionSpinner, playerNameSpinner,TVPointsWrite);
-                String uniqueId = playerNameSpinner.getSelectedItem().toString(); // get the selected item as a string
-                UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
-                UserRef.child(uniqueId).setValue(data); // set the value with the unique ID
-                Toast.makeText(Statistics.this, "Player profile save", Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
