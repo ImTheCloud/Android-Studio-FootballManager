@@ -16,6 +16,151 @@
         tools:layout_editor_absoluteX="-67dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <ScrollView
+        android:id="@+id/scroll"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="46dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></Space>
+
+        <EditText
+            android:id="@+id/ID_Player"
+            style="@style/TextViewStyle"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Players"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="209dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.097"
+            tools:layout_editor_absoluteX="-3dp">
+
+            <LinearLayout
+                android:id="@+id/linear"
+                style="@style/TextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="46dp">
+
+                <ListView
+                    android:id="@+id/playerListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="173dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutTime"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.773">
+
+            <EditText
+                android:id="@+id/ID_Timer_first"
+                style="@style/TextViewStyle"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="First half"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.066"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.792" />
+
+
+            <EditText
+                android:id="@+id/ID_Timer_halftime"
+                style="@style/TextViewStyle"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="Half time"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.792" />
+
+            <EditText
+                android:id="@+id/ID_Timer_second"
+                style="@style/TextViewStyle"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:gravity="center"
+                android:hint="Second half"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.933"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.792" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/startButton"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="goToLive"
+            android:text="Start"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintVertical_bias="0.897" />
+    </LinearLayout>
+    </ScrollView>
+
+
     <Button
         android:id="@+id/house"
         android:layout_width="59dp"
@@ -45,336 +190,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutTime"
-        style="@style/TextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773">
-        <EditText
-            android:id="@+id/ID_Timer_first"
-            style="@style/TextViewStyle"
-            android:layout_width="87dp"
-            android:layout_height="wrap_content"
-            android:ems="4"
-            android:gravity="center"
-            android:hint="First half"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.066"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.792" />
 
-
-        <EditText
-            android:id="@+id/ID_Timer_halftime"
-            style="@style/TextViewStyle"
-            android:layout_width="88dp"
-            android:layout_height="wrap_content"
-            android:ems="4"
-            android:gravity="center"
-            android:hint="Half time"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.792" />
-
-        <EditText
-            android:id="@+id/ID_Timer_second"
-            style="@style/TextViewStyle"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:ems="4"
-            android:gravity="center"
-            android:hint="Second half"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.933"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.792" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutBosanci1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        style="@style/TextViewStyle"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093">
-
-        <Button
-            android:id="@+id/playerDany"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Dany"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerRuben"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Ruben"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerClaudiu"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Claudiu"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerFlavyus"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Flavyus"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerDenis"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Denis"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerRoberto"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Robert"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayoutBosanci2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        style="@style/TextViewStyle"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.186">
-
-        <Button
-
-            android:id="@+id/playerLucian"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Lucian"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerDavid"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="David"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-
-        <Button
-            android:id="@+id/playerSimon"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Simon"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerYaniv"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Yaniv"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerEdaurd"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Eduard"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerIosif"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Iosif"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutBosanci3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        style="@style/TextViewStyle"
-        android:gravity="center_horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.279">
-
-        <Button
-            android:id="@+id/playerVasi"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Vasi"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerBogdan"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Bogdan"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerMarius"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Marius"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerTimote"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Timote"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerAlex"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Alex"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/playerKami"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:backgroundTint="#95000000"
-            android:text="Kami"
-            android:textColor="@android:color/white"
-            android:textSize="8sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-    <EditText
-        style="@style/TextViewStyle"
-        android:id="@+id/ID_Player"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Players"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
-
-    <Button
-        android:id="@+id/startButton"
-        style="@style/TextViewStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToLive"
-        android:text="Start"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.897" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

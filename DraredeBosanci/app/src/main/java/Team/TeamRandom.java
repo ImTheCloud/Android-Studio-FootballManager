@@ -5,13 +5,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.example.draredebosanci.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 import Home.Home;
 import Live.LiveRandom;
 import Home.NewGame;
+import Statistics.StatSpinner;
+import Statistics.Statistics;
 
 public class TeamRandom extends AppCompatActivity {
     private EditText etPlayers;
@@ -26,47 +40,50 @@ public class TeamRandom extends AppCompatActivity {
         timerHalfTime = findViewById(R.id.ID_Timer_halftime);
         timerFirst = findViewById(R.id.ID_Timer_first);
         timerSecond = findViewById(R.id.ID_Timer_second);
+        etPlayers = findViewById(R.id.ID_Player);
 
         timerHalfTime.setInputType(InputType.TYPE_CLASS_NUMBER);
         timerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
         timerSecond.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
-        etPlayers = findViewById(R.id.ID_Player);
-         Button[] buttons = new Button[] {
-                findViewById(R.id.playerClaudiu),
-                findViewById(R.id.playerRuben),
-                findViewById(R.id.playerDany),
-                findViewById(R.id.playerRoberto),
-                findViewById(R.id.playerDenis),
-                findViewById(R.id.playerLucian),
-                findViewById(R.id.playerDavid),
-                findViewById(R.id.playerFlavyus),
-                findViewById(R.id.playerSimon),
-                findViewById(R.id.playerEdaurd),
-                findViewById(R.id.playerYaniv),
-                findViewById(R.id.playerIosif),
-                 findViewById(R.id.playerKami),
-                 findViewById(R.id.playerMarius),
-                 findViewById(R.id.playerAlex),
-                 findViewById(R.id.playerTimote),
-                 findViewById(R.id.playerBogdan),
-                 findViewById(R.id.playerVasi),
+        ListView playerListView = findViewById(R.id.playerListView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        playerListView.setAdapter(adapter);
 
-        };
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference playersRef = database.getReference("Player");
 
-        for (Button button : buttons) {
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String player = button.getText().toString();
-                    String currentText = etPlayers.getText().toString();
-                    String newText = currentText.isEmpty() ? player : currentText + "," + player;
-                    etPlayers.setText(newText);
-                    disableButton(view);
+        playersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> playerNames = new ArrayList<String>();
+                for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
+                    String playerName = playerSnapshot.child("name").getValue(String.class);
+                    playerNames.add(playerName);
                 }
-            });
-        }
+                adapter.addAll(playerNames);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
+                String currentText = etPlayers.getText().toString();
+                    String newText = currentText.isEmpty() ? selectedItem : currentText + ", " + selectedItem;
+                    etPlayers.setText(newText);
+
+            }
+        });
+
+
+
+
 
 
     }

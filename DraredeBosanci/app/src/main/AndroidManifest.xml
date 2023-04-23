@@ -66,8 +66,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="Team.TeamSelect"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="false" />
         <activity
             android:name="Home.NewGame"
             android:exported="false" />
@@ -97,8 +96,7 @@
             android:exported="false" />
         <activity
             android:name="Team.TeamRandom"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="false" />
         <activity
             android:name="Home.AboutMe"
             android:exported="false" />
