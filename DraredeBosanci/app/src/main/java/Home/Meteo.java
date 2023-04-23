@@ -56,7 +56,7 @@ public class Meteo extends AppCompatActivity {
                 null,
                 response -> {
                     try {
-                        Toast.makeText(this, "The meteo in " + location + " is displayed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Meteo : " + location, Toast.LENGTH_SHORT).show();
                         JSONObject main = response.getJSONObject("main");
                         int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
                         temperatureTextView.setText(temperature + "°C");

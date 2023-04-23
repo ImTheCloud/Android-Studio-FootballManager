@@ -31,8 +31,8 @@
 
         <Button
             android:id="@+id/deleteLast"
-            android:layout_width="126dp"
-            android:layout_height="56dp"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="#004CAF50"
             android:drawableLeft="@drawable/baseline_delete_24"
             android:elevation="4dp"
@@ -47,20 +47,20 @@
     </RelativeLayout>
 
     <Button
-            android:id="@+id/DeleteAll"
-            android:drawableLeft="@drawable/baseline_delete_24"
-            android:layout_width="126dp"
-            android:layout_height="56dp"
-            android:backgroundTint="#004CAF50"
-            android:elevation="4dp"
-            android:padding="16dp"
-            android:text="Delete All"
-            android:textColor="#FFFFFF"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:translationZ="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/DeleteAll"
+        android:layout_width="162dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#004CAF50"
+        android:drawableLeft="@drawable/baseline_delete_24"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:text="Delete All"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:translationZ="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
