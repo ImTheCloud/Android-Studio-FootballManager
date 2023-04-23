@@ -39,17 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"></Space>
 
-        <EditText
-            android:id="@+id/ID_Player"
-            style="@style/TextViewStyle"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Players"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white" />
-
 
         <ScrollView
             android:id="@+id/scroll_view"
@@ -75,6 +64,20 @@
                     android:layout_height="173dp" />
             </LinearLayout>
         </ScrollView>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp"></Space>
+
+        <EditText
+            android:id="@+id/ID_Player"
+            style="@style/TextViewStyle"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Players"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
         <LinearLayout
             android:id="@+id/linearLayoutTime"

@@ -317,14 +317,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Game");
                                     UserRef.removeValue();
                                     Toast.makeText(Home.this, "You have deleted the entire history", Toast.LENGTH_SHORT).show();
-                                }else if(input.getText().toString().equals("delete player")) {
+                                }else if(input.getText().toString().equals("delete players")) {
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Player");
                                     UserRef.removeValue();
                                     Toast.makeText(Home.this, "You have deleted all players", Toast.LENGTH_SHORT).show();
-                                }else if(input.getText().toString().equals("delete compo")) {
+                                }else if(input.getText().toString().equals("delete compos")) {
                                     UserRef = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/").getReference().child("Compo");
                                     UserRef.removeValue();
-                                    Toast.makeText(Home.this, "You have deleted compo", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Home.this, "You have deleted compos", Toast.LENGTH_SHORT).show();
                                 }else if(input.getText().toString().equals("view referees")) {
 
                                     FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -361,7 +361,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                                                 builder.setTitle("Codes");
-                                                builder.setMessage("view version\nview codes\nview referees\nadd referee\ndelete referees\ndelete history\ndelete player\ndelete compo");
+                                                builder.setMessage("view version\nview codes\nview referees\nadd referee\ndelete referees\ndelete history\ndelete players\ndelete compos");
                                                 builder.setPositiveButton("OK", null);
                                                 builder.show();
 

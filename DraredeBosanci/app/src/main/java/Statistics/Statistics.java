@@ -303,6 +303,7 @@ private void retrievePlayersFromDatabase() {
     playersRef.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
             ArrayList<String> playerNames = new ArrayList<String>();
             for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
                 String playerName = playerSnapshot.child("name").getValue(String.class);
@@ -311,7 +312,7 @@ private void retrievePlayersFromDatabase() {
             StatSpinner adapter = new StatSpinner(Statistics.this, R.layout.stat_spinner, playerNames.toArray(new String[playerNames.size()]));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             playerNameSpinner.setAdapter(adapter);
-        }
+        }  }
         @Override
         public void onCancelled(DatabaseError databaseError) {
             // traitement de l'erreur d'accès à la base de données

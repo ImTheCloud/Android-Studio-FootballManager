@@ -50,6 +50,7 @@ public class TeamRandom extends AppCompatActivity {
         ListView playerListView = findViewById(R.id.playerListView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         playerListView.setAdapter(adapter);
+        adapter.add("Loading...");
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference playersRef = database.getReference("Player");
@@ -57,14 +58,18 @@ public class TeamRandom extends AppCompatActivity {
         playersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                adapter.clear();
+                if (dataSnapshot.exists()) {
                 ArrayList<String> playerNames = new ArrayList<String>();
                 for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
                     String playerName = playerSnapshot.child("name").getValue(String.class);
                     playerNames.add(playerName);
                 }
                 adapter.addAll(playerNames);
+                }else{
+                    adapter.add("No players in statistics");
+                }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -80,10 +85,6 @@ public class TeamRandom extends AppCompatActivity {
 
             }
         });
-
-
-
-
 
 
     }
