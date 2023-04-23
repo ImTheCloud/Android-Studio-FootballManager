@@ -70,7 +70,6 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
         mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night));
 
@@ -82,6 +81,8 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                     userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     ourField = new LatLng(50.827511 , 4.297444);
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
+
+                    mMap.addMarker(new MarkerOptions().position(userLocation).title("Your location"));
                 }
             });
         }
@@ -101,11 +102,15 @@ public class Map extends AppCompatActivity implements OnMapReadyCallback {
                         userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                         LatLng ourField = new LatLng(50.827511 , 4.297444);
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f));
+
+                        // Add a marker to the map at the user's position
+                        mMap.addMarker(new MarkerOptions().position(userLocation).title("Your location"));
                     }
                 });
             }
         }
     }
+
 
     @Override
     public void onBackPressed() {
