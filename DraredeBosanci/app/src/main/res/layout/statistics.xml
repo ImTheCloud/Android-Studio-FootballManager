@@ -290,6 +290,49 @@
                         tools:layout_editor_absoluteY="71dp">
 
                         <TextView
+                            android:id="@+id/TVWin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/win"
+                            android:text=" Win : "
+                            android:textColor="#ffffff"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.044"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.286" />
+
+                        <EditText
+                            android:id="@+id/ETWin"
+                            android:layout_width="31dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="180dp"
+                            android:background="@android:color/transparent"
+                            android:ems="4"
+                            android:hint="0"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#BDBDBD"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.276" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/TextViewStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="71dp">
+
+                        <TextView
                             android:id="@+id/TVLose"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -321,49 +364,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.355" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/TextViewStyle"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="71dp">
-
-                        <TextView
-                            android:id="@+id/TVWin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/win"
-                            android:text=" Win : "
-                            android:textColor="#ffffff"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.044"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.286" />
-
-                        <EditText
-                            android:id="@+id/ETWin"
-                            android:layout_width="31dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="180dp"
-                            android:background="@android:color/transparent"
-                            android:ems="4"
-                            android:hint="0"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#BDBDBD"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.276" />
 
                     </LinearLayout>
 

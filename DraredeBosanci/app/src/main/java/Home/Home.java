@@ -350,13 +350,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                         public void onCancelled(@NonNull DatabaseError error) {
                                         }
                                     });
+                                }else if(input.getText().toString().equals("view version")) {
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                                    builder.setTitle("Version of the app");
+                                    builder.setMessage("Version 1.0.0");
+                                    builder.setPositiveButton("OK", null);
+                                    builder.show();
                                 }else if(input.getText().toString().equals("view codes")) {
 
                                                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                                                 builder.setTitle("Codes");
-                                                builder.setMessage("view codes\nview referees\nadd referee\ndelete referees\ndelete history\ndelete player\ndelete compo");
+                                                builder.setMessage("view version\nview codes\nview referees\nadd referee\ndelete referees\ndelete history\ndelete player\ndelete compo");
                                                 builder.setPositiveButton("OK", null);
                                                 builder.show();
+
                                 }else{
                                     Toast.makeText(Home.this, "Please enter correct code", Toast.LENGTH_SHORT).show();
                                 }
