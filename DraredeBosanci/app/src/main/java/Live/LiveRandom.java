@@ -71,6 +71,8 @@ public class LiveRandom extends AppCompatActivity {
 
         setPlayerOnTeam();
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +174,20 @@ public class LiveRandom extends AppCompatActivity {
 
         extractTimerValuesFromIntent();
         startTimer();
+
+        timer.cancel();
+        pauseStart = System.currentTimeMillis();
+        timePaused = pauseStart - startTime; // Calculate the correct timePaused value
+        Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
+        pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+
+        String timeLeft = TVStopWatch.getText().toString();
+        String title = "Time left : " + timeLeft;
+        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
+        builder.setSmallIcon(R.drawable.timer);
+        builder.setOnlyAlertOnce(true);
+        NotificationManager manager = notificationHelper.getManager();
+        manager.notify(1, builder.build());
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
