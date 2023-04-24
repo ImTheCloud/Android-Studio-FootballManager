@@ -3,6 +3,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -39,6 +40,14 @@ public class History extends AppCompatActivity {
         deleteLast = findViewById(R.id.deleteLast);
         loadingText = findViewById(R.id.loading_text);
         loadingText.setVisibility(View.VISIBLE);
+
+
+        ListView playerListView = findViewById(R.id.playerListView);
+        List<String> gameNames = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gameNames);
+        playerListView.setAdapter(adapter);
+        retrieveData();
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -260,7 +269,75 @@ public class History extends AppCompatActivity {
             }
         });
     }
+    private void retrieveData() {
+        ListView playerListView = findViewById(R.id.playerListView);
+        List<String> gameNames = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, gameNames);
+        playerListView.setAdapter(adapter);
 
+        FirebaseDatabase databasee = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
+        databasee.getReference("Game").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    int gameNumber = 1;
+                for (DataSnapshot gameSnapshot : dataSnapshot.getChildren()) {
+                    String gameName = "Game " + gameNumber + " (" + gameSnapshot.child("data").getValue(String.class) + ")";
+                    gameNames.add(0, gameName);
+                    gameNumber++;
+                }
+                adapter.notifyDataSetChanged();
+                playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        DataSnapshot gameSnapshot = dataSnapshot.getChildren().iterator().next(); // get data of selected game
+                        for(int i = 0; i < position; i++){
+                            gameSnapshot = dataSnapshot.getChildren().iterator().next(); // get data of selected game
+                        }
+                        String dataText = gameSnapshot.child("data").getValue(String.class);
+                        String goal1 = gameSnapshot.child("goalTeam1").getValue(String.class);
+                        String goal2 = gameSnapshot.child("goalTeam2").getValue(String.class);
+                        String halfText = gameSnapshot.child("half").getValue(String.class);
+                        String timeFirstHalf = gameSnapshot.child("timeFirstHalf").getValue(String.class);
+                        String timeSecondHalf = gameSnapshot.child("timeSecondHalf").getValue(String.class);
+                        String email = gameSnapshot.child("email").getValue(String.class);
+                        String team1 = gameSnapshot.child("team1").getValue().toString();
+                        String team2 = gameSnapshot.child("team2").getValue().toString();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(History.this);
+                        builder.setTitle("Match Details");
+                        builder.setMessage("Date: " + dataText + "\n" +
+                                "Referee: " + email + "\n" +
+                                "Team 1: " + team1 + "\n" +
+                                "Team 2: " + team2 + "\n" +
+                                "Score: " + goal1 + " - " + goal2 + "\n" +
+                                "Time: " + timeFirstHalf + "\"  " + halfText + "\"  " + timeSecondHalf + "\"");
+                        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        DataSnapshot finalGameSnapshot = gameSnapshot;
+                        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String gameKey = finalGameSnapshot.getKey();
+                                databasee.getReference("Game").child(gameKey).removeValue();
+                                dialog.dismiss();retrieveData();
+
+                            }
+                        });
+                        builder.show();
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
 
 }
 
