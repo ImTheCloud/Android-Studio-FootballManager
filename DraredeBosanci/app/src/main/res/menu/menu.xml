@@ -3,31 +3,7 @@
     tools:showIn="navigation_view">
 
 
-    <item android:title="Account">
-        <menu>
-            <item
-                android:id="@+id/nav_referee"
-                android:icon="@drawable/baseline_person_24"
-                android:title="Referee"
-/>
-            <item
-                android:id="@+id/nav_register"
-                android:icon="@drawable/baseline_library_books_24"
-                android:title="Register"
-/>
-            <item
-                android:id="@+id/nav_login"
-                android:icon="@drawable/ic_login"
-                android:title="Log in"
-/>
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_logout_"
-                android:title="Log out"
-     />
 
-        </menu>
-    </item>
 
 
 
@@ -56,7 +32,6 @@
     </item>
     <item android:title="Info">
         <menu>
-
             <item
                 android:id="@+id/nav_rules"
                 android:icon="@drawable/rule"
@@ -69,6 +44,36 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
                 android:title="About Me" />
+            <item
+                android:id="@+id/nav_thank"
+                android:icon="@drawable/baseline_thumb_up_alt_24"
+                android:title="Thanks" />
+        </menu>
+    </item>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_referee"
+                android:icon="@drawable/baseline_person_24"
+                android:title="Referee"
+                />
+            <item
+                android:id="@+id/nav_register"
+                android:icon="@drawable/baseline_library_books_24"
+                android:title="Register"
+                />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_login"
+                android:title="Log in"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout_"
+                android:title="Log out"
+                />
+
         </menu>
     </item>
 

@@ -211,6 +211,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(new Intent(Home.this, AboutMe.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 break;
+            case R.id.nav_thank:
+                startActivity(new Intent(Home.this, ThankYou.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                break;
             case R.id.nav_logout:
                 mAuth.signOut();
                 startActivity(new Intent(Home.this, Login.class));
