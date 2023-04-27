@@ -83,6 +83,23 @@
                 </LinearLayout>
             </ScrollView>
 
+            <TextView
+                android:id="@+id/coma"
+                android:layout_width="373dp"
+                android:layout_height="30dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:scrollbars="vertical"
+                android:text="Add a coma to add a player !"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.142" />
+
             <EditText
                 android:id="@+id/ID_Team1"
                 style="@style/TextViewStyle"
