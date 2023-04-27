@@ -56,13 +56,12 @@ public class Meteo extends AppCompatActivity {
                 null,
                 response -> {
                     try {
-                        Toast.makeText(this, "Meteo : " + location, Toast.LENGTH_SHORT).show();
                         JSONObject main = response.getJSONObject("main");
                         int temperature = (int) Math.round(main.getDouble("temp") - 273.15);
                         temperatureTextView.setText(temperature + "°C");
 
                         // Add the code to display an image based on temperature
-                        if (temperature < 10) {
+                        if (temperature < 15) {
                             image.setImageResource(R.drawable.cloud);
                         } else {
                             image.setImageResource(R.drawable.sun);
