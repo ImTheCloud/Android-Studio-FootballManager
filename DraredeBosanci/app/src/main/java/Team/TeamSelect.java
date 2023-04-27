@@ -88,9 +88,12 @@ public class TeamSelect extends AppCompatActivity{
                     String currentText = selectedEditText.getText().toString();
                     String newText = currentText.isEmpty() ? selectedItem : currentText + ", " + selectedItem;
                     selectedEditText.setText(newText);
+                    adapter.remove(selectedItem); // remove selected item from adapter
                 }
             }
         });
+
+
 
 
 

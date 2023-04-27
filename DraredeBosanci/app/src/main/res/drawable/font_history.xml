@@ -4,5 +4,5 @@
     <corners android:radius="10dp" />
     <stroke
         android:width="1dp"
-        android:color="@color/textview_stroke_color" />
+        android:color="@color/clicked_color" />
 </shape>

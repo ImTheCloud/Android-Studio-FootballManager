@@ -36,11 +36,11 @@ public class TeamRandom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.team_random);
 
-
+        etPlayers = findViewById(R.id.ID_Player);
         timerHalfTime = findViewById(R.id.ID_Timer_halftime);
         timerFirst = findViewById(R.id.ID_Timer_first);
         timerSecond = findViewById(R.id.ID_Timer_second);
-        etPlayers = findViewById(R.id.ID_Player);
+
 
         timerHalfTime.setInputType(InputType.TYPE_CLASS_NUMBER);
         timerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -80,11 +80,23 @@ public class TeamRandom extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedItem = adapterView.getItemAtPosition(i).toString();
                 String currentText = etPlayers.getText().toString();
+                String[] playerNames = currentText.split(", "); // split the names using comma and space as delimiter
+                boolean isPlayerAlreadyAdded = false;
+                for (String playerName : playerNames) {
+                    if (playerName.equals(selectedItem)) {
+                        isPlayerAlreadyAdded = true; // check if player name is already added
+                        break;
+                    }
+                }
+                if (!isPlayerAlreadyAdded) {
                     String newText = currentText.isEmpty() ? selectedItem : currentText + ", " + selectedItem;
                     etPlayers.setText(newText);
-
+                    view.setClickable(false); // set clicked item to be unclickable
+                    adapter.remove(selectedItem); // remove clicked item from ListView
+                }
             }
         });
+
 
 
     }
