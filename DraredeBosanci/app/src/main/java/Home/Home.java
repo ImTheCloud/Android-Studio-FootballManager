@@ -197,14 +197,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     isSoundEnabled = false;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
                     startService(intent);
-                    item.setIcon(R.drawable.volume_off);
-                    item.setTitle("Volume off");
+                    item.setIcon(R.drawable.volume_up);
+                    item.setTitle("Volume on");
                 } else {
                     isSoundEnabled = true;
                     Intent intent = new Intent(Home.this, MyMusicService.class);
                     stopService(intent);
-                    item.setIcon(R.drawable.volume_up);
-                    item.setTitle("Volume up");
+                    item.setIcon(R.drawable.volume_off);
+                    item.setTitle("Volume off");
                 }
                 break;
             case R.id.nav_about:
