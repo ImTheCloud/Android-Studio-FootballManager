@@ -51,6 +51,7 @@ public class LiveRandom extends AppCompatActivity {
     private long timePaused = 0;
     private long pauseStart = 0;
     long startTime = System.currentTimeMillis();
+    private boolean isSaved = false;
 
     DatabaseReference UserRef;
     @Override
@@ -78,19 +79,20 @@ public class LiveRandom extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount++;
-                // Mise à jour du TextView
-                goalT1.setText(Integer.toString(mCount));
+                    mCount++;
+                    goalT1.setText(Integer.toString(mCount));
+
+
+
             }
         });
         mButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Incrémentation de l'entier
-                mCount2++;
-                // Mise à jour du TextView
-                goalT2.setText(Integer.toString(mCount2));
+
+                    mCount2++;
+                    goalT2.setText(Integer.toString(mCount2));
+
             }
         });
 
@@ -110,6 +112,7 @@ public class LiveRandom extends AppCompatActivity {
                                 if (user != null) {
                                     userEmail = user.getEmail();
                                 }
+                                isSaved = true;
                                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
                                 DatabaseReference adminRef = database.getReference("Referee");
                                 String finalUserEmail = userEmail;
@@ -178,8 +181,7 @@ public class LiveRandom extends AppCompatActivity {
         timer.cancel();
         pauseStart = System.currentTimeMillis();
         timePaused = pauseStart - startTime; // Calculate the correct timePaused value
-        Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
-        pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
+
 
         String timeLeft = TVStopWatch.getText().toString();
         String title = "Time left : " + timeLeft;
@@ -276,7 +278,7 @@ public class LiveRandom extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_play_arrow_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
-
+                pauseStartButton.setText("START");
                 // Update the notification with the paused time left value
                 String timeLeft = TVStopWatch.getText().toString();
                 String title = "Time left : " + timeLeft;
@@ -287,6 +289,7 @@ public class LiveRandom extends AppCompatActivity {
                 manager.notify(1, builder.build());
             } else { // Timer is paused
                 // Resume the timer
+
                 long remainingTime = (totalTime * 1000) - timePaused;
                 timer = new CountDownTimer(remainingTime, 1000) {
                     boolean notificationSent = false; // Initialize notificationSent to false
@@ -319,6 +322,7 @@ public class LiveRandom extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_pause_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+                pauseStartButton.setText("PAUSE");
             }
         } else {
             // Timer is not running, so start it
@@ -345,13 +349,30 @@ public class LiveRandom extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-
-        super.onBackPressed();
-        finish();
-        finishTimer();
-        Intent intent = new Intent(LiveRandom.this, TeamRandom.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        if (isSaved) {
+            super.onBackPressed();
+            finish();
+            finishTimer();
+            Intent intent = new Intent(LiveRandom.this, TeamRandom.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to exit without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                    finishTimer();
+                    Intent intent = new Intent(LiveRandom.this, TeamRandom.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     @Override
@@ -381,17 +402,51 @@ public class LiveRandom extends AppCompatActivity {
         textView.setText(sb.toString());
     }
 
-    public void goToHouse(View v){
-        finishTimer();
-        finish();
-        startActivity(new Intent(LiveRandom.this, Home.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    public void goToHouse(View v) {
+        if (isSaved) {
+            finishTimer();
+            finish();
+            startActivity(new Intent(LiveRandom.this, Home.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to go to home screen without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishTimer();
+                    finish();
+                    startActivity(new Intent(LiveRandom.this, Home.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
-    public void goToHistory(View v){
-        finishTimer();
-        finish();
-        startActivity(new Intent(LiveRandom.this, History.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    public void goToHistory(View v) {
+        if (isSaved) {
+            finishTimer();
+            finish();
+            startActivity(new Intent(LiveRandom.this, History.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to access the history without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishTimer();
+                    finish();
+                    startActivity(new Intent(LiveRandom.this, History.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     public void goToRefresh(View v){

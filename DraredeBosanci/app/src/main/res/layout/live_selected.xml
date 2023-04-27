@@ -37,20 +37,20 @@
 
     <Button
         android:id="@+id/pauseStart"
-        android:layout_width="32dp"
-        android:layout_height="21dp"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
         android:background="@drawable/button_selector"
         android:borderlessButtonStyle="@style/Widget.AppCompat.Button.Borderless"
         android:drawableTop="@drawable/baseline_pause_24"
         android:onClick="goToPause"
+        android:text="PAUSE"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
-
+        app:layout_constraintVertical_bias="0.149" />
     <Button
         android:id="@+id/history"
         android:layout_width="59dp"
@@ -83,6 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
     <LinearLayout
         android:id="@+id/layout_timer"
         style="@style/TextViewStyle"
@@ -95,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.221">
+        app:layout_constraintVertical_bias="0.324">
 
         <TextView
             android:id="@+id/TVPlayers"

@@ -51,6 +51,8 @@ public class LiveSelected extends AppCompatActivity {
     long startTime = System.currentTimeMillis();
     private long timePaused = 0;
     private long pauseStart = 0;
+    private boolean isSaved = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,7 @@ public class LiveSelected extends AppCompatActivity {
                                 if (user != null) {
                                     userEmail = user.getEmail();
                                 }
-
+                                isSaved = true;
                                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://drare-de-bosanci-default-rtdb.europe-west1.firebasedatabase.app/");
                                 DatabaseReference adminRef = database.getReference("Referee");
                                 String finalUserEmail = userEmail;
@@ -193,19 +195,6 @@ public class LiveSelected extends AppCompatActivity {
         extractTimerValuesFromIntent();
         startTimer();
 
-        timer.cancel();
-        pauseStart = System.currentTimeMillis();
-        timePaused = pauseStart - startTime; // Calculate the correct timePaused value
-        Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
-        pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
-
-        String timeLeft = TVStopWatch.getText().toString();
-        String title = "Time left : " + timeLeft;
-        NotificationCompat.Builder builder = notificationHelper.createNotification(title);
-        builder.setSmallIcon(R.drawable.timer);
-        builder.setOnlyAlertOnce(true);
-        NotificationManager manager = notificationHelper.getManager();
-        manager.notify(1, builder.build());
     }
     // on create end
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,6 +272,7 @@ public class LiveSelected extends AppCompatActivity {
         }.start();
     }
 
+
     public void goToPause(View v) {
         Button pauseStartButton = (Button) findViewById(R.id.pauseStart);
 
@@ -295,7 +285,7 @@ public class LiveSelected extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_play_arrow_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_play_arrow_24, 0, 0, 0);
-
+                pauseStartButton.setText("START");
                 // Update the notification with the paused time left value
                 String timeLeft = TVStopWatch.getText().toString();
                 String title = "Time left : " + timeLeft;
@@ -338,6 +328,7 @@ public class LiveSelected extends AppCompatActivity {
 
                 // Change the icon of the pauseStart button to "baseline_pause_24"
                 pauseStartButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_pause_24, 0, 0, 0);
+                pauseStartButton.setText("PAUSE");
             }
         } else {
             // Timer is not running, so start it
@@ -386,24 +377,78 @@ public class LiveSelected extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-        Intent intent = new Intent(LiveSelected.this, TeamSelect.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        if (isSaved) {
+            super.onBackPressed();
+            finish();
+            finishTimer();
+            Intent intent = new Intent(LiveSelected.this, TeamSelect.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to exit without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                    finishTimer();
+                    Intent intent = new Intent(LiveSelected.this, TeamSelect.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
-    public void goToHouse(View v){
-        finishTimer();
-        finish();
-        startActivity(new Intent(LiveSelected.this, Home.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    public void goToHouse(View v) {
+        if (isSaved) {
+            finishTimer();
+            finish();
+            startActivity(new Intent(LiveSelected.this, Home.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to go to home screen without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishTimer();
+                    finish();
+                    startActivity(new Intent(LiveSelected.this, Home.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
-    public void goToHistory(View v){
-        finishTimer();
-        finish();
-        startActivity(new Intent(LiveSelected.this, History.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    public void goToHistory(View v) {
+        if (isSaved) {
+            finishTimer();
+            finish();
+            startActivity(new Intent(LiveSelected.this, History.class));
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to access the history without saving the game?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finishTimer();
+                    finish();
+                    startActivity(new Intent(LiveSelected.this, History.class));
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
+            });
+            builder.setNegativeButton("No", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
+
     public void goToRefresh(View v){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to reset the goals to 0?")
