@@ -3,7 +3,10 @@ package Team;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,6 +48,60 @@ public class TeamRandom extends AppCompatActivity {
         timerHalfTime.setInputType(InputType.TYPE_CLASS_NUMBER);
         timerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
         timerSecond.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        timerFirst.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timerFirst.setFilters(new InputFilter[] {new InputFilter.LengthFilter(2)});
+        timerFirst.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 2) {
+                    timerFirst.setText(s.subSequence(0, 2));
+                    timerFirst.setSelection(2);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        timerHalfTime.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timerHalfTime.setFilters(new InputFilter[] {new InputFilter.LengthFilter(2)});
+        timerHalfTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 2) {
+                    timerHalfTime.setText(s.subSequence(0, 2));
+                    timerHalfTime.setSelection(2);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        timerSecond.setInputType(InputType.TYPE_CLASS_NUMBER);
+        timerSecond.setFilters(new InputFilter[] {new InputFilter.LengthFilter(2)});
+        timerSecond.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 2) {
+                    timerSecond.setText(s.subSequence(0, 2));
+                    timerSecond.setSelection(2);
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
 
         ListView playerListView = findViewById(R.id.playerListView);
