@@ -1,0 +1,50 @@
+Feedback
+Wiam
+	-compo ajoiuter bare de nom ok
+	-ajouter des statistiques on se rend pas compte de la ou il faut ajouter pour modifier ok
+	-une fois que on appuie sur un joueur savoir quon a appuyer dessus ok
+	-live bouton start time a modifier ok
+	-pour la map appuyer sur le ping et avoir les stats du match. ok
+
+Michel
+	-ne pas ajouter le mm joueur ok
+	-le probleme des emogie avec le chiffre dans l'email		OK
+	-tant que le match commence pas on peux pas ajouter de goal ok
+
+Mohamed
+	-champs mail rouge pk ??? ok
+	-seulement joueur paire ok
+	-map pointeur arbitre ok
+	-fr en page info  ok
+	-icone mdp ok
+
+Basile
+	-gros bouton go ok
+	-pop up nul ok
+	-bouton fr en haut, et ajouter le EN aussi ok
+	-cliquable numero ok
+	-mail ok
+	-english adress Riggio ok
+	-toast bad ok
+	-history pas lisible ok
+	-fleche a gauche inutie ok
+	-menu deroulant ok
+	-temps ipossible ok
+	-history sans save ok
+	-mail pour demander d'etre referee ok
+Riggio
+	-Text au dessus ok
+	- png bale de foot ok
+	-preciser la virgule ok
+	-add player dans new game ok
+	-nom des joueurs trop long ok
+
+
+PARSER
+
+
+
+
+
+
+
