@@ -44,10 +44,7 @@
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
                 android:title="About Me" />
-            <item
-                android:id="@+id/nav_thank"
-                android:icon="@drawable/baseline_thumb_up_alt_24"
-                android:title="Thanks" />
+
         </menu>
     </item>
 
