@@ -101,17 +101,14 @@ public class NewGame extends AppCompatActivity implements OnMapReadyCallback {
                 float deltaX = x2 - x1;
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (x2 > x1) {
-                        Intent intent = new Intent(this, TeamSelect.class);
+                        Intent intent = new Intent(this,TeamRandom .class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
-
                     } else {
-                        Intent intent = new Intent(this, TeamRandom.class);
+                        Intent intent = new Intent(this, TeamSelect.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-
                     }
                 }
                 break;
