@@ -40,8 +40,6 @@ Riggio
 	-nom des joueurs trop long ok
 
 
-PARSER
-
 
 
 
