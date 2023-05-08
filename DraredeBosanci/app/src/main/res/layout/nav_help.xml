@@ -123,12 +123,6 @@ New Game :\n\
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
-                <Button
-                    android:id="@+id/fr"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_selector"
-                    android:text="FR"/>
             </LinearLayout>
             </ScrollView>
         </androidx.cardview.widget.CardView>
